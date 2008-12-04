@@ -1,0 +1,33 @@
+Extension ggsysinfo for eZ publish
+===================================
+
+Goals:
+
+Allow eZ Publish administrator user to have better insight into its working installation:
+- have the complete informations from the phpinfo() page within the eZ Publish admin interface
+- have the complete informations from the installed php accelerator within the eZ Publish admin interface, and, in case,a llow to clear its cache
+- have a more detailed view on eZ Publish cache files, allowing to grep through them and delete them if needed
+- have a more detailed view on eZ Publish log files, allowing to grep through them
+- have a stats page with all types of content in the db listed
+- have a page with more detailed status tests than ezinfo/isalive
+
+
+Requirements:
+
+- eZ Publish 4.0 or later
+- eZ Publish cluster mode is not supported yet for the cache info part
+- Zend Accelerator, Turck MMCache and IonCube are not supported for the opcode cache part 
+
+
+Installation:
+
+- As per standard eZ Publish extensions: drop in extension dir, activate in site.ini override file or via gui
+- fix the autoload config: if not activated via the admin interface, run the ezpgenerateautoloads.php script
+- if using eAccelerator, make sure that the  eZ Publish dir is within the eaccelerator.allowed_admin_path setting in php.ini
+- to have the connecting-to-the-web and connecting-to-email-server tests activated, go edit sysinfo.ini.append.php
+
+
+SECURITY:
+
+- DO NOT RUN THIS APP WITHOUT REWRITE RULES ENABLED!
+  You would be giving any user the power to reset your php accelerator's cache at any time (if it sounds like an easy dos target, it is because it is)

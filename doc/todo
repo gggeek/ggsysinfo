@@ -1,0 +1,30 @@
+accelerator module:
+- add support for Zend PS, ioncube accelerator, Turck MMCache
+
+cache module:
+- add support for clustered configs
+- add cache file timestamp
+- allow cache stats page to report on enabled/disabled caches per siteaccess
+- allow user to pick the single cache to search through
+- allow search using plain text instead of regexp
+
+log module:
+- to be done
+
+storage module:
+- add support for clustered configs
+- add age of files in dirs
+
+content module:
+- add more content types, including those of std extensions (ezflow, ezsurvey, eznewsletter)
+- allow to remove drafts/pending/old verssions from this page (see flatten.php)
+
+system status module:
+- implement all tests listed (missing: self-testing soap and webdav...)
+- add cronjob that can be st up to check system status and log results somewhere
+
+- add a module with more detailed info about users (never logged in, deactivated, etc...)
+- add templates for standard design ? benefit: could be accessed on front-end servers
+
+- ...
+- profit!

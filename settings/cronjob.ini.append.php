@@ -1,0 +1,6 @@
+<?php /* 
+
+[CronjobSettings]
+ExtensionDirectories[]=ggsysinfo
+
+*/ ?>
