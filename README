@@ -24,7 +24,9 @@ Installation:
 - As per standard eZ Publish extensions: drop in extension dir, activate in site.ini override file or via gui
 - fix the autoload config: if not activated via the admin interface, run the ezpgenerateautoloads.php script
 - if using eAccelerator, make sure that the  eZ Publish dir is within the eaccelerator.allowed_admin_path setting in php.ini
-- to have the connecting-to-the-web and connecting-to-email-server tests activated, go edit sysinfo.ini.append.php
+- to have the connecting-to-the-web and connecting-to-email-server tests activated, go edit sysinfo.ini.append.php.
+  By default these tests are deactivated since they involve active probing of external resources
+- Access to all views this module is regulated by granting access to the "setup/system_info" policy
 
 
 SECURITY:
