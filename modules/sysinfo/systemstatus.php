@@ -9,6 +9,15 @@
  * @license Licensed under GNU General Public License v2.0. See file license.txt
 */
 
+$module = $Params['Module'];
+$http = eZHTTPTool::instance();
+
+$user = eZUser::currentUser();
+if ( !$user->hasAccessTo( 'setup', 'system_info' ) )
+{
+    return $Module->handleError( eZError::KERNEL_ACCESS_DENIED, 'kernel' );
+}
+
 $testslist = sysInfoTools::runtests();
 
 include_once( 'kernel/common/template.php' );
