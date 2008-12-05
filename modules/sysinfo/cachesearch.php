@@ -17,7 +17,6 @@ $module = $Params['Module'];
 $http = eZHTTPTool::instance();
 
 $user = eZUser::currentUser();
-
 if ( !$user->hasAccessTo( 'setup', 'system_info' ) )
 {
     return $Module->handleError( eZError::KERNEL_ACCESS_DENIED, 'kernel' );
