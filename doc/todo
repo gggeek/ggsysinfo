@@ -22,9 +22,13 @@ content module:
 system status module:
 - implement all tests listed (missing: self-testing soap and webdav...)
 - add cronjob that can be st up to check system status and log results somewhere
+- add a param that switches pagelayout to xml/plaintext (plaintext done without hitting template system)
+- add test for echoing something to logs, test for compiling a remplate
+- allow hooking of new tests via ini files
 
 - add a module with more detailed info about users (never logged in, deactivated, etc...)
-- add templates for standard design ? benefit: could be accessed on front-end servers
+- add templates for standard design. Benefit: could be accessed on front-end siteaccesses
+- add reporting modules (eg. all classes definition)
 
 - ...
 - profit!
