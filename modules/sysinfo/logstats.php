@@ -12,10 +12,15 @@
 
 $module = $Params['Module'];
 
-$user = eZUser::currentUser();
-if ( !$user->hasAccessTo( 'setup', 'system_info' ) )
+// rely on system policy instead of creating our own, but allow also PolicyOmitList
+$ini = eZINI::instance();
+if ( !in_array( 'sysinfo/logstats', $ini->variable( 'RoleSettings', 'PolicyOmitList' ) ) )
 {
-    return $Module->handleError( eZError::KERNEL_ACCESS_DENIED, 'kernel' );
+    $user = eZUser::currentUser();
+    if ( !$user->hasAccessTo( 'setup', 'system_info' ) )
+    {
+        return $Module->handleError( eZError::KERNEL_ACCESS_DENIED, 'kernel' );
+    }
 }
 
 $cacheFilesList = array();
