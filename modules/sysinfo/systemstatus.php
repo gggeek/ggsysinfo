@@ -23,18 +23,27 @@ if ( !in_array( 'sysinfo/systemstatus', $ini->variable( 'RoleSettings', 'PolicyO
     }
 }
 
+$format = $Params['output_format'];
+
 $testslist = sysInfoTools::runtests();
 
-include_once( 'kernel/common/template.php' );
-$tpl = templateInit();
-$tpl->setVariable( 'title', 'System status' );
-$tpl->setVariable( 'testslist', $testslist );
+if ( $format == 'plaintext' )
+{
+    var_export( $testslist );
+    eZExecution::cleanExit();
+}
+else
+{
+    include_once( 'kernel/common/template.php' );
+    $tpl = templateInit();
+    $tpl->setVariable( 'title', 'System status' );
+    $tpl->setVariable( 'testslist', $testslist );
 
-$Result = array();
-$Result['content'] = $tpl->fetch( 'design:sysinfo/systemstatus.tpl' );
+    $Result = array();
+    $Result['content'] = $tpl->fetch( 'design:sysinfo/systemstatus.tpl' );
 
-$Result['left_menu'] = 'design:parts/sysinfo/menu.tpl';
-$Result['path'] = array( array( 'url' => false,
-                                'text' => ezi18n( 'SysInfo', 'System status' ) ) );
-
+    $Result['left_menu'] = 'design:parts/sysinfo/menu.tpl';
+    $Result['path'] = array( array( 'url' => false,
+                                    'text' => ezi18n( 'SysInfo', 'System status' ) ) );
+}
 ?>

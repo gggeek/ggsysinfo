@@ -73,7 +73,7 @@ $ViewList['systemstatus'] = array(
     //'functions' => array( 'system_info' ), - we check in the module itself
     "script" => "systemstatus.php",
     "default_navigation_part" => 'ezsysinfonavigationpart',
-    "params" => array( ) );
+    "params" => array( 'output_format' ) );
 
 $FunctionList = array();
 
