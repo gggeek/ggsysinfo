@@ -82,14 +82,21 @@ class sysInfoTools
      * Search text in files using regexps (recursively through folders).
      * Assumes egrep is available if not on windows
      */
-    static function searchInFiles( $searchtext, $cachedir )
+    static function searchInFiles( $searchtext, $cachedir, $is_regexp = true )
     {
         //$fileHandler = eZClusterFileHandler::instance();
         $result = array();
 
         if (  eZSys::osType() != 'win32' )
         {
-            exec( 'egrep -s -R -l "' . str_replace( '"', '\"', $searchtext ) . "\" \"$cachedir\"", $result );
+            if ( $is_regexp )
+            {
+                exec( 'egrep -s -R -l "' . str_replace( '"', '\"', $searchtext ) . "\" \"$cachedir\"", $result );
+            }
+            else
+            {
+                exec( 'fgrep -s -R -l "' . str_replace( '"', '\"', $searchtext ) . "\" \"$cachedir\"", $result );
+            }
         }
         else
         {
@@ -102,15 +109,25 @@ class sysInfoTools
                 {
                     if ( is_dir( $cachedir . '/' . $file ) )
                     {
-                        $result = array_merge( $result, sysInfoTools::searchInFiles( $searchtext, $cachedir . '/' . $file ) );
+                        $result = array_merge( $result, sysInfoTools::searchInFiles( $searchtext, $cachedir . '/' . $file, $is_regexp ) );
                     }
                     else
                     {
                         $txt = @file_get_contents( $cachedir. '/'. $file );
                         /// @todo escape properly #
-                        if( preg_match( "#". $searchtext . "#", $txt ) )
+                        if ( $is_regexp )
                         {
-                            $result[] = $cachedir. '/'. $file;
+                            if( preg_match( "#". $searchtext . "#", $txt ) )
+                            {
+                                $result[] = $cachedir. '/'. $file;
+                            }
+                        }
+                        else
+                        {
+                            if( strpos( $txt, $searchtext ) !== false )
+                            {
+                                $result[] = $cachedir. '/'. $file;
+                            }
                         }
                         $txt = false; // free memory asap
                     }
@@ -144,7 +161,7 @@ class sysInfoTools
         }
 
         $ini = eZINI::instance( 'file.ini' );
-        if ( $ini->variable( 'ClusteringSettings', 'Filehandler' ) == 'ezdb' )
+        if ( $ini->variable( 'ClusteringSettings', 'FileHandler' ) == 'ezdb' )
         {
             // @todo...
             $dbFileHandler = eZClusterFileHandler::instance();

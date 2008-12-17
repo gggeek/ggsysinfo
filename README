@@ -30,6 +30,17 @@ Installation:
   To allow anonymous access to a single view, the ini setting PolicyOmitList can be also used.
 
 
+New modules/views:
+
+All of the functionality is available in a new top-level tab in the administration interface, named "System Information".
+Explore it by navigating the menu on the left side.
+If some of the items in the menu are greyed out, it is because the corresponding item does not work / apply to your eZ Publish setup.
+
+The systemstatus view can be used for systematic monitoring of the status of the eZ Publish installation by external tools such as Nagios, OpenNMS, Zenoss etc...
+For such configurations, it is recommended to use the plaintext output, activated by appending 'plaintext' to the url (after of course, giving correct access permissions):
+http://my.ezpublish.site/index.php/siteaccess/systemstatus/plaintext
+
+
 SECURITY:
 
 - DO NOT RUN THIS APP WITHOUT REWRITE RULES ENABLED!

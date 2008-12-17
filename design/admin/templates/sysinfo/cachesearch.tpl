@@ -55,8 +55,13 @@
 		<th colspan="2">
 			<input type="text" value="{$searchtext}" size="100" name="SearchText" />
 			<input type="submit" value="Search" name="SearchButton" class="button" />
+			<input id="searchtype" type="checkbox" value="Regexp" name="SearchType" alt="" {if $is_regexp}checked="checked" {/if}/><label for="searchtype" style="display: inline; font-weight: normal;">{'Regexp search'|i18n( 'SysInfo' )}</label>
+		<br/>
+			{foreach $cachelist as $cachename => $cachesearched}
+			<input id="searc{$cachename}" type="checkbox" value="{$cachename}" name="SearchCaches[]" alt="" {if $cachesearched}checked="checked" {/if}}/><label for="search{$cachename}" style="display: inline; font-weight: normal;">{$cachename|i18n( 'SysInfo' )}</label>
+			{/foreach}
 		</th>
-	</tr>
+    </tr>
 	<tr>
         <th class="tight"><img src={'toggle-button-16x16.gif'|ezimage} alt="{'Invert selection.'|i18n( 'design/admin/content/draft' )}" onclick="ezjs_toggleCheckboxes( document.cacheaction, 'deleteFile[]' ); return false;" title="{'Invert selection.'|i18n( 'design/admin/content/draft' )}" /></th>
         <th>{'File'|i18n( 'design/admin/content/draft' )}</th>
