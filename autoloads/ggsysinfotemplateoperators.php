@@ -32,7 +32,6 @@ class ggSysinfoTemplateOperators
     }
 
     /**
-     Exécute la fonction PHP correspondant à l'opérateur
     */
     public function modify( &$tpl, &$operatorName, &$operatorParameters, &$rootNamespace, &$currentNamespace, &$operatorValue, &$namedParameters )
     {
