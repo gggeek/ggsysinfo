@@ -27,6 +27,7 @@
     <li><div><span class="disabled">{'Cache search'|i18n('SysInfo')}</span></div></li>
     <li><div><span class="disabled">{'Storage stats'|i18n('SysInfo')}</span></div></li>
 {/if}
+    <li><div><a href={'/sysinfo/storagechurn'|ezurl()}>{'Storage churn'|i18n('SysInfo')}</a></div></li>
     <li><div><a href={'/sysinfo/contentstats'|ezurl()}>{'Content stats'|i18n('SysInfo')}</a></div></li>
     <li><div><span class="disabled">{*<a href={'/sysinfo/logstats'|ezurl()}>*}{'Log stats'|i18n('SysInfo')}{*</a>*}</span></div></li>
     <li><div><span class="disabled">{*<a href={'/sysinfo/logsearch'|ezurl()}>*}{'Log search'|i18n('SysInfo')}{*</a>*}</span></div></li>

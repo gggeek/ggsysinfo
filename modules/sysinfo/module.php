@@ -63,6 +63,13 @@ $ViewList['storagestats'] = array(
     "default_navigation_part" => 'ezsysinfonavigationpart',
     "params" => array( ) );
 
+$ViewList['storagechurn'] = array(
+    //'functions' => array( 'system_info' ), - we check in the module itself
+    "script" => "storagechurn.php",
+    "default_navigation_part" => 'ezsysinfonavigationpart',
+    "params" => array( ),
+    "unordered_params" => array() );
+
 $ViewList['contentstats'] = array(
     //'functions' => array( 'system_info' ), - we check in the module itself
     "script" => "contentstats.php",
