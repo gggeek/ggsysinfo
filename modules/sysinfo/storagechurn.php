@@ -1,15 +1,16 @@
 <?php
 /**
- * Create a graph of files-pet-minute by analyzing storage.log
+ * Create a graph of files-per-minute by analyzing storage.log
  *
  * @author G. Giunta
  * @version $Id$
  * @copyright (C) G. Giunta 2008
  * @license Licensed under GNU General Public License v2.0. See file license.txt
  *
+ * @todo derecred availability of gd2?
  * @todo add support for user-selected start and end date
  * @todo support coarser intervals than 60 secs
- * @todo add a caching layer or create the graph inline instead of stocking it on disk
+ * @todo add a caching layer or create the graph inline instead of stocking it on disk (works better in cluster mode)
  * @todo improve layout: graph padding, x axis labels, etc...
  */
 

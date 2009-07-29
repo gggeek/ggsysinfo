@@ -16,7 +16,7 @@ Requirements:
 
 - eZ Publish 4.0 or later
 - eZ Publish cluster mode is not supported yet for the cache info part
-- Zend Accelerator, Turck MMCache and IonCube are not supported for the opcode cache part 
+- Zend Accelerator, Turck MMCache and IonCube are not supported for the opcode cache part
 
 
 Installation:

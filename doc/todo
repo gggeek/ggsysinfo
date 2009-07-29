@@ -1,3 +1,6 @@
+fix churn: cannot create img if folder is not there
+fix churn: dates in graph are not displayed correctly (they are truncated)
+
 accelerator module:
 - add support for Zend PS, ioncube accelerator, Turck MMCache
 
