@@ -32,6 +32,7 @@ system status module:
 - add a module with more detailed info about users (never logged in, deactivated, etc...)
 - add templates for standard design. Benefit: could be accessed on front-end siteaccesses
 - add reporting modules (eg. all classes definitions) that provide clean html to export eg. as pdf or odt files
+- add memcached control panel
 
 - ...
 - profit!
