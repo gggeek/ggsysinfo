@@ -1,3 +1,5 @@
+- rebase info retrieval on ezsnmpd
+
 fix churn: cannot create img if folder is not there
 fix churn: dates in graph are not displayed correctly (they are truncated)
 
@@ -12,6 +14,12 @@ cache module:
 - add zoom icons on cache search pages that will show the cache file contents
 
 log module:
+- to be done
+
+pending notifications module:
+- to be done
+
+pending indexation events module:
 - to be done
 
 storage module:

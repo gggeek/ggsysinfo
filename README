@@ -45,3 +45,4 @@ SECURITY:
 
 - DO NOT RUN THIS APP WITHOUT REWRITE RULES ENABLED!
   You would be giving any user the power to reset your php accelerator's cache at any time (if it sounds like an easy dos target, it is because it is)
+  
