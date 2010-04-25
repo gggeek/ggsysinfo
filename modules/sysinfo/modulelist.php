@@ -39,6 +39,7 @@ foreach( $modules as $modulename => $path )
 }
 ksort( $moduleList );
 
+$title = 'List of available modules';
 if ( $Params['extensionname'] != '' )
 {
     $title .= ' in extension "' . $Params['extensionname'] . '"';
