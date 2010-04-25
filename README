@@ -10,7 +10,11 @@ Allow eZ Publish administrator user to have better insight into its working inst
 - have a more detailed view on eZ Publish log files, allowing to grep through them
 - have a stats page with all types of content in the db listed
 - have a page with more detailed status tests than ezinfo/isalive
-
+Some pages that can be of help to developers too:
+- all available modules
+- all available module views with their parameteres
+- all available fetch functions
+- all available policy functions
 
 Requirements:
 
