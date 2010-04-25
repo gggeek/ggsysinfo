@@ -33,7 +33,7 @@ else
                 foreach( $module->attribute( 'views' ) as $viewname => $view )
                 {
                     // merge empty array to facilitate life of templates
-                    $view = array_merge( array( 'params' => array(), 'functions' => array(), 'unordered_params' => array(), 'single_post_actions' => array(), 'post_actions' => array(), 'post_actions_parameters' => array() ), $view );
+                    $view = array_merge( array( 'params' => array(), 'functions' => array(), 'unordered_params' => array(), 'single_post_actions' => array(), 'post_actions' => array(), 'post_action_parameters' => array() ), $view );
                     $viewList[$viewname . '_' . $modulename] = $view;
                     $viewList[$viewname . '_' . $modulename]['name'] = $viewname;
                     $viewList[$viewname . '_' . $modulename]['module'] = $modulename;

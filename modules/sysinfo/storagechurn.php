@@ -51,7 +51,7 @@ $max = end( $times );
 $graphname = ezi18n( 'SysInfo', 'Files per '.$scalenames[$scale] );
 
 $graph = new ezcGraphBarChart();
-$graph->title = ezi18n( 'SysInfo', 'Storage churn' );
+$graph->title = ''; // title is in template
 $graph->palette = new ezcGraphPaletteEzBlue();
 $graph->yAxis->label = $graphname;
 $graph->legend = false;
@@ -65,23 +65,55 @@ $graph->xAxis->labelCallback = 'calcChurnLabel';
 function calcChurnLabel( $pos, $step )
 {
     $locale = eZLocale::instance();
-    $out = $locale->formatShortDatetime( $pos );
+    /// todo: look at time span, if too big use date, if small use time (both will not fit, unless we change axis type)
+    // $out = $locale->formatShortDate( $pos );
+    $out = $locale->formatShortTime( $pos );
     return $out;
 }
 $graph->data[$graphname] = new ezcGraphArrayDataSet( $data );
 $graph->driver = new ezcGraphGdDriver();
 $graph->driver->options->imageFormat = IMG_JPEG;
-$graph->options->font = 'c:/windows/fonts/arial.ttf'; /// @todo
+if ( ezSys::osName() == 'windows' )
+{
+    // pick a font that should be available on all windows boxes
+    $graph->options->font = 'c:/windows/fonts/arial.ttf';
+}
+else
+{
+    /// @todo find a way to properly load font files on unix
+    eZDebug::writeWarning( 'Font loading for graph labels on unix not yet implemented');
+}
 
-$outputfile = eZSys::storageDirectory() . '/sysinfo/storagestats.jpg';
-$graph->render( 600, 400,  eZSys::rootDir() . '/' . $outputfile );
+$outputdir = eZSys::rootDir() . '/' . eZSys::cacheDirectory() . '/sysinfo';
+if ( !is_dir( $outputdir ) )
+{
+    mkdir( $outputdir );
+}
+else
+{
+    if ( is_file( $outputdir . '/storagestats.jpg' ) )
+    {
+        unlink( $outputdir . '/storagestats.jpg' );
+    }
+}
+try
+{
+    $errormsg = "";
+    $graph->render( 600, 400, $outputdir . '/storagestats.jpg' );
+} catch( exception $e )
+{
+    $errormsg = "Error while rendering graph: " . $e->getMessage();
+    eZDebug::writeError( $errormsg );
+}
+
 
 // *** output ***
 
 require_once( "kernel/common/template.php" );
 $tpl = templateInit();
 $tpl->setVariable( 'title', 'Storage churn' );
-$tpl->setVariable( 'graphsource', $outputfile );
+$tpl->setVariable( 'graphsource', eZSys::cacheDirectory() . '/sysinfo/storagestats.jpg' );
+$tpl->setVariable( 'errormsg', $errormsg );
 
 $Result = array();
 $Result['content'] = $tpl->fetch( "design:sysinfo/storagechurn.tpl" ); //var_dump($cacheFilesList);

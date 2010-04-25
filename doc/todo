@@ -1,31 +1,25 @@
-- add views with list of modules w. their security functions (ok), views (ok), fetch functions (ok), template operators, policy functions, module details
-  add file name in view list ( + link to ezgeshi?)
-  add call method in fetch list ( + link to ezgeshi?)
-  add error msgs when bad param received
-
+generic tasks:
 - rebase info retrieval on ezsnmpd
 
-fix churn: cannot create img if folder is not there
-fix churn: dates in graph are not displayed correctly (they are truncated)
+developer module:
+- add views with list of template operators, module details, ext. details
+- add file name in view list ( + link to ezgeshi?)
+- add call method in fetch list ( + link to ezgeshi?)
+- add a form to invoke views directly
+- add error msgs when bad param received
+- find a way to add link to docs for stuff provided by extensions
 
 accelerator module:
 - add support for Zend PS, ioncube accelerator, Turck MMCache
 
 cache module:
+- add a default font for linux installs for storage churn graph
+- fix churn: dates in graph are not displayed optimally for large timespans
 - add support for clustered configs
 - add cache file timestamp
 - allow cache stats page to report on enabled/disabled caches per siteaccess
 - add zoom icons on cache stats pages that bring to cache search page listing all cache files of the given type
 - add zoom icons on cache search pages that will show the cache file contents
-
-log module:
-- to be done
-
-pending notifications module:
-- to be done
-
-pending indexation events module:
-- to be done
 
 storage module:
 - add support for clustered configs
@@ -46,6 +40,15 @@ system status module:
 - add templates for standard design. Benefit: could be accessed on front-end siteaccesses
 - add reporting modules (eg. all classes definitions) that provide clean html to export eg. as pdf or odt files
 - add memcached control panel
+
+log module:
+- to be done
+
+pending notifications module:
+- to be done
+
+pending indexation events module:
+- to be done
 
 - ...
 - profit!
