@@ -48,7 +48,7 @@
 {def $basedocurl = 'http://ez.no/doc/ez_publish/technical_manual/4_x/reference/modules/'}
 
 <table class="list" cellspacing="0">
-	<tr>
+    <tr>
         <th>{'Name'|i18n( 'SysInfo')}</th>
         <th>{'Module'|i18n( 'SysInfo')}</th>
         <th>{'Extension'|i18n( 'SysInfo')}</th>
@@ -56,31 +56,31 @@
         <th>{'Named parameters'|i18n( 'SysInfo')}</th>
         <th>{'Required Policy Functions'|i18n( 'SysInfo')}</th>
         <th>{'Help'|i18n( 'SysInfo')}</th>
-	</tr>
+    </tr>
 {foreach $viewlist as $view => $details sequence array( 'bglight', 'bgdark') as $style}
-	<tr class="{$style}">
-		<td>
-			{$details['name']|wash}
-		</td>
-		<td>
-			{$details['module']|wash}
-		</td>
-		<td>
-			{$details['extension']|wash}
-		</td>
-		<td>
-		    {foreach $details['params'] as $id => $param}{$id|inc}. {$param|wash}<br/>{/foreach}
-		</td>
-		<td>
-		    {foreach $details['unordered_params'] as $param => $var}{$param|wash}<br/>{/foreach}
-		</td>
-		<td>
-		    {foreach $details['functions'] as $id => $param}{$param|wash}<br/>{/foreach}
-		</td>
-		<td>
-		    {if eq($details['extension'], '')}<a href="{concat($basedocurl,$details['module'],'/views/',$details['name'])}">ez.no{/if}
-		</td>
-	</tr>
+    <tr class="{$style}">
+        <td>
+            {$details['name']|wash}
+        </td>
+        <td>
+            {$details['module']|wash}
+        </td>
+        <td>
+            {$details['extension']|wash}
+        </td>
+        <td>
+            {foreach $details['params'] as $id => $param}{$id|inc}. {$param|wash}{delimiter}<br/>{/delimiter}{/foreach}
+        </td>
+        <td>
+            {foreach $details['unordered_params'] as $param => $var}{$param|wash}{delimiter}<br/>{/delimiter}{/foreach}
+        </td>
+        <td>
+            {foreach $details['functions'] as $id => $param}{$param|wash}{delimiter}<br/>{/delimiter}{/foreach}
+        </td>
+        <td>
+            {if eq($details['extension'], '')}<a href="{concat($basedocurl,$details['module'],'/views/',$details['name'])}">ez.no{/if}
+        </td>
+    </tr>
 {/foreach}
 </table>
 

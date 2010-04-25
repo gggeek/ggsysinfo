@@ -48,35 +48,35 @@
 {def $basedocurl = 'http://ez.no/doc/ez_publish/technical_manual/4_x/reference/modules/'}
 
 <table class="list" cellspacing="0">
-	<tr>
+    <tr>
         <th>{'Name'|i18n( 'SysInfo')}</th>
         <th>{'Extension'|i18n( 'SysInfo')}</th>
         <th>{'Views'|i18n( 'SysInfo')}</th>
         <th>{'Fetch Functions'|i18n( 'SysInfo')}</th>
         <th>{'Policy Functions'|i18n( 'SysInfo')}</th>
         <th>{'Help'|i18n( 'SysInfo')}</th>
-	</tr>
+    </tr>
 {foreach $modulelist as $module => $details sequence array( 'bglight', 'bgdark') as $style}
-	<tr class="{$style}">
-		<td>
-			<a href={concat('/sysinfo/moduledetails/',$module)|ezurl}>{$module|wash}</a>
-		</td>
-		<td>
-			{$details['extension']|wash}
-		</td>
-		<td>
-			{if gt($details['views'], 0)}<a href={concat('/sysinfo/viewlist/',$module)|ezurl}>{$details['views']}</a>{/if}
-		</td>
-		<td>
-			{if gt($details['fetch_functions'], 0)}<a href={concat('/sysinfo/fetchlist/',$module)|ezurl}>{$details['fetch_functions']}{/if}
-		</td>
-		<td>
-			{if gt($details['policy_functions'], 0)}<a href={concat('/sysinfo/policylist/',$module)|ezurl}>{$details['policy_functions']}{/if}
-		</td>
-		<td>
-		    {if eq($details['extension'], '')}<a href="{concat($basedocurl,$module)}">ez.no{/if}
-		</td>
-	</tr>
+    <tr class="{$style}">
+        <td>
+            <a href={concat('/sysinfo/moduledetails/',$module)|ezurl}>{$module|wash}</a>
+        </td>
+        <td>
+            {$details['extension']|wash}
+        </td>
+        <td>
+            {if gt($details['views'], 0)}<a href={concat('/sysinfo/viewlist/',$module)|ezurl}>{$details['views']}</a>{/if}
+        </td>
+        <td>
+            {if gt($details['fetch_functions'], 0)}<a href={concat('/sysinfo/fetchlist/',$module)|ezurl}>{$details['fetch_functions']}{/if}
+        </td>
+        <td>
+            {if gt($details['policy_functions'], 0)}<a href={concat('/sysinfo/policylist/',$module)|ezurl}>{$details['policy_functions']}{/if}
+        </td>
+        <td>
+            {if eq($details['extension'], '')}<a href="{concat($basedocurl,$module)}">ez.no{/if}
+        </td>
+    </tr>
 {/foreach}
 </table>
 

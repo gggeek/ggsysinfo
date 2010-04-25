@@ -48,35 +48,35 @@
 {def $basedocurl = 'http://ez.no/doc/ez_publish/technical_manual/4_x/reference/modules/'}
 
 <table class="list" cellspacing="0">
-	<tr>
+    <tr>
         <th>{'Name'|i18n( 'SysInfo')}</th>
         <th>{'Module'|i18n( 'SysInfo')}</th>
         <th>{'Extension'|i18n( 'SysInfo')}</th>
         <th>{'Parameters'|i18n( 'SysInfo')}</th>
         <th>{'Call method'|i18n( 'SysInfo')}</th>
         <th>{'Help'|i18n( 'SysInfo')}</th>
-	</tr>
+    </tr>
 {foreach $fetchlist as $fetch => $details sequence array( 'bglight', 'bgdark') as $style}
-	<tr class="{$style}">
-		<td>
-			{$details['name']|wash}
-		</td>
-		<td>
-			{$details['module']|wash}
-		</td>
-		<td>
-			{$details['extension']|wash}
-		</td>
-		<td>
-		    {foreach $details['parameters'] as $id => $param}{$param['name']|wash} - {$param['type']|wash} {if $param['required']} - required{/if}{delimiter}<br/>{/delimiter}{/foreach}
-		</td>
-		<td>
-		    ...
-		</td>
-		<td>
-		    {if eq($details['extension'], '')}<a href="{concat($basedocurl,$details['module'],'/fetch_functions/',$details['name'])}">ez.no{/if}
-		</td>
-	</tr>
+    <tr class="{$style}">
+        <td>
+            {$details['name']|wash}
+        </td>
+        <td>
+            {$details['module']|wash}
+        </td>
+        <td>
+            {$details['extension']|wash}
+        </td>
+        <td>
+            {foreach $details['parameters'] as $id => $param}{$param['name']|wash} - {$param['type']|wash} {if $param['required']} - required{/if}{delimiter}<br/>{/delimiter}{/foreach}
+        </td>
+        <td>
+            ...
+        </td>
+        <td>
+            {if eq($details['extension'], '')}<a href="{concat($basedocurl,$details['module'],'/fetch_functions/',$details['name'])}">ez.no{/if}
+        </td>
+    </tr>
 {/foreach}
 </table>
 

@@ -1,7 +1,7 @@
 <?php
 
 $Module = array( 'name' => 'System Information',
-                 'variable_params' => true );
+                 'variable_params' => false );
 
 $ViewList = array();
 
@@ -82,25 +82,35 @@ $ViewList['systemstatus'] = array(
     "default_navigation_part" => 'ezsysinfonavigationpart',
     "params" => array( 'output_format' ) );
 
+/*$ViewList['extensiondetails'] = array(
+    "script" => "extensiondetails.php",
+    "default_navigation_part" => 'ezsysinfonavigationpart',
+    "params" => array( 'extensionname' ) );*/
+
 $ViewList['modulelist'] = array(
     "script" => "modulelist.php",
     "default_navigation_part" => 'ezsysinfonavigationpart',
     "params" => array( 'extensionname' ) );
 
-$ViewList['moduledetails'] = array(
+/*$ViewList['moduledetails'] = array(
     "script" => "moduledetails.php",
     "default_navigation_part" => 'ezsysinfonavigationpart',
-    "params" => array( 'modulename' ) );
+    "params" => array( 'modulename' ) );*/
 
 $ViewList['viewlist'] = array(
     "script" => "viewlist.php",
     "default_navigation_part" => 'ezsysinfonavigationpart',
     "params" => array( 'modulename' ) );
 
-$ViewList['viewdetails'] = array(
+/*$ViewList['viewdetails'] = array(
     "script" => "viewdetails.php",
     "default_navigation_part" => 'ezsysinfonavigationpart',
-    "params" => array( 'modulename', 'viewname' ) );
+    "params" => array( 'modulename', 'viewname' ) );*/
+
+$ViewList['policylist'] = array(
+    "script" => "policylist.php",
+    "default_navigation_part" => 'ezsysinfonavigationpart',
+    "params" => array( 'modulename' ) );
 
 $ViewList['fetchlist'] = array(
     "script" => "fetchlist.php",
