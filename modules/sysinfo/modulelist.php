@@ -26,10 +26,12 @@ foreach( $modules as $modulename => $path )
         }
         if ( $Params['extensionname'] == '' || $Params['extensionname'] == $extension )
         {
+            /// @todo this generates a warning in debug logs if there are no functions; how to avoid it?
+            ///       The only way seems to pre_test for file existence, looking only
+            ///       at the same dir as where the module is
             $functions = eZFunctionHandler::moduleFunctionInfo( $modulename );
             $moduleList[$modulename] = array(
                 'views' => count( $module->attribute( 'views' ) ),
-                /// @todo this generates a warning in debug logs if there are no functions; how to avoid?
                 'fetch_functions' => count( $functions->FunctionList ),
                 'policy_functions' => count( $module->attribute( 'available_functions' ) ),
                 'extension' => $extension

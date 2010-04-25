@@ -50,32 +50,28 @@
 <table class="list" cellspacing="0">
     <tr>
         <th>{'Name'|i18n( 'SysInfo')}</th>
+        <th>{'Module'|i18n( 'SysInfo')}</th>
         <th>{'Extension'|i18n( 'SysInfo')}</th>
-        <th>{'Views'|i18n( 'SysInfo')}</th>
-        <th>{'Fetch Functions'|i18n( 'SysInfo')}</th>
-        <th>{'Policy Functions'|i18n( 'SysInfo')}</th>
-        <th>{'Help'|i18n( 'SysInfo')}</th>
+        <th>{'Limitations'|i18n( 'SysInfo')}</th>
+        {*<th>{'Help'|i18n( 'SysInfo')}</th>*}
     </tr>
-{foreach $modulelist as $module => $details sequence array( 'bglight', 'bgdark') as $style}
+{foreach $policylist as $policy => $details sequence array( 'bglight', 'bgdark') as $style}
     <tr class="{$style}">
         <td>
-            {*<a href={concat('/sysinfo/moduledetails/',$module)|ezurl}>*}{$module|wash}{*</a>*}
+            {$details['name']|wash}
+        </td>
+        <td>
+            {$details['module']|wash}
         </td>
         <td>
             {$details['extension']|wash}
         </td>
         <td>
-            {if gt($details['views'], 0)}<a href={concat('/sysinfo/viewlist/',$module)|ezurl}>{$details['views']}</a>{/if}
+            {foreach $details['limitations'] as $id => $values}{$id}{delimiter}<br/>{/delimiter}{/foreach}
         </td>
-        <td>
-            {if gt($details['fetch_functions'], 0)}<a href={concat('/sysinfo/fetchlist/',$module)|ezurl}>{$details['fetch_functions']}{/if}
-        </td>
-        <td>
-            {if gt($details['policy_functions'], 0)}<a href={concat('/sysinfo/policylist/',$module)|ezurl}>{$details['policy_functions']}{/if}
-        </td>
-        <td>
-            {if eq($details['extension'], '')}<a href="{concat($basedocurl,$module)}">ez.no{/if}
-        </td>
+        {*<td>
+            {if eq($details['extension'], '')}<a href="{concat($basedocurl,$details['module'],'/views/',$details['name'])}">ez.no{/if}
+        </td>*}
     </tr>
 {/foreach}
 </table>

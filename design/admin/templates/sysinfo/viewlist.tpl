@@ -54,6 +54,7 @@
         <th>{'Extension'|i18n( 'SysInfo')}</th>
         <th>{'Positional parameters'|i18n( 'SysInfo')}</th>
         <th>{'Named parameters'|i18n( 'SysInfo')}</th>
+        <th>{'Post action parameters'|i18n( 'SysInfo')}</th>
         <th>{'Required Policy Functions'|i18n( 'SysInfo')}</th>
         <th>{'Help'|i18n( 'SysInfo')}</th>
     </tr>
@@ -73,6 +74,9 @@
         </td>
         <td>
             {foreach $details['unordered_params'] as $param => $var}{$param|wash}{delimiter}<br/>{/delimiter}{/foreach}
+        </td>
+        <td>
+            {foreach $details['post_params'] as $id => $param}{$param|wash}{delimiter}<br/>{/delimiter}{/foreach}
         </td>
         <td>
             {foreach $details['functions'] as $id => $param}{$param|wash}{delimiter}<br/>{/delimiter}{/foreach}
