@@ -1,3 +1,8 @@
+- add views with list of modules w. their security functions (ok), views (ok), fetch functions (ok), template operators, policy functions, module details
+  add file name in view list ( + link to ezgeshi?)
+  add call method in fetch list ( + link to ezgeshi?)
+  add error msgs when bad param received
+
 - rebase info retrieval on ezsnmpd
 
 fix churn: cannot create img if folder is not there

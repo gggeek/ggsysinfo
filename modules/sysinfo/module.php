@@ -82,6 +82,36 @@ $ViewList['systemstatus'] = array(
     "default_navigation_part" => 'ezsysinfonavigationpart',
     "params" => array( 'output_format' ) );
 
+$ViewList['modulelist'] = array(
+    "script" => "modulelist.php",
+    "default_navigation_part" => 'ezsysinfonavigationpart',
+    "params" => array( 'extensionname' ) );
+
+$ViewList['moduledetails'] = array(
+    "script" => "moduledetails.php",
+    "default_navigation_part" => 'ezsysinfonavigationpart',
+    "params" => array( 'modulename' ) );
+
+$ViewList['viewlist'] = array(
+    "script" => "viewlist.php",
+    "default_navigation_part" => 'ezsysinfonavigationpart',
+    "params" => array( 'modulename' ) );
+
+$ViewList['viewdetails'] = array(
+    "script" => "viewdetails.php",
+    "default_navigation_part" => 'ezsysinfonavigationpart',
+    "params" => array( 'modulename', 'viewname' ) );
+
+$ViewList['fetchlist'] = array(
+    "script" => "fetchlist.php",
+    "default_navigation_part" => 'ezsysinfonavigationpart',
+    "params" => array( 'modulename' ) );
+
+$ViewList['operatorlist'] = array(
+    "script" => "operatorlist.php",
+    "default_navigation_part" => 'ezsysinfonavigationpart',
+    "params" => array( ) );
+
 $FunctionList = array();
 
 ?>
