@@ -18,7 +18,9 @@
 {* DESIGN: Content START *}<div class="box-bc"><div class="box-ml"><div class="box-mr"><div class="box-bl"><div class="box-br"><div class="box-content">
 <ul>
     <li><div><a href={'/sysinfo/systemstatus'|ezurl()}>{'System status'|i18n('SysInfo')}</a></div></li>
-{if eq(ezini('ClusteringSettings', 'FileHandler', 'file.ini'),'ezfs')}
+{def $fileHandler = ezini('ClusteringSettings', 'FileHandler', 'file.ini')
+     $acceptedHandlers = array('ezfs', 'eZFSFileHandler', 'eZFS2FileHandler', 'eZDFSFileHandler')}
+{if $acceptedHandlers|contains($fileHandler)}
     <li><div><a href={'/sysinfo/cachestats'|ezurl()}>{'Cache stats'|i18n('SysInfo')}</a></div></li>
     <li><div><a href={'/sysinfo/cachesearch'|ezurl()}>{'Cache search'|i18n('SysInfo')}</a></div></li>
     <li><div><a href={'/sysinfo/storagestats'|ezurl()}>{'Storage stats'|i18n('SysInfo')}</a></div></li>
