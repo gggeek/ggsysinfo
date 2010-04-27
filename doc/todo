@@ -3,8 +3,8 @@ generic tasks:
 
 developer module:
 - add views with list of template operators, module details, ext. details
-- add file name in view list ( + link to ezgeshi?)
-- add call method in fetch list ( + link to ezgeshi?)
+- add file name in view list (+ link to ezgeshi for ext. code)
+- add link on call method in ext. fetches in fetch list (ezgeshi for ext. code - pubsvn would also be nice if there was ANY doc for those classes... )
 - add a form to invoke views directly
 - add error msgs when bad param received
 - find a way to add link to docs for stuff provided by extensions

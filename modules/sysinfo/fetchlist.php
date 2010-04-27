@@ -18,6 +18,7 @@ if ( $Params['modulename'] != '' && !array_key_exists( $Params['modulename'], $m
 else
 {
 
+    $classes = false;
     foreach( $modules as $modulename => $path )
     {
         if ( $Params['modulename'] == '' || $Params['modulename'] == $modulename )
@@ -35,6 +36,22 @@ else
                 {
                     // merge empty array to facilitate life of templates
                     $fetch = array_merge( array( 'name' => $fetchname, 'parameters' => array(), ), $fetch );
+                    // if fetch is done via class method and file to be included misses, calculate it using autoload
+                    if ( isset( $fetch['call_method']['class'] ) && !isset($fetch['call_method']['include_file'] ) )
+                    {
+                        if ( !is_array( $classes ) )
+                        {
+                            $classes = include( 'autoload/ezp_kernel.php');
+                        }
+                        if ( isset( $classes[$fetch['call_method']['class']] ) )
+                        {
+                            $fetch['call_method']['include_file'] = $classes[$fetch['call_method']['class']];
+                        }
+                        else
+                        {
+                            eZDebug::writeWarning( 'Cannot find in kernel autoloads php file for class ' . $fetch['call_method']['class'], __METHOD__ );
+                        }
+                    }
                     $fetchList[$fetchname . '_' . $modulename] = $fetch;
                     $fetchList[$fetchname . '_' . $modulename]['module'] = $modulename;
                     $fetchList[$fetchname . '_' . $modulename]['extension'] = $extension;
@@ -55,6 +72,7 @@ require_once( "kernel/common/template.php" );
 $tpl = templateInit();
 $tpl->setVariable( 'title', $title );
 $tpl->setVariable( 'fetchlist', $fetchList );
+$tpl->setVariable( 'sdkversion', eZPublishSDK::version() );
 
 $Result = array();
 $Result['content'] = $tpl->fetch( "design:sysinfo/fetchlist.tpl" ); //var_dump($cacheFilesList);

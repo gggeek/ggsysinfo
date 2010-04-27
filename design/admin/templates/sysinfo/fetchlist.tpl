@@ -45,8 +45,6 @@
 </div>
 *}
 
-{def $basedocurl = 'http://ez.no/doc/ez_publish/technical_manual/4_x/reference/modules/'}
-
 <table class="list" cellspacing="0">
     <tr>
         <th>{'Name'|i18n( 'SysInfo')}</th>
@@ -56,7 +54,12 @@
         <th>{'Call method'|i18n( 'SysInfo')}</th>
         <th>{'Help'|i18n( 'SysInfo')}</th>
     </tr>
+{def $callmethod = array()
+     $native     = false()
+     $basedocurl = 'http://ez.no/doc/ez_publish/technical_manual/4_x/reference/modules/'
+     $basedoxurl = concat('http://pubsvn.ez.no/websvn2/filedetails.php?repname=nextgen&path=%2Frelease%2F',$sdkversion,'%2F')}
 {foreach $fetchlist as $fetch => $details sequence array( 'bglight', 'bgdark') as $style}
+    {set $native = eq($details['extension'], '')}
     <tr class="{$style}">
         <td>
             {$details['name']|wash}
@@ -71,10 +74,14 @@
             {foreach $details['parameters'] as $id => $param}{$param['name']|wash} - {$param['type']|wash} {if $param['required']} - required{/if}{delimiter}<br/>{/delimiter}{/foreach}
         </td>
         <td>
-            ...
+            {set $callmethod = $details['call_method']}
+            {if and(is_set($callmethod['class']), is_set($callmethod['method']))}
+                {*if is_set($callmethod['include_file'])}<a href="{concat($basedoxurl,$callmethod['include_file']|urlencode()}">{/if*}
+                {if $native}<a href="{concat($basedoxurl,$callmethod['include_file']|urlencode())}">{/if}{$callmethod['class']}::{$callmethod['method']}{*if $native}</a>{/if*}
+            {/if}
         </td>
         <td>
-            {if eq($details['extension'], '')}<a href="{concat($basedocurl,$details['module'],'/fetch_functions/',$details['name'])}">ez.no{/if}
+            {if $native}<a href="{concat($basedocurl,$details['module'],'/fetch_functions/',$details['name'])}">ez.no{/if}
         </td>
     </tr>
 {/foreach}
