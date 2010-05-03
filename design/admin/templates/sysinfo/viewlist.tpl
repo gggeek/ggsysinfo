@@ -45,8 +45,6 @@
 </div>
 *}
 
-{def $basedocurl = 'http://ez.no/doc/ez_publish/technical_manual/4_x/reference/modules/'}
-
 <table class="list" cellspacing="0">
     <tr>
         <th>{'Name'|i18n( 'SysInfo')}</th>
@@ -56,9 +54,14 @@
         <th>{'Named parameters'|i18n( 'SysInfo')}</th>
         <th>{'Post action parameters'|i18n( 'SysInfo')}</th>
         <th>{'Required Policy Functions'|i18n( 'SysInfo')}</th>
+        <th>{'Source'|i18n( 'SysInfo')}</th>
         <th>{'Help'|i18n( 'SysInfo')}</th>
     </tr>
+{def $native     = false()
+     $basedocurl = 'http://ez.no/doc/ez_publish/technical_manual/4_x/reference/modules/'
+     $basedoxurl = concat('http://pubsvn.ez.no/websvn2/filedetails.php?repname=nextgen&path=%2Frelease%2F',$sdkversion,'%2Fkernel%2F')}
 {foreach $viewlist as $view => $details sequence array( 'bglight', 'bgdark') as $style}
+    {set $native = eq($details['extension'], '')}
     <tr class="{$style}">
         <td>
             {$details['name']|wash}
@@ -82,7 +85,10 @@
             {foreach $details['functions'] as $id => $param}{$param|wash}{delimiter}<br/>{/delimiter}{/foreach}
         </td>
         <td>
-            {if eq($details['extension'], '')}<a href="{concat($basedocurl,$details['module'],'/views/',$details['name'])}">ez.no{/if}
+            {if $native}<a href="{concat($basedoxurl,$details['module'],'/',$details['script'])}">pubsvn.ez.no</a>{/if}
+        </td>
+        <td>
+            {if $native}<a href="{concat($basedocurl,$details['module'],'/views/',$details['name'])}">ez.no</a>{/if}
         </td>
     </tr>
 {/foreach}

@@ -63,6 +63,7 @@ require_once( "kernel/common/template.php" );
 $tpl = templateInit();
 $tpl->setVariable( 'title', $title );
 $tpl->setVariable( 'viewlist', $viewList );
+$tpl->setVariable( 'sdkversion', eZPublishSDK::version() );
 
 $Result = array();
 $Result['content'] = $tpl->fetch( "design:sysinfo/viewlist.tpl" ); //var_dump($cacheFilesList);
