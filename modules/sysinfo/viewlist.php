@@ -63,7 +63,7 @@ $ezgeshi_available = false;
 if ( in_array( 'ezsh', eZExtension::activeExtensions() ) )
 {
     $info = eZExtension::extensionInfo( 'ezsh' );
-    $ezgeshi_available = ( version_compare( $info, '1.3' ) >= 0 );
+    $ezgeshi_available = ( version_compare( $info['Version'], '1.3' ) >= 0 );
 }
 require_once( "kernel/common/template.php" );
 $tpl = templateInit();
