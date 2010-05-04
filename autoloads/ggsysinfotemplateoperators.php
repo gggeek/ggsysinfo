@@ -3,12 +3,16 @@
 class ggSysinfoTemplateOperators
 {
 
+    static $operators = array(
+        'installedphpcache' => array()
+    );
+
     /**
      Return an array with the template operator name.
     */
     public function operatorList()
     {
-        return array( 'installedphpcache');
+        return array_keys( self::$operators );
     }
 
     /**
@@ -26,14 +30,12 @@ class ggSysinfoTemplateOperators
     public function namedParameterList()
     {
 
-        return array(
-                      'installedphpcache' => array()
-                    );
+        return self::$operators;
     }
 
     /**
     */
-    public function modify( &$tpl, &$operatorName, &$operatorParameters, &$rootNamespace, &$currentNamespace, &$operatorValue, &$namedParameters )
+    public function modify( $tpl, $operatorName, $operatorParameters, $rootNamespace, $currentNamespace, &$operatorValue, $namedParameters )
     {
 
         switch ( $operatorName )
