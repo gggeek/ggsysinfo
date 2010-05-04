@@ -1,14 +1,9 @@
 generic tasks:
 - rebase info retrieval on ezsnmpd
-- reduce the policyomitlist to test views
-- add templates for standard design. Benefit: could be accessed on front-end siteaccesses
-- make base urls for doc links configurable
 
 developer module:
-- add views with list of template operators, module details, ext. details
-- add file name in view list (+ link to ezgeshi for ext. code)
-- add link on call method in ext. fetches in fetch list (ezgeshi for ext. code - pubsvn would also be nice if there was ANY doc for those classes... )
-- add a form to invoke views directly
+- add views with list of template operators, module details, extension details
+- add a form to test invoking views directly
 - add error msgs when bad param received
 - find a way to add link to docs for stuff provided by extensions
 
@@ -40,6 +35,7 @@ system status module:
 - allow hooking of new tests via ini files
 
 - add a module with more detailed info about users (never logged in, deactivated, etc...)
+- add templates for standard design. Benefit: could be accessed on front-end siteaccesses
 - add reporting modules (eg. all classes definitions) that provide clean html to export eg. as pdf or odt files
 - add memcached control panel
 

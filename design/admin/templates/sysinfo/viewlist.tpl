@@ -85,7 +85,16 @@
             {foreach $details['functions'] as $id => $param}{$param|wash}{delimiter}<br/>{/delimiter}{/foreach}
         </td>
         <td>
-            {if $native}<a href="{concat($basedoxurl,$details['module'],'/',$details['script'])}">pubsvn.ez.no</a>{/if}
+            {if $ezgeshi_available}
+                {if $native}
+                    {* @todo this really depends on an ini setting... *}
+                    <a href={concat('/geshi/highlight/kernel/',$details['module'],'/',$details['script'])|ezurl}>local</a>
+                {else}
+                    <a href={concat('/geshi/highlight/extension/',$details['extension'],'/',$details['module'],'/',$details['script'])|ezurl}>local</a>
+                {/if}
+            {else}
+                {if $native}<a href="{concat($basedoxurl,$details['module'],'/',$details['script'])}">pubsvn.ez.no</a>{/if}
+            {/if}
         </td>
         <td>
             {if $native}<a href="{concat($basedocurl,$details['module'],'/views/',$details['name'])}">ez.no</a>{/if}

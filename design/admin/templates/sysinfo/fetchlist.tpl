@@ -77,7 +77,11 @@
             {set $callmethod = $details['call_method']}
             {if and(is_set($callmethod['class']), is_set($callmethod['method']))}
                 {*if is_set($callmethod['include_file'])}<a href="{concat($basedoxurl,$callmethod['include_file']|urlencode()}">{/if*}
-                {if $native}<a href="{concat($basedoxurl,$callmethod['include_file']|urlencode())}">{/if}{$callmethod['class']}::{$callmethod['method']}{if $native}</a>{/if}
+                {if $ezgeshi_available}
+                    <a href={concat('/geshi/highlight/',$callmethod['include_file'])|ezurl}>{$callmethod['class']}::{$callmethod['method']}</a>
+                {else}
+                    {if $native}<a href="{concat($basedoxurl,$callmethod['include_file']|urlencode())}">{/if}{$callmethod['class']}::{$callmethod['method']}{if $native}</a>{/if}
+                {/if}
             {/if}
         </td>
         <td>

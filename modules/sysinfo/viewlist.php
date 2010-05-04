@@ -59,11 +59,18 @@ if ( $Params['modulename'] != '' )
     $title .= ' in module "' . $Params['modulename'] . '"';
 }
 
+$ezgeshi_available = false;
+if ( in_array( 'ezsh', eZExtension::activeExtensions() ) )
+{
+    $info = eZExtension::extensionInfo( 'ezsh' );
+    $ezgeshi_available = ( version_compare( $info, '1.3' ) >= 0 );
+}
 require_once( "kernel/common/template.php" );
 $tpl = templateInit();
 $tpl->setVariable( 'title', $title );
 $tpl->setVariable( 'viewlist', $viewList );
 $tpl->setVariable( 'sdkversion', eZPublishSDK::version() );
+$tpl->setVariable( 'ezgeshi_available', $ezgeshi_available );
 
 $Result = array();
 $Result['content'] = $tpl->fetch( "design:sysinfo/viewlist.tpl" ); //var_dump($cacheFilesList);

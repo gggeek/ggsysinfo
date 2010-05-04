@@ -49,7 +49,15 @@ else
                         }
                         else
                         {
-                            eZDebug::writeWarning( 'Cannot find in kernel autoloads php file for class ' . $fetch['call_method']['class'], __METHOD__ );
+                            $classes = include( 'var/autoload/ezp_extension.php');
+                            if ( isset( $classes[$fetch['call_method']['class']] ) )
+                            {
+                                $fetch['call_method']['include_file'] = $classes[$fetch['call_method']['class']];
+                            }
+                            else
+                            {
+                                eZDebug::writeWarning( 'Cannot find in kernel autoloads php file for class ' . $fetch['call_method']['class'], __METHOD__ );
+                            }
                         }
                     }
                     $fetchList[$fetchname . '_' . $modulename] = $fetch;
@@ -68,11 +76,19 @@ if ( $Params['modulename'] != '' )
     $title .= ' in module "' . $Params['modulename'] . '"';
 }
 
+$ezgeshi_available = false;
+if ( in_array( 'ezsh', eZExtension::activeExtensions() ) )
+{
+    $info = eZExtension::extensionInfo( 'ezsh' );
+    $ezgeshi_available = ( version_compare( $info, '1.3' ) >= 0 );
+}
+
 require_once( "kernel/common/template.php" );
 $tpl = templateInit();
 $tpl->setVariable( 'title', $title );
 $tpl->setVariable( 'fetchlist', $fetchList );
 $tpl->setVariable( 'sdkversion', eZPublishSDK::version() );
+$tpl->setVariable( 'ezgeshi_available', $ezgeshi_available );
 
 $Result = array();
 $Result['content'] = $tpl->fetch( "design:sysinfo/fetchlist.tpl" ); //var_dump($cacheFilesList);
