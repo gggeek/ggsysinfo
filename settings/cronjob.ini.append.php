@@ -1,6 +1,8 @@
 <?php /*
 
-[CronjobSettings]
-ExtensionDirectories[]=ggsysinfo
+# for future developments...
+
+#[CronjobSettings]
+#ExtensionDirectories[]=ggsysinfo
 
 */ ?>
