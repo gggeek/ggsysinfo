@@ -5,7 +5,7 @@ Goals:
 
 Allow eZ Publish administrator user to have better insight into its working installation:
 - have the complete informations from the phpinfo() page within the eZ Publish admin interface
-- have the complete informations from the installed php accelerator within the eZ Publish admin interface, and, in case,a llow to clear its cache
+- have the complete informations from the installed php accelerator within the eZ Publish admin interface, and, in case, allow to clear its cache
 - have a more detailed view on eZ Publish cache files, allowing to grep through them and delete them if needed
 - have a more detailed view on eZ Publish log files, allowing to grep through them
 - have a stats page with all types of content in the db listed
@@ -30,7 +30,9 @@ Installation:
 - if using eAccelerator, make sure that the  eZ Publish dir is within the eaccelerator.allowed_admin_path setting in php.ini
 - to have the connecting-to-the-web and connecting-to-email-server tests activated, go edit sysinfo.ini.append.php.
   By default these tests are deactivated since they involve active probing of external resources
-- Access to all views this module is regulated by granting access to the "setup/system_info" policy.
+- Access to all views of this module is regulated by granting access to the "setup/system_info" policy.
+  NB: this is the same policy that governs access to the "System information" page in the admin interface,
+  not a new policy defined by this extension.
   To allow anonymous access to a single view, the ini setting PolicyOmitList can be also used.
 
 
@@ -49,4 +51,3 @@ SECURITY:
 
 - DO NOT RUN THIS APP WITHOUT REWRITE RULES ENABLED!
   You would be giving any user the power to reset your php accelerator's cache at any time (if it sounds like an easy dos target, it is because it is)
-  
