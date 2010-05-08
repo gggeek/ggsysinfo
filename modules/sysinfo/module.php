@@ -1,22 +1,19 @@
 <?php
 
+// an improved setup/info module
 $Module = array( 'name' => 'System Information',
                  'variable_params' => false );
 
 $ViewList = array();
 
-// an improved setup/info module.
-// only admin will have rights to this - we check in the module itself
 $ViewList['php'] = array(
-    //'functions' => array( 'system_info' ),
+    //'functions' => array( 'system_info' ), - we check in the module itself
     "script" => "infophp.php",
     "default_navigation_part" => 'ezsysinfonavigationpart',
     "params" => array( ) );
 
-// an improved setup/info module.
-// only admin will have rights to this - we check in the module itself
 $ViewList['apc'] = array(
-    //'functions' => array( 'system_info' ),
+    //'functions' => array( 'system_info' ), - we check in the module itself
     "script" => "infoapc.php",
     "default_navigation_part" => 'ezsysinfonavigationpart',
     "params" => array( ) );
@@ -88,6 +85,7 @@ $ViewList['systemstatus'] = array(
     "params" => array( 'extensionname' ) );*/
 
 $ViewList['modulelist'] = array(
+    //'functions' => array( 'system_info' ), - we check in the module itself
     "script" => "modulelist.php",
     "default_navigation_part" => 'ezsysinfonavigationpart',
     "params" => array( 'extensionname' ) );
@@ -98,6 +96,7 @@ $ViewList['modulelist'] = array(
     "params" => array( 'modulename' ) );*/
 
 $ViewList['viewlist'] = array(
+    //'functions' => array( 'system_info' ), - we check in the module itself
     "script" => "viewlist.php",
     "default_navigation_part" => 'ezsysinfonavigationpart',
     "params" => array( 'modulename' ) );
@@ -108,19 +107,22 @@ $ViewList['viewlist'] = array(
     "params" => array( 'modulename', 'viewname' ) );*/
 
 $ViewList['policylist'] = array(
+    //'functions' => array( 'system_info' ), - we check in the module itself
     "script" => "policylist.php",
     "default_navigation_part" => 'ezsysinfonavigationpart',
     "params" => array( 'modulename' ) );
 
 $ViewList['fetchlist'] = array(
+    //'functions' => array( 'system_info' ), - we check in the module itself
     "script" => "fetchlist.php",
     "default_navigation_part" => 'ezsysinfonavigationpart',
     "params" => array( 'modulename' ) );
 
-$ViewList['operatorlist'] = array(
+/*$ViewList['operatorlist'] = array(
+    //'functions' => array( 'system_info' ), - we check in the module itself
     "script" => "operatorlist.php",
     "default_navigation_part" => 'ezsysinfonavigationpart',
-    "params" => array( ) );
+    "params" => array( ) );*/
 
 $FunctionList = array();
 

@@ -8,6 +8,17 @@
  *
  */
 
+// rely on system policy instead of creating our own, but allow also PolicyOmitList
+$ini = eZINI::instance();
+if ( !in_array( 'sysinfo/modulelist', $ini->variable( 'RoleSettings', 'PolicyOmitList' ) ) )
+{
+    $user = eZUser::currentUser();
+    if ( !$user->hasAccessTo( 'setup', 'system_info' ) )
+    {
+        return $Module->handleError( eZError::KERNEL_ACCESS_DENIED, 'kernel' );
+    }
+}
+
 // generic info for all modules: number of views, fetch functions, policy functions, name of extension
 $moduleList = array();
 
