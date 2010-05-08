@@ -73,16 +73,8 @@ function calcChurnLabel( $pos, $step )
 $graph->data[$graphname] = new ezcGraphArrayDataSet( $data );
 $graph->driver = new ezcGraphGdDriver();
 $graph->driver->options->imageFormat = IMG_JPEG;
-if ( ezSys::osName() == 'windows' )
-{
-    // pick a font that should be available on all windows boxes
-    $graph->options->font = 'c:/windows/fonts/arial.ttf';
-}
-else
-{
-    /// @todo find a way to properly load font files on unix
-    eZDebug::writeWarning( 'Font loading for graph labels on unix not yet implemented');
-}
+// pick a font that is delivered along with ezp
+$graph->options->font = 'design/standard/fonts/arial.ttf';
 
 $outputdir = eZSys::rootDir() . '/' . eZSys::cacheDirectory() . '/sysinfo';
 if ( !is_dir( $outputdir ) )
