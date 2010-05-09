@@ -36,6 +36,7 @@ if ( !in_array( 'sysinfo/storagechurn', $ini->variable( 'RoleSettings', 'PolicyO
     }
 }
 
+$errormsg = "";
 // nb: this dir is calculated the same way as ezlog does
 $logfile = eZSys::varDirectory() . '/' . $ini->variable( 'FileSettings', 'LogDir' ) . '/storage.log';
 $cachedir = eZSys::cacheDirectory() . '/sysinfo';
@@ -93,7 +94,7 @@ if ( !$cachefound )
 
     $graphname = ezi18n( 'SysInfo', 'Files per '.$scalenames[$scale] );
 
-    $graph = new ezcGraphBarChart();
+    $graph = new ezcGraphBarChart2();
     $locale = eZLocale::instance();
     $graph->title = "From " . $locale->formatShortDateTime( $min ) . " to " . $locale->formatShortDateTime( $max );
     $graph->xAxis->label = "From " . $locale->formatShortDateTime( $min ) . " to " . $locale->formatShortDateTime( $max );
@@ -114,7 +115,8 @@ if ( !$cachefound )
     // pick a font that is delivered along with ezp
     $graph->options->font = 'design/standard/fonts/arial.ttf';
 
-    $outputdir = eZSys::rootDir() . '/' . $cachedir;
+    // try to be atomic in graph generation
+    /*$outputdir = eZSys::rootDir() . '/' . $cachedir;
     $outputfile = eZSys::rootDir() . '/' . $cachefile;
     if ( !is_dir( $outputdir ) )
     {
@@ -126,12 +128,13 @@ if ( !$cachefound )
         {
             unlink( $outputfile );
         }
-    }
+    }*/
     try
     {
-        $errormsg = "";
-        $graph->render( 600, 400, $outputfile );
-        $clusterfile->fileStore( $cachefile );
+        ob_start();
+        $graph->render( 600, 400, null );
+        $content = ob_get_clean();
+        $clusterfile->fileStoreContents( $cachefile, $content );
     } catch( exception $e )
     {
         $errormsg = "Error while rendering graph: " . $e->getMessage();

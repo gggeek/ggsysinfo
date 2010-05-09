@@ -21,7 +21,8 @@ Requirements:
 - eZ Publish 4.0 or later
 - eZ Publish cluster mode is not supported yet for the cache info part
 - Zend Accelerator, Turck MMCache and IonCube are not supported for the opcode cache part
-
+- the GD extension to php is needed to produce graphs (eg. in the storage churn page)
+- the ezgeshi extension ver. 1.3 or later is an optional add-on that will add some fucntionality
 
 Installation:
 
@@ -34,6 +35,7 @@ Installation:
   NB: this is the same policy that governs access to the "System information" page in the admin interface,
   not a new policy defined by this extension.
   To allow anonymous access to a single view, the ini setting PolicyOmitList can be also used.
+- Make sure that users can access image files stored in var/sitename/cache/sysinfo for the storage churn graph to work
 
 - If the ezgeshi extension ver. 1.3 or later is also installed, on the pages listing views and fetcg functions
   a link to the source code will be available. To be able to see the source listing, permission to the policy
