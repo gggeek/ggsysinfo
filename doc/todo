@@ -1,8 +1,8 @@
 generic tasks:
 - rebase info retrieval on ezsnmpd
+- update apc/xcache/eacc control panels
 - move to a saner security configuration
   . use own policies instead of system ones ?
-  . test using policyomitlist
   . add blocking rules that disallow direct access to apc/xcache/eacc control panels
 
 developer views:
