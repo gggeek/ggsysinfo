@@ -14,6 +14,20 @@
  * @todo improve layout: graph padding, x axis labels, etc...
  */
 
+$module = $Params['Module'];
+
+// rely on system policy instead of creating our own, but allow also PolicyOmitList
+$ini = eZINI::instance();
+if ( !in_array( 'sysinfo/storagechurn', $ini->variable( 'RoleSettings', 'PolicyOmitList' ) ) )
+{
+    $user = eZUser::currentUser();
+    $access = $user->hasAccessTo( 'setup', 'system_info' );
+    if ( $access['accessWord'] != 'yes' )
+    {
+        return $module->handleError( eZError::KERNEL_ACCESS_DENIED, 'kernel' );
+    }
+}
+
 // *** Parse storage.log file ***
 
 $scale = 60;

@@ -11,16 +11,17 @@
 */
 
 $module = $Params['Module'];
-$http = eZHTTPTool::instance();
+//$http = eZHTTPTool::instance();
 
 // rely on system policy instead of creating our own, but allow also PolicyOmitList
 $ini = eZINI::instance();
 if ( !in_array( 'sysinfo/systemstatus', $ini->variable( 'RoleSettings', 'PolicyOmitList' ) ) )
 {
     $user = eZUser::currentUser();
-    if ( !$user->hasAccessTo( 'setup', 'system_info' ) )
+    $access = $user->hasAccessTo( 'setup', 'system_info' );
+    if ( $access['accessWord'] != 'yes' )
     {
-        return $Module->handleError( eZError::KERNEL_ACCESS_DENIED, 'kernel' );
+        return $module->handleError( eZError::KERNEL_ACCESS_DENIED, 'kernel' );
     }
 }
 

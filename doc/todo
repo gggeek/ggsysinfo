@@ -1,18 +1,20 @@
 generic tasks:
 - rebase info retrieval on ezsnmpd
-- move to a saner security configuration, stop using policyomitlist + in-view policy checking
+- move to a saner security configuration
+  . use own policies instead of system ones ?
+  . test using policyomitlist
+  . add blocking rules that disallow direct access to apc/xcache/eacc control panels
 
-developer module:
+developer views:
 - add views with list of template operators, module details, extension details
 - add a form to test invoking views directly
 - add error msgs when bad param received
 - find a way to add link to docs for stuff provided by extensions
 
-accelerator module:
+accelerator views:
 - add support for Zend PS, ioncube accelerator, Turck MMCache
 
-cache module:
-- add a default font for linux installs for storage churn graph
+cache views:
 - fix churn: dates in graph are not displayed optimally for large timespans
 - add support for clustered configs
 - add cache file timestamp
@@ -20,32 +22,32 @@ cache module:
 - add zoom icons on cache stats pages that bring to cache search page listing all cache files of the given type
 - add zoom icons on cache search pages that will show the cache file contents
 
-storage module:
+storage views:
 - add support for clustered configs
 - add age of files in dirs
 
-content module:
+content views:
 - add more content types, including those of std extensions (ezflow, ezsurvey, eznewsletter)
 - allow to remove drafts/pending/old verssions from this page (see flatten.php)
 
-system status module:
+system status views:
 - implement all tests listed (missing: self-testing soap and webdav...)
 - add cronjob that can be st up to check system status and log results somewhere
 - add a param that switches pagelayout to xml (plaintext already done done, without even hitting the template system)
 - add test for echoing something to logs, test for compiling a remplate
 - allow hooking of new tests via ini files
 
-- add a module with more detailed info about users (never logged in, deactivated, etc...)
-- add reporting modules (eg. all classes definitions) that provide clean html to export eg. as pdf or odt files
+- add a view with more detailed info about users (never logged in, deactivated, etc...)
+- add reporting views (eg. all classes definitions) that provide clean html to export eg. as pdf or odt files
 - add memcached control panel
 
-log module:
+log views:
 - to be done
 
-pending notifications module:
+pending notifications views:
 - to be done
 
-pending indexation events module:
+pending indexation events views:
 - to be done
 
 - ...

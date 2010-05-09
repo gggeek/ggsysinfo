@@ -19,9 +19,10 @@ $ini = eZINI::instance();
 if ( !in_array( 'sysinfo/cachesearch', $ini->variable( 'RoleSettings', 'PolicyOmitList' ) ) )
 {
     $user = eZUser::currentUser();
-    if ( !$user->hasAccessTo( 'setup', 'system_info' ) )
+    $access = $user->hasAccessTo( 'setup', 'system_info' );
+    if ( $access['accessWord'] != 'yes' )
     {
-        return $Module->handleError( eZError::KERNEL_ACCESS_DENIED, 'kernel' );
+        return $module->handleError( eZError::KERNEL_ACCESS_DENIED, 'kernel' );
     }
 }
 
@@ -37,7 +38,7 @@ if ( $http->hasPostVariable( 'RemoveButton' ) && $http->hasPostVariable( 'delete
 {
     if ( !$user->hasAccessTo( 'setup', 'managecache' ) )
     {
-        return $Module->handleError( eZError::KERNEL_ACCESS_DENIED, 'kernel' );
+        return $module->handleError( eZError::KERNEL_ACCESS_DENIED, 'kernel' );
     }
 
     $fileHandler = eZClusterFileHandler::instance();

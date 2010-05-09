@@ -8,14 +8,17 @@
  *
  */
 
+$module = $Params['Module'];
+
 // rely on system policy instead of creating our own, but allow also PolicyOmitList
 $ini = eZINI::instance();
 if ( !in_array( 'sysinfo/policylist', $ini->variable( 'RoleSettings', 'PolicyOmitList' ) ) )
 {
     $user = eZUser::currentUser();
-    if ( !$user->hasAccessTo( 'setup', 'system_info' ) )
+    $access = $user->hasAccessTo( 'setup', 'system_info' );
+    if ( $access['accessWord'] != 'yes' )
     {
-        return $Module->handleError( eZError::KERNEL_ACCESS_DENIED, 'kernel' );
+        return $module->handleError( eZError::KERNEL_ACCESS_DENIED, 'kernel' );
     }
 }
 

@@ -17,9 +17,10 @@ $ini = eZINI::instance();
 if ( !in_array( 'sysinfo/logstats', $ini->variable( 'RoleSettings', 'PolicyOmitList' ) ) )
 {
     $user = eZUser::currentUser();
-    if ( !$user->hasAccessTo( 'setup', 'system_info' ) )
+    $access = $user->hasAccessTo( 'setup', 'system_info' );
+    if ( $access['accessWord'] != 'yes' )
     {
-        return $Module->handleError( eZError::KERNEL_ACCESS_DENIED, 'kernel' );
+        return $module->handleError( eZError::KERNEL_ACCESS_DENIED, 'kernel' );
     }
 }
 

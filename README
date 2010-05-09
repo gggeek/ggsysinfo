@@ -35,6 +35,9 @@ Installation:
   not a new policy defined by this extension.
   To allow anonymous access to a single view, the ini setting PolicyOmitList can be also used.
 
+- If the ezgeshi extension ver. 1.3 or later is also installed, on the pages listing views and fetcg functions
+  a link to the source code will be available. To be able to see the source listing, permission to the policy
+  geshi/view_ezpublish_source must be granted to the current user.
 
 New modules/views:
 
