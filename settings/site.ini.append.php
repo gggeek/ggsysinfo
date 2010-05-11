@@ -14,4 +14,12 @@ TranslationExtensions[]=ggsysinfo
 # - using PolicyOmitList[]=sysinfo/oneview, it is possible to allow anon access to one specific view
 PolicyOmitList[]=sysinfo
 
+# Cache item entry (for eZ Publish 4.3 and up)
+[Cache]
+CacheItems[]=sysinfo
+
+[Cache_sysinfo]
+name=ggSysInfo extension graph cache
+path=sysinfo
+
 */ ?>
