@@ -2,7 +2,7 @@
 /**
  *
  * @author G. Giunta
- * @version $Id$
+ * @version $Id: sysinfotools.php 18 2010-04-17 14:29:21Z gg $
  * @copyright (C) G. Giunta 2008-2010
  * @license Licensed under GNU General Public License v2.0. See file license.txt
  *
