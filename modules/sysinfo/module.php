@@ -54,6 +54,13 @@ $ViewList['logsearch'] = array(
     "default_navigation_part" => 'ezsysinfonavigationpart',
     "params" => array( ) );
 
+$ViewList['logchurn'] = array(
+    //'functions' => array( 'system_info' ), - we check in the module itself
+    "script" => "logchurn.php",
+    "default_navigation_part" => 'ezsysinfonavigationpart',
+    "params" => array( ),
+    "unordered_params" => array() );
+
 $ViewList['storagestats'] = array(
     //'functions' => array( 'system_info' ), - we check in the module itself
     "script" => "storagestats.php",

@@ -20,7 +20,7 @@
 <ul>
     <li><div><a href={'/sysinfo/systemstatus'|ezurl()}>{'System status'|i18n('SysInfo')}</a></div></li>
 {def $fileHandler = ezini('ClusteringSettings', 'FileHandler', 'file.ini')
-     $acceptedHandlers = array('ezfs', 'eZFSFileHandler', 'eZFS2FileHandler', 'eZDFSFileHandler')}
+     $acceptedHandlers = array('ezfs', 'eZFSFileHandler', 'eZFS2FileHandler')}
 {if $acceptedHandlers|contains($fileHandler)}
     <li><div><a href={'/sysinfo/cachestats'|ezurl()}>{'Cache stats'|i18n('SysInfo')}</a></div></li>
     <li><div><a href={'/sysinfo/cachesearch'|ezurl()}>{'Cache search'|i18n('SysInfo')}</a></div></li>
@@ -34,6 +34,7 @@
     <li><div><a href={'/sysinfo/contentstats'|ezurl()}>{'Content stats'|i18n('SysInfo')}</a></div></li>
     <li><div><span class="disabled">{*<a href={'/sysinfo/logstats'|ezurl()}>*}{'Log stats'|i18n('SysInfo')}{*</a>*}</span></div></li>
     <li><div><span class="disabled">{*<a href={'/sysinfo/logsearch'|ezurl()}>*}{'Log search'|i18n('SysInfo')}{*</a>*}</span></div></li>
+    <li><div><a href={'/sysinfo/logchurn'|ezurl()}>{'Log churn'|i18n('SysInfo')}</a></span></div></li>
 </ul>
 {* DESIGN: Content END *}</div></div></div></div></div></div>
 

@@ -1,9 +1,9 @@
 generic tasks:
+- retest policy rules on 4.0.7
 - rebase info retrieval on ezsnmpd
-- update apc/xcache/eacc control panels
 - move to a saner security configuration
   . use own policies instead of system ones ?
-  . add blocking rules that disallow direct access to apc/xcache/eacc control panels
+  . add blocking code that disallow direct access to apc/xcache/eacc control panels
 
 developer views:
 - add views with list of template operators, module details, extension details
@@ -12,9 +12,12 @@ developer views:
 - find a way to add link to docs for stuff provided by extensions
 
 accelerator views:
+- update apc/xcache/eacc control panels to their latest svn code
+- add support for wincache
 - add support for Zend PS, ioncube accelerator, Turck MMCache
 
 cache views:
+- add a button in churn view to force regeneration of graph on demand
 - fix churn: dates in graph are not displayed optimally for large timespans
 - add support for clustered configs
 - add cache file timestamp
@@ -28,11 +31,11 @@ storage views:
 
 content views:
 - add more content types, including those of std extensions (ezflow, ezsurvey, eznewsletter)
-- allow to remove drafts/pending/old verssions from this page (see flatten.php)
+- allow to remove drafts/pending/old versions from this page (see flatten.php)
 
 system status views:
 - implement all tests listed (missing: self-testing soap and webdav...)
-- add cronjob that can be st up to check system status and log results somewhere
+- add cronjob that can be set up to check system status and log results somewhere
 - add a param that switches pagelayout to xml (plaintext already done done, without even hitting the template system)
 - add test for echoing something to logs, test for compiling a remplate
 - allow hooking of new tests via ini files
