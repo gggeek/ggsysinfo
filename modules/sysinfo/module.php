@@ -24,6 +24,12 @@ $ViewList['xcache'] = array(
     "default_navigation_part" => 'ezsysinfonavigationpart',
     "params" => array( ) );
 
+$ViewList['wincache'] = array(
+    //'functions' => array( 'system_info' ), - we check in the module itself
+    "script" => "infowincache.php",
+    "default_navigation_part" => 'ezsysinfonavigationpart',
+    "params" => array( ) );
+
 $ViewList['eaccelerator'] = array(
     //'functions' => array( 'system_info' ), - we check in the module itself
     "script" => "infoeaccelerator.php",
