@@ -38,6 +38,6 @@ $Result['content'] = $tpl->fetch( "design:sysinfo/info.tpl" );
 
 $Result['left_menu'] = 'design:parts/sysinfo/menu.tpl';
 $Result['path'] = array( array( 'url' => false,
-                                'text' => 'XCache' ) );
+                                'text' => 'WinCache' ) );
 
 ?>

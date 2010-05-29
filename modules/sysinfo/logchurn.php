@@ -18,7 +18,7 @@ $module = $Params['Module'];
 
 // rely on system policy instead of creating our own, but allow also PolicyOmitList
 $ini = eZINI::instance();
-if ( !in_array( 'sysinfo/storagechurn', $ini->variable( 'RoleSettings', 'PolicyOmitList' ) ) )
+if ( !in_array( 'sysinfo/logchurn', $ini->variable( 'RoleSettings', 'PolicyOmitList' ) ) )
 {
     $user = eZUser::currentUser();
     $access = $user->hasAccessTo( 'setup', 'system_info' );
