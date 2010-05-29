@@ -1,0 +1,154 @@
+/*body {
+    background-color: #ffffff;
+    color: #000000;
+    font-family: sans-serif;
+    font-size: 0.8em;
+}
+h1 {
+    font-size: 2em;
+}*/
+#content {
+    width: 960px;
+    margin: 5px;
+}
+#content #header {
+    color: #ffffff;
+    border: 1px solid black;
+    background-color: #5C87B2;
+    margin-bottom: 1em;
+    padding: 1em 2em;
+}
+/*The #menu element credits: */
+/*Credits: Dynamic Drive CSS Library */
+/*URL: http://www.dynamicdrive.com/style/ */
+#menu {
+    width: 100%;
+    overflow: hidden;
+    border-bottom: 1px solid black;
+    margin-bottom: 1em; /*bottom horizontal line that runs beneath tabs*/
+}
+#menu ul {
+    margin: 0;
+    padding: 0;
+    padding-left: 10px; /*offset of tabs relative to browser left edge*/;
+    font-weight: bold;
+    font-size: 1.2em;
+    list-style-type: none;
+}
+#menu li {
+    display: inline;
+    margin: 0;
+}
+#menu li a {
+    float: left;
+    display: block;
+    text-decoration: none;
+    margin: 0;
+    padding: 7px 8px;
+    border-right: 1px solid white; /*padding inside each tab*/
+    color: white; /*right divider between tabs*/
+    background: #5C87B2; /*background of tabs (default state)*/
+}
+#menu li a:visited {
+    color: white;
+}
+#menu li a:hover, #menu li.selected a {
+    background: #336699;
+}
+/*The end of the menu elements credits */
+#panel{
+    float: left;
+    width: 100%;
+    margin-bottom: 2em;
+    border: 1px solid black;
+}
+#panel_header{
+    background-color: #5C87B2;
+    font-weight: bold;
+    color: #ffffff;
+    border-bottom: 1px solid black;
+    padding: 0.5em;
+}
+#panel_body{
+    background-color: #E7E7E7;
+    padding: 0.5em;
+    white-space: 
+}
+pre {
+    white-space: pre-wrap; /* css-3 */
+    white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
+    white-space: -pre-wrap; /* Opera 4-6 */
+    white-space: -o-pre-wrap; /* Opera 7 */
+    word-wrap: break-word; /* Internet Explorer 5.5+ */
+}
+.overview{
+    float: left;
+    width: inherit;
+    margin-bottom: 2em;
+}
+.list{
+    float: left;
+    width: 100%;
+    margin-bottom: 2em;
+}
+.wideleftpanel{
+    float: left;
+    width: 520px;
+    margin-right: 20px;
+}
+.widerightpanel{
+    float: left;
+    width: 420px;
+}
+.leftpanel{
+    float: left;
+    width: 310px;
+}
+.rightpanel{
+    float:left;
+    width: 320px;
+    margin-left: 5px;
+}
+.extra_margin{
+    margin-top: 20px;
+}
+table {
+    border-collapse: collapse;
+}
+td, th {
+    border: 1px solid black;
+    vertical-align: baseline;
+}
+th {
+    background-color: #5C87B2;
+    font-weight: bold;
+    color: #ffffff;
+}
+.e {
+    background-color: #cbe1ef;
+    font-weight: bold;
+    color: #000000;
+    width: 40%;
+}
+.leftpanel .e{
+    width: 50%;
+}
+.v {
+    background-color: #E7E7E7;
+    color: #000000;
+}
+.n{
+    background-color: #FFFF00;
+    color: #000000;
+    font-weight: bold;
+}
+.notice {
+    display: block;
+    margin-top: 1.5em;
+    padding: 1em;
+    background-color: #ffffe0;
+    border: 1px solid #dddddd;
+}
+.clear{
+    clear: both;
+}

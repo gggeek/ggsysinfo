@@ -30,7 +30,7 @@ $output = preg_replace(array('#^.*<body>#s','#</body>.*$#s'), '', $output);
 require_once( "kernel/common/template.php" );
 $tpl = templateInit();
 $tpl->setVariable( 'title', 'WinCache' );
-//$tpl->setVariable( 'css', 'xcache.css' );
+$tpl->setVariable( 'css', 'wincache.css' );
 $tpl->setVariable( 'info', $output );
 
 $Result = array();
