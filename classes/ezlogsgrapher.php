@@ -20,6 +20,50 @@ class ezLogsGrapher
 {
 
     /**
+     * Parses an eZ log file, returns a (nested) array with one value per log message
+     * @return array
+     */
+    static function splitLog( $logfile, $exclude_regexp='#\] Timing Point: #' )
+    {
+        $file =  file( $logfile );
+        $data = array();
+        $content = '';
+        $time = 0;
+        $ip = '';
+        foreach ( $file as $line )
+        {
+            if ( preg_match( '/^\[ ([A-Za-z0-9: ]+) \] \[([0-9.]+)\] (.*)/', $line, $matches ) )
+            {
+                if ( $time > 0 )
+                {
+                    $data[] = array( 'date' => $date, 'message' => $content, 'label' => $label, 'source' => $ip, 'timestamp' => $time );
+                }
+                $time = 0;
+                $content = '';
+                if ( !preg_match( $exclude_regexp, $line ) )
+                {
+                    $date = $matches[1];
+                    /// @todo test if $time > 0 else log error
+                    $time = strtotime( $date );
+                    $ip = $matches[2];
+                    $label = $matches[3];
+                }
+            }
+            else
+            {
+                $content .= "\n$line";
+            }
+        }
+        if ( $time > 0 )
+        {
+            $data[] = array( 'date' => $date, 'message' => $content, 'label' => $label, 'source' => $ip, 'timestamp' => $time );
+        }
+        return $data;
+    }
+
+    /**
+    * Returns an array where indexes are timestamps, and values are the number of log events found
+    * @param $scale the time interval used to average (default: 1 minute)
     * @return array
     */
     static function parseLog( $logfile, $scale=60, $exclude_regexp='#\] Timing Point: #' )

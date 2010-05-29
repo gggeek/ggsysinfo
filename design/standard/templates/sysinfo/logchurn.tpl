@@ -18,7 +18,7 @@
     <h2>{$title}</h2>
     <div class="context-block">
     {if ne($graphsource, false())}
-        <img src="{concat(ezroot('no'),$graphsource)}" alt="{$title|i18n('SysInfo')}" />
+        <a href={concat('sysinfo/logview/',$title)|ezurl()}><img src="{concat(ezroot('no'),$graphsource)}" alt="{$title|i18n('SysInfo')}" /></a>
     {else}
         {'No log file'|i18n('SysInfo')}
     {/if}
