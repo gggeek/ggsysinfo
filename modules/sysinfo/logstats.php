@@ -3,11 +3,10 @@
  *
  * @author G. Giunta
  * @version $Id$
- * @copyright (C) G. Giunta 2008-2010
+ * @copyright (C) G. Giunta 2010
  * @license Licensed under GNU General Public License v2.0. See file license.txt
  *
- * @todo add more details, such as dates of first/last files,
- * @todo add support for clustered configs - hard currently, since there is no recursive search in api...
+ * @todo sort logs by criticity
  */
 
 $module = $Params['Module'];
@@ -24,36 +23,51 @@ if ( !in_array( 'sysinfo/logstats', $ini->variable( 'RoleSettings', 'PolicyOmitL
     }
 }
 
-$cacheFilesList = array();
+$errormsg = '';
+$cachedir = eZSys::cacheDirectory() . '/sysinfo';
+$logFilesList = array();
 
-$cacheList = eZCache::fetchList();
-foreach ( $cacheList as $cacheItem )
+// nb: this dir is calculated the same way as ezlog does
+$debug = eZDebug::instance();
+$logfiles = $debug->logFiles();
+foreach( $logfiles as $level => $file )
 {
-    if ( $cacheItem['path'] != false && $cacheItem['enabled'] )
-    {
-        $cacheFilesList[$cacheItem['name']] = array( 'path' => $cacheItem['path'] );
+    $logfile = $file[0] . $file[1];
+    $logname = str_replace( '.log', '', $file[1] );
 
-        // take care: this is hardcoded from knowledge of cache structure...
-        if ( $cacheItem['path'] == 'var/cache/ini' )
+    if ( file_exists( $logfile ) )
+    {
+        $count = 1;
+        $size = filesize( $logfile );
+        $modified = filemtime( $logfile );
+
+        // *** parse rotated log files, if found ***
+        $data = array();
+        for( $i = eZdebug::maxLogrotateFiles(); $i > 0; $i-- )
         {
-            $cacheFilesList[$cacheItem['name']]['count'] = sysInfoTools::countFilesInDir( eZSys::siteDir() . '/' . $cacheItem['path'] );
+            $archivelog = $logfile.".$i";
+            if ( file_exists( $archivelog ) )
+            {
+                $data = ezLogsGrapher::asum( $data, ezLogsGrapher::parseLog( $archivelog ) );
+                $size += filesize( $archivelog );
+                $count++;
+            }
         }
-        else
-        {
-            $cacheFilesList[$cacheItem['name']]['count'] = sysInfoTools::countFilesInDir( eZSys::cacheDirectory() . '/' . $cacheItem['path'] );
-        }
+
+        $logFilesList[$logname] = array( 'path' => $logfile, 'count' => $count, 'size' => $size, 'modified' => $modified );
     }
 }
 
 require_once( "kernel/common/template.php" );
 $tpl = templateInit();
-$tpl->setVariable( 'filelist', $cacheFilesList );
+$tpl->setVariable( 'filelist', $logFilesList );
+$tpl->setVariable( 'title', 'Log Stats' );
 
 $Result = array();
-$Result['content'] = $tpl->fetch( "design:sysinfo/cachestats.tpl" ); //var_dump($cacheFilesList);
+$Result['content'] = $tpl->fetch( "design:sysinfo/logstats.tpl" ); //var_dump($cacheFilesList);
 
 $Result['left_menu'] = 'design:parts/sysinfo/menu.tpl';
 $Result['path'] = array( array( 'url' => false,
-                                'text' => ezi18n( 'SysInfo', 'Cache stats' ) ) );
+                                'text' => ezi18n( 'SysInfo', 'Log stats' ) ) );
 
 ?>

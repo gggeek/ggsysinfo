@@ -9,10 +9,9 @@
  *
  * @todo add support for user-selected start and end date
  * @todo support coarser intervals than 60 secs
- * @todo add support for also showing older (rotated) logs
+ * @todo add support for not showing older (rotated) logs
  * @todo sort logs by criticity
  * @todo use a line graph and coalesce logs together
- * @todo add log file size
  */
 
 $module = $Params['Module'];

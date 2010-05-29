@@ -45,7 +45,9 @@ system status views:
 - add memcached control panel
 
 log views:
-- to be done
+- allow display of more logfiles (eg. ezdebugsettings logs and audit logs)
+- allow zooming in graph / listing of messages in a timespan
+- log search view
 
 pending notifications views:
 - to be done

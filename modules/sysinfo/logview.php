@@ -1,13 +1,13 @@
 <?php
 /**
- * Create a table of messages by analyzing error logs
+ * Dsiplay a table of messages by parsing a log file
  *
  * @author G. Giunta
  * @version $Id: storagechurn.php 43 2010-05-09 23:13:22Z gg $
- * @copyright (C) G. Giunta 2008-2010
+ * @copyright (C) G. Giunta 2010
  * @license Licensed under GNU General Public License v2.0. See file license.txt
  *
- * @todo add support for user-selected start and end date
+ * @todo add support for user-selected start and end date (offset/limit?)
  * @todo add support for not showing older (rotated) logs
  */
 
@@ -28,18 +28,18 @@ if ( !in_array( 'sysinfo/storagechurn', $ini->variable( 'RoleSettings', 'PolicyO
 $errormsg = 'File not found';
 $data = array();
 $cachedir = eZSys::cacheDirectory() . '/sysinfo';
+$logname = '';
 
 // nb: this dir is calculated the same way as ezlog does
 $debug = eZDebug::instance();
 $logfiles = $debug->logFiles();
-
 foreach( $logfiles as $level => $file )
 {
     if ( $file[1] == $Params['logfile'] . '.log' )
     {
 
         $logfile = $file[0] . $file[1];
-        //$logname = str_replace( '.log', '', $file[1] );
+        $logname = $Params['logfile'];
 
         if ( file_exists( $logfile ) )
         {
@@ -68,7 +68,7 @@ foreach( $logfiles as $level => $file )
 
 require_once( "kernel/common/template.php" );
 $tpl = templateInit();
-$tpl->setVariable( 'title', $Params['logfile'] );
+$tpl->setVariable( 'title', $Params['logfile'] ); // washed in tpl for safety
 $tpl->setVariable( 'log', $data );
 $tpl->setVariable( 'errormsg', $errormsg );
 
@@ -77,5 +77,7 @@ $Result['content'] = $tpl->fetch( "design:sysinfo/logview.tpl" ); //var_dump($ca
 
 $Result['left_menu'] = 'design:parts/sysinfo/menu.tpl';
 $Result['path'] = array( array( 'url' => false,
-                                'text' => ezi18n( 'SysInfo', 'Log view' ) ) );
+                                'text' => ezi18n( 'SysInfo', 'Log view' ) ),
+                         array( 'url' => false,
+                                'text' => $logname ) );
 ?>

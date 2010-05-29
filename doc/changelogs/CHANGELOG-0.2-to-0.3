@@ -1,11 +1,19 @@
 Changes from 0.2 to 0.3 - released 2010/xx/yy
 
-- Added name of php method implementing fetch function in 'fetch function list' view, linked to source code on pubsvn
-- Added link to source code (on pubsvn) for the 'views list' view
-- Added link to local source code for the 'views list' and 'fetch functions list' views, if ezgeshi extension 1.3 or later is installed
+New:
+- Added 'log display' view, to display log messages within the console. Yippee!!
+- Added 'log stats' view, with size and last modification date of all log files
+
+Improved:
+- Fetch function list view: added name of php method implementing fetch function, linked to source code on pubsvn
+- Views list view: added link to source code (on pubsvn)
+- Views list view, Fetch functions list view: added link to local source code if ezgeshi extension 1.3 or later is installed
+- Storage churn graph: clicking on graph brings to full log view
+- Storage churn graph: point to arial font included by default with eZP, not only on windows (thanks A. Pagnoni)
+- Storage churn graph: add a title with start and end date; use 10 points font
+- Storage churn graph: add a cache to avoid recalculating graph if storage log has not changed
+- Commented out unused cronjob.ini file
+
+Fixed:
+- Added policy checking to developer's views; fixed policy checking for all others
 - Moved design elements to 'standard' design, as it is the standard way ;)
-- storage churn graph: point to arial font included by default with eZP, not only on windows (thanks A. Pagnoni)
-- storage churn graph: add a title with start and end date; use 10 points font
-- storage churn graph: add a cache to avoid recalculating graph if storage log has not changed
-- added policy checking to developer's views; fixed policy checking for all others
-- commented out unused cornjob.ini file
