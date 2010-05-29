@@ -9,7 +9,7 @@
     <li><div>{if ne($currentcache,'apc')}<span class="disabled">APC</span>{else}<a href={'/sysinfo/apc'|ezurl()}>APC</a>{/if}</div></li>
     <li><div>{if ne($currentcache,'eaccelerator')}<span class="disabled">eAccelerator</span>{else}<a href={'/sysinfo/eaccelerator'|ezurl()}>eAccelerator</a>{/if}</div></li>
     <li><div>{if ne($currentcache,'xcache')}<span class="disabled">XCache</span>{else}<a href={'/sysinfo/xcache'|ezurl()}>XCache</a>{/if}</div></li>
-	<li><div>{if true()}<span class="disabled">WinCache</span>{else}<a href={'/sysinfo/wincache'|ezurl()}>WinCache</a>{/if}</div></li>
+	<li><div>{if ne($currentcache,'wincache')}<span class="disabled">WinCache</span>{else}<a href={'/sysinfo/wincache'|ezurl()}>WinCache</a>{/if}</div></li>
 </ul>
 {* DESIGN: Content END *}</div></div></div></div></div></div>
 

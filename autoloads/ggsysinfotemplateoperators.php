@@ -66,6 +66,10 @@ class ggSysinfoTemplateOperators
                 {
                     $operatorValue = 'xcache';
                 }
+                else if ( extension_loaded( "wincache" ) )
+                {
+                    $operatorValue = 'wincache';
+                }
                 else
                 {
                         $operatorValue = '';
