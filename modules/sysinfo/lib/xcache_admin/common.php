@@ -1,4 +1,17 @@
 <?php
+/**
+ * Patched version of COMMON.PHP file for inclusion within an eZPublish admin template
+ * based on rev. 1.2.2
+ *
+ * patches applied are marked with a ////
+ *
+ * @author G. Giunta - see copyright statement below for more info
+ * @version $Id$
+ */
+if ( !defined( 'EZCBASE_ENABLED' ) )
+{
+    die();
+}
 
 function get_language_file_ex($name, $l, $s)
 {

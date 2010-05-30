@@ -7,6 +7,10 @@
  * @author G. Giunta - see copyright statement below for more info
  * @version $Id$
  */
+if ( !defined( 'EZCBASE_ENABLED' ) )
+{
+    die();
+}
 /*
   +----------------------------------------------------------------------+
   | APC                                                                  |

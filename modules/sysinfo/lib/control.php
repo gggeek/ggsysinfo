@@ -1,4 +1,17 @@
 <?php
+/**
+ * Patched version of CONTROL.PHP file for inclusion within an eZPublish admin template
+ * based on rev. 0.9.5
+ *
+ * patches applied are marked with a ////
+ *
+ * @author G. Giunta - see copyright statement below for more info
+ * @version $Id$
+ */
+if ( !defined( 'EZCBASE_ENABLED' ) )
+{
+    die();
+}
 /*
    +----------------------------------------------------------------------+
    | eAccelerator control panel                                           |

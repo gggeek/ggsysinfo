@@ -1,4 +1,17 @@
 <?php
+/**
+ * Patched version of WINCACHE.PHP file for inclusion within an eZPublish admin template
+ * based on rev. 1.1.0beta2
+ *
+ * patches applied are marked with a ////
+ *
+ * @author G. Giunta - see copyright statement below for more info
+ * @version $Id: apc.php 1 2008-12-04 15:32:20Z gg $
+ */
+if ( !defined( 'EZCBASE_ENABLED' ) )
+{
+    die();
+}
 /*
    +----------------------------------------------------------------------------------------------+
    | Windows Cache for PHP                                                                        |
@@ -38,8 +51,10 @@
  * If you do not want to use authentication for this page, set USE_AUTHENTICATION to 0.
  * If you use authentication then replace the default password.
  */
+//// BEGIN
 ////define('USE_AUTHENTICATION', 1);
 define('USE_AUTHENTICATION', 0);
+//// END
 define('USERNAME', 'wincache');
 define('PASSWORD', 'wincache');
 
