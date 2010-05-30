@@ -37,7 +37,7 @@ Installation:
   To allow anonymous access to a single view, the ini setting PolicyOmitList can be also used.
 - Make sure that users can access image files stored in var/sitename/cache/sysinfo for the storage churn graph to work
 
-- If the ezgeshi extension ver. 1.3 or later is also installed, on the pages listing views and fetcg functions
+- If the ezgeshi extension ver. 1.3 or later is also installed, on the pages listing views and fetch functions
   a link to the source code will be available. To be able to see the source listing, permission to the policy
   geshi/view_ezpublish_source must be granted to the current user.
 
@@ -50,9 +50,3 @@ If some of the items in the menu are greyed out, it is because the corresponding
 The systemstatus view can be used for systematic monitoring of the status of the eZ Publish installation by external tools such as Nagios, OpenNMS, Zenoss etc...
 For such configurations, it is recommended to use the plaintext output, activated by appending 'plaintext' to the url (after of course, giving correct access permissions):
 http://my.ezpublish.site/index.php/siteaccess/systemstatus/plaintext
-
-
-SECURITY:
-
-- DO NOT RUN THIS APP WITHOUT REWRITE RULES ENABLED!
-  You would be giving any user the power to reset your php accelerator's cache at any time (if it sounds like an easy dos target, it is because it is)

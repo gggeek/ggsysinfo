@@ -3,7 +3,6 @@ generic tasks:
 - rebase info retrieval on ezsnmpd
 - move to a saner security configuration
   . use own policies instead of system ones ?
-  . add blocking code that disallow direct access to apc/xcache/eacc control panels
 
 developer views:
 - add views with list of template operators, module details, extension details
@@ -12,8 +11,9 @@ developer views:
 - find a way to add link to docs for stuff provided by extensions
 
 accelerator views:
-- update apc/xcache/eacc control panels to their latest svn code
-- add support for wincache
+- update apc/xcache/eacc control panels to their latest (svn?) code
+- add support for wincache images in fastcgi non-rewritten mode
+- test images for eacc/xache/apc ig both standard and vhost mode
 - add support for Zend PS, ioncube accelerator, Turck MMCache
 
 cache views:
