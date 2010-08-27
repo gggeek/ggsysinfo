@@ -161,7 +161,8 @@ class sysInfoTools
         }
 
         $ini = eZINI::instance( 'file.ini' );
-        if ( $ini->variable( 'ClusteringSettings', 'FileHandler' ) == 'ezdb' )
+        $handler = $ini->variable( 'ClusteringSettings', 'FileHandler' );
+        if ( $handler == 'ezdb' || $handler == 'eZDBFileHandler' )
         {
             // @todo...
             $dbFileHandler = eZClusterFileHandler::instance();
