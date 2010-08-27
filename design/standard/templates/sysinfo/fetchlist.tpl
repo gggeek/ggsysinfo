@@ -57,7 +57,7 @@
 {def $callmethod = array()
      $native     = false()
      $basedocurl = 'http://ez.no/doc/ez_publish/technical_manual/4_x/reference/modules/'
-     $basedoxurl = concat('http://pubsvn.ez.no/websvn2/filedetails.php?repname=nextgen&path=%2Frelease%2F',$sdkversion,'%2F')}
+     $basedoxurl = concat('http://github.com/ezsystems/ezpublish/tree/release-',$sdkversion,'/')}
 {foreach $fetchlist as $fetch => $details sequence array( 'bglight', 'bgdark') as $style}
     {set $native = eq($details['extension'], '')}
     <tr class="{$style}">
