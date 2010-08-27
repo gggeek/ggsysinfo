@@ -59,7 +59,6 @@
     </tr>
 {def $native     = false()
      $basedocurl = 'http://ez.no/doc/ez_publish/technical_manual/4_x/reference/modules/'
-     http://github.com/ezsystems/ezpublish/tree/master/kernel/
      $basedoxurl = concat('http://github.com/ezsystems/ezpublish/tree/release-',$sdkversion,'/kernel/')}
 {foreach $viewlist as $view => $details sequence array( 'bglight', 'bgdark') as $style}
     {set $native = eq($details['extension'], '')}
@@ -94,7 +93,7 @@
                     <a href={concat('/geshi/highlight/extension/',$details['extension'],'/',$details['module'],'/',$details['script'])|ezurl}>local</a>
                 {/if}
             {else}
-                {if $native}<a href="{concat($basedoxurl,$details['module'],'/',$details['script'])}">pubsvn.ez.no</a>{/if}
+                {if $native}<a href="{concat($basedoxurl,$details['module'],'/',$details['script'])}">github</a>{/if}
             {/if}
         </td>
         <td>
