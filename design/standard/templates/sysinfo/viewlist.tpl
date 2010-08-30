@@ -59,7 +59,7 @@
     </tr>
 {def $native     = false()
      $basedocurl = 'http://ez.no/doc/ez_publish/technical_manual/4_x/reference/modules/'
-     $basedoxurl = concat('http://github.com/ezsystems/ezpublish/tree/release-',$sdkversion,'/kernel/')}
+     $basedoxurl = concat('http://github.com/ezsystems/ezpublish/tree/',$sdkversion,'/kernel/')}
 {foreach $viewlist as $view => $details sequence array( 'bglight', 'bgdark') as $style}
     {set $native = eq($details['extension'], '')}
     <tr class="{$style}">
