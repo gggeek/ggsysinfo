@@ -4,55 +4,47 @@
 <context>
     <name>SysInfo</name>
     <message>
-        <source>Cache search</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
+        <location filename="systemstatus.php" line="49"/>
         <source>System status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="cachestats.php" line="61"/>
         <source>Cache stats</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="cachesearch.php" line="107"/>
+        <source>Cache search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="storagestats.php" line="50"/>
         <source>Storage stats</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="storagechurn.php" line="64"/>
+        <source>files per </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="storagechurn.php" line="85"/>
         <source>Storage churn</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="contentstats.php" line="56"/>
         <source>Content stats</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="logstats.php" line="71"/>
         <source>Log stats</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Log search</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Log churn</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Modules</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Views</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Policy Functions</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fetch Functions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -244,19 +236,43 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Doc Content class</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
+        <location filename="logchurn.php" line="97"/>
         <source>messages per </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Log view</source>
+        <location filename="logchurn.php" line="126"/>
+        <source>Log churn</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>files per </source>
+        <location filename="modulelist.php" line="73"/>
+        <source>Modules</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="viewlist.php" line="94"/>
+        <source>Views</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="policylist.php" line="77"/>
+        <source>Policy Functions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="fetchlist.php" line="111"/>
+        <source>Fetch Functions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="docclass.php" line="38"/>
+        <source>Doc Content class</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="logview.php" line="80"/>
+        <source>Log view</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
