@@ -144,6 +144,12 @@ $ViewList['fetchlist'] = array(
     "default_navigation_part" => 'ezsysinfonavigationpart',
     "params" => array( ) );*/
 
+$ViewList['docclass'] = array(
+    //'functions' => array( 'system_info' ), - we check in the module itself
+    "script" => "docclass.php",
+    "default_navigation_part" => 'ezsysinfonavigationpart',
+    "params" => array( ) );
+
 $FunctionList = array();
 
 ?>
