@@ -33,7 +33,7 @@ class sysInfoTools
                 {
                     if ( is_dir( $cachedir . '/' . $file ) )
                     {
-                        $return += sysInfoTools::countFilesInDir( $cachedir . '/' . $file );
+                        $return += self::countFilesInDir( $cachedir . '/' . $file );
                     }
                     else
                     {
@@ -285,7 +285,7 @@ class sysInfoTools
             $sender = $ini->variable( 'MailSettings', 'EmailSender' );
             $mail->setSender($sender);
             $mail->setSubject( "Test email" );
-            $mail->setBody( "Thsi email was automatically sent while testing eZ Publish connectivity to the mail server. Please do not reply." );
+            $mail->setBody( "This email was automatically sent while testing eZ Publish connectivity to the mail server. Please do not reply." );
             $mailResult = eZMailTransport::send( $mail );
             if ( $mailResult )
             {
