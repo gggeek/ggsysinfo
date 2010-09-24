@@ -27,7 +27,7 @@ $tpl = templateInit();
 $tpl->setVariable( 'title', 'Content classes report' );
 
 $Result = array();
-$Result['content'] = $tpl->fetch( "design:sysinfo/docclass.tpl" );
+$Result['content'] = $tpl->fetch( "design:sysinfo/classesreport.tpl" );
 
 $Result['left_menu'] = 'design:parts/sysinfo/menu.tpl';
 $Result['path'] = array( array( 'url' => false,
