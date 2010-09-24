@@ -173,11 +173,15 @@ class iniChecker
             }
         }
 
-        // unexpected values in std files
+        // unexpected params in (changed) std files
 
         // values present in both sa and override
 
         // bad content: whitespaces
+
+        // bad content: params in changed files with different Case than std files params
+
+        // values that will be changed with the new (4.4) precedence rules
 
         return $warnings;
     }
