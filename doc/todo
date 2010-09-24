@@ -4,6 +4,9 @@ generic tasks:
 - move to a saner security configuration
   . use own policies instead of system ones ?
 
+reports views:
+- add an excel pagelayout for direct export
+
 developer views:
 - add views with list of template operators, module details, extension details
 - add a form to test invoking views directly
