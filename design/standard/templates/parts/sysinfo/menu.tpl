@@ -56,6 +56,6 @@
 {* DESIGN: Header END *}</div></div></div></div></div></div>
 {* DESIGN: Content START *}<div class="box-bc"><div class="box-ml"><div class="box-mr"><div class="box-bl"><div class="box-br"><div class="box-content">
 <ul>
-    <li><div><a href={'/sysinfo/docclass'|ezurl()}>{'Content classes'|i18n('SysInfo')}</a></div></li>
+    <li><div><a href={'/sysinfo/classesreport'|ezurl()}>{'Content classes'|i18n('SysInfo')}</a></div></li>
 </ul>
 {* DESIGN: Content END *}</div></div></div></div></div></div>
