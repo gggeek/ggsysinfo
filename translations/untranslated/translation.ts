@@ -60,7 +60,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Classes definition</source>
+        <source>Content classes definition</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -88,7 +88,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Name</source>
+        <source>Attribute</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -132,7 +132,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Data Collector</source>
+        <source>Info Collector</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

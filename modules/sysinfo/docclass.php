@@ -1,13 +1,9 @@
 <?php
 /**
- *
- * @author G. Giunta
+ * @author A. Sebbane
  * @version $Id: contentstats.php 2570 2008-11-25 11:35:44Z ezsystems $
- * @copyright (C) G. Giunta 2008
+ * @copyright (C) G. Giunta 2010
  * @license Licensed under GNU General Public License v2.0. See file license.txt
- *
- * @todo add more classes of content that have no stats in main admin interface
- * @todo add support for ezsurvey, ezflow, eznewsletter contents
  */
 
 $module = $Params['Module'];
@@ -24,20 +20,17 @@ if ( !in_array( 'sysinfo/docclass', $ini->variable( 'RoleSettings', 'PolicyOmitL
     }
 }
 
-$http = eZHTTPTool::instance();
+//$http = eZHTTPTool::instance();
 
 require_once( "kernel/common/template.php" );
 $tpl = templateInit();
-$tpl->setVariable( 'title', 'Listes des classes de contenus' );
+$tpl->setVariable( 'title', 'Content classes report' );
 
 $Result = array();
 $Result['content'] = $tpl->fetch( "design:sysinfo/docclass.tpl" );
 
 $Result['left_menu'] = 'design:parts/sysinfo/menu.tpl';
 $Result['path'] = array( array( 'url' => false,
-                                'text' => ezi18n( 'SysInfo', 'Doc Content class' ) ) );
+                                'text' => ezi18n( 'SysInfo', 'Content classes' ) ) );
 
-
-								
-								
 ?>

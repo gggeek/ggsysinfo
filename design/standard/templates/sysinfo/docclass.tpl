@@ -1,8 +1,12 @@
+{**
+ @todo add class description, id, modification date, obj count?
+ @todo limit attr. description col width
+*}
 <div class="context-block">
 
 {* DESIGN: Header START *}<div class="box-header"><div class="box-tc"><div class="box-ml"><div class="box-mr"><div class="box-tl"><div class="box-tr">
 
-<h1 class="context-title">{$title}</h1>
+<h1 class="context-title">{$title|i18n('SysInfo')}</h1>
 
 {* DESIGN: Mainline *}<div class="header-mainline"></div>
 
@@ -13,65 +17,44 @@
 
 {* Items per page and view mode selector. *}
 
-<table cellpadding="0" border="1" width="100%">
-{def $classes=fetch( 'class', 'list',
-                           hash( 'sort_by', array( 'name', true() ) ) )}
-
-
-
-{def $attributes=''}
+{def $classes = fetch( 'class', 'list', hash( 'sort_by', array( 'name', true() ) ) )
+     $attributes = ''
+     $LanguageCode = ''}
 {foreach $classes as $class}
-<div style="clear:both">
-<h2>{$class.name|wash}</h2>
-<h3>{'Structure'|i18n('SysInfo')}</h3>
-        {set $attributes=fetch( 'class', 'attribute_list', hash( 'class_id', $class.id ) )}
-        <table cellpadding="0" border="1" width="100%">
-        <tr>
-		<th>{'Name'|i18n('SysInfo')}</th>
+    <div style="clear:both">
+    <h2>{$class.name|wash()} [{$class.identifier}]</h2>
+    {$class.descriptionList[$language_code]|wash}
+    {* @todo find a smarter way to get the language for the attricbute description*}
+    {set $attributes = fetch( 'class', 'attribute_list', hash( 'class_id', $class.id ) )
+         $LanguageCode = $class.top_priority_language_locale}
+    <table class="list">
+    <tr>
+        <th></th>
+        <th>{'Attribute'|i18n('SysInfo')}</th>
         <th>{'Identifier'|i18n('SysInfo')}</th>
         <th>{'Datatype'|i18n('SysInfo')}</th>
         <th>{'Required'|i18n('SysInfo')}</th>
-        <th>{'Translatable'|i18n('SysInfo')}</th>
-        <th>{'Data Collector'|i18n('SysInfo')}</th>
         <th>{'Searchable'|i18n('SysInfo')}</th>
-		<th>{'Description'|i18n('SysInfo')}</th>
-        </tr>
-        {foreach $attributes as $attribute}
-            <tr>
-            <td>{$attribute.name|wash}</td>
-            <td>{$attribute.identifier|wash}</td>
-            <td>{$attribute.data_type_string|wash}</td>
-				<td>
-					{if $attribute.is_required}
-						{'Yes'|i18n('SysInfo')}
-            {else}
-						{'No'|i18n('SysInfo')}
-					{/if}
-				</td>
-            <td>{$attribute.can_translate|wash}</td>
-            <td>
-            {if $attribute.is_information_collector}
-						  {'Yes'|i18n('SysInfo')}
-            {else}
-						{'No'|i18n('SysInfo')}
-            {/if}
-            </td>
-				<td>
-					{if $attribute.is_searchable}
-						{'Yes'|i18n('SysInfo')}
-            {else}
-						{'No'|i18n('SysInfo')}
-            {/if}
-            </td>
-				<td>&nbsp;</td>
-            </tr>
-        {/foreach}
-        </table>
+        <th>{'Info Collector'|i18n('SysInfo')}</th>
+        <th>{'Translatable'|i18n('SysInfo')}</th>
+        <th>{'Description'|i18n('SysInfo')}</th>
+    </tr>
+    {foreach $attributes as $i => $attribute sequence array( 'bglight', 'bgdark') as $style}
+    <tr class="{$style}">
+        <td>{$i|inc()}</td>
+        <td>{$attribute.name|wash}</td>
+        <td>{$attribute.identifier|wash}</td>
+        <td>{$attribute.data_type_string|wash}</td>
+        <td>{if $attribute.is_required}{'Yes'|i18n('SysInfo')}{else}{'No'|i18n('SysInfo')}{/if}</td>
+        <td>{if $attribute.is_searchable}{'Yes'|i18n('SysInfo')}{else}{'No'|i18n('SysInfo')}{/if}</td>
+        <td>{if $attribute.is_information_collector}{'Yes'|i18n('SysInfo')}{else}{'No'|i18n('SysInfo')}{/if}</td>
+        <td>{if $attribute.can_translate}{'Yes'|i18n('SysInfo')}{else}{'No'|i18n('SysInfo')}{/if}</td>
+        <td>{if is_set($attribute.descriptionList)}{$attribute.descriptionList[$language_code]|wash()}{else}&nbsp;{/if}</td>
+    </tr>
+    {/foreach}
+    </table>
 {/foreach}
-{undef $attributes}
-{undef $classes}
-
-
+{undef $attributes $classes $LanguageCode}
 
 {* DESIGN: Content END *}</div></div></div>
 <div class="controlbar">
