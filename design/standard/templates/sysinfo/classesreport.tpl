@@ -19,7 +19,15 @@
 
 {def $classes = fetch( 'class', 'list', hash( 'sort_by', array( 'name', true() ) ) )
      $attributes = ''
-     $LanguageCode = ''}
+     $LanguageCode = ''
+     $modified = 0}
+{foreach $classes as $class}
+    {if gt($class.modified, $modified)}
+        {set $modified = $class.modified}
+    {/if}
+{/foreach}
+{'Classes last modified'|i18n('SysInfo'): {$modified|l10n( shortdatetime )}
+
 {foreach $classes as $class}
     <div style="clear:both">
     <h2>{$class.name|wash()} [{$class.identifier}]</h2>

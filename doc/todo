@@ -4,6 +4,8 @@ generic tasks:
 - move to a saner security configuration
   . use own policies instead of system ones ?
 - finish porting remaining views to genericview.php
+- use the list of views for left-hand menu
+- add description for every view in sysinfomodule.php
 
 reports views:
 - add an excel pagelayout for direct export
