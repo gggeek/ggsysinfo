@@ -11,6 +11,9 @@ generic tasks:
 reports views:
 - add an excel pagelayout for direct export
 - add a cache to class report page
+- add workflow report
+- add roles & policies report
+- add obj states / sections report?
 
 developer views:
 - add views with list of template operators, module details, extension details
@@ -58,7 +61,12 @@ log views:
 - log search view
 
 qa views:
+- ini file naming: use != checks for ez >= 4.4
 - integrate with ezgeshi if found to link to highlighted ini files
+- template check view
+- view that runs setup wizard tests
+- extensions that have mysql .sql files but not db_schema.dba
+- duplicate values for designlist, relatedsa
 
 pending notifications views:
 - to be done

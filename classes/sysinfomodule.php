@@ -19,7 +19,6 @@ class sysinfoModule{
             'index' => array(
                 "script" => "genericview.php",
                 "default_navigation_part" => 'ezsysinfonavigationpart',
-                "params" => array( ),
                 'name' => '',
                 'title' => 'System Information' ),
         ),
@@ -29,7 +28,6 @@ class sysinfoModule{
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 "script" => "genericview.php",
                 "default_navigation_part" => 'ezsysinfonavigationpart',
-                "params" => array( ),
                 'name' => 'phpinfo()',
                 'description' => 'The standard phpinfo() information page detailing php settings' ),
 
@@ -37,7 +35,6 @@ class sysinfoModule{
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 "script" => "genericview.php",
                 "default_navigation_part" => 'ezsysinfonavigationpart',
-                "params" => array( ),
                 'name' => 'APC',
                 'description' => 'The control panel for the APC opcode cache' ),
 
@@ -45,7 +42,6 @@ class sysinfoModule{
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 "script" => "genericview.php",
                 "default_navigation_part" => 'ezsysinfonavigationpart',
-                "params" => array( ),
                 'name' => 'eAccelerator',
                 'description' => 'The control panel for the eAccelerator opcode cache' ),
 
@@ -53,7 +49,6 @@ class sysinfoModule{
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 "script" => "genericview.php",
                 "default_navigation_part" => 'ezsysinfonavigationpart',
-                "params" => array( ),
                 'name' => 'XCache',
                 'description' => 'The control panel for the XCache opcode cache' ),
 
@@ -61,7 +56,6 @@ class sysinfoModule{
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 "script" => "genericview.php",
                 "default_navigation_part" => 'ezsysinfonavigationpart',
-                "params" => array( ),
                 'name' => 'WinCache',
                 'description' => 'The control panel for the WinCache opcode cache' ),
         ),
@@ -78,14 +72,12 @@ class sysinfoModule{
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 "script" => "genericview.php",
                 "default_navigation_part" => 'ezsysinfonavigationpart',
-                "params" => array( ),
                 'name' => 'Cache stats' ),
 
             'cachesearch' => array(
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 "script" => "cachesearch.php",
                 "default_navigation_part" => 'ezsysinfonavigationpart',
-                "params" => array( ),
                 'name' => 'Cache search' ),
 
 
@@ -93,43 +85,36 @@ class sysinfoModule{
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 "script" => "genericview.php",
                 "default_navigation_part" => 'ezsysinfonavigationpart',
-                "params" => array( ),
                 'name' => 'Storage stats' ),
 
             'storagechurn' => array(
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 "script" => "genericview.php",
                 "default_navigation_part" => 'ezsysinfonavigationpart',
-                "params" => array( ),
-                "unordered_params" => array(),
                 'name' => 'Storage churn' ),
 
             'contentstats' => array(
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 "script" => "genericview.php",
                 "default_navigation_part" => 'ezsysinfonavigationpart',
-                "params" => array( ),
                 'name' => 'Content stats' ),
 
             'logstats' => array(
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 "script" => "genericview.php",
                 "default_navigation_part" => 'ezsysinfonavigationpart',
-                "params" => array( ),
                 'name' => 'Log Stats' ),
 
             'logsearch' => array(
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 "script" => "logsearch.php",
                 "default_navigation_part" => 'ezsysinfonavigationpart',
-                "params" => array( ),
                 'name' => 'Log search' ),
 
             'logchurn' => array(
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 "script" => "genericview.php",
                 "default_navigation_part" => 'ezsysinfonavigationpart',
-                "params" => array( ),
                 "unordered_params" => array(),
                 'name' => 'Log churn' ),
 
@@ -138,7 +123,6 @@ class sysinfoModule{
                 "script" => "logview.php",
                 "default_navigation_part" => 'ezsysinfonavigationpart',
                 "params" => array( 'logfile' ),
-                "unordered_params" => array(),
                 'name' => 'Log view' ),
 
         ),
@@ -200,15 +184,13 @@ class sysinfoModule{
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 "script" => "genericview.php",
                 "default_navigation_part" => 'ezsysinfonavigationpart',
-                "params" => array( ),
                 'name' => 'Ini files problems' ),
 
-            /*'inisettingsqa' => array(
+            'inisettingsqa' => array(
                 //'functions' => array( 'system_info' ), - we check in the module itself
-                "script" => "inisettingsqa.php",
+                "script" => "genericview.php",
                 "default_navigation_part" => 'ezsysinfonavigationpart',
-                "params" => array( ),
-                'name' => '' )*/
+                'name' => 'Ini values problems' )
 
         ),
         'Reports' => array(

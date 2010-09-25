@@ -55,54 +55,86 @@ class iniChecker
             }
         }
 
-        // .ini files in extensions that have same name as std files, no .ini (master) file for new ones
-        $newinis = array();
-        $changedinis = array();
-        foreach( self::$userinis as $file )
+        // starting with version 4.4, it is not necessary to have exactly one .ini
+        // file (and optionally many .ini.append.php)
+        if ( version_compare( '4.4', eZPublishSDK::version() ) == -1 )
         {
-            $ini = preg_replace( '/\.append$/', '', preg_replace( '/\.php/', '', basename( $file ) ) );
-            if ( in_array( $ini, self::$originalinis ) )
+
+            // .ini files in extensions that have same name as std files, no .ini (master) file for new ones
+            $newinis = array();
+            $changedinis = array();
+            foreach( self::$userinis as $file )
             {
-                $changedinis[$ini][] = $file;
-            }
-            else
-            {
-                $newinis[$ini][] = $file;
-            }
-        }
-//var_export( $changedinis );
-//var_export( $newinis );
-        foreach( $changedinis as $ini )
-        {
-            foreach( $ini as $file )
-            {
-                if ( preg_match( '#\.ini$#', $file ) )
+                $ini = preg_replace( '/\.append$/', '', preg_replace( '/\.php/', '', basename( $file ) ) );
+                if ( in_array( $ini, self::$originalinis ) )
                 {
-                    $warnings[] = "File $file should be renamed to .ini.append.php";
-                }
-            }
-        }
-        foreach( $newinis as $ininame => $inis )
-        {
-            $orig = 0;
-            foreach( $inis as $file )
-            {
-                if ( preg_match( '#\.ini$#', $file ) )
-                {
-                    $orig++;
-                }
-            }
-            if ( $orig != 1 )
-            {
-                if ( $orig == 0 )
-                {
-                    $warnings[] = "There should be one $ininame file with a .ini extension. Found: " . implode( $inis, ', ' );
+                    $changedinis[$ini][] = $file;
                 }
                 else
                 {
-                    $warnings[] = "There should be only one $ininame file with a .ini extension. Found: " . implode( $inis, ', ' );
+                    $newinis[$ini][] = $file;
                 }
             }
+
+            foreach( $changedinis as $ini )
+            {
+                foreach( $ini as $file )
+                {
+                    if ( preg_match( '#\.ini$#', $file ) )
+                    {
+                        $warnings[] = "File $file should be renamed to .ini.append.php";
+                    }
+                }
+            }
+            foreach( $newinis as $ininame => $inis )
+            {
+                $orig = 0;
+                foreach( $inis as $file )
+                {
+                    if ( preg_match( '#\.ini$#', $file ) )
+                    {
+                        $orig++;
+                    }
+                }
+                if ( $orig != 1 )
+                {
+                    if ( $orig == 0 )
+                    {
+                        $warnings[] = "There should be one $ininame file with a .ini extension. Found: " . implode( $inis, ', ' );
+                    }
+                    else
+                    {
+                        $warnings[] = "There should be only one $ininame file with a .ini extension. Found: " . implode( $inis, ', ' );
+                    }
+                }
+            }
+        }
+
+        return $warnings;
+    }
+
+    static function checkFileContents()
+    {
+        self::initialize();
+
+        $warnings = array();
+
+        // generic syntax validation
+        foreach( self::$originalinis as $file )
+        {
+            $values[$file] = self::parseIniFile( "settings/$file", $warnings );
+        }
+        foreach( self::$extensioninis as $file )
+        {
+            $extvalues[$file] = self::parseIniFile( $file, $warnings, true );
+        }
+        foreach( self::$siteaccesinis as $file )
+        {
+            $savalues[$file] = self::parseIniFile( $file, $warnings, true );
+        }
+        foreach( self::$overrideinis as $file )
+        {
+            $overvalues[$file] = self::parseIniFile( $file, $warnings, true );
         }
 
         // unexpected params in (changed) std files
@@ -186,13 +218,117 @@ class iniChecker
         return $inifiles;
     }
 
-    // return an array of blocks, with values inside
-    protected static function parseIniFile( $filename )
+    /**
+    * Return an array of blocks, with values inside, and stores the warnings
+    * generated while parsing the file.
+    * Regular expressions taken from ezgeshi extension
+    *
+    * @todo be more stringent with php opening/closing tag lines
+    * @todo make sure there is a php comment at the start of a php file!
+    * @todo allow php-style comments: // and /* * / ?
+    */
+    protected static function parseIniFile( $filename, &$warnings, $isphp=false )
     {
-        foreach ( file( $filename ) as $line )
+        $groups = array();
+        $currentrgroup = '';
+        $isincomments = false;
+        foreach ( file( $filename, FILE_IGNORE_NEW_LINES & FILE_SKIP_EMPTY_LINES ) as $i => $line )
         {
-            /// @todo...
+            $i++;
+
+            // empty line
+            if ( trim( $line ) == '' )
+            {
+                continue;
+            }
+
+            // windows CRLF eol marker does not gbet stripped properly all of the time by php!
+            $line = preg_replace( '/\r$/', '', $line);
+
+            // comment
+            if ( preg_match( '/^#/', $line ) )
+            {
+                continue;
+            }
+            // bad ini block: whitespace before it...
+            if ( preg_match( '/^[ \t]+\[[^\]]+\][ \t]*/', $line ) )
+            {
+                $warnings[] = "Bad block on line $i of file $filename: whitespace before block '$line'";
+                continue;
+            }
+            // bad line: space before setting name
+            if ( preg_match( '/^[ \t]+[\w_*@-]/', $line ) )
+            {
+                $warnings[] = "Bad parameter on line $i of file $filename: whitespace before parameter '$line'";
+                continue;
+            }
+            // bad line: space after setting name
+            if ( preg_match( '/^[\w_*@-]*[\w_*@-][ \t]+/', $line ) )
+            {
+                $warnings[] = "Bad parameter on line $i of file $filename: whitespace after parameter '$line'";
+                continue;
+            }
+            // bad line: space after array key
+            if ( preg_match( '/^[\w_*@-]+\[[^\]]*\][ \t]+/', $line ) )
+            {
+                $warnings[] = "Bad array parameter on line $i of file $filename: whitespace after array key '$line'";
+                continue;
+            }
+            // most likely bad line: space after = sign
+            if ( preg_match( '/^[^#=]+=[ \t]+.?/', $line ) )
+            {
+                $warnings[] = "Bad parameter on line $i of file $filename: whitespace after equal sign '$line'";
+                continue;
+            }
+            // most likely bad line: space after setting value
+            if ( preg_match( '/^[^#=]+=[^ \t\n]+[ \t]+$/', $line ) )
+            {
+                $warnings[] = "Bad parameter on line $i of file $filename: whitespace after value '$line'";
+                continue;
+            }
+             // most likely bad line: space at beginning or end of array key
+            if ( preg_match( '/^[^\[#]\[[ \t]+[^\]]*\]|\[[^\]]*[ \t]+\]/', $line ) )
+            {
+                $warnings[] = "Bad array parameter on line $i of file $filename: whitespace at beginning or end of array key '$line'";
+                continue;
+            }
+            // ini block: no whitespace allowed before it on the line, only whitespace allowed afterwards
+            if ( preg_match( '/^\[([^\]]+)\][ \t]*/', $line, $matches ) )
+            {
+                $currentgroup = $matches[1];
+                continue;
+            }
+            // array reset
+            if ( preg_match( '/^([\w_*@-]+)\[\]$/', $line, $matches ) )
+            {
+                $groups[$currentgroup][$matches[1]] = array();
+                continue;
+            }
+            // array value
+            if ( preg_match( '/^([^#\]]+)\[([^ \]]+[^\]]*[^ \]]+|[^ \]]*)\]=(.*)/', $line, $matches ) )
+            {
+                if ( $matches[2] == '' )
+                {
+                    $groups[$currentgroup][$matches[1]][] = $matches[3];
+                }
+                else
+                {
+                    $groups[$currentgroup][$matches[1]][$matches[2]] = $matches[3];
+                }
+                continue;
+            }
+            // config line
+            if ( preg_match( '/^([\w_*@-]+(?:\[[^\]]*\])?)=(.*)/', $line, $matches ) )
+            {
+                $groups[$currentgroup][$matches[1]] = $matches[2];
+                continue;
+            }
+            if ( !$isphp || ( !preg_match( '/^<\?php/', $line ) && !preg_match( '/\?>$/', $line ) && !preg_match( '#^/\*$#', $line ) && !preg_match( '#^\*/$#', $line ) ) )
+            {
+                $warnings[] = "Bad line $i of file $filename: neither a value, nor a block or comment '$line'";
+            }
         }
+        return $groups;
     }
 
 }

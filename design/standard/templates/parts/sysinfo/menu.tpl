@@ -61,7 +61,7 @@
 {* DESIGN: Content START *}<div class="box-bc"><div class="box-ml"><div class="box-mr"><div class="box-bl"><div class="box-br"><div class="box-content">
 <ul>
     <li><div><a href={'/sysinfo/inifilesqa'|ezurl()}>{'Ini files'|i18n('SysInfo')}</a></div></li>
-    {*<li><div><a href={'/sysinfo/inisettingsqa'|ezurl()}>{'Ini settings'|i18n('SysInfo')}</a></div></li>*}
+    <li><div><a href={'/sysinfo/inisettingsqa'|ezurl()}>{'Ini settings'|i18n('SysInfo')}</a></div></li>
 </ul>
 {* DESIGN: Content END *}</div></div></div></div></div></div>
 
