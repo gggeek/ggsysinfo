@@ -9,7 +9,7 @@ Tabs[]=ggsysinfo
 [Topmenu_ggsysinfo]
 Name=System Information
 Tooltip=Display detailed system information
-URL[default]=sysinfo/php
+URL[default]=sysinfo/index
 NavigationPartIdentifier=ezsysinfonavigationpart
 
 Enabled[]

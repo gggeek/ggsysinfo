@@ -10,20 +10,6 @@
  * @todo add support for clustered configs - hard currently, since there is no recursive search in api...
  */
 
-$module = $Params['Module'];
-
-// rely on system policy instead of creating our own, but allow also PolicyOmitList
-$ini = eZINI::instance();
-if ( !in_array( 'sysinfo/storagestats', $ini->variable( 'RoleSettings', 'PolicyOmitList' ) ) )
-{
-    $user = eZUser::currentUser();
-    $access = $user->hasAccessTo( 'setup', 'system_info' );
-    if ( $access['accessWord'] != 'yes' )
-    {
-        return $module->handleError( eZError::KERNEL_ACCESS_DENIED, 'kernel' );
-    }
-}
-
 $storagedir = eZSys::storageDirectory();
 $files = @scandir( eZSys::storageDirectory() );
 foreach( $files as $file )
@@ -37,16 +23,6 @@ foreach( $files as $file )
     }
 }
 
-require_once( "kernel/common/template.php" );
-$tpl = templateInit();
-$tpl->setVariable( 'title', 'Storage stats' );
 $tpl->setVariable( 'filelist', $cacheFilesList );
-
-$Result = array();
-$Result['content'] = $tpl->fetch( "design:sysinfo/cachestats.tpl" ); //var_dump($cacheFilesList);
-
-$Result['left_menu'] = 'design:parts/sysinfo/menu.tpl';
-$Result['path'] = array( array( 'url' => false,
-                                'text' => ezi18n( 'SysInfo', 'Storage stats' ) ) );
 
 ?>

@@ -9,20 +9,6 @@
  * @todo sort logs by criticity
  */
 
-$module = $Params['Module'];
-
-// rely on system policy instead of creating our own, but allow also PolicyOmitList
-$ini = eZINI::instance();
-if ( !in_array( 'sysinfo/logstats', $ini->variable( 'RoleSettings', 'PolicyOmitList' ) ) )
-{
-    $user = eZUser::currentUser();
-    $access = $user->hasAccessTo( 'setup', 'system_info' );
-    if ( $access['accessWord'] != 'yes' )
-    {
-        return $module->handleError( eZError::KERNEL_ACCESS_DENIED, 'kernel' );
-    }
-}
-
 $errormsg = '';
 $cachedir = eZSys::cacheDirectory() . '/sysinfo';
 $logFilesList = array();
@@ -61,13 +47,5 @@ foreach( $logfiles as $level => $file )
 require_once( "kernel/common/template.php" );
 $tpl = templateInit();
 $tpl->setVariable( 'filelist', $logFilesList );
-$tpl->setVariable( 'title', 'Log Stats' );
-
-$Result = array();
-$Result['content'] = $tpl->fetch( "design:sysinfo/logstats.tpl" ); //var_dump($cacheFilesList);
-
-$Result['left_menu'] = 'design:parts/sysinfo/menu.tpl';
-$Result['path'] = array( array( 'url' => false,
-                                'text' => ezi18n( 'SysInfo', 'Log stats' ) ) );
 
 ?>

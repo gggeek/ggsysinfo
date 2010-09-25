@@ -1,0 +1,1 @@
+{include uri='design:sysinfo/info.tpl'}

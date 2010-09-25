@@ -12,20 +12,6 @@
  * @todo
  */
 
-$module = $Params['Module'];
-
-// rely on system policy instead of creating our own, but allow also PolicyOmitList
-$ini = eZINI::instance();
-if ( !in_array( 'sysinfo/storagechurn', $ini->variable( 'RoleSettings', 'PolicyOmitList' ) ) )
-{
-    $user = eZUser::currentUser();
-    $access = $user->hasAccessTo( 'setup', 'system_info' );
-    if ( $access['accessWord'] != 'yes' )
-    {
-        return $module->handleError( eZError::KERNEL_ACCESS_DENIED, 'kernel' );
-    }
-}
-
 $errormsg = "";
 // nb: this dir is calculated the same way as ezlog does
 $logfile = eZSys::varDirectory() . '/' . $ini->variable( 'FileSettings', 'LogDir' ) . '/storage.log';
@@ -71,16 +57,7 @@ if ( !$cachefound )
 
 // *** output ***
 
-require_once( "kernel/common/template.php" );
-$tpl = templateInit();
-$tpl->setVariable( 'title', 'Storage churn' );
 $tpl->setVariable( 'graphsource', $cachefile );
 $tpl->setVariable( 'errormsg', $errormsg );
 
-$Result = array();
-$Result['content'] = $tpl->fetch( "design:sysinfo/storagechurn.tpl" ); //var_dump($cacheFilesList);
-
-$Result['left_menu'] = 'design:parts/sysinfo/menu.tpl';
-$Result['path'] = array( array( 'url' => false,
-                                'text' => ezi18n( 'SysInfo', 'Storage churn' ) ) );
 ?>

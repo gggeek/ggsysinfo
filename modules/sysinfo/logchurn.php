@@ -14,20 +14,6 @@
  * @todo use a line graph and coalesce logs together
  */
 
-$module = $Params['Module'];
-
-// rely on system policy instead of creating our own, but allow also PolicyOmitList
-$ini = eZINI::instance();
-if ( !in_array( 'sysinfo/logchurn', $ini->variable( 'RoleSettings', 'PolicyOmitList' ) ) )
-{
-    $user = eZUser::currentUser();
-    $access = $user->hasAccessTo( 'setup', 'system_info' );
-    if ( $access['accessWord'] != 'yes' )
-    {
-        return $module->handleError( eZError::KERNEL_ACCESS_DENIED, 'kernel' );
-    }
-}
-
 $errormsg = '';
 $cachedir = eZSys::cacheDirectory() . '/sysinfo';
 $scale = 60;
@@ -109,12 +95,9 @@ foreach( $logfiles as $level => $file )
         }
     }
 }
-//die();
+
 // *** output ***
 
-require_once( "kernel/common/template.php" );
-$tpl = templateInit();
-$tpl->setVariable( 'title', 'Log churn' );
 $tpl->setVariable( 'graphsources', $cachefiles );
 $tpl->setVariable( 'errormsg', $errormsg );
 

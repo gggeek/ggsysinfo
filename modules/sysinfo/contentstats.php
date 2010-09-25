@@ -10,19 +10,6 @@
  * @todo add support for ezsurvey, ezflow, eznewsletter contents
  */
 
-// rely on system policy instead of creating our own, but allow also PolicyOmitList
-$ini = eZINI::instance();
-if ( !in_array( 'sysinfo/contentstats', $ini->variable( 'RoleSettings', 'PolicyOmitList' ) ) )
-{
-    $user = eZUser::currentUser();
-    $access = $user->hasAccessTo( 'setup', 'system_info' );
-    if ( $access['accessWord'] != 'yes' )
-    {
-        $module = $Params['Module'];
-        return $module->handleError( eZError::KERNEL_ACCESS_DENIED, 'kernel' );
-    }
-}
-
 $contentTypes = array(
     'Objects (including users)' => array( 'table' => 'ezcontentobject' ),
     'Users' => array( 'table' => 'ezuser' ),
@@ -43,16 +30,6 @@ foreach( $contentTypes as $key => $desc )
     $contentList[$key] = $count[0]['NUM'];
 }
 
-require_once( "kernel/common/template.php" );
-$tpl = templateInit();
-$tpl->setVariable( 'title', 'Content stats' );
 $tpl->setVariable( 'contentlist', $contentList );
-
-$Result = array();
-$Result['content'] = $tpl->fetch( "design:sysinfo/contentstats.tpl" ); //var_dump($cacheFilesList);
-
-$Result['left_menu'] = 'design:parts/sysinfo/menu.tpl';
-$Result['path'] = array( array( 'url' => false,
-                                'text' => ezi18n( 'SysInfo', 'Content stats' ) ) );
 
 ?>

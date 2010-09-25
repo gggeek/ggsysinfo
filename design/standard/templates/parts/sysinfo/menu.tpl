@@ -1,3 +1,7 @@
+{**
+ @todo make this more dynamic by making usage of sysinfoModule php class
+*}
+
 {* DESIGN: Header START *}<div class="box-header"><div class="box-tc"><div class="box-ml"><div class="box-mr"><div class="box-tl"><div class="box-tr">
 <h4>PHP</h4>
 {* DESIGN: Header END *}</div></div></div></div></div></div>
@@ -48,6 +52,16 @@
     <li><div><a href={'/sysinfo/policylist'|ezurl()}>{'Policy Functions'|i18n('SysInfo')}</a></div></li>
     <li><div><a href={'/sysinfo/fetchlist'|ezurl()}>{'Fetch Functions'|i18n('SysInfo')}</a></div></li>
     {*<li><div><a href={'/sysinfo/operatorlist'|ezurl()}>{'Template Operators'|i18n('SysInfo')}</a></div></li>*}
+</ul>
+{* DESIGN: Content END *}</div></div></div></div></div></div>
+
+{* DESIGN: Header START *}<div class="box-header"><div class="box-tc"><div class="box-ml"><div class="box-mr"><div class="box-tl"><div class="box-tr">
+<h4>Quality Assurance</h4>
+{* DESIGN: Header END *}</div></div></div></div></div></div>
+{* DESIGN: Content START *}<div class="box-bc"><div class="box-ml"><div class="box-mr"><div class="box-bl"><div class="box-br"><div class="box-content">
+<ul>
+    <li><div><a href={'/sysinfo/inifilesqa'|ezurl()}>{'Ini files'|i18n('SysInfo')}</a></div></li>
+    <li><div><a href={'/sysinfo/inisettingsqa'|ezurl()}>{'Ini settings'|i18n('SysInfo')}</a></div></li>
 </ul>
 {* DESIGN: Content END *}</div></div></div></div></div></div>
 

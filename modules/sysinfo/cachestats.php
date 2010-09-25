@@ -11,20 +11,6 @@
  * @todo add support for clustered configs - hard currently, since there is no recursive search in api...
  */
 
-$module = $Params['Module'];
-
-// rely on system policy instead of creating our own, but allow also PolicyOmitList
-$ini = eZINI::instance();
-if ( !in_array( 'sysinfo/cachestats', $ini->variable( 'RoleSettings', 'PolicyOmitList' ) ) )
-{
-    $user = eZUser::currentUser();
-    $access = $user->hasAccessTo( 'setup', 'system_info' );
-    if ( $access['accessWord'] != 'yes' )
-    {
-        return $module->handleError( eZError::KERNEL_ACCESS_DENIED, 'kernel' );
-    }
-}
-
 $cacheFilesList = array();
 
 $cacheList = eZCache::fetchList();
@@ -48,16 +34,6 @@ foreach ( $cacheList as $cacheItem )
     }
 }
 
-require_once( "kernel/common/template.php" );
-$tpl = templateInit();
-$tpl->setVariable( 'title', 'Cache stats' );
 $tpl->setVariable( 'filelist', $cacheFilesList );
-
-$Result = array();
-$Result['content'] = $tpl->fetch( "design:sysinfo/cachestats.tpl" ); //var_dump($cacheFilesList);
-
-$Result['left_menu'] = 'design:parts/sysinfo/menu.tpl';
-$Result['path'] = array( array( 'url' => false,
-                                'text' => ezi18n( 'SysInfo', 'Cache stats' ) ) );
 
 ?>
