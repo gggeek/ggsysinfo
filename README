@@ -22,7 +22,7 @@ Requirements:
 - eZ Publish cluster mode is not supported yet for the cache info part
 - Zend Accelerator, Turck MMCache and IonCube are not supported for the opcode cache part
 - the GD extension to php is needed to produce graphs (eg. in the storage churn page)
-- the ezgeshi extension ver. 1.3 or later is an optional add-on that will add some fucntionality
+- the ezgeshi extension ver. 1.3 or later is an optional add-on that will add some functionality
 
 Installation:
 
