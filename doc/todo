@@ -9,6 +9,7 @@ generic tasks:
 
 reports views:
 - add an excel pagelayout for direct export
+- add a cache to class report page
 
 developer views:
 - add views with list of template operators, module details, extension details

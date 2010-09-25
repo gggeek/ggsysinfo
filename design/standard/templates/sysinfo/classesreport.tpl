@@ -26,7 +26,7 @@
         {set $modified = $class.modified}
     {/if}
 {/foreach}
-{'Classes last modified'|i18n('SysInfo'): {$modified|l10n( shortdatetime )}
+{'Classes last modified'|i18n('SysInfo')}: {$modified|l10n( shortdatetime )}
 
 {foreach $classes as $class}
     <div style="clear:both">
