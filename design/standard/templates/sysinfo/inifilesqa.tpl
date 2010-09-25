@@ -1,0 +1,1 @@
+{include uri='design:sysinfo/table.tpl' rows=$warnings}

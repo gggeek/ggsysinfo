@@ -15,95 +15,27 @@
 class iniChecker
 {
 
-    /// Scan a settings dir for ini files; Works for settings/ as well as for extension/xxx/settings
-    static function scanDirForInis( $dir, $dofiles=true, $dodirs=true )
-    {
-        $inifiles = array();
-        foreach( @scandir( $dir ) as $extfile )
-        {
-            /// @todo check ez code for exact list of extensions used
-            // .ini, .ini.php, .ini.append, .ini.append.php
-            if ( is_file( "$dir/$extfile" ) && $dofiles && preg_match( '/\.ini(\.append)?(\.php)?$/', $extfile ) )
-            {
-                $inifiles[] = "$dir/$extfile";
-            }
-            elseif ( $extfile == 'siteaccess' && $dodirs )
-            {
-                foreach( scandir( "$dir/$extfile" ) as $extdir )
-                {
-                     if( is_dir( "$dir/$extfile/$extdir" ) && $extdir != '..' && $extdir != '.' )
-                     {
-                         $inifiles = array_merge( $inifiles, self::scanDirForInis( "$dir/$extfile/$extdir", true, false ) );
-                     }
-                }
-            }
-        }
-        return $inifiles;
-    }
-
-    // return an array of blocks, with values inside
-    static function parseIniFile( $filename )
-    {
-        foreach ( file( $filename ) as $line )
-        {
-            /// @todo...
-        }
-    }
+    static $originalinis = array(); // $i => $name
+    static $extensioninis = array(); // $i => $filename, includes inactive sa and active exts
+    static $siteaccesinis = array(); // $i => $filename, includes inactive sa
+    static $overrideinis = array(); // $i => $filename
+    static $userinis = array();
+    static $initialized = false;
 
     /// @bug: does not check for extensions activated by sa
     /// @bug: does not work with symlinks for used folders?
-    static function runChecks()
+    static function checkFileNames()
     {
+        self::initialize();
+
         $ini = eZINI::instance( 'site.ini' );
-
-        $settingsdir = 'settings';
-        $extensionsdir = eZExtension::baseDirectory();
-        $extensionsdirs = array(); // $name => $dir
-        $activeextensions = $ini->variable( 'ExtensionSettings', 'ActiveExtensions' ); // $i => $name
         $activesiteaccesses = $ini->variable( 'SiteAccessSettings', 'AvailableSiteAccessList' ); // $i => $name
-        $originalinis = array(); // $i => $name
-        $extensioninis = array(); // $i => $filename, includes inactive sa and active exts
-        $siteaccesinis = array(); // $i => $filename, includes inactive sa
-        $overrideinis = array(); // $i => $filename
-
-        foreach ( scandir( $settingsdir ) as $inifile )
-        {
-            if ( is_file( "$settingsdir/$inifile" ) && preg_match( '#\.ini$#', $inifile ) )
-            {
-                $originalinis[] = $inifile;
-            }
-        }
-        foreach ( @scandir( "$settingsdir/override" ) as $inifile )
-        {
-            if ( is_file( "$settingsdir/override/$inifile" ) && preg_match( '/\.ini(\.append)?(\.php)?$/', $inifile ) )
-            {
-                $overrideinis[] = "$settingsdir/override/$inifile";
-            }
-        }
-        $siteaccesinis = self::scanDirForInis( $settingsdir, false, true );
-        foreach ( scandir( $extensionsdir ) as $extdir )
-        {
-            if ( is_dir( "$extensionsdir/$extdir/settings" ) && $extdir != '.' && $extdir != '..' )
-            {
-                $extensionsdirs[$extdir] = "$extensionsdir/$extdir/settings";
-            }
-        }
-        foreach( $activeextensions as $extname )
-        {
-            $extensioninis = array_merge( $extensioninis, self::scanDirForInis( $extensionsdirs[$extname] ) );
-        }
-        $userinis = array_merge( $overrideinis, $siteaccesinis, $extensioninis );
-
-//var_export( $originalinis );
-//var_export( $extensioninis );
-//var_export( $siteaccesinis );
-//var_export( $overrideinis );
 
         // checks:
         $warnings = array();
 
         // look for files named .ini.append, .ini.php
-        foreach( $userinis as $file )
+        foreach( self::$userinis as $file )
         {
             if ( preg_match( '/\.ini(\.append|\.php)$/', $file ) )
             {
@@ -112,7 +44,7 @@ class iniChecker
         }
 
         // look for extension/xxx/siteaccess/yyy/zzz files, with yyy siteaccess not existing
-        foreach( $userinis as $file )
+        foreach( self::$userinis as $file )
         {
             if ( preg_match( '#/siteaccess/([^/]+)/.+#', $file, $matches ) )
             {
@@ -126,10 +58,10 @@ class iniChecker
         // .ini files in extensions that have same name as std files, no .ini (master) file for new ones
         $newinis = array();
         $changedinis = array();
-        foreach( $userinis as $file )
+        foreach( self::$userinis as $file )
         {
             $ini = preg_replace( '/\.append$/', '', preg_replace( '/\.php/', '', basename( $file ) ) );
-            if ( in_array( $ini, $originalinis ) )
+            if ( in_array( $ini, self::$originalinis ) )
             {
                 $changedinis[$ini][] = $file;
             }
@@ -184,6 +116,83 @@ class iniChecker
         // values that will be changed with the new (4.4) precedence rules
 
         return $warnings;
+    }
+
+    protected static function initialize( $force=false )
+    {
+        if ( self::$initialized && !$force )
+        {
+           return;
+        }
+
+        $settingsdir = 'settings';
+        $extensionsdir = eZExtension::baseDirectory();
+        $extensionsdirs = array(); // $name => $dir
+        $ini = eZINI::instance( 'site.ini' );
+        $activeextensions = $ini->variable( 'ExtensionSettings', 'ActiveExtensions' ); // $i => $name
+
+        foreach ( scandir( $settingsdir ) as $inifile )
+        {
+            if ( is_file( "$settingsdir/$inifile" ) && preg_match( '#\.ini$#', $inifile ) )
+            {
+                self::$originalinis[] = $inifile;
+            }
+        }
+        foreach ( @scandir( "$settingsdir/override" ) as $inifile )
+        {
+            if ( is_file( "$settingsdir/override/$inifile" ) && preg_match( '/\.ini(\.append)?(\.php)?$/', $inifile ) )
+            {
+                self::$overrideinis[] = "$settingsdir/override/$inifile";
+            }
+        }
+        $siteaccesinis = self::scanDirForInis( $settingsdir, false, true );
+        foreach ( scandir( $extensionsdir ) as $extdir )
+        {
+            if ( is_dir( "$extensionsdir/$extdir/settings" ) && $extdir != '.' && $extdir != '..' )
+            {
+                $extensionsdirs[$extdir] = "$extensionsdir/$extdir/settings";
+            }
+        }
+        foreach( $activeextensions as $extname )
+        {
+            self::$extensioninis = array_merge( self::$extensioninis, self::scanDirForInis( $extensionsdirs[$extname] ) );
+        }
+        self::$userinis = array_merge( self::$overrideinis, self::$siteaccesinis, self::$extensioninis );
+    }
+
+    /// Scan a settings dir for ini files; Works for settings/ as well as for extension/xxx/settings
+    protected static function scanDirForInis( $dir, $dofiles=true, $dodirs=true )
+    {
+        $inifiles = array();
+        foreach( @scandir( $dir ) as $extfile )
+        {
+            /// @todo check ez code for exact list of extensions used
+            // .ini, .ini.php, .ini.append, .ini.append.php
+            if ( is_file( "$dir/$extfile" ) && $dofiles && preg_match( '/\.ini(\.append)?(\.php)?$/', $extfile ) )
+            {
+                $inifiles[] = "$dir/$extfile";
+            }
+            elseif ( $extfile == 'siteaccess' && $dodirs )
+            {
+                foreach( scandir( "$dir/$extfile" ) as $extdir )
+                {
+                    if( is_dir( "$dir/$extfile/$extdir" ) && $extdir != '..' && $extdir != '.' )
+                    {
+                        $inifiles = array_merge( $inifiles, self::scanDirForInis( "$dir/$extfile/$extdir", true, false ) );
+                    }
+                }
+            }
+        }
+        return $inifiles;
+    }
+
+    // return an array of blocks, with values inside
+    protected static function parseIniFile( $filename )
+    {
+        foreach ( file( $filename ) as $line )
+        {
+            /// @todo...
+        }
     }
 
 }

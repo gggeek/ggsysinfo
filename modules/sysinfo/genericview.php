@@ -4,6 +4,8 @@
  * @version $Id: contentstats.php 2570 2008-11-25 11:35:44Z ezsystems $
  * @copyright (C) G. Giunta 2010
  * @license Licensed under GNU General Public License v2.0. See file license.txt
+ *
+ *  @todo use a 3-level path, with the name of the group as 2nd element ?
  */
 
 $module = $Params['Module'];

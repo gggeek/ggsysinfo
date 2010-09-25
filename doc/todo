@@ -3,6 +3,7 @@ generic tasks:
 - rebase info retrieval on ezsnmpd
 - move to a saner security configuration
   . use own policies instead of system ones ?
+- finish porting remaining views to genericview.php
 
 reports views:
 - add an excel pagelayout for direct export
@@ -51,6 +52,9 @@ log views:
 - allow display of more logfiles (eg. ezdebugsettings logs and audit logs)
 - allow zooming in graph / listing of messages in a timespan
 - log search view
+
+qa views:
+- integrate with ezgeshi if found to link to highlighted ini files
 
 pending notifications views:
 - to be done
