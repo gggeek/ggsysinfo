@@ -62,6 +62,7 @@
 <ul>
     <li><div><a href={'/sysinfo/inifilesqa'|ezurl()}>{'Ini files'|i18n('SysInfo')}</a></div></li>
     <li><div><a href={'/sysinfo/inisettingsqa'|ezurl()}>{'Ini settings'|i18n('SysInfo')}</a></div></li>
+    <li><div><a href={'/sysinfo/phpfilesqa'|ezurl()}>{'Php files'|i18n('SysInfo')}</a></div></li>
 </ul>
 {* DESIGN: Content END *}</div></div></div></div></div></div>
 

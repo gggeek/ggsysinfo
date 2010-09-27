@@ -190,7 +190,13 @@ class sysinfoModule{
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 "script" => "genericview.php",
                 "default_navigation_part" => 'ezsysinfonavigationpart',
-                'name' => 'Ini values problems' )
+                'name' => 'Ini values problems' ),
+
+            'phpfilesqa' => array(
+                //'functions' => array( 'system_info' ), - we check in the module itself
+                "script" => "genericview.php",
+                "default_navigation_part" => 'ezsysinfonavigationpart',
+                'name' => 'Php files problems' ),
 
         ),
         'Reports' => array(
