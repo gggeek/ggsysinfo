@@ -4,7 +4,7 @@ generic tasks:
 - move to a saner security configuration
   . use own policies instead of system ones ?
 - finish porting remaining views to genericview.php
-- use the list of views for left-hand menu
+- use the list of views from the php class sysinfomodule for left-hand menu
 - add description for every view in sysinfomodule.php
 - add some js to left-hand menu to be able to expand/collaps groups of views
 
@@ -12,7 +12,7 @@ index viex:
 - disable the unsuable links, such as is done in the left col
 
 reports views:
-- add an excel pagelayout for direct export
+- add an excel pagelayout for direct export (or just use print pagelayout)
 - add a cache to class report page
 - add workflow report
 - add roles & policies report
@@ -64,12 +64,13 @@ log views:
 - log search view
 
 qa views:
-- ini file naming: use != checks for ez >= 4.4
 - integrate with ezgeshi if found to link to highlighted ini files
 - template check view
 - view that runs setup wizard tests
 - extensions that have mysql .sql files but not db_schema.dba
 - duplicate values for designlist, relatedsa
+- parse php files for validity, and, if the ezcodingstyle extension is installed, for code style compliance
+- check for non-utf8 start tags in ini files, template files
 
 pending notifications views:
 - to be done

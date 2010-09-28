@@ -232,7 +232,7 @@ class iniChecker
         $groups = array();
         $currentrgroup = '';
         $isincomments = false;
-        foreach ( file( $filename, FILE_IGNORE_NEW_LINES & FILE_SKIP_EMPTY_LINES ) as $i => $line )
+        foreach ( file( $filename, FILE_IGNORE_NEW_LINES ) as $i => $line )
         {
             $i++;
 
@@ -253,43 +253,43 @@ class iniChecker
             // bad ini block: whitespace before it...
             if ( preg_match( '/^[ \t]+\[[^\]]+\][ \t]*/', $line ) )
             {
-                $warnings[] = "Bad block on line $i of file $filename: whitespace before block '$line'";
+                $warnings[] = array( "Bad block: whitespace before opening bracket", $filename, $i, $line );
                 continue;
             }
             // bad line: space before setting name
             if ( preg_match( '/^[ \t]+[\w_*@-]/', $line ) )
             {
-                $warnings[] = "Bad parameter on line $i of file $filename: whitespace before parameter '$line'";
+                $warnings[] = array( "Bad parameter: whitespace before parameter name", $filename, $i, $line );
                 continue;
             }
             // bad line: space after setting name
             if ( preg_match( '/^[\w_*@-]*[\w_*@-][ \t]+/', $line ) )
             {
-                $warnings[] = "Bad parameter on line $i of file $filename: whitespace after parameter '$line'";
+                $warnings[] = array( "Bad parameter: whitespace after parameter", $filename, $i, $line );
                 continue;
             }
             // bad line: space after array key
             if ( preg_match( '/^[\w_*@-]+\[[^\]]*\][ \t]+/', $line ) )
             {
-                $warnings[] = "Bad array parameter on line $i of file $filename: whitespace after array key '$line'";
+                $warnings[] = array( "Bad array parameter: whitespace after array key", $filename, $i, $line );
                 continue;
             }
             // most likely bad line: space after = sign
             if ( preg_match( '/^[^#=]+=[ \t]+.?/', $line ) )
             {
-                $warnings[] = "Bad parameter on line $i of file $filename: whitespace after equal sign '$line'";
+                $warnings[] = array( "Bad parameter: whitespace after equal sign", $filename, $i, $line );
                 continue;
             }
             // most likely bad line: space after setting value
             if ( preg_match( '/^[^#=]+=[^ \t\n]+[ \t]+$/', $line ) )
             {
-                $warnings[] = "Bad parameter on line $i of file $filename: whitespace after value '$line'";
+                $warnings[] = array( "Bad parameter: whitespace after value", $filename, $i, $line );
                 continue;
             }
              // most likely bad line: space at beginning or end of array key
             if ( preg_match( '/^[^\[#]\[[ \t]+[^\]]*\]|\[[^\]]*[ \t]+\]/', $line ) )
             {
-                $warnings[] = "Bad array parameter on line $i of file $filename: whitespace at beginning or end of array key '$line'";
+                $warnings[] = array( "Bad array parameter: whitespace at beginning or end of array key", $filename, $i, $line );
                 continue;
             }
             // ini block: no whitespace allowed before it on the line, only whitespace allowed afterwards
@@ -325,7 +325,7 @@ class iniChecker
             }
             if ( !$isphp || ( !preg_match( '/^<\?php/', $line ) && !preg_match( '/\?>$/', $line ) && !preg_match( '#^/\*$#', $line ) && !preg_match( '#^\*/$#', $line ) ) )
             {
-                $warnings[] = "Bad line $i of file $filename: neither a value, nor a block or comment '$line'";
+                $warnings[] = array( "Bad line: neither a value, nor a block or comment", $filename, $i, $line );
             }
         }
         return $groups;

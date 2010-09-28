@@ -89,7 +89,7 @@ class phpChecker
     */
     protected static function parsePhpFile( $filename, &$warnings )
     {
-        $lines = file( $filename, FILE_IGNORE_NEW_LINES & FILE_SKIP_EMPTY_LINES );
+        $lines = file( $filename, FILE_IGNORE_NEW_LINES );
 
         // known php files to include html content
         /// @todo take this from an ini, to allow user to add more known files to be skipped
@@ -116,16 +116,16 @@ class phpChecker
             // NB: we consider files with the BOM errors, too!
             if ( $i == 1 && !preg_match( '/^<\?/', $line ) && !preg_match( '%^#!/usr/bin/env php%', $line ) )
             {
-                $warnings[] = "Spurious content on line $i of file $filename: it should start with a php opening tag: '$line'";
+                $warnings[] = array( "Spurious content: it should start with a php opening tag", $filename, $i, $line );
             }
             else if ( $i == 1 && preg_match( '/^<\?/', $line ) && !preg_match( '/<\?php/', $line ) )
             {
-                $warnings[] = "Bad php opening tag on line $i of file $filename: it should be the long version: '$line'";
+                $warnings[] = array( "Bad php opening tag: it should be the long version", $filename, $i, $line );
             }
             // check: every php file should start with a php closing tag
             if ( $i == $linecount && !preg_match( '/\?>$/', $line ) )
             {
-                $warnings[] = "Spurious content on line $i of file $filename: it should end with a php closing tag: '$line'";
+                $warnings[] = array( "Spurious content: it should end with a php closing tag", $filename, $i, $line );
             }
         }
         return true; /// @todo

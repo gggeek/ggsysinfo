@@ -16,9 +16,18 @@
 {/if}
 
 <table class="list" cellspacing="0">
+  <tr>
+    <th>Line</th>
+    <th>File</th>
+    <th>Content</th>
+    <th>Warning</th>
+  </tr>
 {foreach $rows as $row sequence array( 'bglight', 'bgdark') as $style}
-  <tr class="{$style}">
-    <td>{$row|wash()}</td>
+    <tr class="{$style}">
+    <td>{$row.2|wash()}</td>
+    <td>{if $ezgeshi_available}<a href={concat('/geshi/highlight/',$row.1,'/(language)/',$fileformat)|ezurl()}>{/if}{$row.1|wash()}{if $ezgeshi_available}</a>{/if}</td>
+    <td style="font-family: monospace;">{$row.3|wash()}</td>
+    <td>{$row.0|wash()}</td>
   </tr>
 {/foreach}
 </table>
