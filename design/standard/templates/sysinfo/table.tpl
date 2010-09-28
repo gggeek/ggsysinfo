@@ -15,6 +15,7 @@
 <link rel="stylesheet" type="text/css" href={concat('stylesheets/',$css)|ezdesign()} />
 {/if}
 
+{if $rows}
 <table class="list" cellspacing="0">
   <tr>
     <th>Line</th>
@@ -31,6 +32,9 @@
   </tr>
 {/foreach}
 </table>
+{else}
+  No problems detected
+{/if}
 
 </div>
 

@@ -6,12 +6,6 @@
  * @license Licensed under GNU General Public License v2.0. See file license.txt
  */
 
-
-
-/**
- * iniChecker
- *
- */
 class iniChecker
 {
 
@@ -126,15 +120,15 @@ class iniChecker
         }
         foreach( self::$extensioninis as $file )
         {
-            $extvalues[$file] = self::parseIniFile( $file, $warnings, true );
+            $extvalues[$file] = self::parseIniFile( $file, $warnings );
         }
         foreach( self::$siteaccesinis as $file )
         {
-            $savalues[$file] = self::parseIniFile( $file, $warnings, true );
+            $savalues[$file] = self::parseIniFile( $file, $warnings );
         }
         foreach( self::$overrideinis as $file )
         {
-            $overvalues[$file] = self::parseIniFile( $file, $warnings, true );
+            $overvalues[$file] = self::parseIniFile( $file, $warnings );
         }
 
         // unexpected params in (changed) std files
@@ -224,7 +218,7 @@ class iniChecker
     * Regular expressions taken from ezgeshi extension
     *
     * @todo be more stringent with php opening/closing tag lines
-    * @todo make sure there is a php comment at the start of a php file!
+    * @todo make sure there is a php comment at the start of a php file: it is recommended (even though without comment but with the php tag you get an error, not the whole file)
     * @todo allow php-style comments: // and /* * / ?
     * @todo make the set of tests configurable via ini
     */
@@ -233,90 +227,106 @@ class iniChecker
         $groups = array();
         $currentrgroup = '';
         $isincomments = false;
+        $isphp = ( substr( $filename, -4 ) == '.php' );
         foreach ( file( $filename, FILE_IGNORE_NEW_LINES ) as $i => $line )
         {
             $i++;
 
-            // empty line
-            if ( trim( $line ) == '' )
-            {
-                continue;
-            }
-
             // windows CRLF eol marker does not gbet stripped properly all of the time by php!
             $line = preg_replace( '/\r$/', '', $line);
 
-            // 1st line: look for charset (code taken from ezini)
-            if ( $i == 1 && preg_match( "/#\?ini(.+)\?/", $line, $ini_arr ) )
+            // 1st line
+            if ( $i == 1 )
             {
-                $args = explode( " ", trim( $ini_arr[1] ) );
-                foreach ( $args as $arg )
+                if ( $isphp && !preg_match( "/^<\?php/", $line ) )
                 {
-                    $vars = explode( '=', trim( $arg ) );
-                    if ( $vars[0] == "charset" )
+                    $warnings[] = array( "Missing php opening tag and comment tag", $filename, $i, $line );
+                }
+
+                // look for charset (code taken from ezini)
+                if ( preg_match( "/#\?ini(.+)\?/", $line, $ini_arr ) )
+                {
+                    $args = explode( " ", trim( $ini_arr[1] ) );
+                    foreach ( $args as $arg )
                     {
-                        $val = $vars[1];
-                        if ( strlen( $val ) > 0 && $val[0] == '"' && substr( $val, -1 ) == '"' )
-                            $val = substr( $val, 1, -1 );
-                        if ( $val != 'utf-8' && $val != 'utf8' )
+                        $vars = explode( '=', trim( $arg ) );
+                        if ( $vars[0] == "charset" )
                         {
-                            $warnings[] = array( "Bad charset: $val, utf-8 recommended", $filename, $i, $line );
+                            $val = $vars[1];
+                            if ( strlen( $val ) > 0 && $val[0] == '"' && substr( $val, -1 ) == '"' )
+                                $val = substr( $val, 1, -1 );
+                            if ( $val != 'utf-8' && $val != 'utf8' )
+                            {
+                                $warnings[] = array( "Bad charset: $val, utf-8 recommended", $filename, $i, $line );
+                            }
                         }
                     }
                 }
             }
 
-            // comment
-            if ( preg_match( '/^#/', $line ) )
+            // comments after a value, on the same line: allowed
+            if ( preg_match( "/^(.+)##/", $line, $regs ) )
+                $line = $regs[1];
+
+            // empty line or comment
+            if ( trim( $line ) == '' or $line[0] == '#' )
             {
                 continue;
             }
+
             // bad ini block: whitespace before it...
-            if ( preg_match( '/^[ \t]+\[[^\]]+\][ \t]*/', $line ) )
+            if ( preg_match( '/^\s+\[.+\]\s*$/', $line ) )
             {
                 $warnings[] = array( "Bad block: whitespace before opening bracket", $filename, $i, $line );
                 continue;
             }
+            // bad ini block: non-whitespace after it...
+            if ( preg_match( '/^\[.+\]\s*\S+/', $line ) )
+            {
+                $warnings[] = array( "Bad block: non-whitespace after closing bracket", $filename, $i, $line );
+                continue;
+            }
             // bad line: space before setting name
-            if ( preg_match( '/^[ \t]+[\w_*@-]/', $line ) )
+            if ( preg_match( '/^\s+[\w_*@-]/', $line ) )
             {
                 $warnings[] = array( "Bad parameter: whitespace before parameter name", $filename, $i, $line );
                 continue;
             }
             // bad line: space after setting name
-            if ( preg_match( '/^[\w_*@-]*[\w_*@-][ \t]+/', $line ) )
+            if ( preg_match( '/^[\w_*@-]+\s+/', $line ) )
             {
-                $warnings[] = array( "Bad parameter: whitespace after parameter", $filename, $i, $line );
+                $warnings[] = array( "Bad parameter: whitespace after parameter name", $filename, $i, $line );
                 continue;
             }
             // bad line: space after array key
-            if ( preg_match( '/^[\w_*@-]+\[[^\]]*\][ \t]+/', $line ) )
+            if ( preg_match( '/^[\w_*@-]+\[[^\]]*\]\s+/', $line ) )
             {
                 $warnings[] = array( "Bad array parameter: whitespace after array key", $filename, $i, $line );
                 continue;
             }
+            // bad line: something within an array key reset
+            if ( preg_match( '/^[\w_*@-]+\[[^\]]+\]$/', $line ) )
+            {
+                $warnings[] = array( "Bad array parameter: non empty key for array reset", $filename, $i, $line );
+                continue;
+            }
             // most likely bad line: space after = sign
-            if ( preg_match( '/^[^#=]+=[ \t]+.?/', $line ) )
+            if ( preg_match( '/^[\w_*@-]+(\[[^\]]+\])?=\s+/', $line ) )
             {
                 $warnings[] = array( "Bad parameter: whitespace after equal sign", $filename, $i, $line );
                 continue;
             }
             // most likely bad line: space after setting value
-            if ( preg_match( '/^[^#=]+=[^ \t\n]+[ \t]+$/', $line ) )
+            if ( preg_match( '/^[\w_*@-]+(\[[^\]]+\])?=\s+\S+$/', $line ) )
             {
                 $warnings[] = array( "Bad parameter: whitespace after value", $filename, $i, $line );
                 continue;
             }
-             // most likely bad line: space at beginning or end of array key
-            if ( preg_match( '/^[^\[#]\[[ \t]+[^\]]*\]|\[[^\]]*[ \t]+\]/', $line ) )
-            {
-                $warnings[] = array( "Bad array parameter: whitespace at beginning or end of array key", $filename, $i, $line );
-                continue;
-            }
+
             // ini block: no whitespace allowed before it on the line, only whitespace allowed afterwards
-            if ( preg_match( '/^\[([^\]]+)\][ \t]*/', $line, $matches ) )
+            if ( preg_match( '/^\[(.+)\]\s*$/', $line, $matches ) )
             {
-                $currentgroup = $matches[1];
+                $currentgroup = trim( $matches[1] );
                 continue;
             }
             // array reset
@@ -344,6 +354,7 @@ class iniChecker
                 $groups[$currentgroup][$matches[1]] = $matches[2];
                 continue;
             }
+            /// @todo improve this!
             if ( !$isphp || ( !preg_match( '/^<\?php/', $line ) && !preg_match( '/\?>$/', $line ) && !preg_match( '#^/\*$#', $line ) && !preg_match( '#^\*/$#', $line ) ) )
             {
                 $warnings[] = array( "Bad line: neither a value, nor a block or comment", $filename, $i, $line );
