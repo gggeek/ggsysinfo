@@ -226,6 +226,7 @@ class iniChecker
     * @todo be more stringent with php opening/closing tag lines
     * @todo make sure there is a php comment at the start of a php file!
     * @todo allow php-style comments: // and /* * / ?
+    * @todo make the set of tests configurable via ini
     */
     protected static function parseIniFile( $filename, &$warnings, $isphp=false )
     {
@@ -244,6 +245,26 @@ class iniChecker
 
             // windows CRLF eol marker does not gbet stripped properly all of the time by php!
             $line = preg_replace( '/\r$/', '', $line);
+
+            // 1st line: look for charset (code taken from ezini)
+            if ( $i == 1 && preg_match( "/#\?ini(.+)\?/", $line, $ini_arr ) )
+            {
+                $args = explode( " ", trim( $ini_arr[1] ) );
+                foreach ( $args as $arg )
+                {
+                    $vars = explode( '=', trim( $arg ) );
+                    if ( $vars[0] == "charset" )
+                    {
+                        $val = $vars[1];
+                        if ( strlen( $val ) > 0 && $val[0] == '"' && substr( $val, -1 ) == '"' )
+                            $val = substr( $val, 1, -1 );
+                        if ( $val != 'utf-8' && $val != 'utf8' )
+                        {
+                            $warnings[] = array( "Bad charset: $val, utf-8 recommended", $filename, $i, $line );
+                        }
+                    }
+                }
+            }
 
             // comment
             if ( preg_match( '/^#/', $line ) )
