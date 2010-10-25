@@ -58,7 +58,7 @@
         <th>{'Help'|i18n( 'SysInfo')}</th>
     </tr>
 {def $native     = false()
-     $basedocurl = 'http://ez.no/doc/ez_publish/technical_manual/4_x/reference/modules/'
+     $basedocurl = 'http://doc.ez.no/eZ-Publish/Technical-manual/4.x/Reference/Modules'
      $basedoxurl = concat('http://github.com/ezsystems/ezpublish/tree/',$sdkversion,'/kernel/')}
 {foreach $viewlist as $view => $details sequence array( 'bglight', 'bgdark') as $style}
     {set $native = eq($details['extension'], '')}
