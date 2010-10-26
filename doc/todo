@@ -64,13 +64,13 @@ log views:
 - log search view
 
 qa views:
-- integrate with ezgeshi if found to link to highlighted ini files
+- add a cache for parsed ini files
 - template check view
 - view that runs setup wizard tests
 - extensions that have mysql .sql files but not db_schema.dba
-- duplicate values for designlist, relatedsa
+- duplicate values for designlist, relatedsa, etc...
 - parse php files for validity, and, if the ezcodingstyle extension is installed, for code style compliance
-- check for non-utf8 start tags in ini files, template files
+- check for non-utf8 start tags template files
 
 pending notifications views:
 - to be done

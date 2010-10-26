@@ -45,40 +45,43 @@
 </div>
 *}
 
-{def $basedocurl = 'http://doc.ez.no/eZ-Publish/Technical-manual/4.x/Reference/Modules'}
-
 <table class="list" cellspacing="0">
     <tr>
         <th>{'Name'|i18n( 'SysInfo')}</th>
+        <th>{'Module'|i18n( 'SysInfo')}</th>
         <th>{'Extension'|i18n( 'SysInfo')}</th>
-        <th>{'Views'|i18n( 'SysInfo')}</th>
-        <th>{'Fetch Functions'|i18n( 'SysInfo')}</th>
-        <th>{'Policy Functions'|i18n( 'SysInfo')}</th>
-        <th>{'Operations'|i18n( 'SysInfo')}</th>
-        <th>{'Help'|i18n( 'SysInfo')}</th>
+        <th>{'Parameters'|i18n( 'SysInfo')}</th>
+        <th>{'Implemented in'|i18n( 'SysInfo')}</th>
+        <th>{'Source'|i18n( 'SysInfo')}</th>
     </tr>
-{foreach $modulelist as $module => $details sequence array( 'bglight', 'bgdark') as $style}
+{def $native     = false()
+     $basedocurl = 'http://doc.ez.no/eZ-Publish/Technical-manual/4.x/Reference/Modules'
+     $basedoxurl = concat('http://github.com/ezsystems/ezpublish/tree/',$sdkversion,'/')}
+{foreach $operationlist as $view => $details sequence array( 'bglight', 'bgdark') as $style}
+    {set $native = eq($details['extension'], '')}
     <tr class="{$style}">
         <td>
-            {*<a href={concat('/sysinfo/moduledetails/',$module)|ezurl}>*}{$module|wash}{*</a>*}
+            {$details['name']|wash}
+        </td>
+        <td>
+            {$details['module']|wash}
         </td>
         <td>
             {$details['extension']|wash}
         </td>
         <td>
-            {if gt($details['views'], 0)}<a href={concat('/sysinfo/viewlist/',$module)|ezurl}>{$details['views']}</a>{/if}
+            {foreach $details['parameters'] as $id => $param}{$id|inc}. {$param.name|wash} ({$param.type|wash}){delimiter}<br/>{/delimiter}{/foreach}
         </td>
         <td>
-            {if gt($details['fetch_functions'], 0)}<a href={concat('/sysinfo/fetchlist/',$module)|ezurl}>{$details['fetch_functions']}{/if}
+            {$details.default_call_method.class|wash}
         </td>
         <td>
-            {if gt($details['policy_functions'], 0)}<a href={concat('/sysinfo/policylist/',$module)|ezurl}>{$details['policy_functions']}{/if}
-        </td>
-        <td>
-            {if gt($details['operations'], 0)}<a href={concat('/sysinfo/operationlist/',$module)|ezurl}>{$details['operations']}{/if}
-        </td>
-        <td>
-            {if eq($details['extension'], '')}<a href="{concat($basedocurl,$module)}">ez.no{/if}
+            {if $ezgeshi_available}
+                {* @todo this really depends on an ini setting... *}
+                <a href={concat('/geshi/highlight/',$details.default_call_method.include_file)|ezurl}>local</a>
+            {else}
+                {if $native}<a href="{concat($basedoxurl,$details.default_call_method.include_file)}">github</a>{/if}
+            {/if}
         </td>
     </tr>
 {/foreach}

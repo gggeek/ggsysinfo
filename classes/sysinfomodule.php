@@ -164,6 +164,13 @@ class sysinfoModule{
             "params" => array( 'modulename' ),
             'name' => 'Policy functions list' ),
 
+        'operationlist' => array(
+            //'functions' => array( 'system_info' ), - we check in the module itself
+            "script" => "operationlist.php",
+            "default_navigation_part" => 'ezsysinfonavigationpart',
+            "params" => array( 'modulename' ),
+            'name' => 'Operations list' ),
+
         'fetchlist' => array(
             //'functions' => array( 'system_info' ), - we check in the module itself
             "script" => "fetchlist.php",

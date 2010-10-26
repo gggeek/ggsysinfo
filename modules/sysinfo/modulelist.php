@@ -43,10 +43,14 @@ foreach( $modules as $modulename => $path )
             ///       The only way seems to pre_test for file existence, looking only
             ///       at the same dir as where the module is
             $functions = eZFunctionHandler::moduleFunctionInfo( $modulename );
+            /// @todo prevent warning to be generated here, too
+            $moduleOperationInfo = new eZModuleOperationInfo( $modulename );
+            $moduleOperationInfo->loadDefinition();
             $moduleList[$modulename] = array(
                 'views' => count( $module->attribute( 'views' ) ),
                 'fetch_functions' => count( $functions->FunctionList ),
                 'policy_functions' => count( $module->attribute( 'available_functions' ) ),
+                'operations' => count( $moduleOperationInfo->OperationList ),
                 'extension' => $extension
             );
         }

@@ -51,6 +51,7 @@
     <li><div><a href={'/sysinfo/viewlist'|ezurl()}>{'Views'|i18n('SysInfo')}</a></div></li>
     <li><div><a href={'/sysinfo/policylist'|ezurl()}>{'Policy Functions'|i18n('SysInfo')}</a></div></li>
     <li><div><a href={'/sysinfo/fetchlist'|ezurl()}>{'Fetch Functions'|i18n('SysInfo')}</a></div></li>
+    <li><div><a href={'/sysinfo/operationlist'|ezurl()}>{'Operations'|i18n('SysInfo')}</a></div></li>
     {*<li><div><a href={'/sysinfo/operatorlist'|ezurl()}>{'Template Operators'|i18n('SysInfo')}</a></div></li>*}
 </ul>
 {* DESIGN: Content END *}</div></div></div></div></div></div>
