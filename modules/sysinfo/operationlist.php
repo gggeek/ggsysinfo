@@ -54,7 +54,7 @@ else
 
                         $operationList[$op['name'] . '_' . $modulename ] = $op;
                         $operationList[$op['name'] . '_' . $modulename ]['module'] = $modulename;
-                         $operationList[$op['name'] . '_' . $modulename ]['extension'] = $extension;
+                        $operationList[$op['name'] . '_' . $modulename ]['extension'] = $extension;
                     }
                 }
 
@@ -112,4 +112,6 @@ if ( $Params['modulename'] != '' )
     $Result['path'][] = array( 'url' => false,
                                'text' => $Params['modulename'] );
 }
+
+$Result['groups'] = sysinfoModule::$view_groups;
 ?>

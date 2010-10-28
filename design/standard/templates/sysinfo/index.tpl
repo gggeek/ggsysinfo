@@ -12,14 +12,20 @@
 <p>An interface aiming to complement the "Setup" tab from the standard administration interface, of use mostly to system administrator and developers.</p>
 
 <table class="list" cellspacing="0">
+{def $prefix=''}
 {foreach $groups as $name => $exts offset 1}
+      {if eq($name, 'Reports')}
+          {set $prefix = 'layout/set/print/'}
+      {else}
+          {set $prefix = ''}
+      {/if}
       <tr>
           <th>{$name}</th>
           <th>Description</th>
       </tr>
     {foreach $exts as $i => $ext sequence array( 'bglight', 'bgdark') as $style}
       <tr class="{$style}">
-          <td><a href={concat('sysinfo/', $i)|ezurl()}>{$ext.name}</a></td>
+          <td>{if $ext.disabled}{$ext.name}{else}<a href={concat($prefix, 'sysinfo/', $i)|ezurl()}>{$ext.name}</a>{/if}</td>
           <td>{$ext.description}</td>
       </tr>
     {/foreach}

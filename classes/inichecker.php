@@ -184,6 +184,7 @@ class iniChecker
             self::$extensioninis = array_merge( self::$extensioninis, self::scanDirForInis( $extensionsdirs[$extname] ) );
         }
         self::$userinis = array_merge( self::$overrideinis, self::$siteaccesinis, self::$extensioninis );
+		self::$initialized = true;
     }
 
     /// Scan a settings dir for ini files; Works for settings/ as well as for extension/xxx/settings

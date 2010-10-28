@@ -23,4 +23,9 @@ Shown[browse]=false
 Enabled[edit]=true
 Shown[navigation]=true
 
+# This line means the tab will not be visible on eZP 4.3 and later unless the
+# current user has access to the setup/system_info policy
+# You can disable it if you use PolicyOmitList to allow access to the sysinfo module
+PolicyList[]=setup/system_info
+
 */ ?>
