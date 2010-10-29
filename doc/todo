@@ -4,9 +4,9 @@ generic tasks:
 - move to a saner security configuration
   . use own policies instead of system ones ?
 - finish porting remaining views to genericview.php
-- use the list of views from the php class sysinfomodule for left-hand menu
 - add description for every view in sysinfomodule.php
 - add some js to left-hand menu to be able to expand/collaps groups of views
+- add name of module in the path
 
 index viex:
 - disable the unsuable links, such as is done in the left col

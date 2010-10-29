@@ -1,10 +1,13 @@
 <?php
-
+/**
+* @todo the sysinfomoduleviews should be moved to a a fetch func, maybe renamed...
+*/
 class ggSysinfoTemplateOperators
 {
 
     static $operators = array(
-        'installedphpcache' => array()
+        'installedphpcache' => array(),
+        'sysinfomoduleviews' => array(),
     );
 
     /**
@@ -76,6 +79,12 @@ class ggSysinfoTemplateOperators
                 }
                 break;
             }
+            case 'sysinfomoduleviews':
+                {
+                    $operatorValue = sysinfoModule::groupList();
+                }
+                break;
+
         }
     }
 
