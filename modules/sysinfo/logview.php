@@ -11,20 +11,6 @@
  * @todo add support for not showing older (rotated) logs
  */
 
-$module = $Params['Module'];
-
-// rely on system policy instead of creating our own, but allow also PolicyOmitList
-$ini = eZINI::instance();
-if ( !in_array( 'sysinfo/logview', $ini->variable( 'RoleSettings', 'PolicyOmitList' ) ) )
-{
-    $user = eZUser::currentUser();
-    $access = $user->hasAccessTo( 'setup', 'system_info' );
-    if ( $access['accessWord'] != 'yes' )
-    {
-        return $module->handleError( eZError::KERNEL_ACCESS_DENIED, 'kernel' );
-    }
-}
-
 $errormsg = 'File not found';
 $data = array();
 $cachedir = eZSys::cacheDirectory() . '/sysinfo';
@@ -66,18 +52,10 @@ foreach( $logfiles as $level => $file )
 
 // *** output ***
 
-require_once( "kernel/common/template.php" );
-$tpl = templateInit();
-$tpl->setVariable( 'title', $Params['logfile'] ); // washed in tpl for safety
 $tpl->setVariable( 'log', $data );
 $tpl->setVariable( 'errormsg', $errormsg );
+$tpl->setVariable( 'title', sysinfoModule::viewTitle( 'logview' ) . ': ' . $Params['logfile'] ); // washed in tpl for safety
 
-$Result = array();
-$Result['content'] = $tpl->fetch( "design:sysinfo/logview.tpl" ); //var_dump($cacheFilesList);
+$extra_path = $logname;
 
-$Result['left_menu'] = 'design:parts/sysinfo/menu.tpl';
-$Result['path'] = array( array( 'url' => false,
-                                'text' => ezi18n( 'SysInfo', 'Log view' ) ),
-                         array( 'url' => false,
-                                'text' => $logname ) );
 ?>

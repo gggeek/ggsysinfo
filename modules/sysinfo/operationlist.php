@@ -8,20 +8,6 @@
  *
  */
 
-$module = $Params['Module'];
-
-// rely on system policy instead of creating our own, but allow also PolicyOmitList
-$ini = eZINI::instance();
-if ( !in_array( 'sysinfo/operationlist', $ini->variable( 'RoleSettings', 'PolicyOmitList' ) ) )
-{
-    $user = eZUser::currentUser();
-    $access = $user->hasAccessTo( 'setup', 'system_info' );
-    if ( $access['accessWord'] != 'yes' )
-    {
-        return $module->handleError( eZError::KERNEL_ACCESS_DENIED, 'kernel' );
-    }
-}
-
 // generic info for all views: module name, extension name, ...
 $operationList = array();
 $modules = eZModuleLister::getModuleList();
@@ -85,6 +71,7 @@ $title = 'List of available operations';
 if ( $Params['modulename'] != '' )
 {
     $title .= ' in module "' . $Params['modulename'] . '"';
+    $extra_path = $Params['modulename'];
 }
 
 $ezgeshi_available = false;
@@ -93,25 +80,10 @@ if ( in_array( 'ezsh', eZExtension::activeExtensions() ) )
     $info = eZExtension::extensionInfo( 'ezsh' );
     $ezgeshi_available = ( version_compare( $info['Version'], '1.3' ) >= 0 );
 }
-require_once( "kernel/common/template.php" );
-$tpl = templateInit();
+
 $tpl->setVariable( 'title', $title );
 $tpl->setVariable( 'operationlist', $operationList );
 $tpl->setVariable( 'sdkversion', eZPublishSDK::version() );
 $tpl->setVariable( 'ezgeshi_available', $ezgeshi_available );
 
-$Result = array();
-$Result['content'] = $tpl->fetch( "design:sysinfo/operationlist.tpl" ); //var_dump($cacheFilesList);
-
-$Result['left_menu'] = 'design:parts/sysinfo/menu.tpl';
-$Result['path'] = array( array( 'url' => false,
-                                'text' => ezi18n( 'SysInfo', 'Operations' ) ) );
-if ( $Params['modulename'] != '' )
-{
-    $Result['path'][0]['url'] = '/sysinfo/operationlist';
-    $Result['path'][] = array( 'url' => false,
-                               'text' => $Params['modulename'] );
-}
-
-$Result['groups'] = sysinfoModule::$view_groups;
 ?>

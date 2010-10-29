@@ -102,7 +102,7 @@ class sysInfoTools
         {
             $files = @scandir( $cachedir );
             if ( $files === false )
-                return false;
+                return array();
             foreach( $files as $file )
             {
                 if ( $file != '.' && $file != '..' )
@@ -196,9 +196,9 @@ class sysInfoTools
         {
            $status_tests['ezfind'] = 'X';
         }
-		
-		
-		
+
+
+
         $ini = eZINI::instance( 'ldap.ini' );
         if ( $ini->variable( 'LDAPSettings', 'LDAPEnabled' ) == 'true' && $ini->variable( 'LDAPSettings', 'LDAPServer' ) != '' )
         {

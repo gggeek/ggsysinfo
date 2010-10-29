@@ -1,11 +1,13 @@
 <?php
 /**
+ * A script that gathers the common parts of all views of the sysinfo module
+ *
  * @author G. Giunta
  * @version $Id: contentstats.php 2570 2008-11-25 11:35:44Z ezsystems $
  * @copyright (C) G. Giunta 2010
  * @license Licensed under GNU General Public License v2.0. See file license.txt
  *
- *  @todo use a 3-level path, with the name of the group as 2nd element ?
+ * @todo use a 3-level path, with the name of the group as 2nd element ?
  */
 
 $module = $Params['Module'];
@@ -27,6 +29,8 @@ require_once( "kernel/common/template.php" );
 $tpl = templateInit();
 $tpl->setVariable( 'title', sysinfoModule::viewTitle( $view ) );
 
+$extra_path = '';
+
 include( "extension/ggsysinfo/modules/sysinfo/$view.php" );
 
 $Result = array();
@@ -45,5 +49,20 @@ else
     $url2ndlevel = array( array( 'url' => false,
                                  'text' => ezi18n( 'SysInfo', sysinfoModule::viewName( $view ) ) ) );
 }
-$Result['path'] = array_merge( $url1stlevel, $url2ndlevel );
+if ( $extra_path != '' )
+{
+    if ( sysinfoModule::viewActive( $view )  )
+    {
+        $url2ndlevel[0]['url'] = "sysinfo/$view";
+    }
+
+    $url3rdlevel = array( array( 'url' => false,
+                                 'text' => $extra_path ) );
+}
+else
+{
+    $url3rdlevel = array();
+}
+$Result['path'] = array_merge( $url1stlevel, $url2ndlevel, $url3rdlevel );
+
 ?>

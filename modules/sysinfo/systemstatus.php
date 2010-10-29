@@ -10,21 +10,6 @@
  * @license Licensed under GNU General Public License v2.0. See file license.txt
 */
 
-$module = $Params['Module'];
-//$http = eZHTTPTool::instance();
-
-// rely on system policy instead of creating our own, but allow also PolicyOmitList
-$ini = eZINI::instance();
-if ( !in_array( 'sysinfo/systemstatus', $ini->variable( 'RoleSettings', 'PolicyOmitList' ) ) )
-{
-    $user = eZUser::currentUser();
-    $access = $user->hasAccessTo( 'setup', 'system_info' );
-    if ( $access['accessWord'] != 'yes' )
-    {
-        return $module->handleError( eZError::KERNEL_ACCESS_DENIED, 'kernel' );
-    }
-}
-
 $format = $Params['output_format'];
 
 $testslist = sysInfoTools::runtests();
@@ -36,16 +21,6 @@ if ( $format == 'plaintext' )
 }
 else
 {
-    include_once( 'kernel/common/template.php' );
-    $tpl = templateInit();
-    $tpl->setVariable( 'title', 'System status' );
     $tpl->setVariable( 'testslist', $testslist );
-
-    $Result = array();
-    $Result['content'] = $tpl->fetch( 'design:sysinfo/systemstatus.tpl' );
-
-    $Result['left_menu'] = 'design:parts/sysinfo/menu.tpl';
-    $Result['path'] = array( array( 'url' => false,
-                                    'text' => ezi18n( 'SysInfo', 'System status' ) ) );
 }
 ?>

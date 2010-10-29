@@ -8,19 +8,6 @@
  *
  */
 
-// rely on system policy instead of creating our own, but allow also PolicyOmitList
-$ini = eZINI::instance();
-if ( !in_array( 'sysinfo/modulelist', $ini->variable( 'RoleSettings', 'PolicyOmitList' ) ) )
-{
-    $user = eZUser::currentUser();
-    $access = $user->hasAccessTo( 'setup', 'system_info' );
-    if ( $access['accessWord'] != 'yes' )
-    {
-        $module = $Params['Module'];
-        return $module->handleError( eZError::KERNEL_ACCESS_DENIED, 'kernel' );
-    }
-}
-
 // generic info for all modules: number of views, fetch functions, policy functions, name of extension
 $moduleList = array();
 
@@ -62,23 +49,10 @@ $title = 'List of available modules';
 if ( $Params['extensionname'] != '' )
 {
     $title .= ' in extension "' . $Params['extensionname'] . '"';
+    $extra_path = $Params['extensionname'];
 }
 
-require_once( "kernel/common/template.php" );
-$tpl = templateInit();
 $tpl->setVariable( 'title', $title );
 $tpl->setVariable( 'modulelist', $moduleList );
 
-$Result = array();
-$Result['content'] = $tpl->fetch( "design:sysinfo/modulelist.tpl" ); //var_dump($cacheFilesList);
-
-$Result['left_menu'] = 'design:parts/sysinfo/menu.tpl';
-$Result['path'] = array( array( 'url' => false,
-                                'text' => ezi18n( 'SysInfo', 'Modules' ) ) );
-if ( $Params['extensionname'] != '' )
-{
-    $Result['path'][0]['url'] = '/sysinfo/viewlist';
-    $Result['path'][] = array( 'url' => false,
-                               'text' => $Params['extensionname'] );
-}
 ?>

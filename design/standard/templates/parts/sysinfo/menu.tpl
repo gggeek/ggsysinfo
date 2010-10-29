@@ -13,7 +13,9 @@
     {* DESIGN: Content START *}<div class="box-bc"><div class="box-ml"><div class="box-mr"><div class="box-bl"><div class="box-br"><div class="box-content">
     <ul>
     {foreach $exts as $i => $ext}
-      <li><div>{if $ext.disabled}<span class="disabled">{$ext.name}</span>{else}<a href={concat($prefix, 'sysinfo/', $i)|ezurl()}>{$ext.name}</a>{/if}</div></li>
+        {if $ext.hidden|not()}
+        <li><div>{if $ext.disabled}<span class="disabled">{$ext.name}</span>{else}<a href={concat($prefix, 'sysinfo/', $i)|ezurl()}>{$ext.name}</a>{/if}</div></li>
+        {/if}
     {/foreach}
     </ul>
     {* DESIGN: Content END *}</div></div></div></div></div></div>

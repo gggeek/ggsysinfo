@@ -6,9 +6,6 @@
  * @version $Id: contentstats.php 2570 2008-11-25 11:35:44Z ezsystems $
  * @copyright (C) G. Giunta 2010
  * @license Licensed under GNU General Public License v2.0. See file license.txt
- *
- * @todo add an enabled/disabled (calculated) status for thos views that need it
- * @todo add view title here, as well as view name for path
  */
 
 class sysinfoModule{
@@ -20,6 +17,7 @@ class sysinfoModule{
     * - title / name ???
     * - description
     * - disabled (this one is calculated by the initialize() function
+    * - hidden (for left menu)
     */
     static $view_groups = array(
 
@@ -75,7 +73,7 @@ class sysinfoModule{
 
             'systemstatus' => array(
                 //'functions' => array( 'system_info' ), - we check in the module itself
-                "script" => "systemstatus.php",
+                "script" => "genericview.php",
                 "default_navigation_part" => 'ezsysinfonavigationpart',
                 "params" => array( 'output_format' ),
                 'name' => 'System status' ),
@@ -89,7 +87,7 @@ class sysinfoModule{
 
             'cachesearch' => array(
                 //'functions' => array( 'system_info' ), - we check in the module itself
-                "script" => "cachesearch.php",
+                "script" => "genericview.php",
                 "default_navigation_part" => 'ezsysinfonavigationpart',
                 'name' => 'Cache search',
                 'disabled' => true ),
@@ -120,11 +118,11 @@ class sysinfoModule{
                 "default_navigation_part" => 'ezsysinfonavigationpart',
                 'name' => 'Log Stats' ),
 
-            'logsearch' => array(
+            /*'logsearch' => array(
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 "script" => "logsearch.php",
                 "default_navigation_part" => 'ezsysinfonavigationpart',
-                'name' => 'Log search' ),
+                'name' => 'Log search' ),*/
 
             'logchurn' => array(
                 //'functions' => array( 'system_info' ), - we check in the module itself
@@ -135,10 +133,11 @@ class sysinfoModule{
 
             'logview' => array(
                 //'functions' => array( 'system_info' ), - we check in the module itself
-                "script" => "logview.php",
+                "script" => "genericview.php",
                 "default_navigation_part" => 'ezsysinfonavigationpart',
                 "params" => array( 'logfile' ),
-                'name' => 'Log view' ),
+                'name' => 'Log view',
+                'hidden' => true ),
 
         ),
         'Development' => array(
@@ -150,7 +149,7 @@ class sysinfoModule{
 
         'modulelist' => array(
             //'functions' => array( 'system_info' ), - we check in the module itself
-            "script" => "modulelist.php",
+            "script" => "genericview.php",
             "default_navigation_part" => 'ezsysinfonavigationpart',
             "params" => array( 'extensionname' ),
             'name' => 'Module list' ),
@@ -162,7 +161,7 @@ class sysinfoModule{
 
         'viewlist' => array(
             //'functions' => array( 'system_info' ), - we check in the module itself
-            "script" => "viewlist.php",
+            "script" => "genericview.php",
             "default_navigation_part" => 'ezsysinfonavigationpart',
             "params" => array( 'modulename' ),
             'name' => 'View list' ),
@@ -174,21 +173,21 @@ class sysinfoModule{
 
         'policylist' => array(
             //'functions' => array( 'system_info' ), - we check in the module itself
-            "script" => "policylist.php",
+            "script" => "genericview.php",
             "default_navigation_part" => 'ezsysinfonavigationpart',
             "params" => array( 'modulename' ),
             'name' => 'Policy functions list' ),
 
         'operationlist' => array(
             //'functions' => array( 'system_info' ), - we check in the module itself
-            "script" => "operationlist.php",
+            "script" => "genericview.php",
             "default_navigation_part" => 'ezsysinfonavigationpart',
             "params" => array( 'modulename' ),
             'name' => 'Operations list' ),
 
         'fetchlist' => array(
             //'functions' => array( 'system_info' ), - we check in the module itself
-            "script" => "fetchlist.php",
+            "script" => "genericview.php",
             "default_navigation_part" => 'ezsysinfonavigationpart',
             "params" => array( 'modulename' ),
             'name' => 'Fetch functions list' ),
@@ -277,10 +276,6 @@ class sysinfoModule{
         {
              self::$view_groups['PHP']['wincache']['disabled'] = false;
         }
-        /*else
-        {
-            $operatorValue = '';
-        }*/
         self::$initialized = true;
     }
 
@@ -331,6 +326,19 @@ class sysinfoModule{
             }
         }
         return 'title-for-path';
+    }
+
+    /// true if view is neither hidden nor disabled
+    static function viewActive( $viewname )
+    {
+        foreach( self::$view_groups as $views )
+        {
+            if ( array_key_exists( $viewname, $views ) )
+            {
+                return !@$views[$viewname]['disabled'] && !@$views[$viewname]['hidden'];
+            }
+        }
+        return false;
     }
 }
 ?>

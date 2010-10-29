@@ -87,6 +87,7 @@ $title = 'List of available fetch functions';
 if ( $Params['modulename'] != '' )
 {
     $title .= ' in module "' . $Params['modulename'] . '"';
+    $extra_path =  $Params['modulename'];
 }
 
 $ezgeshi_available = false;
@@ -96,23 +97,9 @@ if ( in_array( 'ezsh', eZExtension::activeExtensions() ) )
     $ezgeshi_available = ( version_compare( $info['Version'], '1.3' ) >= 0 );
 }
 
-require_once( "kernel/common/template.php" );
-$tpl = templateInit();
 $tpl->setVariable( 'title', $title );
 $tpl->setVariable( 'fetchlist', $fetchList );
 $tpl->setVariable( 'sdkversion', eZPublishSDK::version() );
 $tpl->setVariable( 'ezgeshi_available', $ezgeshi_available );
 
-$Result = array();
-$Result['content'] = $tpl->fetch( "design:sysinfo/fetchlist.tpl" ); //var_dump($cacheFilesList);
-
-$Result['left_menu'] = 'design:parts/sysinfo/menu.tpl';
-$Result['path'] = array( array( 'url' => false,
-                                'text' => ezi18n( 'SysInfo', 'Fetch Functions' ) ) );
-if ( $Params['modulename'] != '' )
-{
-    $Result['path'][0]['url'] = '/sysinfo/fetchlist';
-    $Result['path'][] = array( 'url' => false,
-                               'text' => $Params['modulename'] );
-}
 ?>

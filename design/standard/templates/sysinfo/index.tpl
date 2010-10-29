@@ -14,20 +14,22 @@
 <table class="list" cellspacing="0">
 {def $prefix=''}
 {foreach $groups as $name => $exts offset 1}
-      {if eq($name, 'Reports')}
-          {set $prefix = 'layout/set/print/'}
-      {else}
-          {set $prefix = ''}
-      {/if}
-      <tr>
-          <th>{$name}</th>
-          <th>Description</th>
-      </tr>
+    {if eq($name, 'Reports')}
+        {set $prefix = 'layout/set/print/'}
+    {else}
+        {set $prefix = ''}
+    {/if}
+    <tr>
+        <th>{$name}</th>
+        <th>Description</th>
+    </tr>
     {foreach $exts as $i => $ext sequence array( 'bglight', 'bgdark') as $style}
-      <tr class="{$style}">
-          <td>{if $ext.disabled}{$ext.name}{else}<a href={concat($prefix, 'sysinfo/', $i)|ezurl()}>{$ext.name}</a>{/if}</td>
-          <td>{$ext.description}</td>
-      </tr>
+        {if $ext.hidden|not()}
+        <tr class="{$style}">
+            <td>{if $ext.disabled}{$ext.name}{else}<a href={concat($prefix, 'sysinfo/', $i)|ezurl()}>{$ext.name}</a>{/if}</td>
+            <td>{$ext.description}</td>
+        </tr>
+        {/if}
     {/foreach}
 {/foreach}
 </table>

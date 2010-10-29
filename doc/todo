@@ -39,6 +39,8 @@ cache views:
 - allow cache stats page to report on enabled/disabled caches per siteaccess
 - add zoom icons on cache stats pages that bring to cache search page listing all cache files of the given type
 - add zoom icons on cache search pages that will show the cache file contents
+- when ezgeshi is found, add links to wiew with highlight cache files
+- improve checkboxes display in cache-search page (make them break on two or more lines)
 
 storage views:
 - add support for clustered configs

@@ -14,18 +14,6 @@
 $module = $Params['Module'];
 $http = eZHTTPTool::instance();
 
-// rely on system policy instead of creating our own, but allow also PolicyOmitList
-$ini = eZINI::instance();
-if ( !in_array( 'sysinfo/cachesearch', $ini->variable( 'RoleSettings', 'PolicyOmitList' ) ) )
-{
-    $user = eZUser::currentUser();
-    $access = $user->hasAccessTo( 'setup', 'system_info' );
-    if ( $access['accessWord'] != 'yes' )
-    {
-        return $module->handleError( eZError::KERNEL_ACCESS_DENIED, 'kernel' );
-    }
-}
-
 $deletedfiles = 0;
 $filelist = array();
 $searchtext = '';
@@ -89,22 +77,11 @@ if ( $http->hasPostVariable( 'SearchText' ) && $http->hasPostVariable( 'SearchCa
     //print_r($filelist);
 }
 
-
-require_once( "kernel/common/template.php" );
-$tpl = templateInit();
 $tpl->setVariable( 'filelist', $filelist );
 $tpl->setVariable( 'list_count', count( $filelist ) );
 $tpl->setVariable( 'searchtext', $searchtext );
 $tpl->setVariable( 'cachelist', $cacheDirsList2 );
 $tpl->setVariable( 'deletedfiles', $deletedfiles );
 $tpl->setVariable( 'is_regexp', $is_regexp );
-
-$Result = array();
-$Result['content'] = $tpl->fetch( "design:sysinfo/cachesearch.tpl" );
-
-$Result['left_menu'] = 'design:parts/sysinfo/menu.tpl';
-$Result['path'] = array( array( 'url' => false,
-                                'text' => ezi18n( 'SysInfo', 'Cache search' ) ) );
-
 
 ?>
