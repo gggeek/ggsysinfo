@@ -9,7 +9,7 @@
 
 {* DESIGN: Content START *}<div class="box-bc"><div class="box-ml"><div class="box-mr"><div class="box-bl"><div class="box-br"><div class="box-content">
 
-<p>An interface aiming to complement the "Setup" tab from the standard administration interface, of use mostly to system administrator and developers.</p>
+<div class="block"><p>An interface aiming to complement the "Setup" tab from the standard administration interface, of use mostly to system administrator and developers.</p></div>
 
 <table class="list" cellspacing="0">
 {def $prefix=''}
