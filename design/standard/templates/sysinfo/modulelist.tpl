@@ -45,7 +45,7 @@
 </div>
 *}
 
-{def $basedocurl = 'http://doc.ez.no/eZ-Publish/Technical-manual/4.x/Reference/Modules'}
+{def $basedocurl = 'http://doc.ez.no/eZ-Publish/Technical-manual/4.x/Reference/Modules/'}
 
 <table class="list" cellspacing="0">
     <tr>

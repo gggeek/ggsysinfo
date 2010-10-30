@@ -56,7 +56,7 @@
     </tr>
 {def $callmethod = array()
      $native     = false()
-     $basedocurl = 'http://doc.ez.no/eZ-Publish/Technical-manual/4.x/Reference/Modules'
+     $basedocurl = 'http://doc.ez.no/eZ-Publish/Technical-manual/4.x/Reference/Modules/'
      $basedoxurl = concat('http://github.com/ezsystems/ezpublish/tree/',$sdkversion,'/')}
 {foreach $fetchlist as $fetch => $details sequence array( 'bglight', 'bgdark') as $style}
     {set $native = eq($details['extension'], '')}
@@ -85,7 +85,7 @@
             {/if}
         </td>
         <td>
-            {if $native}<a href="{concat($basedocurl,$details['module'],'/fetch_functions/',$details['name'])}">ez.no{/if}
+            {if $native}<a href="{concat($basedocurl,$details['module'],'/Fetch-functions/',$details['name'])}">ez.no{/if}
         </td>
     </tr>
 {/foreach}

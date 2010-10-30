@@ -58,7 +58,7 @@
         <th>{'Help'|i18n( 'SysInfo')}</th>
     </tr>
 {def $native     = false()
-     $basedocurl = 'http://doc.ez.no/eZ-Publish/Technical-manual/4.x/Reference/Modules'
+     $basedocurl = 'http://doc.ez.no/eZ-Publish/Technical-manual/4.x/Reference/Modules/'
      $basedoxurl = concat('http://github.com/ezsystems/ezpublish/tree/',$sdkversion,'/kernel/')}
 {foreach $viewlist as $view => $details sequence array( 'bglight', 'bgdark') as $style}
     {set $native = eq($details['extension'], '')}
@@ -97,7 +97,7 @@
             {/if}
         </td>
         <td>
-            {if $native}<a href="{concat($basedocurl,$details['module'],'/views/',$details['name'])}">ez.no</a>{/if}
+            {if $native}<a href="{concat($basedocurl,$details['module'],'/Views/',$details['name'])}">ez.no</a>{/if}
         </td>
     </tr>
 {/foreach}
