@@ -32,7 +32,7 @@ class ezLogsGrapher
         $ip = '';
         foreach ( $file as $line )
         {
-            if ( preg_match( '/^\[ ([A-Za-z0-9: ]+) \] \[([0-9.]+)\] (.*)/', $line, $matches ) )
+            if ( preg_match( '/^\[ ([A-Za-z0-9: ]+) \] \[([0-9.]*)\] (.*)/', $line, $matches ) )
             {
                 if ( $time > 0 )
                 {
