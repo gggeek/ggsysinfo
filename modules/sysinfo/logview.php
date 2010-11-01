@@ -38,13 +38,13 @@ foreach( $logfiles as $level => $file )
                 if ( file_exists( $archivelog ) )
                 {
                     $data = array_merge( $data, ezLogsGrapher::splitLog( $archivelog ) );
+                    //var_dump( $archivelog );
                 }
             }
 
             // *** Parse log file ***
             $data = array_reverse( array_merge( $data, ezLogsGrapher::splitLog( $logfile ) ) );
-
-            //var_dump( $data );
+            //var_dump( $logfile );
         }
         break;
     }

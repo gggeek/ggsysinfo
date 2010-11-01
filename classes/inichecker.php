@@ -33,7 +33,7 @@ class iniChecker
         {
             if ( preg_match( '/\.ini(\.append|\.php)$/', $file ) )
             {
-                $warnings[] = "File $file has deprecated filename extension";
+                $warnings[] = array( "File has deprecated filename extension", $file, null, '' );
             }
         }
 
@@ -44,7 +44,7 @@ class iniChecker
             {
                 if ( $matches[1] != 'setup' && $matches[1] != 'admin' && !in_array( $matches[1], $activesiteaccesses ) )
                 {
-                    $warnings[] = "File $file is for an inactive siteaccess {$matches[1]}";
+                    $warnings[] = array( "File is for an inactive siteaccess {$matches[1]}", $file, null, '' );
                 }
             }
         }
@@ -76,7 +76,7 @@ class iniChecker
                 {
                     if ( preg_match( '#\.ini$#', $file ) )
                     {
-                        $warnings[] = "File $file should be renamed to .ini.append.php";
+                        $warnings[] = array( "File should be renamed to .ini.append.php", $file, null, '' );
                     }
                 }
             }
@@ -94,11 +94,11 @@ class iniChecker
                 {
                     if ( $orig == 0 )
                     {
-                        $warnings[] = "There should be one $ininame file with a .ini extension. Found: " . implode( $inis, ', ' );
+                        $warnings[] = array( "There should be one $ininame file with a .ini extension. Found: " . implode( $inis, ', ' ), '', null, '');
                     }
                     else
                     {
-                        $warnings[] = "There should be only one $ininame file with a .ini extension. Found: " . implode( $inis, ', ' );
+                        $warnings[] = array( "There should be only one $ininame file with a .ini extension. Found: " . implode( $inis, ', ' ), '', null, '');
                     }
                 }
             }
