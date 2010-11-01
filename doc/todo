@@ -71,11 +71,5 @@ qa views:
 - move all of the tests in an external extension?
 - allow hooking of new tests via ini files
 
-pending notifications views:
-- to be done
-
-pending indexation events views:
-- to be done
-
 - ...
 - profit!

@@ -2,14 +2,15 @@ Changes from 0.3 to 0.4 - released 2010/xx/yy
 
 New:
 - added a page listing all operations defined by modules
-- added a new 'Content Classes report' page, where all content classes definition is available at a glance
+- added a new 'Content classes report' page, where all content classes definition is available at a glance
   Thanks A. Sebbane, the first contributor of hopefully a long series!
 - added 3 "QA" pages to check for common problems with ini settings files and php files
 
 Improved:
-- added a test for connectivity to the solr backend in the system status page when eZFind is activated
+- added a test for connectivity to the solr backend in the 'System status' page when eZFind is activated
 - hide Sysinfo tab in admin2 design for users that cannot access it anyway
-- display of some views using the admin design
+- better display of some pages using the admin design (old Administration Interface)
+- in the 'Content stats' page, show the number of pending notification events and indexation events
 
 Fixed:
 - the test for cluster-file-handler database would fail on recent ezp builds, where the name of the handler changed (tanks A. Sebbane)
