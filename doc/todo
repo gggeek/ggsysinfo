@@ -17,6 +17,7 @@ developer views:
 - add a form to test invoking views directly
 - add error msgs when bad param received
 - find a way to add link to docs for stuff provided by extensions
+- in operations list page, mention every php method executed as part of an operation
 
 accelerator views:
 - update apc/xcache/eacc control panels to their latest (svn?) code
