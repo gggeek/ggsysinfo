@@ -72,7 +72,7 @@
             {$details['extension']|wash}
         </td>
         <td>
-            {foreach $details['parameters'] as $id => $param}{$param['name']|wash} - {$param['type']|wash} {if $param['required']} - required{/if}{delimiter}<br/>{/delimiter}{/foreach}
+            {foreach $details['parameters'] as $id => $param}{$param['name']|wash} ({$param['type']|wash}){if $param['required']} required{/if}{delimiter}<br/>{/delimiter}{/foreach}
         </td>
         {set $callmethod = $details['call_method']}
         <td>
