@@ -7,8 +7,9 @@
  * @license Licensed under GNU General Public License v2.0. See file license.txt
  */
 
+$extdir =  eZExtension::baseDirectory();
 ob_start();
-include('extension/ggsysinfo/modules/sysinfo/lib/control.php');
+include( $extdir . '/ggsysinfo/modules/sysinfo/lib/control.php' );
 $output = ob_get_contents();
 ob_end_clean();
 $pos = strpos( $output, '<body class="center">' );
