@@ -52,6 +52,7 @@
         <th>{'Extension'|i18n( 'SysInfo')}</th>
         <th>{'Parameters'|i18n( 'SysInfo')}</th>
         <th>{'Call method'|i18n( 'SysInfo')}</th>
+        <th>{'Source'|i18n( 'SysInfo')}</th>
         <th>{'Help'|i18n( 'SysInfo')}</th>
     </tr>
 {def $callmethod = array()
@@ -73,14 +74,18 @@
         <td>
             {foreach $details['parameters'] as $id => $param}{$param['name']|wash} - {$param['type']|wash} {if $param['required']} - required{/if}{delimiter}<br/>{/delimiter}{/foreach}
         </td>
+        {set $callmethod = $details['call_method']}
         <td>
-            {set $callmethod = $details['call_method']}
             {if and(is_set($callmethod['class']), is_set($callmethod['method']))}
-                {*if is_set($callmethod['include_file'])}<a href="{concat($basedoxurl,$callmethod['include_file']|urlencode()}">{/if*}
+                {$callmethod['class']}::{$callmethod['method']}
+            {/if}
+        </td>
+        <td>
+            {if and(is_set($callmethod['class']), is_set($callmethod['method']))}
                 {if $ezgeshi_available}
-                    <a href={concat('/geshi/highlight/',$callmethod['include_file'])|ezurl}>{$callmethod['class']}::{$callmethod['method']}</a>
+                    <a href={concat('/geshi/highlight/',$callmethod['include_file'])|ezurl}>local</a>
                 {else}
-                    {if $native}<a href="{concat($basedoxurl,$callmethod['include_file']|urlencode())}">{/if}{$callmethod['class']}::{$callmethod['method']}{if $native}</a>{/if}
+                    {if $native}<a href="{concat($basedoxurl,$callmethod['include_file']|urlencode())}">github</a>{/if}
                 {/if}
             {/if}
         </td>
