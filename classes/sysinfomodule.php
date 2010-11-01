@@ -76,13 +76,15 @@ class sysinfoModule{
                 "script" => "genericview.php",
                 "default_navigation_part" => 'ezsysinfonavigationpart',
                 "params" => array( 'output_format' ),
-                'name' => 'System status' ),
+                'name' => 'System status',
+                'description' => 'Executes tests to verify the functioning of various parts of the system (e.g. connection to the database or to the eZFind indexing server)' ),
 
             'cachestats' => array(
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 "script" => "genericview.php",
                 "default_navigation_part" => 'ezsysinfonavigationpart',
                 'name' => 'Cache stats',
+                'description' => 'Number of files and total size per every cache type',
                 'disabled' => true ),
 
             'cachesearch' => array(
@@ -90,6 +92,7 @@ class sysinfoModule{
                 "script" => "genericview.php",
                 "default_navigation_part" => 'ezsysinfonavigationpart',
                 'name' => 'Cache search',
+                'description' => 'Allows to search for a given string or regexp in the different cache files',
                 'disabled' => true ),
 
 
@@ -98,25 +101,29 @@ class sysinfoModule{
                 "script" => "genericview.php",
                 "default_navigation_part" => 'ezsysinfonavigationpart',
                 'name' => 'Storage stats',
+                'description' => 'Number of files and total size for binary contents',
                 'disabled' => true ),
 
             'storagechurn' => array(
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 "script" => "genericview.php",
                 "default_navigation_part" => 'ezsysinfonavigationpart',
-                'name' => 'Storage churn' ),
+                'name' => 'Storage churn',
+                'description' => 'Graph of number of files per minutes written to disk (including caches and binary contents)' ),
 
             'contentstats' => array(
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 "script" => "genericview.php",
                 "default_navigation_part" => 'ezsysinfonavigationpart',
-                'name' => 'Content stats' ),
+                'name' => 'Content stats',
+                'description' => 'Number of content objects present, information collections, pending notification events, pending indexation events etc...' ),
 
             'logstats' => array(
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 "script" => "genericview.php",
                 "default_navigation_part" => 'ezsysinfonavigationpart',
-                'name' => 'Log Stats' ),
+                'name' => 'Log Stats',
+                'description' => 'Total size and last modification date of log files' ),
 
             /*'logsearch' => array(
                 //'functions' => array( 'system_info' ), - we check in the module itself
@@ -129,7 +136,8 @@ class sysinfoModule{
                 "script" => "genericview.php",
                 "default_navigation_part" => 'ezsysinfonavigationpart',
                 "unordered_params" => array(),
-                'name' => 'Log churn' ),
+                'name' => 'Log churn',
+                'description' => 'Graph of events written per minute in the log files' ),
 
             'logview' => array(
                 //'functions' => array( 'system_info' ), - we check in the module itself
@@ -152,7 +160,8 @@ class sysinfoModule{
             "script" => "genericview.php",
             "default_navigation_part" => 'ezsysinfonavigationpart',
             "params" => array( 'extensionname' ),
-            'name' => 'Module list' ),
+            'name' => 'Module list',
+            'description' => 'List of all active modules' ),
 
 /*'moduledetails'] = array(
    "script" => "moduledetails.php",
@@ -164,7 +173,8 @@ class sysinfoModule{
             "script" => "genericview.php",
             "default_navigation_part" => 'ezsysinfonavigationpart',
             "params" => array( 'modulename' ),
-            'name' => 'View list' ),
+            'name' => 'View list',
+            'description' => 'List of all module views' ),
 
 /*'viewdetails'] = array(
    "script" => "viewdetails.php",
@@ -176,21 +186,24 @@ class sysinfoModule{
             "script" => "genericview.php",
             "default_navigation_part" => 'ezsysinfonavigationpart',
             "params" => array( 'modulename' ),
-            'name' => 'Policy functions list' ),
+            'name' => 'Policy functions list',
+            'description' => 'List of all module access policies' ),
 
         'operationlist' => array(
             //'functions' => array( 'system_info' ), - we check in the module itself
             "script" => "genericview.php",
             "default_navigation_part" => 'ezsysinfonavigationpart',
             "params" => array( 'modulename' ),
-            'name' => 'Operations list' ),
+            'name' => 'Operations list',
+            'description' => 'List of all module operations' ),
 
         'fetchlist' => array(
             //'functions' => array( 'system_info' ), - we check in the module itself
             "script" => "genericview.php",
             "default_navigation_part" => 'ezsysinfonavigationpart',
             "params" => array( 'modulename' ),
-            'name' => 'Fetch functions list' ),
+            'name' => 'Fetch functions list',
+            'description' => 'List of all module fetch functions' ),
 
 /*'operatorlist'] = array(
    //'functions' => array( 'system_info' ), - we check in the module itself
@@ -205,19 +218,22 @@ class sysinfoModule{
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 "script" => "genericview.php",
                 "default_navigation_part" => 'ezsysinfonavigationpart',
-                'name' => 'Ini files problems' ),
+                'name' => 'Ini files problems',
+                'description' => 'Checks for all ini files found the correct naming conventions' ),
 
             'inisettingsqa' => array(
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 "script" => "genericview.php",
                 "default_navigation_part" => 'ezsysinfonavigationpart',
-                'name' => 'Ini values problems' ),
+                'name' => 'Ini values problems',
+                'description' => 'Checks for all ini files found the correctness of syntax, presence of php opening comment tag and charset declaration' ),
 
             'phpfilesqa' => array(
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 "script" => "genericview.php",
                 "default_navigation_part" => 'ezsysinfonavigationpart',
-                'name' => 'Php files problems' ),
+                'name' => 'Php files problems',
+                'description' => 'Checks for all php files found the presence of opening and closing php tags' ),
 
         ),
         'Reports' => array(
@@ -228,7 +244,8 @@ class sysinfoModule{
                 "default_navigation_part" => 'ezsysinfonavigationpart',
                 "params" => array( ),
                 'name' => 'Content classes',
-                'title' => 'Content classes report' )
+                'title' => 'Content classes report',
+                'description' => 'Definition of all content classes in a format friendly to backups' )
 
         )
     );
@@ -240,6 +257,12 @@ class sysinfoModule{
             return;
         }
 
+        // starting with version 4.1, this is available in the Setup|System Info page
+        if ( version_compare( '4.1', eZPublishSDK::version() ) <= 0 )
+        {
+             self::$view_groups['PHP']['php']['hidden'] = true;
+        }
+
         $ini = eZINI::instance( 'file.ini' );
         $h = $ini->variable( 'ClusteringSettings', 'FileHandler' );
         if ( in_array( $h, array( 'ezfs', 'eZFSFileHandler', 'eZFS2FileHandler' ) ) )
@@ -248,6 +271,7 @@ class sysinfoModule{
             self::$view_groups['eZPublish']['cachesearch']['disabled'] = false;
             self::$view_groups['eZPublish']['storagestats']['disabled'] = false;
         }
+
         /*if ( isset( $GLOBALS['_PHPA'] ) )
         {
            self::$view_groups['PHP']['phpaccelerator'];
@@ -276,6 +300,7 @@ class sysinfoModule{
         {
              self::$view_groups['PHP']['wincache']['disabled'] = false;
         }
+
         self::$initialized = true;
     }
 
