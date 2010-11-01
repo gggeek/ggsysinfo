@@ -1,7 +1,7 @@
 Changes from 0.3 to 0.4 - released 2010/xx/yy
 
 New:
-- added a page listing all operations defined by module
+- added a page listing all operations defined by modules
 - added a new 'Content Classes report' page, where all content classes definition is available at a glance
   Thanks A. Sebbane, the first contributor of hopefully a long series!
 - added 3 "QA" pages to check for common problems with ini settings files and php files
@@ -9,9 +9,11 @@ New:
 Improved:
 - added a test for connectivity to the solr backend in the system status page when eZFind is activated
 - hide Sysinfo tab in admin2 design for users that cannot access it anyway
+- display of some views using the admin design
 
 Fixed:
 - the test for cluster-file-handler database would fail on recent ezp builds, where the name of the handler changed (tanks A. Sebbane)
 - fix the links used for displaying source code on pubsvn (list of modules/views and fatch functions): migrated to github
-- fix a bug in searching files and some cache dirs that do not exist (eg. disabled caches) on windows
+- fix a warning in searching files and some cache dirs that do not exist (eg. disabled caches) on windows
 - in log display, show log messages generated from cli scripts
+- links to online docs now point to http://doc.ez.no

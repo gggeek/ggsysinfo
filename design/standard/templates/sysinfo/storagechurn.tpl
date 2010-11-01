@@ -14,7 +14,7 @@
 {if ne($errormsg, '')}
     {$errormsg}
 {else}
-<div class="context-block">
+<div class="block">
 <img src="{concat(ezroot('no'),$graphsource)}" alt="{$title|i18n('SysInfo')}" />
 </div>
 {/if}
