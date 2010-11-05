@@ -18,6 +18,7 @@ developer views:
 - add error msgs when bad param received
 - find a way to add link to docs for stuff provided by extensions
 - in operations list page, mention every php method executed as part of an operation
+- integrate with ezpersistentobject_inspector extension: if its there, take from it description of modules and fetch functions
 
 accelerator views:
 - update apc/xcache/eacc control panels to their latest (svn?) code
