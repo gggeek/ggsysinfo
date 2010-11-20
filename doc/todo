@@ -70,5 +70,7 @@ qa views:
 - move all of the tests in an external extension?
 - allow hooking of new tests via ini files
 
+- take over template of the 'setup/extensions' page, and add links to extension docs (if any found): readme, changelogs, install etc
+
 - ...
 - profit!
