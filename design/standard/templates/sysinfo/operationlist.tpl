@@ -55,7 +55,8 @@
         <th>{'Source'|i18n( 'SysInfo')}</th>
     </tr>
 {def $native     = false()
-     $basedocurl = 'http://doc.ez.no/eZ-Publish/Technical-manual/4.x/Reference/Modules'
+     $basedocurl = concat(ezini('GeneralSettings', 'DocRoot', 'sysinfo.ini').fetches,'/')
+     $docsuffix  = ezini('GeneralSettings', 'PageSuffix', 'sysinfo.ini')
      $basedoxurl = concat('http://github.com/ezsystems/ezpublish/tree/',$sdkversion,'/')}
 {foreach $operationlist as $view => $details sequence array( 'bglight', 'bgdark') as $style}
     {set $native = eq($details['extension'], '')}

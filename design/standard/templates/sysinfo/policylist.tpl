@@ -45,7 +45,8 @@
 </div>
 *}
 
-{def $basedocurl = 'http://doc.ez.no/eZ-Publish/Technical-manual/4.x/Reference/Modules'}
+{def $basedocurl = = ezini('GeneralSettings', 'DocRoot', 'sysinfo.ini').fetches
+     $docsuffix  = ezini('GeneralSettings', 'PageSuffix', 'sysinfo.ini')}
 
 <table class="list" cellspacing="0">
     <tr>

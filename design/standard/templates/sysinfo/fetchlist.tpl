@@ -57,7 +57,8 @@
     </tr>
 {def $callmethod = array()
      $native     = false()
-     $basedocurl = 'http://doc.ez.no/eZ-Publish/Technical-manual/4.x/Reference/Modules/'
+     $basedocurl = concat(ezini('GeneralSettings', 'DocRoot', 'sysinfo.ini').fetches,'/')
+     $docsuffix  = ezini('GeneralSettings', 'PageSuffix', 'sysinfo.ini')
      $basedoxurl = concat('http://github.com/ezsystems/ezpublish/tree/',$sdkversion,'/')}
 {foreach $fetchlist as $fetch => $details sequence array( 'bglight', 'bgdark') as $style}
     {set $native = eq($details['extension'], '')}
@@ -90,7 +91,7 @@
             {/if}
         </td>
         <td>
-            {if $native}<a href="{concat($basedocurl,$details['module'],'/Fetch-functions/',$details['name'])}">ez.no{/if}
+            {if $native}<a href="{concat($basedocurl,$details['module'],'/Fetch-functions/',$details['name'],$docsuffix)}">ez.no{/if}
         </td>
     </tr>
 {/foreach}

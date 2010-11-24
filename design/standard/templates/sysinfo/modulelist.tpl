@@ -45,7 +45,8 @@
 </div>
 *}
 
-{def $basedocurl = 'http://doc.ez.no/eZ-Publish/Technical-manual/4.x/Reference/Modules/'}
+{def $basedocurl = concat(ezini('GeneralSettings', 'DocRoot', 'sysinfo.ini').fetches,'/')
+     $docsuffix  = ezini('GeneralSettings', 'PageSuffix', 'sysinfo.ini')}
 
 <table class="list" cellspacing="0">
     <tr>
@@ -78,7 +79,7 @@
             {if gt($details['operations'], 0)}<a href={concat('/sysinfo/operationlist/',$module)|ezurl}>{$details['operations']}{/if}
         </td>
         <td>
-            {if eq($details['extension'], '')}<a href="{concat($basedocurl,$module)}">ez.no{/if}
+            {if eq($details['extension'], '')}<a href="{concat($basedocurl,$module,$docsuffix)}">ez.no{/if}
         </td>
     </tr>
 {/foreach}
