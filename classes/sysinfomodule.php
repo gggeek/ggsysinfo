@@ -245,7 +245,16 @@ class sysinfoModule{
                 "params" => array( ),
                 'name' => 'Content classes',
                 'title' => 'Content classes report',
-                'description' => 'Definition of all content classes in a format friendly to backups' )
+                'description' => 'Definition of all content classes in a format friendly to backups' ),
+
+            'policiesreport' => array(
+                //'functions' => array( 'system_info' ), - we check in the module itself
+                "script" => "genericview.php",
+                "default_navigation_part" => 'ezsysinfonavigationpart',
+                "params" => array( ),
+                'name' => 'Roles & Policies',
+                'title' => 'Roles & Policies report',
+                'description' => 'Definition of all Roles & Policies in a format friendly to backups' ),
 
         )
     );

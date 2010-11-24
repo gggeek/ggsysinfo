@@ -7,8 +7,7 @@ generic tasks:
 
 reports views:
 - add a cache to class report page
-- add workflow report
-- add roles & policies report
+- add workflows report
 - add obj states / sections report?
 - allow to sort on class id, and show it ? nb: might make the report less useful for syncing different installs
 
