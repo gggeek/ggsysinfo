@@ -6,13 +6,14 @@ generic tasks:
 - add some js to left-hand menu to be able to expand/collaps groups of views
 
 reports views:
-- add a cache to class report page
+- add a cache to report pages
 - add workflows report
-- add obj states / sections report?
+- add obj states report?
 - allow to sort on class id, and show it ? nb: might make the report less useful for syncing different installs
 
 developer views:
 - add views with list of template operators, module details, extension details
+- add a 'webservices' view listing soap, ezjscore ang ggws services
 - add a form to test invoking views directly
 - add error msgs when bad param received
 - find a way to add link to docs for stuff provided by extensions
@@ -70,6 +71,9 @@ qa views:
 - allow hooking of new tests via ini files
 
 - take over template of the 'setup/extensions' page, and add links to extension docs (if any found): readme, changelogs, install etc
+- take over template of the 'setup/sections' page, add nr. of objects per section
+- take over template of the 'setup/workflows' page, add nr. of workflows per group
+- take over template of the 'setup/classes' page, add nr. of classes per group
 
 - ...
 - profit!
