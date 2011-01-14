@@ -4,6 +4,7 @@ generic tasks:
 - move to a saner security configuration
   . use own policies instead of system ones ?
 - add some js to left-hand menu to be able to expand/collaps groups of views
+- add a new view(/views) for security related checks, see eg. here: http://piwik.org/security/
 
 reports views:
 - add a cache to report pages
@@ -74,6 +75,7 @@ qa views:
 - take over template of the 'setup/sections' page, add nr. of objects per section
 - take over template of the 'setup/workflows' page, add nr. of workflows per group
 - take over template of the 'setup/classes' page, add nr. of classes per group
+- take over template of the 'setup/ini files' page, add links to online docs
 
 - ...
 - profit!
