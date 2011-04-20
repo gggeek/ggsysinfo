@@ -91,7 +91,7 @@
                     {* @todo this really depends on an ini setting... *}
                     <a href={concat('/geshi/highlight/kernel/',$details['module'],'/',$details['script'])|ezurl}>local</a>
                 {else}
-                    <a href={concat('/geshi/highlight/extension/',$details['extension'],'/',$details['module'],'/',$details['script'])|ezurl}>local</a>
+                    <a href={concat('/geshi/highlight/extension/',$details['extension'],'/modules/',$details['module'],'/',$details['script'])|ezurl}>local</a>
                 {/if}
             {else}
                 {if $native}<a href="{concat($basedoxurl,$details['module'],'/',$details['script'])}">github</a>{/if}
