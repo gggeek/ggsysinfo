@@ -25,6 +25,7 @@ if ( !in_array( "sysinfo/$view", $ini->variable( 'RoleSettings', 'PolicyOmitList
     }
 }
 
+include_once( 'kernel/common/i18n.php' );
 require_once( "kernel/common/template.php" );
 $tpl = templateInit();
 $tpl->setVariable( 'title', sysinfoModule::viewTitle( $view ) );
