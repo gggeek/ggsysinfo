@@ -289,11 +289,11 @@ class sysinfoModule{
         {
             $operatorValue = 'mmcache';
         }*/
-        else if ( extension_loaded( "eAccelerator" ) )
+        if ( extension_loaded( "eAccelerator" ) )
         {
             self::$view_groups['PHP']['eaccelerator']['disabled'] = false;
         }
-        else if ( extension_loaded( "apc" ) )
+        if ( extension_loaded( "apc" ) )
         {
              self::$view_groups['PHP']['apc']['disabled'] = false;
         }
@@ -301,11 +301,11 @@ class sysinfoModule{
         {
             $operatorValue = 'performancesuite';
         }*/
-        else if ( extension_loaded( "xcache" ) )
+        if ( extension_loaded( "xcache" ) )
         {
             self::$view_groups['PHP']['xcache']['disabled'] = false;
         }
-        else if ( extension_loaded( "wincache" ) )
+        if ( extension_loaded( "wincache" ) )
         {
              self::$view_groups['PHP']['wincache']['disabled'] = false;
         }
