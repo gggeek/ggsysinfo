@@ -63,7 +63,7 @@
 		<td>
 			{$details['count']}
 		</td>
-		<td>
+		<td style="text-align: right;">
 			{$details['size']}
 		</td>
 	</tr>
