@@ -465,7 +465,7 @@ if (isset($MYREQUEST['IMG']))
 	}
 	header("Content-type: image/png");
 	imagepng($image);
-	exit;
+	//exit;
 }
 
 // sortable table header in "scripts for this host" view
