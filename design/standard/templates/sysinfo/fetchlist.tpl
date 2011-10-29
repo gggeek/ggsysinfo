@@ -59,7 +59,7 @@
      $native     = false()
      $basedocurl = concat(ezini('GeneralSettings', 'DocRoot', 'sysinfo.ini').fetches,'/')
      $docsuffix  = ezini('GeneralSettings', 'PageSuffix', 'sysinfo.ini')
-     $basedoxurl = concat('http://github.com/ezsystems/ezpublish/tree/',$sdkversion,'/')}
+     $basedoxurl = concat(ezini('GeneralSettings', 'DocRoot', 'sysinfo.ini').sourcecode,$sdkversion,'/')}
 {foreach $fetchlist as $fetch => $details sequence array( 'bglight', 'bgdark') as $style}
     {set $native = eq($details['extension'], '')}
     <tr class="{$style}">

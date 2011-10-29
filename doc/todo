@@ -15,6 +15,7 @@ reports views:
 developer views:
 - add views with list of template operators, module details, extension details
 - add a 'webservices' view listing soap, ezjscore ang ggws services
+- add an extended attr. filters view?
 - add a form to test invoking views directly
 - add error msgs when bad param received
 - find a way to add link to docs for stuff provided by extensions
@@ -25,7 +26,7 @@ accelerator views:
 - update apc/xcache/eacc control panels to their latest (svn?) code
 - add support for wincache images in fastcgi non-rewritten mode
 - test images for eacc/xache/apc in both standard and vhost mode
-- add support for Zend PS, ioncube accelerator, Turck MMCache
+- add support for Zend Optimizer+, ioncube accelerator, Turck MMCache => For Zend, use a call to  accelerator_get_status()
 
 cache views:
 - add a button in churn view to force regeneration of graph on demand
@@ -70,6 +71,7 @@ qa views:
 - check for non-utf8 start tags template files
 - move all of the tests in an external extension?
 - allow hooking of new tests via ini files
+- test for templates in override dirs that have no override rule
 
 - take over template of the 'setup/extensions' page, and add links to extension docs (if any found): readme, changelogs, install etc
 - take over template of the 'setup/sections' page, add nr. of objects per section
