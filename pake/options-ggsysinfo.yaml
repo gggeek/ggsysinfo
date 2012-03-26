@@ -1,0 +1,24 @@
+extension:
+    name: ggwebservices
+
+version:
+    major: 0
+    minor: 11
+    release: 3
+
+ezp:
+    version:
+        major: 4
+        minor: 4
+        release: 0
+
+git:
+    url: https://gggeek@github.com/gggeek/ggwebservices.git
+
+create:
+    tarball: no
+    zip: yes
+    doxygen_doc: yes
+
+releasenr:
+    separator: .
