@@ -3,8 +3,20 @@ generic tasks:
 - rebase info retrieval on ezsnmpd
 - move to a saner security configuration
   . use own policies instead of system ones ?
-- add some js to left-hand menu to be able to expand/collaps groups of views
+- add some js to left-hand menu to be able to expand/collapse groups of views
 - add a new view(/views) for security related checks, see eg. here: http://piwik.org/security/
+
+security view:
+- fix test for php version: use eZ http client
+- tweak warnings about post_max_size, memory_limit, upload_max_filesize
+- remove file_uploads warning
+- tone down suhosin - say that it comes with problems of its own with eZ (or remove it altogether)
+- disable session save_path test when using ezdb-based sessions or memcache (alos ping piwik)
+- add eZ-specific checks:
+  . check for access to overrides.ini.append.php via curl
+  . check for eZ version number (needs a dedicated page on share.ez.no)
+  . add a link to the check for ini files syntax
+  . try to create a file outside of vardir to check for fs access perms
 
 reports views:
 - add a cache to report pages

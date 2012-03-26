@@ -214,6 +214,13 @@ class sysinfoModule{
         ),
         'QA' => array(
 
+            'secinfo' => array(
+                //'functions' => array( 'system_info' ), - we check in the module itself
+                "script" => "genericview.php",
+                "default_navigation_part" => 'ezsysinfonavigationpart',
+                'name' => 'Security checks',
+                'description' => 'Executes tests to verify the proper configuration of the system for security-related aspects' ),
+
             'inifilesqa' => array(
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 "script" => "genericview.php",

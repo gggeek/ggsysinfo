@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests status of eZ Publish install in mlore detail than ezinfo/isalive
+ * Tests status of eZ Publish install in more detail than ezinfo/isalive
  * For every test, 1 = OK, 0 = KO and X = NA. ? = test not yet implemented
  * NB: some tests are enabled/disabled depending upon config in sysinfo.ini
  *
