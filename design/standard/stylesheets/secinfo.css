@@ -1,0 +1,15 @@
+.secinfo .message {
+    background-color: green;
+}
+
+.secinfo .notice {
+    background-color: yellow;
+}
+
+.secinfo .warning {
+    background-color: red;
+}
+
+.secinfo .error {
+    background-color: silver;
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<software>
+    <metadata>
+        <name>ggsysinfo</name>
+        <version>0.5-dev</version>
+        <copyright>Copyright (C) 2008-2012 Gaetano Giunta</copyright>
+        <license>GNU General Public License v2.0</license>
+    </metadata>
+
+    <dependencies>
+        <extends>
+        </extends>
+        <requires>
+        </requires>
+    </dependencies>
+
+</software>
