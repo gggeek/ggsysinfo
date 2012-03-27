@@ -94,7 +94,6 @@ class sysinfoModule{
                 'description' => 'Allows to search for a given string or regexp in the different cache files',
                 'disabled' => true ),
 
-
             'storagestats' => array(
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 "script" => "genericview.php",
@@ -220,6 +219,14 @@ class sysinfoModule{
                 'name' => 'Security checks',
                 'description' => 'Executes tests to verify the proper configuration of the system for security-related aspects' ),
 
+            'databaseqa' => array(
+                //'functions' => array( 'system_info' ), - we check in the module itself
+                "script" => "genericview.php",
+                "default_navigation_part" => 'ezsysinfonavigationpart',
+                'name' => 'Database problems',
+                'description' => 'Checks for common database misconfigurations',
+                'disabled' => true ),
+
             'inifilesqa' => array(
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 "script" => "genericview.php",
@@ -314,6 +321,12 @@ class sysinfoModule{
         if ( extension_loaded( "wincache" ) )
         {
              self::$view_groups['PHP']['wincache']['disabled'] = false;
+        }
+
+        $db = eZDB::instance();
+        if ( $db->databaseName() == 'mysql' )
+        {
+            self::$view_groups['QA']['databaseqa']['disabled'] = false;
         }
 
         self::$initialized = true;

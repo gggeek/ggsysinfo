@@ -40,9 +40,9 @@ accelerator views:
 - add support for Zend Optimizer+, ioncube accelerator, Turck MMCache => For Zend, use a call to  accelerator_get_status()
 
 cache views:
+- add support for clustered configs
 - add a button in churn view to force regeneration of graph on demand
 - fix churn: dates in graph are not displayed optimally for large timespans
-- add support for clustered configs
 - add cache file timestamp
 - allow cache stats page to report on enabled/disabled caches per siteaccess
 - add zoom icons on cache stats pages that bring to cache search page listing all cache files of the given type

@@ -12,6 +12,11 @@
 $format = $Params['output_format'];
 
 $testslist = sysInfoTools::runtests();
+$ezsnmpd_available = false;
+if ( in_array( 'ezsnmpd', eZExtension::activeExtensions() ) )
+{
+    $ezsnmpd_available = true;
+}
 
 if ( $format == 'plaintext' )
 {
@@ -21,5 +26,6 @@ if ( $format == 'plaintext' )
 else
 {
     $tpl->setVariable( 'testslist', $testslist );
+    $tpl->setVariable( 'ezsnmpd_available', $ezsnmpd_available );
 }
 ?>
