@@ -74,6 +74,10 @@
 {/foreach}
 </table>
 
+{if $ezsnmpd_available}
+    See also the <a href={'snmp/mib/html'|ezurl}>eZSNMPd extension</a> for more status tests
+{/if}
+
 {*
 <div class="context-toolbar">
 {include name=navigator
