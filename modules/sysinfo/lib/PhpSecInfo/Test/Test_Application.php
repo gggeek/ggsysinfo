@@ -36,22 +36,12 @@ class PhpSecInfo_Test_Application extends PhpSecInfo_Test
 	 * @return boolean
 	 */
 	function isTestable() {
-////		return Piwik_Http::getTransportMethod() !== null;
 	    return true;
 
 	}
 
+    /// @todo add a "more info" page for every eZ-related test
 	function getMoreInfoURL() {
-		$urls = array(
-////			'Piwik' => 'http://piwik.org/changelog',
-            'ggSysInfo' => 'http://projects.ez.no/ggsysinfo',
-			'PHP' => 'http://php.net/',
-		);
-
-		if ($tn = $this->getTestName()) {
-			return $urls[$tn];
-		} else {
-			return false;
-		}
+		return false;
 	}
 }

@@ -9,7 +9,7 @@
 /**
  * require the PhpSecInfo_Test_Application class
  */
-require_once(PHPSECINFO_BASE_DIR.'/Test/Test_Application.php');
+require_once(PHPSECINFO_BASE_DIR.'/Test/Test_Core.php');
 
 /**
  * Test class for PHP application
@@ -19,9 +19,9 @@ require_once(PHPSECINFO_BASE_DIR.'/Test/Test_Application.php');
  * @package PhpSecInfo
  * @author Piwik
  */
-class PhpSecInfo_Test_Application_Php extends PhpSecInfo_Test_Application
+class PhpSecInfo_Test_Core_Php_Version extends PhpSecInfo_Test_Core
 {
-	var $test_name = "PHP";
+	var $test_name = "php_version";
 
 	var $recommended_value = null;
 
@@ -65,4 +65,8 @@ class PhpSecInfo_Test_Application_Php extends PhpSecInfo_Test_Application
 		$this->setMessageForResult(PHPSECINFO_TEST_RESULT_WARN, 'en', "You are running PHP ".$this->current_value." which is really old. We recommend running the latest (stable) version of PHP which includes numerous bug fixes and security fixes.");
 		$this->setMessageForResult(PHPSECINFO_TEST_RESULT_ERROR, 'en', "Unable to determine the latest version of PHP available.");
 	}
+
+    function getMoreInfoURL() {
+        return 'http://www.php.net';
+    }
 }
