@@ -2,8 +2,7 @@
 /**
  *
  * @author G. Giunta
- * @version $Id: infoxcache.php 41 2010-05-09 14:26:35Z gg $
- * @copyright (C) G. Giunta 2008-2010
+ * @copyright (C) G. Giunta 2008-2012
  * @license Licensed under GNU General Public License v2.0. See file license.txt
  */
 

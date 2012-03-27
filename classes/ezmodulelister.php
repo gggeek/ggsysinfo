@@ -4,8 +4,8 @@
  * Copied here from ezwebservicesapi and renamed to avoid clashes
  *
  * @author G. Giunta
- * @version $Id: ggezwebservicesclient.php 102 2009-09-02 09:03:34Z gg $
- * @copyright (C) G. Giunta 2010
+ * @copyright (C) G. Giunta 2010-2012
+ * @license Licensed under GNU General Public License v2.0. See file license.txt
  */
 
 class eZModuleLister

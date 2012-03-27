@@ -2,8 +2,7 @@
 /**
  * List all existing fetch functions (optionally, in a given module)
  * @author G. Giunta
- * @version $Id: cachestats.php 18 2010-04-17 14:29:21Z gg $
- * @copyright (C) G. Giunta 2010
+ * @copyright (C) G. Giunta 2010-2012
  * @license Licensed under GNU General Public License v2.0. See file license.txt
  *
  */

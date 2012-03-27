@@ -3,8 +3,7 @@
  * Create a graph of files-per-minute by analyzing storage.log
  *
  * @author G. Giunta
- * @version $Id$
- * @copyright (C) G. Giunta 2008-2010
+ * @copyright (C) G. Giunta 2008-2012
  * @license Licensed under GNU General Public License v2.0. See file license.txt
  *
  * @todo add support for user-selected start and end date

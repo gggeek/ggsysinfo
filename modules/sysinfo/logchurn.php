@@ -3,8 +3,7 @@
  * Create a graph of messages-per-minute by analyzing error logs
  *
  * @author G. Giunta
- * @version $Id: storagechurn.php 43 2010-05-09 23:13:22Z gg $
- * @copyright (C) G. Giunta 2008-2010
+ * @copyright (C) G. Giunta 2008-2012
  * @license Licensed under GNU General Public License v2.0. See file license.txt
  *
  * @todo add support for user-selected start and end date

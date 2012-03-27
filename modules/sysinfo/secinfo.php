@@ -3,12 +3,11 @@
  * Tests security of eZ Publish install. Based on phpsecinfo tests
  *
  * @author G. Giunta
- * @version $Id: systemstatus.php 91 2010-10-29 20:39:45Z gg $
  * @copyright (C) G. Giunta 2008-2012
  * @license Licensed under GNU General Public License v2.0. See file license.txt
 */
 
-$psi = new PhpSecInfo( /*array( 'view_directory' => 'extension/ggsysinfo/modules/sysinfo/lib/' )*/ );
+$psi = new PhpSecInfo();
 $psi->loadAndRun();
 $results = $psi->getResultsAsArray();
 
