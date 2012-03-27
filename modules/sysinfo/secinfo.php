@@ -12,9 +12,8 @@ $psi->loadAndRun();
 $results = $psi->getResultsAsArray();
 
 // suppress unwanted results
-//unset( $results['test_results']['Core']['memory_limit'] );
-//unset( $results['test_results']['Core']['post_max_size'] );
-//unset( $results['test_results']['Core']['upload_max_filesize'] );
+unset( $results['test_results']['Suhosin'] );
+unset( $results['test_results']['Core']['file_uploads'] );
 
 $tpl->setVariable( 'results', $results );
 

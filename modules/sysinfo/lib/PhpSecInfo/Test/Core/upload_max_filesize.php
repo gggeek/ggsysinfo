@@ -15,7 +15,7 @@ require_once(PHPSECINFO_BASE_DIR.'/Test/Test_Core.php');
  * The max recommended size for the upload_max_filesize setting, in bytes
  *
  */
-define ('PHPSECINFO_UPLOAD_MAXLIMIT', 1024*256);
+define ('PHPSECINFO_UPLOAD_MAXLIMIT', 1024*1024*4); // for editors, a 4MB image/video is not too big
 
 
 /**

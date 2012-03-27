@@ -18,7 +18,7 @@ require_once(PHPSECINFO_BASE_DIR.'/Test/Test_Core.php');
  * The max recommended size for the memory_limit setting, in bytes
  *
  */
-define ('PHPSECINFO_MEMORY_LIMIT', 8*1024*1024);
+define ('PHPSECINFO_MEMORY_LIMIT', 64*1024*1024); // set to 64mb according to ez install doc
 
 /**
  * Test Class for memory_limit setting
