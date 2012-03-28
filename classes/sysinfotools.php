@@ -174,6 +174,25 @@ class sysInfoTools
                     $status_tests['cluster db'] = 1;
             }
         }
+        else if ( $handler == 'eZDFSFileHandler' )
+        {
+            // This is even worse: we have no right to know if db connection is ok.
+            // So we replicate some code here...
+            $dbbackend = eZExtension::getHandlerClass(
+                new ezpExtensionOptions(
+                array( 'iniFile'     => 'file.ini',
+                       'iniSection'  => 'eZDFSClusteringSettings',
+                       'iniVariable' => 'DBBackend' ) ) );
+            try
+            {
+                $dbbackend->_connect();
+                $status_tests['cluster db'] = 1;
+            }
+            catch ( exception $e )
+            {
+
+            }
+        }
         else
         {
             $status_tests['cluster db'] = 'X';
