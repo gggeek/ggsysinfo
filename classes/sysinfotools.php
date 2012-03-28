@@ -395,5 +395,15 @@ class sysInfoTools
         return false;
     }
 
+    static function ezgeshiAvailable()
+    {
+        if ( in_array( 'ezsh', eZExtension::activeExtensions() ) )
+        {
+            $info = eZExtension::extensionInfo( 'ezsh' );
+            return ( version_compare( $info['Version'], '1.3' ) >= 0 || version_compare( $info['version'], '1.3' ) >= 0 );
+        }
+        return false;
+    }
+
 }
 ?>

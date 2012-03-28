@@ -203,13 +203,15 @@ class sysinfoModule{
             'name' => 'Fetch functions list',
             'description' => 'List of all module fetch functions' ),
 
-/*'operatorlist'] = array(
-   //'functions' => array( 'system_info' ), - we check in the module itself
-   "script" => "operatorlist.php",
-   "default_navigation_part" => 'ezsysinfonavigationpart',
-   "params" => array( ) );*/
-
+        'operatorlist' => array(
+           //'functions' => array( 'system_info' ), - we check in the module itself
+           "script" => "genericview.php",
+           "default_navigation_part" => 'ezsysinfonavigationpart',
+           "params" => array(  'extensionname' ),
+            'name' => 'Template Operators list',
+            'description' => 'List of all template operators' ),
         ),
+
         'QA' => array(
 
             'secinfo' => array(
@@ -249,6 +251,7 @@ class sysinfoModule{
                 'description' => 'Checks for all php files found the presence of opening and closing php tags' ),
 
         ),
+
         'Reports' => array(
 
             'classesreport' => array(

@@ -59,12 +59,7 @@ if ( $Params['modulename'] != '' )
     $extra_path = $Params['modulename'];
 }
 
-$ezgeshi_available = false;
-if ( in_array( 'ezsh', eZExtension::activeExtensions() ) )
-{
-    $info = eZExtension::extensionInfo( 'ezsh' );
-    $ezgeshi_available = ( version_compare( $info['Version'], '1.3' ) >= 0 );
-}
+$ezgeshi_available = sysInfoTools::ezgeshiAvailable();
 
 $tpl->setVariable( 'title', $title );
 $tpl->setVariable( 'viewlist', $viewList );

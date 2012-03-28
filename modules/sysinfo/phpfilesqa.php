@@ -6,12 +6,7 @@
  */
 
 $warnings = phpChecker::checkFileContents();
-$ezgeshi_available = false;
-if ( in_array( 'ezsh', eZExtension::activeExtensions() ) )
-{
-    $info = eZExtension::extensionInfo( 'ezsh' );
-    $ezgeshi_available = ( version_compare( $info['Version'], '1.3' ) >= 0 );
-}
+$ezgeshi_available = sysInfoTools::ezgeshiAvailable();
 
 $tpl->setVariable( 'warnings', $warnings );
 $tpl->setVariable( 'ezgeshi_available', $ezgeshi_available );
