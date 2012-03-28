@@ -13,7 +13,7 @@ ezp:
         release: 7
 
 git:
-    url: https://gggeek@github.com/gggeek/ggsysinfo.git
+    url: https://github.com/gggeek/ggsysinfo.git
 
 create:
     tarball: no
