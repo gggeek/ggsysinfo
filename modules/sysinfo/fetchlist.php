@@ -30,7 +30,7 @@ if ( $Params['modulename'] != '' && !array_key_exists( $Params['modulename'], $m
 else
 {
 
-    $classes = false;
+    $classes = sysInfoTools::autoloadClasses();
     foreach( $modules as $modulename => $path )
     {
         if ( $Params['modulename'] == '' || $Params['modulename'] == $modulename )
@@ -51,25 +51,13 @@ else
                     // if fetch is done via class method and file to be included misses, calculate it using autoload
                     if ( isset( $fetch['call_method']['class'] ) && !isset($fetch['call_method']['include_file'] ) )
                     {
-                        if ( !is_array( $classes ) )
-                        {
-                            $classes = include( 'autoload/ezp_kernel.php');
-                        }
                         if ( isset( $classes[$fetch['call_method']['class']] ) )
                         {
                             $fetch['call_method']['include_file'] = $classes[$fetch['call_method']['class']];
                         }
                         else
                         {
-                            $classes = include( 'var/autoload/ezp_extension.php');
-                            if ( isset( $classes[$fetch['call_method']['class']] ) )
-                            {
-                                $fetch['call_method']['include_file'] = $classes[$fetch['call_method']['class']];
-                            }
-                            else
-                            {
-                                eZDebug::writeWarning( 'Cannot find in kernel autoloads php file for class ' . $fetch['call_method']['class'], __METHOD__ );
-                            }
+                            eZDebug::writeWarning( 'Cannot find in autoloads php file for class ' . $fetch['call_method']['class'], __METHOD__ );
                         }
                     }
                     $fetchList[$fetchname . '_' . $modulename] = $fetch;

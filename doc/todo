@@ -24,7 +24,9 @@ reports views:
 - allow to sort on class id, and show it ? nb: might make the report less useful for syncing different installs
 
 developer views:
-- add views with list of template operators, module details, extension details
+- add views with list of module details, extension details
+- template operators view: add params also for thpes ops that don't use namedParametersPerOperator
+- template operators view: add links to online docs for kernel ops (needs an url-decoding table)
 - add a 'webservices' view listing soap, ezjscore ang ggws services
 - add an extended attr. filters view?
 - add a form to test invoking views directly

@@ -400,10 +400,36 @@ class sysInfoTools
         if ( in_array( 'ezsh', eZExtension::activeExtensions() ) )
         {
             $info = eZExtension::extensionInfo( 'ezsh' );
-            return ( version_compare( $info['Version'], '1.3' ) >= 0 || version_compare( $info['version'], '1.3' ) >= 0 );
+            // since ezp 4.4, we have a lowercase version info
+            return ( version_compare( @$info['Version'], '1.3' ) >= 0 || version_compare( @$info['version'], '1.3' ) >= 0 );
         }
         return false;
     }
 
+    /**
+    * Return arry of all php classes registered for autoload.
+    * Class ezpAutoloader does not help us here...
+    */
+    static function autoloadClasses()
+    {
+        if ( !is_array( self::$ezpClasses ) )
+        {
+            self::$ezpClasses = include 'autoload/ezp_kernel.php';
+            if ( file_exists( 'var/autoload/ezp_extension.php' ) )
+            {
+                self::$ezpClasses = array_merge( self::$ezpClasses, include 'var/autoload/ezp_extension.php' );
+            }
+            if ( defined( 'EZP_AUTOLOAD_ALLOW_KERNEL_OVERRIDE' ) and EZP_AUTOLOAD_ALLOW_KERNEL_OVERRIDE )
+            {
+                if ( $ezpKernelOverrideClasses = include 'var/autoload/ezp_override.php' )
+                {
+                    self::$ezpClasses = array_merge( self::$ezpClasses, $ezpKernelOverrideClasses );
+                }
+            }
+        }
+        return self::$ezpClasses;
+    }
+
+    static $ezpClasses = false;
 }
 ?>
