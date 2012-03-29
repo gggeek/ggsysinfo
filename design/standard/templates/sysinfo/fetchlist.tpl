@@ -86,7 +86,7 @@
                 {if $ezgeshi_available}
                     <a href={concat('/geshi/highlight/',$callmethod['include_file'])|ezurl}>local</a>
                 {else}
-                    {if $native}<a href="{concat($basedoxurl,$callmethod['include_file']|urlencode())}">github</a>{/if}
+                    {if and($native, $source_available)}<a href="{concat($basedoxurl,$callmethod['include_file']|urlencode())}">github</a>{/if}
                 {/if}
             {/if}
         </td>

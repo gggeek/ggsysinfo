@@ -91,7 +91,7 @@
                     <a href={concat('/geshi/highlight/extension/',$details['extension'],'/modules/',$module,'/module.php')|ezurl}>local</a>
                 {/if}
             {else}
-                {if $native}<a href="{concat($basedoxurl,$module,'/module.php')}">github</a>{/if}
+                {if and($native, $source_available)}<a href="{concat($basedoxurl,$module,'/module.php')}">github</a>{/if}
             {/if}
         </td>
         <td>

@@ -47,7 +47,8 @@ else
                 'script' => $operatorDef['script'],
                 'class' => $operatorDef['class'],
                 'extension' => $extension,
-                'params' => $tpl->operatorParameterList( $opName )
+                'params' => $tpl->operatorParameterList( $opName ),
+                'doc_folders' => sysInfoTools::operatorDocFolders( $opName )
             );
         }
     }
@@ -67,5 +68,6 @@ $tpl->setVariable( 'title', $title );
 $tpl->setVariable( 'operatorlist', $operatorList );
 $tpl->setVariable( 'sdkversion', eZPublishSDK::version() );
 $tpl->setVariable( 'ezgeshi_available', $ezgeshi_available );
+$tpl->setVariable( 'source_available', sysInfoTools::sourceCodeAvailable( eZPublishSDK::version() ) );
 
 ?>

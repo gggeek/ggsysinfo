@@ -52,13 +52,13 @@
         <th>{'Parameters'|i18n( 'SysInfo')}</th>
         <th>{'Class'|i18n( 'SysInfo')}</th>
         <th>{'Source'|i18n( 'SysInfo')}</th>
-        {*<th>{'Help'|i18n( 'SysInfo')}</th>*}
+        <th>{'Help'|i18n( 'SysInfo')}</th>
     </tr>
 {def $native     = false()
      $id         = 0
-     $basedocurl = concat(ezini('GeneralSettings', 'DocRoot', 'sysinfo.ini').fetches,'/')
+     $basedocurl = concat(ezini('GeneralSettings', 'DocRoot', 'sysinfo.ini').operators,'/')
      $docsuffix  = ezini('GeneralSettings', 'PageSuffix', 'sysinfo.ini')
-     $basedoxurl = concat(ezini('GeneralSettings', 'DocRoot', 'sysinfo.ini').sourcecode,$sdkversion,'/kernel/')}
+     $basedoxurl = concat(ezini('GeneralSettings', 'DocRoot', 'sysinfo.ini').sourcecode, $sdkversion, '/' )}
 {foreach $operatorlist as $operator => $details sequence array( 'bglight', 'bgdark') as $style}
     {set $native = eq($details['extension'], '')}
     <tr class="{$style}">
@@ -79,12 +79,12 @@
             {if $ezgeshi_available}
                 <a href={concat('/geshi/highlight/', $details['script'])|ezurl}>local</a>
             {else}
-                {if $native}<a href="{concat($basedoxurl,$details['script'])}">github</a>{/if}
+                {if and($native, $source_available)}<a href="{concat($basedoxurl,$details['script'])}">github</a>{/if}
             {/if}
         </td>
-        {*<td>
-            {if $native}<a href="{concat($basedocurl,$details['module'],'/Views/',$details['name'],$docsuffix)}">ez.no</a>{/if}
-        </td>*}
+        <td>
+            {foreach $details.doc_folders as $folder}<a href="{concat($basedocurl,$folder,'/',$operator,$docsuffix)}" title="{$folder|wash()}">ez.no</a>{delimiter}<br/>{/delimiter}{/foreach}
+        </td>
     </tr>
 {/foreach}
 </table>

@@ -81,7 +81,7 @@
                 {* @todo this really depends on an ini setting... *}
                 <a href={concat('/geshi/highlight/',$details.default_call_method.include_file)|ezurl}>local</a>
             {else}
-                {if $native}<a href="{concat($basedoxurl,$details.default_call_method.include_file)}">github</a>{/if}
+                {if and($native, $source_available)}<a href="{concat($basedoxurl,$details.default_call_method.include_file)}">github</a>{/if}
             {/if}
         </td>
     </tr>

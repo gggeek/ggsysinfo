@@ -397,6 +397,7 @@ class sysInfoTools
 
     static function ezgeshiAvailable()
     {
+        return false;
         if ( in_array( 'ezsh', eZExtension::activeExtensions() ) )
         {
             $info = eZExtension::extensionInfo( 'ezsh' );
@@ -428,6 +429,53 @@ class sysInfoTools
             }
         }
         return self::$ezpClasses;
+    }
+
+    /**
+    * Returns true for eZP versions which have a known github tag
+    * @param string $version
+    * @return boolean
+    */
+    static function sourceCodeAvailable( $version )
+    {
+        $ini = eZINI::instance( 'sysinfo.ini' );
+        $excluded = $ini->variable( 'GeneralSettings', 'MissingSourceVersions' );
+        // exclude CP installs, as there is no online tag for those
+        $majorversion = explode( '.', $version );
+        $majorversion = $majorversion[0];
+        return ( !in_array( $version, $excluded ) && $majorversion < 2011 );
+    }
+
+    /**
+    * Given a (known) tpl operator name, returns its subfolder in the online docs
+    * @param string $version
+    * @return array or false
+    *
+    * @todo move list to ini ?
+    */
+    static function operatorDocFolders( $operator )
+    {
+        $out = false;
+        $folders = array(
+            'Arrays' => array( 'append', 'array', 'array_sum', 'begins_with', 'compare', 'contains', 'ends_with', 'explode', 'extract', 'extract_left', 'extract_right', 'hash', 'implode', 'insert', 'merge', 'prepend', 'remove', 'repeat', 'replace', 'reverse', 'unique' ),
+            'Data-and-information-extraction' => array( 'currentdate', 'ezhttp', 'ezhttp_hasvariable', 'ezini', 'ezini_hasvariable', 'ezmodule', 'ezpreference', 'ezsys', 'fetch', 'module_params' ),
+            'Formatting-and-internationalization' => array( 'd18n', 'datetime', 'i18n', 'l10n', 'si' ),
+            'Images' => array( 'image', 'imagefile', 'texttoimage' ),
+            'Logical-operations' => array( 'and', 'choose', 'cond', 'eq', 'false', 'first_set', 'ge', 'gt', 'le', 'lt', 'ne', 'not', 'null', 'or', 'true' ),
+            'Matemathics' => array( 'abs', 'ceil', 'dec', 'div', 'floor', 'inc', 'max', 'min', 'mod', 'mul', 'rand', 'round', 'sub', 'sum' ),
+            'Miscellaneous' => array( 'action_icon', 'attribute', 'classgroup_icon', 'class_icon', 'content_structure_tree', 'ezpackage', 'flag_icon', 'gettime', 'icon_info', 'makedate', 'maketime', 'mimetype_icon', 'month_overview', 'pdf', 'roman', 'topmenu', 'treemenu' ),
+            'Strings' => array( 'append', 'autolink', 'begins_with', 'break', 'chr', 'compare', 'concat', 'contains', 'count_chars', 'count_words', 'crc32', 'downcase', 'ends_with', 'explode', 'extract', 'extract_left', 'extract_right', 'indent', 'insert', 'md5', 'nl2br', 'ord', 'pad', 'prepend', 'remove', 'repeat', 'replace', 'reverse', 'rot13', 'shorten', 'simpletags', 'simplify', 'trim', 'upcase', 'upfirst', 'upword', 'wash', 'wordtoimage', 'wrap' ),
+            'URLs' => array( 'exturl', 'ezdesign', 'ezimage', 'ezroot', 'ezurl' ),
+            'Variable-and-type-handling' => array('count', 'float', 'get_class', 'get_type', 'int', 'is_array', 'is_boolean', 'is_class', 'is_float', 'is_integer', 'is_null', 'is_numeric', 'is_object', 'is_set', 'is_string', 'is_unset' )
+        );
+        foreach ( $folders as $fname => $folder )
+        {
+            if ( in_array( $operator, $folder ) )
+            {
+                $out[] = $fname;
+            }
+        }
+        return $out;
     }
 
     static $ezpClasses = false;

@@ -83,5 +83,6 @@ $tpl->setVariable( 'title', $title );
 $tpl->setVariable( 'fetchlist', $fetchList );
 $tpl->setVariable( 'sdkversion', eZPublishSDK::version() );
 $tpl->setVariable( 'ezgeshi_available', $ezgeshi_available );
+$tpl->setVariable( 'source_available', sysInfoTools::sourceCodeAvailable( eZPublishSDK::version() ) );
 
 ?>
