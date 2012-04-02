@@ -146,13 +146,13 @@ class sysInfoTools
         $status_tests = array(
             'db' => '0',
             'cluster db' => '0',
-            'ldap server' => '0',
+			'ldap server' => '0',
             'web access' => '0',
 			'ezfind' => '0',
             'mail' => '0',
             //'ez soap' => '?',
             //'ez webdav' => '?'
-            );
+        );
 
         $db = eZDB::instance();
         if ( $db->isConnected() === true )
