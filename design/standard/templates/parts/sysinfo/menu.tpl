@@ -13,8 +13,8 @@
     {* DESIGN: Content START *}<div class="box-bc"><div class="box-ml"><div class="box-mr"><div class="box-bl"><div class="box-br"><div class="box-content">
     <ul>
     {foreach $exts as $i => $ext}
-        {if $ext.hidden|not()}
-        <li><div>{if $ext.disabled}<span class="disabled">{$ext.name}</span>{else}<a href={concat($prefix, 'sysinfo/', $i)|ezurl()}>{$ext.name}</a>{/if}</div></li>
+        {if or(and(is_set($ext.hidden),$ext.hidden|not()),is_set($ext.hidden)|not())}
+        <li><div>{if and(is_set($ext.disabled),$ext.disabled)}<span class="disabled">{$ext.name}</span>{else}<a href={concat($prefix, 'sysinfo/', $i)|ezurl()}>{$ext.name}</a>{/if}</div></li>
         {/if}
     {/foreach}
     </ul>
