@@ -148,7 +148,7 @@ class sysInfoTools
             'cluster db' => '0',
             'ldap server' => '0',
             'web access' => '0',
-			'ezfind' => '0',
+            'ezfind' => '0',
             'mail' => '0',
             //'ez soap' => '?',
             //'ez webdav' => '?'
@@ -198,24 +198,23 @@ class sysInfoTools
             $status_tests['cluster db'] = 'X';
         }
 
-	if ( in_array( 'ezfind', eZExtension::activeExtensions())  ){
-		 $ini = eZINI::instance( 'solr.ini' );
-		 $ezfinpingurl = $ini->variable( 'SolrBase', 'SearchServerURI' )."/admin/ping";
-		 $data = eZHTTPTool::getDataByURL( $ezfinpingurl, false );
-           		 $pos2 = stripos($data, '<str name="status">OK</str>');
-	if ($pos2 !== false)
-             {
+        if ( in_array( 'ezfind', eZExtension::activeExtensions() )  )
+        {
+            $ini = eZINI::instance( 'solr.ini' );
+            $ezfinpingurl = $ini->variable( 'SolrBase', 'SearchServerURI' )."/admin/ping";
+            $data = eZHTTPTool::getDataByURL( $ezfinpingurl, false );
+            $pos2 = stripos($data, '<str name="status">OK</str>');
+            if ( $pos2 !== false )
+            {
                 $status_tests['ezfind'] = '1';
-             }else{
-				$status_tests['ezfind'] = '0';
-			 }
+            }else{
+                $status_tests['ezfind'] = '0';
+            }
         }
         else
         {
            $status_tests['ezfind'] = 'X';
         }
-
-
 
         $ini = eZINI::instance( 'ldap.ini' );
         if ( $ini->variable( 'LDAPSettings', 'LDAPEnabled' ) == 'true' && $ini->variable( 'LDAPSettings', 'LDAPServer' ) != '' )
