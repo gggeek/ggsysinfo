@@ -24,9 +24,9 @@
         <th>Description</th>
     </tr>
     {foreach $exts as $i => $ext sequence array( 'bglight', 'bgdark') as $style}
-        {if $ext.hidden|not()}
+        {if or(and(is_set($ext.hidden),$ext.hidden|not()),is_set($ext.hidden)|not())}
         <tr class="{$style}">
-            <td>{if $ext.disabled}{$ext.name}{else}<a href={concat($prefix, 'sysinfo/', $i)|ezurl()}>{$ext.name}</a>{/if}</td>
+            <td>{if and(is_set($ext.disabled),$ext.disabled)}{$ext.name}{else}<a href={concat($prefix, 'sysinfo/', $i)|ezurl()}>{$ext.name}</a>{/if}</td>
             <td>{$ext.description}</td>
         </tr>
         {/if}
