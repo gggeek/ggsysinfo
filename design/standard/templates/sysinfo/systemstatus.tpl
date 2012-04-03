@@ -76,6 +76,8 @@
 
 {if $ezsnmpd_available}
     See also the <a href={'snmp/mib/html'|ezurl}>eZSNMPd extension</a> for more status tests
+{else}
+    You can also install the <a href="http://projects.ez.no/ezsnmpd">eZSNMPd extension</a> for more status tests
 {/if}
 
 {*
