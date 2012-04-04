@@ -22,13 +22,21 @@ foreach ( $cacheList as $cacheItem )
         // take care: this is hardcoded from knowledge of cache structure...
         if ( $cacheItem['path'] == 'var/cache/ini' )
         {
-            $cacheFilesList[$cacheItem['name']]['count'] = sysInfoTools::countFilesInDir( eZSys::siteDir() . '/' . $cacheItem['path'] );
-            $cacheFilesList[$cacheItem['name']]['size'] = number_format( sysInfoTools::countFilesSizeInDir( eZSys::siteDir() . '/' . $cacheItem['path'] ) );
+            $cachedir = eZSys::siteDir() . '/' . $cacheItem['path'];
         }
         else
         {
-            $cacheFilesList[$cacheItem['name']]['count'] = sysInfoTools::countFilesInDir( eZSys::cacheDirectory() . '/' . $cacheItem['path'] );
-            $cacheFilesList[$cacheItem['name']]['size'] = number_format( sysInfoTools::countFilesSizeInDir( eZSys::cacheDirectory() . '/' . $cacheItem['path'] ) );
+            $cachedir = eZSys::cacheDirectory() . '/' . $cacheItem['path'];
+        }
+        $count = sysInfoTools::countFilesInDir( $cachedir );
+        $cacheFilesList[$cacheItem['name']]['count'] = $count;
+        if ( $count )
+        {
+            $cacheFilesList[$cacheItem['name']]['size'] = number_format( sysInfoTools::countFilesSizeInDir( $cachedir ) );
+        }
+        else
+        {
+            $cacheFilesList[$cacheItem['name']]['size'] = "";
         }
     }
 }
