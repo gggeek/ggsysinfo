@@ -198,7 +198,7 @@ class sysInfoTools
             $status_tests['cluster db'] = 'X';
         }
 
-        if ( in_array( 'ezfind', eZExtension::activeExtensions() )  )
+        if ( in_array( 'ezfind', eZExtension::activeExtensions() ) )
         {
             $ini = eZINI::instance( 'solr.ini' );
             $ezfinpingurl = $ini->variable( 'SolrBase', 'SearchServerURI' )."/admin/ping";
@@ -207,7 +207,9 @@ class sysInfoTools
             if ( $pos2 !== false )
             {
                 $status_tests['ezfind'] = '1';
-            }else{
+            }
+            else
+            {
                 $status_tests['ezfind'] = '0';
             }
         }
@@ -219,30 +221,33 @@ class sysInfoTools
         $ini = eZINI::instance( 'ldap.ini' );
         if ( $ini->variable( 'LDAPSettings', 'LDAPEnabled' ) == 'true' && $ini->variable( 'LDAPSettings', 'LDAPServer' ) != '' )
         {
-            // code copied over ezldapuser class...
-
-            $LDAPVersion = $ini->variable( 'LDAPSettings', 'LDAPVersion' );
-            $LDAPServer = $ini->variable( 'LDAPSettings', 'LDAPServer' );
-            $LDAPPort = $ini->variable( 'LDAPSettings', 'LDAPPort' );
-            $LDAPBindUser = $ini->variable( 'LDAPSettings', 'LDAPBindUser' );
-            $LDAPBindPassword = $ini->variable( 'LDAPSettings', 'LDAPBindPassword' );
-
-            $ds = ldap_connect( $LDAPServer, $LDAPPort );
-
-            if ( $ds )
+            if ( function_exists( 'ldap_connect' ) )
             {
-                ldap_set_option( $ds, LDAP_OPT_PROTOCOL_VERSION, $LDAPVersion );
-                if ( $LDAPBindUser == '' )
+                // code copied over ezldapuser class...
+
+                $LDAPVersion = $ini->variable( 'LDAPSettings', 'LDAPVersion' );
+                $LDAPServer = $ini->variable( 'LDAPSettings', 'LDAPServer' );
+                $LDAPPort = $ini->variable( 'LDAPSettings', 'LDAPPort' );
+                $LDAPBindUser = $ini->variable( 'LDAPSettings', 'LDAPBindUser' );
+                $LDAPBindPassword = $ini->variable( 'LDAPSettings', 'LDAPBindPassword' );
+
+                $ds = ldap_connect( $LDAPServer, $LDAPPort );
+
+                if ( $ds )
                 {
-                    $r = ldap_bind( $ds );
-                }
-                else
-                {
-                    $r = ldap_bind( $ds, $LDAPBindUser, $LDAPBindPassword );
-                }
-                if ( $r )
-                {
-                    $status_tests['ldap server'] = 1;
+                    ldap_set_option( $ds, LDAP_OPT_PROTOCOL_VERSION, $LDAPVersion );
+                    if ( $LDAPBindUser == '' )
+                    {
+                        $r = ldap_bind( $ds );
+                    }
+                    else
+                    {
+                        $r = ldap_bind( $ds, $LDAPBindUser, $LDAPBindPassword );
+                    }
+                    if ( $r )
+                    {
+                        $status_tests['ldap server'] = 1;
+                    }
                 }
             }
         }

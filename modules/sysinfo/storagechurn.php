@@ -25,8 +25,15 @@ $cachefound = false;
 $clusterfile = eZClusterFileHandler::instance( $cachefile );
 if ( $clusterfile->exists() )
 {
+    $logdate = $logdate2 = 0;
+    if ( file_exists( $logfile ) )
+    {
     $logdate = filemtime( $logfile );
+    }
+    if ( file_exists( $logfile2 ) )
+    {
     $logdate2 = filemtime( $logfile2 );
+    }
     $cachedate = $clusterfile->mtime();
     if ( $cachedate >= $logdate && $cachedate >= $logdate2 )
     {

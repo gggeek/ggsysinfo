@@ -67,6 +67,10 @@ class ezLogsGrapher
     */
     static function parseLog( $logfile, $scale=60, $exclude_regexp='#\] Timing Point: #' )
     {
+        if ( !file_exists( $logfile ) )
+        {
+            return array();
+        }
         $file =  file( $logfile );
         $data = array();
         foreach ( $file as $line )

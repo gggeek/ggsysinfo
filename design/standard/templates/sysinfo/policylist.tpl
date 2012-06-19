@@ -45,7 +45,7 @@
 </div>
 *}
 
-{def $basedocurl = = ezini('GeneralSettings', 'DocRoot', 'sysinfo.ini').fetches
+{def $basedocurl = ezini('GeneralSettings', 'DocRoot', 'sysinfo.ini').fetches
      $docsuffix  = ezini('GeneralSettings', 'PageSuffix', 'sysinfo.ini')}
 
 <table class="list" cellspacing="0">
