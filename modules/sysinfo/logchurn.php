@@ -34,16 +34,19 @@ foreach( $logfiles as $level => $file )
 
         // *** Check if cached image file exists and is younger than storage log
         $cachefound = false;
-        $clusterfile = eZClusterFileHandler::instance( $cachefile );
-        if ( $clusterfile->exists() )
+        if ( $Params['viewmode'] != 'json' )
         {
-            $logdate = filemtime( $logfile );
-            $cachedate = $clusterfile->mtime();
-            if ( $cachedate >= $logdate )
+            $clusterfile = eZClusterFileHandler::instance( $cachefile );
+            if ( $clusterfile->exists() )
             {
-                $cachefound = true;
-                $clusterfile->fetch();
-                $cachefiles[$logname] = $cachefile;
+                $logdate = filemtime( $logfile );
+                $cachedate = $clusterfile->mtime();
+                if ( $cachedate >= $logdate )
+                {
+                    $cachefound = true;
+                    $clusterfile->fetch();
+                    $cachefiles[$logname] = $cachefile;
+                }
             }
         }
 
@@ -64,7 +67,11 @@ foreach( $logfiles as $level => $file )
             // *** Parse log file ***
             $data = ezLogsGrapher::asum( $data, ezLogsGrapher::parseLog( $logfile, $scale ) );
 
-            //var_dump( $data );
+            if ( $Params['viewmode'] == 'json' )
+            {
+                $cachefiles[$logname] = $data;
+                continue;
+            }
 
             // *** build graph and store it ***
             if ( count( $data ) )
@@ -93,6 +100,14 @@ foreach( $logfiles as $level => $file )
             }
         }
     }
+}
+
+if ( $Params['viewmode'] == 'json' )
+{
+    header( 'Content-Type: application/json' );
+    //header( "Last-Modified: $mdate" );
+    echo json_encode( $cachefiles );
+    eZExecution::cleanExit();
 }
 
 // *** output ***

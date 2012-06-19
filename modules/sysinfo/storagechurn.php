@@ -17,6 +17,26 @@ $logfile = eZSys::varDirectory() . '/' . $ini->variable( 'FileSettings', 'LogDir
 // but storage log also is in var/log (created I think before siteaccess settings are loaded)
 $logfile2 = 'var/log/storage.log';
 
+if ( $Params['viewmode'] == 'json' )
+{
+    if ( !is_file( $logfile ) && !is_file( $logfile2 ) )
+    {
+        /// @todo return a 404 error?
+    }
+
+    $data = ezLogsGrapher::asum( ezLogsGrapher::parseLog( $logfile, $scale ), ezLogsGrapher::parseLog( $logfile2, $scale ) );
+    ksort( $data );
+
+    $mtime = @filemtime( $logfile );
+    $mtime2 = @filemtime( $logfile2 );
+    $mdate = gmdate( 'D, d M Y H:i:s', ( $mtime > $mtime2 ? $mtime : $mtime2 ) ) . ' GMT';
+
+    header( 'Content-Type: application/json' );
+    header( "Last-Modified: $mdate" );
+    echo json_encode( $data );
+    eZExecution::cleanExit();
+}
+
 $cachedir = eZSys::cacheDirectory() . '/sysinfo';
 $cachefile = $cachedir . '/storagechurn.jpg';
 

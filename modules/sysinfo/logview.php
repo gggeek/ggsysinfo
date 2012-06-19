@@ -30,6 +30,28 @@ foreach( $logfiles as $level => $file )
         {
             $errormsg = '';
 
+            /// @todo add support for if-modified-since, etag headers
+            if ( $Params['viewmode'] == 'raw' )
+            {
+                /// @todo we could be more efficient by echoing files to screen without reading all of them into memory all at once
+                $data = '';
+                for( $i = eZdebug::maxLogrotateFiles(); $i > 0; $i-- )
+                {
+                    $archivelog = $logfile.".$i";
+                    if ( file_exists( $archivelog ) )
+                    {
+                        $data .= file_get_contents( $archivelog );
+                    }
+                }
+                $data .= file_get_contents( $logfile );
+                $mdate = gmdate( 'D, d M Y H:i:s', filemtime( $logfile ) ) . ' GMT';
+
+                header( 'Content-Type: text/plain' );
+                header( "Last-Modified: $mdate" );
+                echo $data;
+                eZExecution::cleanExit();
+            }
+
             // *** parse rotated log files, if found ***
             for( $i = eZdebug::maxLogrotateFiles(); $i > 0; $i-- )
             {
@@ -43,10 +65,18 @@ foreach( $logfiles as $level => $file )
 
             // *** Parse log file ***
             $data = array_reverse( array_merge( $data, ezLogsGrapher::splitLog( $logfile ) ) );
-            //var_dump( $logfile );
+            $mdate = gmdate( 'D, d M Y H:i:s', filemtime( $logfile ) ) . ' GMT';
+            header( "Last-Modified: $mdate" );
         }
         break;
     }
+}
+
+if ( $Params['viewmode'] == 'raw' )
+{
+    // if we're here it's because desired file was not found
+    // @todo return a 404 error?
+    //       It can be either a valid filename but no log yet, or bad filename...
 }
 
 // *** output ***

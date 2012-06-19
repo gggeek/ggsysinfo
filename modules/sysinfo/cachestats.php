@@ -41,6 +41,52 @@ foreach ( $cacheList as $cacheItem )
     }
 }
 
+$ini = eZINI::instance( 'file.ini' );
+if ( $ini->variable( 'ClusteringSettings', 'FileHandler' ) == 'eZDFSFileHandler' )
+{
+    $storagedir = $ini->variable( 'eZDFSClusteringSettings', 'MountPointPath' );
+
+    foreach ( $cacheList as $cacheItem )
+    {
+        if ( $cacheItem['path'] != false && $cacheItem['enabled'] )
+        {
+            $cachename = 'DFS://' . $cacheItem['name'];
+
+            // take care: this is hardcoded from knowledge of cache structure...
+            if ( $cacheItem['path'] == 'var/cache/ini' )
+            {
+                //$cachedir = $storagedir . '/' . eZSys::siteDir() . '/' . $cacheItem['path'];
+                // no var/cache/ini in dfs nfs storage
+                continue;
+            }
+            else
+            {
+                $cachedir = $storagedir . '/' . eZSys::cacheDirectory() . '/' . $cacheItem['path'];
+            }
+            $cacheFilesList[$cachename] = array( 'path' => $cachedir );
+            $count = sysInfoTools::countFilesInDir( $cachedir );
+            $cacheFilesList[$cachename]['count'] = $count;
+            if ( $count )
+            {
+                $cacheFilesList[$cachename]['size'] = number_format( sysInfoTools::countFilesSizeInDir( $cachedir ) );
+            }
+            else
+            {
+                $cacheFilesList[$cachename]['size'] = "";
+            }
+        }
+    }
+
+}
+
+if ( $Params['viewmode'] == 'json' )
+{
+    header( 'Content-Type: application/json' );
+    //header( "Last-Modified: $mdate" );
+    echo json_encode( $cacheFilesList );
+    eZExecution::cleanExit();
+}
+
 $tpl->setVariable( 'filelist', $cacheFilesList );
 
 ?>

@@ -43,6 +43,13 @@ foreach( $logfiles as $level => $file )
     }
 }
 
+if ( $Params['viewmode'] == 'json' )
+{
+    header( 'Content-Type: application/json' );
+    echo json_encode( $logFilesList );
+    eZExecution::cleanExit();
+}
+
 require_once( "kernel/common/template.php" );
 $tpl = templateInit();
 $tpl->setVariable( 'filelist', $logFilesList );
