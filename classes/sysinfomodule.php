@@ -82,6 +82,7 @@ class sysinfoModule{
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 'script' => 'genericview.php',
                 'default_navigation_part' => 'ezsysinfonavigationpart',
+                'unordered_params' => array( 'view' => 'viewmode' ),
                 'name' => 'Cache stats',
                 'description' => 'Number of files and total size per every cache type',
                 'disabled' => true ),

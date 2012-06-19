@@ -7,6 +7,7 @@
  *
  * @todo add more details, such as dates of first/last files
  * @todo add support for db-clustered configs - hard currently, since there is no recursive search in api...
+ * @todo in edfs mode allow user to only show local / clustered data
  */
 
 $cacheFilesList = array();

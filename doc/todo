@@ -4,6 +4,15 @@ generic tasks:
 - move to a saner security configuration
   . use own policies instead of system ones ?
 - add some js to left-hand menu to be able to expand/collapse groups of views
+- cluster support:
+  - finalize json-videmode for all views which expose local data
+  - add ini settings to tell to master server the ips/hostnames of siblings
+  - add out-of-band-auth for the between-cluster-nodes calls, as session cookie name might be !=
+  - make views of "master" node cluster aware:
+    . get data from siblings
+    . cache it locally
+    . coalesce it or display it side-by-side
+    . do this via ajax?
 
 security view:
 - tweak warnings about post_max_size (esp. if rest is enabled, it has to be bigger)
@@ -42,7 +51,7 @@ accelerator views:
 - add support for Zend Optimizer+, ioncube accelerator, Turck MMCache => For Zend, use a call to  accelerator_get_status()
 
 cache views:
-- add support for clustered configs
+- add support for more clustered configs
 - add a button in churn view to force regeneration of graph on demand
 - fix churn: dates in graph are not displayed optimally for large timespans
 - add cache file timestamp
@@ -53,7 +62,7 @@ cache views:
 - improve checkboxes display in cache-search page (make them break on two or more lines)
 
 storage views:
-- add support for clustered configs
+- add support for more clustered configs
 - add age of files in dirs
 
 content views:
