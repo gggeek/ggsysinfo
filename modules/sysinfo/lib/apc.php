@@ -75,8 +75,13 @@ function defaults($d,$v) {
 }
 
 // rewrite $PHP_SELF to block XSS attacks
-//
-$PHP_SELF= isset($_SERVER['PHP_SELF']) ? htmlentities(strip_tags($_SERVER['PHP_SELF'],''), ENT_QUOTES) : '';
+
+//// BEGIN
+//// M. Romanovsky 2012.06.21
+//// Fixes to include this page within an eZ Publish admin page
+//// $PHP_SELF= isset($_SERVER['PHP_SELF']) ? htmlentities(strip_tags($_SERVER['PHP_SELF'],''), ENT_QUOTES) : '';
+$PHP_SELF=eZURI::instance()->originalURIString(true);
+//// END
 $time = time();
 $host = getenv('HOSTNAME');
 if($host) { $host = '('.$host.')'; }
