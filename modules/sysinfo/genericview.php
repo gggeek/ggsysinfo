@@ -45,7 +45,7 @@ if ( $view == 'index' )
 else
 {
     $url2ndlevel = array( array( 'url' => false,
-                                 'text' => ezi18n( 'SysInfo', sysinfoModule::viewName( $view ) ) ) );
+                                 'text' => sysInfoTools::ezpI18ntr( 'SysInfo', sysinfoModule::viewName( $view ) ) ) );
 }
 if ( $extra_path != '' )
 {
