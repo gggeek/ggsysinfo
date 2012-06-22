@@ -19,8 +19,7 @@ else
 {
     $classes = sysInfoTools::autoloadClasses();
 
-    require_once( "kernel/common/template.php" );
-    $tpl = templateInit();
+    $tpl = sysInfoTools::eZTemplateFactory();
     foreach( $tpl->Operators as $opName => $operatorDef )
     {
         if (!isset($operatorDef['class']))

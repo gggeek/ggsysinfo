@@ -50,8 +50,7 @@ if ( $Params['viewmode'] == 'json' )
     eZExecution::cleanExit();
 }
 
-require_once( "kernel/common/template.php" );
-$tpl = templateInit();
+$tpl = sysInfoTools::eZTemplateFactory();
 $tpl->setVariable( 'filelist', $logFilesList );
 
 ?>

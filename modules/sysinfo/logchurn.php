@@ -86,7 +86,7 @@ foreach( $logfiles as $level => $file )
                 /*$last = end( array_keys( $data ) );
                 $data[$last + $scale] = 0;*/
 
-                $graphname = ezi18n( 'SysInfo', 'messages per '.$scalenames[$scale] );
+                $graphname = sysInfoTools::ezpI18ntr( 'SysInfo', 'messages per '.$scalenames[$scale] );
                 $graph = ezLogsGrapher::graph( $data, $graphname, $scale );
                 if ( $graph != false )
                 {
@@ -120,5 +120,5 @@ $Result['content'] = $tpl->fetch( "design:sysinfo/logchurn.tpl" ); //var_dump($c
 
 $Result['left_menu'] = 'design:parts/sysinfo/menu.tpl';
 $Result['path'] = array( array( 'url' => false,
-                                'text' => ezi18n( 'SysInfo', 'Log churn' ) ) );
+                                'text' => sysInfoTools::ezpI18ntr( 'SysInfo', 'Log churn' ) ) );
 ?>

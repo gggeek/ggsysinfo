@@ -482,6 +482,45 @@ class sysInfoTools
         return $out;
     }
 
+    /**
+     * Wrapper method to translate labels and eventually takes advantage of new 4.3 i18n API
+     * @param $context
+     * @param $message
+     * @param $comment
+     * @param $argument
+     * @return string
+     */
+    public static function ezpI18ntr( $context, $message, $comment = null, $argument = null )
+    {
+        // eZ Publish < 4.3 => use old i18n system
+        if( eZPublishSDK::majorVersion() >= 4 && eZPublishSDK::minorVersion() < 3 )
+        {
+            include_once( 'kernel/common/i18n.php' );
+            return ezi18n( $context, $message, $comment, $argument );
+        }
+        else
+        {
+            return ezpI18n::tr( $context, $message, $comment, $argument );
+        }
+    }
+
+    /**
+     * Wrapper method to initialize a template and eventually takes advantage of new 4.3 TPL API
+     * @return eZTemplate
+     */
+    public static function eZTemplateFactory()
+    {
+        if( eZPublishSDK::majorVersion() >= 4 && eZPublishSDK::minorVersion() < 3 )
+        {
+            include_once( 'kernel/common/template.php' );
+            return templateInit();
+        }
+        else
+        {
+            return eZTemplate::factory();
+        }
+    }
+
     static $ezpClasses = false;
 }
 ?>

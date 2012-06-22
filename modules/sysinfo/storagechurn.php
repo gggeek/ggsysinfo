@@ -73,7 +73,7 @@ if ( !$cachefound )
     ksort( $data );
 
     // *** build graph and store it ***
-    $graphname = ezi18n( 'SysInfo', 'files per '.$scalenames[$scale] );
+    $graphname = sysInfoTools::ezpI18ntr( 'SysInfo', 'files per '.$scalenames[$scale] );
     $graph = ezLogsGrapher::graph( $data, $graphname, $scale );
     if ( $graph != false )
     {

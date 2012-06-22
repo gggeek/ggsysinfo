@@ -24,9 +24,7 @@ if ( !in_array( "sysinfo/$view", $ini->variable( 'RoleSettings', 'PolicyOmitList
     }
 }
 
-include_once( 'kernel/common/i18n.php' );
-require_once( "kernel/common/template.php" );
-$tpl = templateInit();
+$tpl = sysInfoTools::eZTemplateFactory();
 $tpl->setVariable( 'title', sysinfoModule::viewTitle( $view ) );
 
 $extra_path = '';
@@ -38,7 +36,7 @@ $Result['content'] = $tpl->fetch( "design:sysinfo/$view.tpl" );
 
 $Result['left_menu'] = 'design:parts/sysinfo/menu.tpl';
 $url1stlevel = array( array( 'url' => 'sysinfo/index',
-                             'text' => ezi18n( 'SysInfo', 'System information' ) ) );
+                             'text' => sysInfoTools::ezpI18ntr( 'SysInfo', 'System information' ) ) );
 if ( $view == 'index' )
 {
     $url1stlevel[0]['url'] = false;
