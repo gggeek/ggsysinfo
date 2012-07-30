@@ -67,6 +67,14 @@ class sysinfoModule{
                 'name' => 'WinCache',
                 'description' => 'The control panel for the WinCache opcode cache',
                 'disabled' => true ),
+
+            'mysqli' => array(
+                //'functions' => array( 'system_info' ), - we check in the module itself
+                'script' => 'genericview.php',
+                'default_navigation_part' => 'ezsysinfonavigationpart',
+                'name' => 'MySQLi',
+                'description' => 'The control panel for MySQL connection stats',
+                'disabled' => true ),
         ),
         'eZPublish' => array(
 
@@ -339,6 +347,12 @@ class sysinfoModule{
         if ( $db->databaseName() == 'mysql' )
         {
             self::$view_groups['QA']['databaseqa']['disabled'] = false;
+
+            /// @todo is this the correct way to check?
+            if ( function_exists( 'mysqli_get_client_stats' ) )
+            {
+                self::$view_groups['PHP']['mysqli']['disabled'] = false;
+            }
         }
 
         self::$initialized = true;
