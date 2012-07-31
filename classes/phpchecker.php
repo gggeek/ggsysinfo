@@ -17,6 +17,7 @@ class phpChecker
     static $originalphps = array(); // $i => $filename
     static $extensionphps = array(); // $i => $filename, includes inactive sa and active exts
     static $initialized = false;
+    static $php = null;
 
     static function checkFileContents()
     {
@@ -59,6 +60,13 @@ class phpChecker
         {
             self::$extensionphps = array_merge( self::$extensionphps, self::scanDirForphps( "$extensionsdir/$extdir", true ) );
         }
+
+        $php = 'php';
+        exec( $php . ' -v', $output );
+        if ( count( $output ) && strpos( $output[0], 'PHP' ) !== false )
+        {
+            self::$php = $php;
+        }
         self::$initialized = true;
     }
 
@@ -86,7 +94,7 @@ class phpChecker
     * @todo parse for validity
     * @todo we are not checking if a php closing tag is followed by whitespace only lines
     */
-    protected static function parsePhpFile( $filename, &$warnings )
+    protected static function parsePhpFile( $filename, &$warnings, $checksyntax=true )
     {
         $lines = file( $filename, FILE_IGNORE_NEW_LINES );
 
@@ -127,6 +135,17 @@ class phpChecker
                 $warnings[] = array( "Spurious content: it should end with a php closing tag", $filename, $i, $line );
             }*/
         }
+
+        if ( $checksyntax && self::$php )
+        {
+            exec( escapeshellcmd( self::$php ) . " -l " . escapeshellarg( $filename ), $output );
+            $output = implode( "\n", $output );
+            if ( strpos( $output, 'No syntax errors detected' ) !== 0 )
+            {
+                $warnings[] = array( "Syntax error: $output", $filename, null, null );
+            }
+        }
+
         return true; /// @todo
     }
 

@@ -63,7 +63,7 @@ cache views:
 
 db views:
 - coalesce mysql stats in a more useful set of data
-- run sqltuner.pl and perconatoolkit as well to get suggestions
+- run sqltuner.pl and percona-toolkit as well to get suggestions
 
 storage views:
 - add support for more clustered configs
@@ -87,11 +87,13 @@ log views:
 - log search view
 
 qa views:
+- use ajax calls to test php and tpl validity to avoid very long page load time
+- allow to specify location of php executable via ini
 - add a cache for parsed ini files
 - view that runs setup wizard tests
 - extensions that have mysql .sql files but not db_schema.dba
 - duplicate values for designlist, relatedsa, etc...
-- parse php files for validity, and, if the ezcodingstyle extension is installed, for code style compliance
+- if the ezcodingstyle extension is installed, parse php files for code style compliance
 - check for non-utf8 start tags template files
 - move all of the tests in an external extension?
 - allow hooking of new tests via ini files
