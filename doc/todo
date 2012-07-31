@@ -5,7 +5,7 @@ generic tasks:
   . use own policies instead of system ones ?
 - add some js to left-hand menu to be able to expand/collapse groups of views
 - cluster support:
-  - finalize json-videmode for all views which expose local data
+  - finalize json-mode for all views which expose local data
   - add ini settings to tell to master server the ips/hostnames of siblings
   - add out-of-band-auth for the between-cluster-nodes calls, as session cookie name might be !=
   - make views of "master" node cluster aware:
@@ -34,7 +34,7 @@ reports views:
 
 developer views:
 - add views with list of module details, extension details
-- template operators view: add params also for thpes ops that don't use namedParametersPerOperator
+- template operators view: add params also for the ops that don't use namedParametersPerOperator
 - template operators view: add links to online docs for kernel ops (needs an url-decoding table)
 - add a 'webservices' view listing soap, ezjscore ang ggws services
 - add an extended attr. filters view?
@@ -84,6 +84,7 @@ log views:
 - log search view
 
 qa views:
+- template files checks: intercept error/warning messages generated while parsing files and show them inline
 - add a cache for parsed ini files
 - template check view
 - view that runs setup wizard tests
