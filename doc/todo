@@ -61,6 +61,10 @@ cache views:
 - when ezgeshi is found, add links to wiew with highlight cache files
 - improve checkboxes display in cache-search page (make them break on two or more lines)
 
+db views:
+- coalesce mysql stats in a more useful set of data
+- run sqltuner.pl and perconatoolkit as well to get suggestions
+
 storage views:
 - add support for more clustered configs
 - add age of files in dirs
@@ -79,14 +83,11 @@ system status views:
 - add memcached control panel
 
 log views:
-- allow display of more logfiles (eg. ezdebugsettings logs and audit logs)
 - allow zooming in graph / listing of messages in a timespan
 - log search view
 
 qa views:
-- template files checks: intercept error/warning messages generated while parsing files and show them inline
 - add a cache for parsed ini files
-- template check view
 - view that runs setup wizard tests
 - extensions that have mysql .sql files but not db_schema.dba
 - duplicate values for designlist, relatedsa, etc...

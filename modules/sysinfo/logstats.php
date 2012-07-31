@@ -11,6 +11,8 @@
 $errormsg = '';
 $cachedir = eZSys::cacheDirectory() . '/sysinfo';
 $logFilesList = array();
+$extraLogFilesList = array();
+
 
 // nb: this dir is calculated the same way as ezlog does
 $debug = eZDebug::instance();
@@ -39,7 +41,25 @@ foreach( $logfiles as $level => $file )
             }
         }
 
-        $logFilesList[$logname] = array( 'path' => $logfile, 'count' => $count, 'size' => $size, 'modified' => $modified );
+        $logFilesList[$logname] = array( 'path' => $logfile, 'count' => $count, 'size' => $size, 'modified' => $modified, 'link' => true );
+    }
+}
+
+foreach( scandir( 'var/log' ) as $log )
+{
+    $logfile = "var/log/$log";
+    if ( is_file( $logfile ) && substr( $log, -4 ) == '.log' && !in_array( $log, array( 'error.log', 'warning.log', 'debug.log', 'notice.log', 'strict.log' ) ) )
+    {
+        $logFilesList[$log] = array( 'path' => $logfile, 'count' => '[1]', 'size' => filesize( $logfile ), 'modified' => filemtime( $logfile ) );
+    }
+}
+$logdir = eZSys::varDirectory() . '/' . $ini->variable( 'FileSettings', 'LogDir' );
+foreach( scandir( $logdir ) as $log )
+{
+    $logfile = "$logdir/$log";
+    if ( is_file( $logfile ) && substr( $log, -4 ) == '.log' )
+    {
+        $logFilesList[$log] = array( 'path' => $logfile, 'count' => '[1]', 'size' => filesize( $logfile ), 'modified' => filemtime( $logfile ) );
     }
 }
 

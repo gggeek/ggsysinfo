@@ -56,7 +56,11 @@
 {foreach $filelist as $cache => $details sequence array( 'bglight', 'bgdark') as $style}
 	<tr class="{$style}">
 		<td>
+			{if $details.link}
 			<a href={concat('sysinfo/logview/', $cache)|ezurl()}>{$cache|wash}</a>
+			{else}
+			{$cache|wash}
+			{/if}
 		</td>
 		<td>
 			{$details['path']}
