@@ -121,11 +121,11 @@ class phpChecker
             {
                 $warnings[] = array( "Bad php opening tag: it should be the long version", $filename, $i, $line );
             }
-            // check: every php file should start with a php closing tag
+            /* // check: every php file should end with a php closing tag
             if ( $i == $linecount && !preg_match( '/\?>$/', $line ) )
             {
                 $warnings[] = array( "Spurious content: it should end with a php closing tag", $filename, $i, $line );
-            }
+            }*/
         }
         return true; /// @todo
     }
