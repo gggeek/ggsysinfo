@@ -401,7 +401,6 @@ class sysInfoTools
 
     static function ezgeshiAvailable()
     {
-        return false;
         if ( in_array( 'ezsh', eZExtension::activeExtensions() ) )
         {
             $info = eZExtension::extensionInfo( 'ezsh' );
