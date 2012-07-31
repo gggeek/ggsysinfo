@@ -83,7 +83,7 @@
             {foreach $details['post_params'] as $id => $param}{$param|wash}{delimiter}<br/>{/delimiter}{/foreach}
         </td>
         <td>
-            {foreach $details['functions'] as $id => $param}{$param|wash}{delimiter}<br/>{/delimiter}{/foreach}
+            {foreach $details['functions'] as $id => $param}<a href={concat('sysinfo/policylist#',$details['module']|wash(),$param|wash())|ezurl()}>{$param|wash}</a>{delimiter}<br/>{/delimiter}{/foreach}
         </td>
         <td>
             {if $ezgeshi_available}

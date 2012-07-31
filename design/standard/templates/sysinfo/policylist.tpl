@@ -57,7 +57,7 @@
         {*<th>{'Help'|i18n( 'SysInfo')}</th>*}
     </tr>
 {foreach $policylist as $policy => $details sequence array( 'bglight', 'bgdark') as $style}
-    <tr class="{$style}">
+    <tr class="{$style}" id="{$details['module']|wash}{$details['name']|wash}">
         <td>
             {$details['name']|wash}
         </td>
