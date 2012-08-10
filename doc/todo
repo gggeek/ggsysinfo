@@ -90,7 +90,6 @@ qa views:
 - use ajax calls to test php and tpl validity to avoid very long page load time
 - allow to specify location of php executable via ini
 - add a cache for parsed ini files
-- view that runs setup wizard tests
 - extensions that have mysql .sql files but not db_schema.dba
 - duplicate values for designlist, relatedsa, etc...
 - if the ezcodingstyle extension is installed, parse php files for code style compliance

@@ -86,6 +86,14 @@ class sysinfoModule{
                 'name' => 'System status',
                 'description' => 'Executes tests to verify the functioning of various parts of the system (e.g. connection to the database or to the eZFind indexing server)' ),
 
+            'systemcheck' => array(
+                //'functions' => array( 'system_info' ), - we check in the module itself
+                'script' => 'genericview.php',
+                'default_navigation_part' => 'ezsysinfonavigationpart',
+                //'params' => array( 'output_format' ),
+                'name' => 'System check',
+                'description' => 'Executes tests to verify that the envitonment can properly support eZ Publish (i.e. the tests normally run by the setup wizard)' ),
+
             'cachestats' => array(
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 'script' => 'genericview.php',
@@ -232,14 +240,14 @@ class sysinfoModule{
                 'script' => 'genericview.php',
                 'default_navigation_part' => 'ezsysinfonavigationpart',
                 'name' => 'Security checks',
-                'description' => 'Executes tests to verify the proper configuration of the system for security-related aspects' ),
+                'description' => 'Executes tests to verify the proper configuration of the system for security-related aspects (taken from phpsecinfo)' ),
 
             'databaseqa' => array(
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 'script' => 'genericview.php',
                 'default_navigation_part' => 'ezsysinfonavigationpart',
                 'name' => 'Database problems',
-                'description' => 'Checks for common database misconfigurations',
+                'description' => 'Checks for common database misconfigurations (character set and storage engine of all tables)',
                 'disabled' => true ),
 
             'inifilesqa' => array(
@@ -262,7 +270,7 @@ class sysinfoModule{
                 'unordered_params' => array( 'view' => 'viewmode' ),
                 'default_navigation_part' => 'ezsysinfonavigationpart',
                 'name' => 'Php files problems',
-                'description' => 'Checks for all php files found the presence of opening and closing php tags' ),
+                'description' => 'Checks for all php files found the presence of opening and closing php tags, syntax validity' ),
 
             'tplfilesqa' => array(
                 //'functions' => array( 'system_info' ), - we check in the module itself
