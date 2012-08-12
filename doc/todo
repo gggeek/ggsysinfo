@@ -1,6 +1,6 @@
 generic tasks:
 - retest policy rules on 4.0.7
-- rebase info retrieval on ezsnmpd
+- rebase info retrieval on ezsnmpd (?)
 - move to a saner security configuration
   . use own policies instead of system ones ?
 - add some js to left-hand menu to be able to expand/collapse groups of views
@@ -36,7 +36,7 @@ developer views:
 - add views with list of module details, extension details
 - template operators view: add params also for the ops that don't use namedParametersPerOperator
 - template operators view: add links to online docs for kernel ops (needs an url-decoding table)
-- add a 'webservices' view listing soap, ezjscore ang ggws services
+- add a 'webservices' view listing soap, ezjscore and ggws services
 - add an extended attr. filters view?
 - add a form to test invoking views directly
 - add error msgs when bad param received
@@ -58,7 +58,7 @@ cache views:
 - allow cache stats page to report on enabled/disabled caches per siteaccess
 - add zoom icons on cache stats pages that bring to cache search page listing all cache files of the given type
 - add zoom icons on cache search pages that will show the cache file contents
-- when ezgeshi is found, add links to wiew with highlight cache files
+- when ezgeshi is found, add links to wiew with highlight of cache files
 - improve checkboxes display in cache-search page (make them break on two or more lines)
 
 db views:

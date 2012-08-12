@@ -37,6 +37,7 @@ Installation:
   not a new policy defined by this extension.
   To allow anonymous access to a single view, the ini setting PolicyOmitList can be also used.
 - Make sure that users can access image files stored in var/sitename/cache/sysinfo for the storage churn graph to work
+  (this means properly configuring .htaccess file or vhost configuration ususally)
 
 - If the ezgeshi extension ver. 1.3 or later is also installed, on the pages listing views and fetch functions
   a link to the source code will be available. To be able to see the source listing, permission to the policy
@@ -45,7 +46,7 @@ Installation:
 New modules/views:
 
 All of the functionality is available in a new top-level tab in the administration interface, named "System Information".
-Explore it by navigating the menu on the left side.
+A somewhat-detailed description of all available information pages is given there.
 If some of the items in the menu are greyed out, it is because the corresponding item does not work / apply to your eZ Publish setup.
 
 The systemstatus view can be used for systematic monitoring of the status of the eZ Publish installation by external tools such as Nagios, OpenNMS, Zenoss etc...

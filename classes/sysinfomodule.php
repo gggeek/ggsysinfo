@@ -73,7 +73,7 @@ class sysinfoModule{
                 'script' => 'genericview.php',
                 'default_navigation_part' => 'ezsysinfonavigationpart',
                 'name' => 'MySQL',
-                'description' => 'The control panel for MySQL connection stats',
+                'description' => 'A control panel for MySQL connection stats',
                 'disabled' => true ),
         ),
         'eZPublish' => array(
@@ -278,7 +278,7 @@ class sysinfoModule{
                 'unordered_params' => array( 'view' => 'viewmode' ),
                 'default_navigation_part' => 'ezsysinfonavigationpart',
                 'name' => 'Tpl files problems',
-                'description' => 'Checks validity for all tpl files found' ),
+                'description' => 'Checks syntax validity for all tpl files found' ),
         ),
 
         'Reports' => array(
