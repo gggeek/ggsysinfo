@@ -36,6 +36,14 @@ class sysinfoModule{
                 'name' => 'phpinfo()',
                 'description' => 'The standard phpinfo() information page detailing php settings' ),
 
+            'acceleratorplus' => array(
+                //'functions' => array( 'system_info' ), - we check in the module itself
+                'script' => 'genericview.php',
+                'default_navigation_part' => 'ezsysinfonavigationpart',
+                'name' => 'Zend Accelerator Plus',
+                'description' => 'The control panel for the Zend Accelerator Plus opcode cache',
+                'disabled' => true ),
+
             'apc' => array(
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 'script' => 'genericview.php',
@@ -134,6 +142,13 @@ class sysinfoModule{
                 'default_navigation_part' => 'ezsysinfonavigationpart',
                 'name' => 'Content stats',
                 'description' => 'Number of content objects present, information collections, pending notification events, pending indexation events etc...' ),
+
+            'contentchurn' => array(
+                //'functions' => array( 'system_info' ), - we check in the module itself
+                'script' => 'genericview.php',
+                'default_navigation_part' => 'ezsysinfonavigationpart',
+                'name' => 'Content churn',
+                'description' => 'Graph of number of objects created per day' ),
 
             'logstats' => array(
                 //'functions' => array( 'system_info' ), - we check in the module itself
@@ -345,6 +360,10 @@ class sysinfoModule{
         if ( extension_loaded( 'apc' ) )
         {
              self::$view_groups['PHP']['apc']['disabled'] = false;
+        }
+        if ( function_exists( 'accelerator_get_status' ) )
+        {
+            self::$view_groups['PHP']['acceleratorplus']['disabled'] = false;
         }
         /*else if ( extension_loaded( 'Zend Performance Suite' ) )
         {
