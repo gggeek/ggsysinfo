@@ -52,13 +52,31 @@ $script->initialize();
 // Report structure: [ { title: "xxx", data: [] } ]
 $report = array();
 
-$cli->output();
+$cli->output( 'Executing system status checks...' );
+$data = sysInfoTools::runtests();
+$report[] = array(
+    'title' => 'System status checks (1=OK, 0=KO, X=NA)',
+    'data' => $data,
+    'byrow' => true
+);
+
+$cli->output( 'Executing setup wizards checks...' );
+$data = systemChecker::checkSetupRequirements();
+$report[] = array(
+    'title' => 'Setup wizard checks',
+    'data' => array_combine( array_keys( $data ), array_fill( 0, count( $data ), 'warning' ) ),
+    'byrow' => true
+);
+
 $cli->output( 'Gathering content stats...' );
 $report[] = array(
     'title' => 'Content stats',
     'data' => contentStatsGatherer::gather(),
     'byrow' => true
 );
+
+$cli->output( 'Done!' );
+$cli->output();
 
 $cli->output( reportGenerator::getCSV( $report ) );
 
