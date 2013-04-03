@@ -4,6 +4,7 @@ generic tasks:
 - move to a saner security configuration
   . use own policies instead of system ones ?
 - add some js to left-hand menu to be able to expand/collapse groups of views
+- add cronjob to mail report on a fixed basis
 - cluster support:
   - finalize json-mode for all views which expose local data
   - add ini settings to tell to master server the ips/hostnames of siblings
@@ -48,7 +49,8 @@ accelerator views:
 - update apc/xcache/eacc control panels to their latest (svn?) code
 - add support for wincache images in fastcgi non-rewritten mode
 - test images for eacc/xache/apc in both standard and vhost mode
-- add support for Zend Optimizer+, ioncube accelerator, Turck MMCache => For Zend, use a call to  accelerator_get_status()
+- add support for Zend Optimizer+ => For Zend, use a call to  accelerator_get_status()
+- add support for ioncube accelerator, Turck MMCache
 
 cache views:
 - add support for more clustered configs
