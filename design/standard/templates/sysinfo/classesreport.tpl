@@ -32,6 +32,12 @@
     <div style="clear:both">
     <h2>{$class.name|wash()} [{$class.identifier}]</h2>
     {$class.descriptionList[$language_code]|wash}
+    <table class="list">
+    <tr class="bglight"><td>{'Container'|i18n('SysInfo')}</td><td>{if $class.is_container}{'Yes'|i18n('SysInfo')}{else}{'No'|i18n('SysInfo')}{/if}</td></tr>
+    <tr class="bgdark"><td>{'Always available'|i18n('SysInfo')}</td><td>{if $class.always_available}{'Yes'|i18n('SysInfo')}{else}{'No'|i18n('SysInfo')}{/if}</td></tr>
+    <tr class="bglight"><td>{'Object name pattern'|i18n('SysInfo')}</td><td>{$class.contentobject_name|wash()}</td></tr>
+    <tr class="bgdark"><td>{'URL alias pattern'|i18n('SysInfo')}</td><td>{$class.url_alias_name|wash()}</td></tr>
+    </table>
     {* @todo find a smarter way to get the language for the attricbute description*}
     {set $attributes = fetch( 'class', 'attribute_list', hash( 'class_id', $class.id ) )
          $LanguageCode = $class.top_priority_language_locale}
