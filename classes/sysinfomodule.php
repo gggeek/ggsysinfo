@@ -40,7 +40,7 @@ class sysinfoModule{
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 'script' => 'genericview.php',
                 'default_navigation_part' => 'ezsysinfonavigationpart',
-                'name' => 'OPcache / Zend Accelerator Plus',
+                'name' => 'OPcache/Zend Acc Plus',
                 'description' => 'The control panel for the OPcache / Zend Accelerator Plus opcode cache',
                 'disabled' => true ),
 
@@ -370,7 +370,7 @@ class sysinfoModule{
         {
              self::$view_groups['PHP']['apc']['disabled'] = false;
         }
-        if ( function_exists( 'accelerator_get_status' ) )
+        if ( function_exists( 'accelerator_get_status' ) || function_exists( 'opcache_get_status' ) )
         {
             self::$view_groups['PHP']['acceleratorplus']['disabled'] = false;
         }
