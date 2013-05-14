@@ -8,6 +8,8 @@
 
 <h1 class="context-title">{$title|i18n('SysInfo')}</h1>
 
+<h2>{'Siteaccess'|i18n('SysInfo')}: {$current_siteaccess|wash()}</h2>
+
 {* DESIGN: Mainline *}<div class="header-mainline"></div>
 
 {* DESIGN: Header END *}</div></div></div></div></div></div>
@@ -19,6 +21,8 @@
 
 {*'Classes last modified'|i18n('SysInfo')}: {$modified|l10n( shortdatetime )*}
 
+{def $i = 0
+     $styles = array( 'bglight', 'bgdark' )}
 {foreach $ini_files as $ini => $groups}
     <div style="clear:both">
     <h2>{$ini|wash()}</h2>
@@ -30,9 +34,10 @@
         <th>{'Value'|i18n('SysInfo')}</th>
     </tr>
     {* @todo fix alternating colors *}
-    {foreach $groups as $group => $settings sequence array( 'bglight', 'bgdark' ) as $style}
+    {foreach $groups as $group => $settings}
         {foreach $settings as $setting => $val}
-            <tr class="{$style}">
+            {set $i = $i|inc()|mod(2)}
+            <tr class="{$styles[$i]}">
                 <td>{$group|wash}</td>
                 <td>{$setting|wash()}</td>
                 <td>

@@ -311,7 +311,7 @@ class sysinfoModule{
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 'script' => 'genericview.php',
                 'default_navigation_part' => 'ezsysinfonavigationpart',
-                'params' => array( ),
+                'params' => array( 'siteaccess' ),
                 'name' => 'Ini settings',
                 'title' => 'Ini settings report',
                 'description' => 'Definition of all Ini settings in a format friendly to backups' ),
