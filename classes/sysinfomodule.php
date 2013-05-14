@@ -307,6 +307,15 @@ class sysinfoModule{
                 'title' => 'Content classes report',
                 'description' => 'Definition of all content classes in a format friendly to backups' ),
 
+            'inireport' => array(
+                //'functions' => array( 'system_info' ), - we check in the module itself
+                'script' => 'genericview.php',
+                'default_navigation_part' => 'ezsysinfonavigationpart',
+                'params' => array( ),
+                'name' => 'Ini settings',
+                'title' => 'Ini settings report',
+                'description' => 'Definition of all Ini settings in a format friendly to backups' ),
+
             'policiesreport' => array(
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 'script' => 'genericview.php',

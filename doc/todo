@@ -32,6 +32,7 @@ reports views:
 - add workflows report
 - add obj states report?
 - allow to sort on class id, and show it ? nb: might make the report less useful for syncing different installs
+- ini report: make it accept a siteaccess parameter
 
 developer views:
 - add views with list of module details, extension details
