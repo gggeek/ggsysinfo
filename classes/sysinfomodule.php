@@ -40,8 +40,8 @@ class sysinfoModule{
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 'script' => 'genericview.php',
                 'default_navigation_part' => 'ezsysinfonavigationpart',
-                'name' => 'Zend Accelerator Plus',
-                'description' => 'The control panel for the Zend Accelerator Plus opcode cache',
+                'name' => 'OPcache / Zend Accelerator Plus',
+                'description' => 'The control panel for the OPcache / Zend Accelerator Plus opcode cache',
                 'disabled' => true ),
 
             'apc' => array(
@@ -60,20 +60,20 @@ class sysinfoModule{
                 'description' => 'The control panel for the eAccelerator opcode cache',
                 'disabled' => true ),
 
-            'xcache' => array(
-                //'functions' => array( 'system_info' ), - we check in the module itself
-                'script' => 'genericview.php',
-                'default_navigation_part' => 'ezsysinfonavigationpart',
-                'name' => 'XCache',
-                'description' => 'The control panel for the XCache opcode cache',
-                'disabled' => true ),
-
             'wincache' => array(
                 //'functions' => array( 'system_info' ), - we check in the module itself
                 'script' => 'genericview.php',
                 'default_navigation_part' => 'ezsysinfonavigationpart',
                 'name' => 'WinCache',
                 'description' => 'The control panel for the WinCache opcode cache',
+                'disabled' => true ),
+
+            'xcache' => array(
+                //'functions' => array( 'system_info' ), - we check in the module itself
+                'script' => 'genericview.php',
+                'default_navigation_part' => 'ezsysinfonavigationpart',
+                'name' => 'XCache',
+                'description' => 'The control panel for the XCache opcode cache',
                 'disabled' => true ),
 
             'mysqli' => array(
