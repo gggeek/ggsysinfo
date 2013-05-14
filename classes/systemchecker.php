@@ -20,7 +20,7 @@ class systemChecker
     {
         $criticalTests = eZSetupCriticalTests();
         $optionalTests = eZSetupOptionalTests();
-        $testTable = eZSetupTestTable();
+        //$testTable = eZSetupTestTable();
 
         // run all tests
         $list = null;
