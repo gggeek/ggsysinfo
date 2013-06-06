@@ -1,0 +1,10 @@
+{
+    "name": "gggeek/ggsysinfo",
+    "type": "ezpublish-legacy-extension",
+    "description": "Allows eZ Publish administrators to have better insight into their working installation",
+    "license": "GNU General Public License v2.0",
+    "minimum-stability": "dev",
+    "require": {
+        "ezsystems/ezpublish-legacy-extension-installer": "*"
+    }
+}
