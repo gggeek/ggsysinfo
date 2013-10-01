@@ -48,8 +48,7 @@ foreach( $logfiles as $level => $file )
 
                 readfile( $logfile );
                 $mdate = gmdate( 'D, d M Y H:i:s', filemtime( $logfile ) ) . ' GMT';
-                echo memory_get_peak_usage() / 1024 / 1000;
-
+                
                 eZExecution::cleanExit();
             }
 
