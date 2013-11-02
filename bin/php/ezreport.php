@@ -9,6 +9,7 @@
  * @copyright (C) G. Giunta 2012
  * @license Licensed under GNU General Public License v2.0. See file license.txt
  *
+ * @todo add options to let users to select which tests to run (ALL by default)
  * @todo add option for output format: CSV, XML, ...
  */
 

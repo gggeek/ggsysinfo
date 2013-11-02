@@ -1,3 +1,19 @@
++ check override.ini for
+  - tpls not found
+  - rules with non-existsing nodes, non-existing classes
+
++ check for content classes with missing datatypes
+
++ check for rss feeds with no data defined
+
++ check for preview-designs which do not exist
+
++ check for present but inactive extensions polluting ext. autoload
+
++ check for active siteaccess with no settings defined
+
++ check for content classes with 0 objects
+
 generic tasks:
 - retest policy rules on 4.0.7
 - rebase info retrieval on ezsnmpd (?)
@@ -28,13 +44,14 @@ security view:
   . too many roles with content/* policies
 
 reports views:
-- add a cache to report pages
+- add a cache to report pages + load via ajax
 - add workflows report
 - add obj states report?
 - allow to sort on class id, and show it ? nb: might make the report less useful for syncing different installs
-- ini report: make it accept a siteaccess parameter
+- ini report: add links to switch siteaccess
 
 developer views:
+- add view with list of siteaccess, grouped by db/relatedsiteaccesslist
 - add views with list of module details, extension details
 - template operators view: add params also for the ops that don't use namedParametersPerOperator
 - template operators view: add links to online docs for kernel ops (needs an url-decoding table)
@@ -50,11 +67,10 @@ accelerator views:
 - update apc/xcache/eacc control panels to their latest (svn?) code
 - add support for wincache images in fastcgi non-rewritten mode
 - test images for eacc/xache/apc in both standard and vhost mode
-- add support for Zend Optimizer+ => For Zend, use a call to  accelerator_get_status()
 - add support for ioncube accelerator, Turck MMCache
 
 cache views:
-- add support for more clustered configs
+- add support for more clustered configs (size of clustered cache as well)
 - add a button in churn view to force regeneration of graph on demand
 - fix churn: dates in graph are not displayed optimally for large timespans
 - add cache file timestamp
@@ -66,7 +82,7 @@ cache views:
 
 db views:
 - coalesce mysql stats in a more useful set of data
-- run sqltuner.pl and percona-toolkit as well to get suggestions
+- run mysqltuner.pl and percona-toolkit as well to get suggestions
 
 storage views:
 - add support for more clustered configs
