@@ -33,22 +33,22 @@ foreach( $logfiles as $level => $file )
             /// @todo add support for if-modified-since, etag headers
             if ( $Params['viewmode'] == 'raw' )
             {
-                /// @todo we could be more efficient by echoing files to screen without reading all of them into memory all at once
-                $data = '';
+                $mdate = gmdate( 'D, d M Y H:i:s', filemtime( $logfile ) ) . ' GMT';
+                header( 'Content-Type: text/plain' );
+                header( "Last-Modified: $mdate" );
+
                 for( $i = eZdebug::maxLogrotateFiles(); $i > 0; $i-- )
                 {
                     $archivelog = $logfile.".$i";
                     if ( file_exists( $archivelog ) )
                     {
-                        $data .= file_get_contents( $archivelog );
+                        readfile( $archivelog );
                     }
                 }
-                $data .= file_get_contents( $logfile );
-                $mdate = gmdate( 'D, d M Y H:i:s', filemtime( $logfile ) ) . ' GMT';
 
-                header( 'Content-Type: text/plain' );
-                header( "Last-Modified: $mdate" );
-                echo $data;
+                readfile( $logfile );
+                $mdate = gmdate( 'D, d M Y H:i:s', filemtime( $logfile ) ) . ' GMT';
+                
                 eZExecution::cleanExit();
             }
 
