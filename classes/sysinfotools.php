@@ -509,7 +509,7 @@ class sysInfoTools
      */
     public static function eZTemplateFactory()
     {
-        if( eZPublishSDK::majorVersion() >= 4 && eZPublishSDK::minorVersion() < 3 )
+        if( eZPublishSDK::majorVersion() == 4 && eZPublishSDK::minorVersion() < 3 )
         {
             include_once( 'kernel/common/template.php' );
             return templateInit();
