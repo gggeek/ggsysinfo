@@ -93,6 +93,10 @@ foreach( $logfiles as $level => $file )
                     $clusterfile->fileStoreContents( $cachefile, $graph );
                     $cachefiles[$logname] = $cachefile;
                 }
+                else
+                {
+                    $errormsg = ezLogsGrapher::lastError();
+                }
             }
             else
             {

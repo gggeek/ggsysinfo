@@ -79,6 +79,10 @@ if ( !$cachefound )
     {
         $clusterfile->fileStoreContents( $cachefile, $graph );
     }
+    else
+    {
+        $errormsg = ezLogsGrapher::lastError();
+    }
 }
 
 // *** output ***
