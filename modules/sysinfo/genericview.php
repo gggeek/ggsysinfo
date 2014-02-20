@@ -26,6 +26,7 @@ if ( !in_array( "sysinfo/$view", $ini->variable( 'RoleSettings', 'PolicyOmitList
 
 $tpl = sysInfoTools::eZTemplateFactory();
 $tpl->setVariable( 'title', sysinfoModule::viewTitle( $view ) );
+$tpl->setVariable( 'description', sysinfoModule::viewDescription( $view ) );
 
 $extra_path = '';
 

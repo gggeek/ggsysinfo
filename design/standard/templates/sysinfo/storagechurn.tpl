@@ -4,7 +4,7 @@
 
 <h1 class="context-title">{'Storage churn'|i18n('SysInfo')}</h1>
 
-{* DESIGN: Mainline *}<div class="header-mainline"></div>
+{* DESIGN: Mainline *}<div class="header-mainline">{$description|wash}</div>
 
 {* DESIGN: Header END *}</div></div></div></div></div></div>
 

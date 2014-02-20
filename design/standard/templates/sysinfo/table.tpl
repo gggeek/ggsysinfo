@@ -3,7 +3,7 @@
 
 <h1 class="context-title">{$title|wash()}</h1>
 
-{* DESIGN: Mainline *}<div class="header-mainline"></div>
+{* DESIGN: Mainline *}<div class="header-mainline">{$description|wash}</div>
 
 {* DESIGN: Header END *}</div></div></div></div></div></div>
 

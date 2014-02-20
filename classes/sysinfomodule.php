@@ -426,7 +426,7 @@ class sysinfoModule{
         return $viewlist;
     }
 
-    /// @todo use name if title is missing
+    // we use name if title is missing
     static function viewTitle( $viewname )
     {
         foreach( self::$view_groups as $views )
@@ -449,6 +449,18 @@ class sysinfoModule{
             }
         }
         return 'title-for-path';
+    }
+
+    static function viewDescription( $viewname )
+    {
+        foreach( self::$view_groups as $views )
+        {
+            if ( array_key_exists( $viewname, $views ) )
+            {
+                return isset( $views[$viewname]['description'] ) ? $views[$viewname]['description'] : $views[$viewname][''];
+            }
+        }
+        return '';
     }
 
     /// true if view is neither hidden nor disabled
