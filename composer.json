@@ -11,5 +11,5 @@
     },
     "require-dev": {
         "gggeek/ezextensionbuilder": "*"
-    },
+    }
 }
