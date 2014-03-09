@@ -22,9 +22,9 @@ spl_autoload_register( array( 'autoloadHelper', 'autoload' ) );
 $cli = eZCLI::instance();
 
 $script = eZScript::instance( array( 'description' => ( "Generate System Information Report" ),
-                                     'use-session' => false,
-                                     'use-modules' => true,
-                                     'use-extensions' => true ) );
+    'use-session' => false,
+    'use-modules' => true,
+    'use-extensions' => true ) );
 $script->startup();
 $options = $script->getOptions(
     '',

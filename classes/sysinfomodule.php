@@ -100,7 +100,7 @@ class sysinfoModule{
                 'default_navigation_part' => 'ezsysinfonavigationpart',
                 //'params' => array( 'output_format' ),
                 'name' => 'System check',
-                'description' => 'Executes tests to verify that the envitonment can properly support eZ Publish (i.e. the tests normally run by the setup wizard)' ),
+                'description' => 'Executes tests to verify that the environment can properly support eZ Publish (i.e. the tests normally run by the setup wizard)' ),
 
             'cachestats' => array(
                 //'functions' => array( 'system_info' ), - we check in the module itself
@@ -457,7 +457,7 @@ class sysinfoModule{
         {
             if ( array_key_exists( $viewname, $views ) )
             {
-                return isset( $views[$viewname]['description'] ) ? $views[$viewname]['description'] : $views[$viewname][''];
+                return isset( $views[$viewname]['description'] ) ? $views[$viewname]['description'] : $views[$viewname];
             }
         }
         return '';

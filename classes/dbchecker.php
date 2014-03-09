@@ -36,7 +36,7 @@ class dbChecker
                 return $warnings;
 
             //case 'oracle':
-                /// @todo check for stored procs which are not compiled; tables with max id bigger than their associtaed sequence; double triggers on tables
+                /// @todo check for stored procs which are not compiled; tables with max id bigger than their associated sequence; double triggers on tables
 
             default:
                 return array( 'Database type ' . $db->databaseName() . ' can currently not be checked for problems' );

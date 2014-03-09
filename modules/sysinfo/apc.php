@@ -7,10 +7,12 @@
  */
 
 $extdir =  eZExtension::baseDirectory();
+
 // patch variable used by apc.php to build urls
 $self = $_SERVER['PHP_SELF'];
 $url = 'sysinfo/apc';
 eZURI::transformURI( $url );
+
 $_SERVER['PHP_SELF'] = $url;
 ob_start();
 include( $extdir . '/ggsysinfo/modules/sysinfo/lib/apc.php' );
