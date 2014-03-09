@@ -8,5 +8,8 @@
     "require": {
         "ezsystems/ezpublish-legacy-installer": "*",
         "zetacomponents/graph": "dev-master"
-    }
+    },
+    "require-dev": {
+        "gggeek/ezextensionbuilder": "*"
+    },
 }
