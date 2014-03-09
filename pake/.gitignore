@@ -1,9 +1,1 @@
-doc
-src
-doxyfile_master
-INSTALL
-LICENSE
-options-ezextensionbuilder.yaml
-options-sample.yaml
-package_master.xml
-README
+options-ggsysinfo-user.yaml

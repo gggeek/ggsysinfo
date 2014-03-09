@@ -3,7 +3,7 @@
  * Create a graph of messages-per-minute by analyzing error logs
  *
  * @author G. Giunta
- * @copyright (C) G. Giunta 2008-2012
+ * @copyright (C) G. Giunta 2008-2014
  * @license Licensed under GNU General Public License v2.0. See file license.txt
  *
  * @todo add support for user-selected start and end date
