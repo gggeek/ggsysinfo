@@ -7,3 +7,4 @@ pakefile.php
 .idea/
 composer.phar
 composer.lock
+vendor
