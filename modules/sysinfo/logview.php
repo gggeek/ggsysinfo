@@ -1,6 +1,7 @@
 <?php
 /**
- * Dsiplay a table of messages by parsing a log file
+ * Display a list of messages by parsing an ezdebug log file, including its rotated versions.
+ * Now with support for "raw" version as well
  *
  * @author G. Giunta
  * @copyright (C) G. Giunta 2010-2014
@@ -12,7 +13,6 @@
 
 $errormsg = 'File not found';
 $data = array();
-$cachedir = eZSys::cacheDirectory() . '/sysinfo';
 $logname = '';
 
 // nb: this dir is calculated the same way as ezlog does
@@ -82,9 +82,8 @@ if ( $Params['viewmode'] == 'raw' )
 // *** output ***
 
 $tpl->setVariable( 'log', $data );
+$tpl->setVariable( 'logfile', $Params['logfile'] );
 $tpl->setVariable( 'errormsg', $errormsg );
-$tpl->setVariable( 'title', sysinfoModule::viewTitle( 'logview' ) . ': ' . $Params['logfile'] ); // washed in tpl for safety
+$tpl->setVariable( 'title', ezSysinfoModule::viewTitle( 'logview' ) . ': ' . $Params['logfile'] ); // washed in tpl for safety
 
 $extra_path = $logname;
-
-?>

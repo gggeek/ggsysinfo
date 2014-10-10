@@ -8,7 +8,11 @@
 
 {* DESIGN: Mainline *}<div class="header-mainline">{$description|wash}</div>
 
+<a href={concat('sysinfo/logview/', $logfile, '/(view)/raw')|ezurl()}>{'RAW version'|i18n( 'SysInfo')}</a>
+
 {* DESIGN: Header END *}</div></div></div></div></div></div>
+
+
 
 {* DESIGN: Content START *}{*<div class="box-bc"><div class="box-ml"><div class="box-mr"><div class="box-bl"><div class="box-br"><div class="box-content">*}
 {* DESIGN: Content START *}<div class="box-ml"><div class="box-mr"><div class="box-content">
@@ -49,29 +53,33 @@
     {$errormsg}
 {/if}
 
+{if gt($details|count(), 1000)}
+    {'Showing only the top 1000 rows'|i18n( 'SysInfo')}
+{/if}
+
 <table class="list" cellspacing="0">
-	<tr>
+    <tr>
         <th>{'Date'|i18n( 'SysInfo')}</th>
         <th>{'Client'|i18n( 'SysInfo')}</th>
         <th>{'Label'|i18n( 'SysInfo')}</th>
         <th>{'Message'|i18n( 'SysInfo')}</th>
-	</tr>
-{foreach $log as $details sequence array( 'bglight', 'bgdark') as $style}
-	<tr class="{$style}">
-		<td>
-		    {* use $details['timestamp'] for custom formatting *}
-			{$details['date']}
-		</td>
-		<td>
-			{$details['source']|wash()}
-		</td>
-		<td>
-			{$details['label']|wash()}
-		</td>
-		<td>
-			{$details['message']|wash()}
-		</td>
-	</tr>
+    </tr>
+{foreach $log as $details max 1000 sequence array( 'bglight', 'bgdark') as $style}
+    <tr class="{$style}">
+        <td>
+            {* use $details['timestamp'] for custom formatting *}
+            {$details['date']}
+        </td>
+        <td>
+            {$details['source']|wash()}
+        </td>
+        <td>
+            {$details['label']|wash()}
+        </td>
+        <td>
+            {$details['message']|wash()}
+        </td>
+    </tr>
 {/foreach}
 </table>
 

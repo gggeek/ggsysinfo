@@ -81,7 +81,7 @@ class ggSysinfoTemplateOperators
             }
             case 'sysinfomoduleviews':
                 {
-                    $operatorValue = sysinfoModule::groupList();
+                    $operatorValue = ezSysinfoModule::groupList();
                 }
                 break;
 

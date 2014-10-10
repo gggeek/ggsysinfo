@@ -9,8 +9,24 @@
 require_once( 'kernel/setup/ezsetuptests.php' );
 require_once( 'kernel/setup/ezsetupcommon.php' );
 
-class systemChecker
+class systemChecker implements ezSysinfoReport
 {
+
+    public function getReport()
+    {
+        $data = self::checkSetupRequirements();
+        return array_combine( array_keys( $data ), array_fill( 0, count( $data ), 'warning' ) );
+    }
+
+    public function getDescription()
+    {
+        return array(
+            'tag' => 'setupwizardchecks',
+            'title' => 'Setup wizard checks',
+            'executingString' => 'Executing setup wizards checks...',
+            'format' => 'byrow'
+        );
+    }
 
     /**
     * Executes checks for system requirements taken from setup wizard
@@ -41,15 +57,15 @@ class systemChecker
         }
 
         // remove failures we don't care about
-        foreach( $warnings as $testname => $error )
+        foreach( $warnings as $testName => $error )
         {
-            switch( $testname )
+            switch( $testName )
             {
                 // this test is useless: if we get here, at least 1 db connection is working (nb: is it really true? to be checked for anon uer...)
                 case 'database_all_extensions':
                 // this test should (imho) just be removed from the setup wizard
                 case 'accept_path_info':
-                    unset( $warnings[$testname] );
+                    unset( $warnings[$testName] );
                     break;
                 default:
                     break;

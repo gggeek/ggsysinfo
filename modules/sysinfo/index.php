@@ -1,5 +1,5 @@
 <?php
 
-$tpl->setVariable( 'groups', sysinfoModule::groupList() );
+$tpl->setVariable( 'groups', ezSysinfoModule::groupList() );
 
 ?>

@@ -55,7 +55,7 @@
 		<td>
 			{$type|wash}
 		</td>
-		<td>
+		<td style="text-align: right;">
 			{$count}
 		</td>
 	</tr>

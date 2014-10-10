@@ -60,7 +60,7 @@
 		<td>
 			{$details['path']}
 		</td>
-		<td>
+		<td style="text-align: right;">
 			{$details['count']}
 		</td>
 		<td style="text-align: right;">

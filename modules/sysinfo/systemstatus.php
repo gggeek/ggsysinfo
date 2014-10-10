@@ -5,27 +5,33 @@
  * NB: some tests are enabled/disabled depending upon config in sysinfo.ini
  *
  * @author G. Giunta
- * @copyright (C) G. Giunta 2008-2012
+ * @copyright (C) G. Giunta 2008-2014
  * @license Licensed under GNU General Public License v2.0. See file license.txt
-*/
+ */
 
-$format = $Params['output_format'];
+// backwards compatibility
+if ( !isset( $Params['viewmode'] ) )
+{
+    if ( isset( $Params['output_format'] ) )
+    {
+        $Params['viewmode'] = $Params['output_format'];
+    }
+}
 
-$testslist = sysInfoTools::runtests();
+$testsList = sysInfoTools::runTests();
 $ezsnmpd_available = false;
 if ( in_array( 'ezsnmpd', eZExtension::activeExtensions() ) )
 {
     $ezsnmpd_available = true;
 }
 
-if ( $format == 'plaintext' )
+if ( $Params['viewmode'] == 'plaintext' || $Params['viewmode'] == 'json' )
 {
-    var_export( $testslist );
-    eZExecution::cleanExit();
+    $response_type = $Params['viewmode'];
+    $response_data = $testsList;
+    return;
 }
-else
-{
-    $tpl->setVariable( 'testslist', $testslist );
-    $tpl->setVariable( 'ezsnmpd_available', $ezsnmpd_available );
-}
-?>
+
+$tpl->setVariable( 'testslist', $testsList );
+$tpl->setVariable( 'ezsnmpd_available', $ezsnmpd_available );
+

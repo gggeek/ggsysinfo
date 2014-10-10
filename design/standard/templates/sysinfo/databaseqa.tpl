@@ -21,6 +21,7 @@
     <th>Problems detected</th>
   </tr>
 {foreach $warnings as $warning sequence array( 'bglight', 'bgdark') as $style}
+  <tr class="{$style}">
     <td>{$warning|wash()}</td>
   </tr>
 {/foreach}

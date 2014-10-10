@@ -20,21 +20,28 @@ class reportGenerator
             $out .= $test['title'] . "\n";
             $out .= "----------\n";
 
-            if ( @$test['byrow'] )
+            switch( @$test['format'] )
             {
-                foreach( $test['data'] as $key => $val )
-                {
-                    $out .= "$key, $val\n";
-                }
-            }
-            else
-            {
-                foreach( $test['data'] as $row )
-                {
+                /// @todo convert html-with-tables to plaintext
+                case 'html':
+                    $out .= $test['data'] . "\n";
+                    break;
+
+                case 'byrow':
+                    foreach( $test['data'] as $key => $val )
                     {
-                        $out .= implode( ',', $row ) . "\n";
+                        $out .= "$key, $val\n";
                     }
-                }
+                    break;
+
+                case 'byline':
+                default:
+                    foreach( $test['data'] as $row )
+                    {
+                        {
+                            $out .= implode( ',', $row ) . "\n";
+                        }
+                    }
             }
         }
         return $out;

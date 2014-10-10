@@ -2,7 +2,7 @@
 /**
  *
  * @author G. Giunta
- * @copyright (C) G. Giunta 2010-2012
+ * @copyright (C) G. Giunta 2010-2014
  * @license Licensed under GNU General Public License v2.0. See file license.txt
  *
  * @todo sort logs by criticity
@@ -16,8 +16,8 @@ $extraLogFilesList = array();
 
 // nb: this dir is calculated the same way as ezlog does
 $debug = eZDebug::instance();
-$logfiles = $debug->logFiles();
-foreach( $logfiles as $level => $file )
+$logFiles = $debug->logFiles();
+foreach( $logFiles as $level => $file )
 {
     $logfile = $file[0] . $file[1];
     $logname = str_replace( '.log', '', $file[1] );
@@ -41,7 +41,8 @@ foreach( $logfiles as $level => $file )
             }
         }
 
-        $logFilesList[$logname] = array( 'path' => $logfile, 'count' => $count, 'size' => $size, 'modified' => $modified, 'link' => true );
+        $logFilesList[$logname] = array( 'path' => $logfile, 'count' => $count, 'size' => $size,
+            'modified' => $modified, 'link' => 'sysinfo/logview/' . $logname );
     }
 }
 
@@ -50,27 +51,32 @@ foreach( scandir( 'var/log' ) as $log )
     $logfile = "var/log/$log";
     if ( is_file( $logfile ) && substr( $log, -4 ) == '.log' && !in_array( $log, array( 'error.log', 'warning.log', 'debug.log', 'notice.log', 'strict.log' ) ) )
     {
-        $logFilesList[$log] = array( 'path' => $logfile, 'count' => '[1]', 'size' => filesize( $logfile ), 'modified' => filemtime( $logfile ) );
+        $logFilesList[$log] = array( 'path' => $logfile, 'count' => '[1]', 'size' => filesize( $logfile ),
+            'modified' => filemtime( $logfile ), 'link' => 'sysinfo/customlogview/' . str_replace( array( '/', '\\' ), ':', $logfile ) );
     }
 }
-$logdir = eZSys::varDirectory() . '/' . $ini->variable( 'FileSettings', 'LogDir' );
-foreach( scandir( $logdir ) as $log )
+$logDir = eZSys::varDirectory() . '/' . $ini->variable( 'FileSettings', 'LogDir' );
+foreach( scandir( $logDir ) as $log )
 {
-    $logfile = "$logdir/$log";
+    $logfile = "$logDir/$log";
     if ( is_file( $logfile ) && substr( $log, -4 ) == '.log' )
     {
-        $logFilesList[$log] = array( 'path' => $logfile, 'count' => '[1]', 'size' => filesize( $logfile ), 'modified' => filemtime( $logfile ) );
+        $logFilesList[$log] = array( 'path' => $logfile, 'count' => '[1]', 'size' => filesize( $logfile ),
+            'modified' => filemtime( $logfile ), 'link' => 'sysinfo/customlogview/' . str_replace( array( '/', '\\' ), ':', $logfile ) );
     }
+}
+
+// windows friendly
+foreach( $logFilesList as &$desc )
+{
+    $desc['path'] = str_replace( '\\', '/', $desc['path'] );
 }
 
 if ( $Params['viewmode'] == 'json' )
 {
-    header( 'Content-Type: application/json' );
-    echo json_encode( $logFilesList );
-    eZExecution::cleanExit();
+    $response_type = $Params['viewmode'];
+    $response_data = $logFilesList;
+    return;
 }
 
-$tpl = sysInfoTools::eZTemplateFactory();
 $tpl->setVariable( 'filelist', $logFilesList );
-
-?>

@@ -1,8 +1,20 @@
++ add histogram-like stats:
+  - number of objects with X outgoing relations
+  - number of objects with X incoming relations
+  - number of objects per version
+  - number of objects per X nodes
+  - number of nodes per X children
+  - number of objects per section
+
 + check override.ini for
   - tpls not found
-  - rules with non-existsing nodes, non-existing classes
+  - rules with non-existing nodes, non-existing classes
 
 + check for content classes with missing datatypes
+
++ check for workflows with missing event types
+
++ check for multiplexer events which point to non-existing workflows
 
 + check for rss feeds with no data defined
 
@@ -14,9 +26,18 @@
 
 + check for content classes with 0 objects
 
-+ check for stale ezmutex locks
++ check: disabled functions in php.ini, grep for their usage in php code
 
-+ add info panel for async publication
++ list size of sf cache files as well when ezp >= 5.0
+
+cluster support:
+- make more views cluster-aware: the storage churn, log churn
+- add a view comparing ini settings from across all cluster nodes (or 2 at a time)
+- better display of data for cluster-aware pages instead of stacked iframes ?
+  . get data from siblings as json
+  . cache it locally (?)
+  . coalesce it or allow display side-by-side
+  . do this via ezjscore? current master/slave view implementation is really a hack (but it works...)
 
 generic tasks:
 - retest policy rules on 4.0.7
@@ -25,15 +46,6 @@ generic tasks:
   . use own policies instead of system ones ?
 - add some js to left-hand menu to be able to expand/collapse groups of views
 - add cronjob to mail report on a fixed basis
-- cluster support:
-  - finalize json-mode for all views which expose local data
-  - add ini settings to tell to master server the ips/hostnames of siblings
-  - add out-of-band-auth for the between-cluster-nodes calls, as session cookie name might be !=
-  - make views of "master" node cluster aware:
-    . get data from siblings
-    . cache it locally
-    . coalesce it or display it side-by-side
-    . do this via ajax?
 
 security view:
 - tweak warnings about post_max_size (esp. if rest is enabled, it has to be bigger)
@@ -49,10 +61,10 @@ security view:
 
 reports views:
 - add a cache to report pages + load via ajax
-- add workflows report
 - add obj states report?
 - allow to sort on class id, and show it ? nb: might make the report less useful for syncing different installs
 - ini report: add links to switch siteaccess
+- convert all reports to being generated from json data structures, to allow proper comparison
 
 developer views:
 - add view with list of siteaccess, grouped by db/relatedsiteaccesslist
@@ -74,14 +86,14 @@ accelerator views:
 - add support for ioncube accelerator, Turck MMCache
 
 cache views:
-- add support for more clustered configs (size of clustered cache as well)
+- add support for more clustered configs (size of clustered cache as well for ezdb mode, plus db size vs. hdd size for ezdfs)
 - add a button in churn view to force regeneration of graph on demand
 - fix churn: dates in graph are not displayed optimally for large timespans
 - add cache file timestamp
 - allow cache stats page to report on enabled/disabled caches per siteaccess
 - add zoom icons on cache stats pages that bring to cache search page listing all cache files of the given type
 - add zoom icons on cache search pages that will show the cache file contents
-- when ezgeshi is found, add links to wiew with highlight of cache files
+- when ezgeshi is found, add links to view with highlight of cache files
 - improve checkboxes display in cache-search page (make them break on two or more lines)
 
 db views:
@@ -89,21 +101,20 @@ db views:
 - run mysqltuner.pl and percona-toolkit as well to get suggestions
 
 storage views:
-- add support for more clustered configs
 - add age of files in dirs
 
 content views:
 - add more content types, including those of std extensions (ezflow, ezsurvey, eznewsletter)
 - allow to remove drafts/pending/old versions from this page (see flatten.php)
+- better support for number of objects in SOLR for multicore scenarios
 
 system status views:
 - implement all tests listed (missing: self-testing soap and webdav...)
 - add cronjob that can be set up to check system status and log results somewhere
 - add a param that switches pagelayout to xml (plaintext already done done, without even hitting the template system)
 - add test for echoing something to logs, test for compiling a template
-- allow hooking of new tests via ini files
 - add a view with more detailed info about users (never logged in, deactivated, etc...)
-- add memcached control panel
+- add memcached control panel (is it really our duty? it's the same as for solr, rabbitmq etc)
 
 log views:
 - allow zooming in graph / listing of messages in a timespan

@@ -4,8 +4,6 @@
 $Module = array( 'name' => 'System Information',
                  'variable_params' => false );
 
-$ViewList = sysinfoModule::viewList();
+$ViewList = ezSysinfoModule::viewList();
 
 $FunctionList = array();
-
-?>

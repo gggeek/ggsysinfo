@@ -1,0 +1,1 @@
+{include uri='design:sysinfo/storagestats.tpl'}

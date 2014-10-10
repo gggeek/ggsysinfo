@@ -108,10 +108,9 @@ foreach( $logfiles as $level => $file )
 
 if ( $Params['viewmode'] == 'json' )
 {
-    header( 'Content-Type: application/json' );
-    //header( "Last-Modified: $mdate" );
-    echo json_encode( $cachefiles );
-    eZExecution::cleanExit();
+    $response_type = $Params['viewmode'];
+    $response_data = $cachefiles;
+    return;
 }
 
 // *** output ***
@@ -125,4 +124,3 @@ $Result['content'] = $tpl->fetch( "design:sysinfo/logchurn.tpl" ); //var_dump($c
 $Result['left_menu'] = 'design:parts/sysinfo/menu.tpl';
 $Result['path'] = array( array( 'url' => false,
                                 'text' => sysInfoTools::ezpI18ntr( 'SysInfo', 'Log churn' ) ) );
-?>

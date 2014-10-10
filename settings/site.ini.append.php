@@ -14,6 +14,13 @@ TranslationExtensions[]=ggsysinfo
 # - using PolicyOmitList[]=sysinfo/oneview, it is possible to allow anon access to one specific view
 PolicyOmitList[]=sysinfo
 
+# The following view is even more strange: it checks permissions by using a token in the db.
+# It is used for server-2-server communication in eZ clusters, and has to be accessible in backoffice siteaccesses
+PolicyOmitList[]=sysinfo/clusterslave
+
+[SiteAccessSettings]
+AnonymousAccessList[]=sysinfo/clusterslave
+
 # Cache item entry (for eZ Publish 4.3 and up)
 [Cache]
 CacheItems[]=sysinfo

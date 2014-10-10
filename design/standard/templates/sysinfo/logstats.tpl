@@ -46,35 +46,35 @@
 *}
 
 <table class="list" cellspacing="0">
-	<tr>
+    <tr>
         <th>{'Name'|i18n( 'SysInfo')}</th>
         <th>{'Path'|i18n( 'SysInfo')}</th>
         <th>{'Files'|i18n( 'SysInfo')}</th>
         <th>{'Total size (bytes)'|i18n( 'SysInfo')}</th>
         <th>{'Last updated'|i18n( 'SysInfo')}</th>
-	</tr>
-{foreach $filelist as $cache => $details sequence array( 'bglight', 'bgdark') as $style}
-	<tr class="{$style}">
-		<td>
-			{if $details.link}
-			<a href={concat('sysinfo/logview/', $cache)|ezurl()}>{$cache|wash}</a>
-			{else}
-			{$cache|wash}
-			{/if}
-		</td>
-		<td>
-			{$details['path']}
-		</td>
-		<td>
-			{$details['count']}
-		</td>
-		<td>
-			{$details['size']}
-		</td>
-		<td>
-			{$details['modified']|datetime('custom', '%M %d %Y %H:%i:%s')}
-		</td>
-	</tr>
+    </tr>
+{foreach $filelist as $log => $details sequence array( 'bglight', 'bgdark') as $style}
+    <tr class="{$style}">
+        <td>
+            {if $details.link}
+            <a href={$details.link|ezurl()}>{$log|wash}</a>
+            {else}
+            {$log|wash}
+            {/if}
+        </td>
+        <td>
+            {$details['path']}
+        </td>
+        <td style="text-align: right;">
+            {$details['count']}
+        </td>
+        <td style="text-align: right;">
+            {$details['size']}
+        </td>
+        <td>
+            {$details['modified']|datetime('custom', '%M %d %Y %H:%i:%s')}
+        </td>
+    </tr>
 {/foreach}
 </table>
 
