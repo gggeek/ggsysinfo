@@ -4,15 +4,15 @@ Extension ggsysinfo for eZ publish
 Goals:
 
 Allow eZ Publish administrators to have better insight into their working installation:
-- have the complete informations from the phpinfo() page within the eZ Publish admin interface
-- have the complete informations from the installed php accelerator within the eZ Publish admin interface, and, in case, allow to clear its cache
+- have the complete information from the phpinfo() page within the eZ Publish admin interface
+- have the complete information from the installed php accelerator within the eZ Publish admin interface, and, in case, allow to clear its cache
 - have a more detailed view on eZ Publish cache files, allowing to grep through them and delete them if needed
 - have a more detailed view on eZ Publish log files, allowing to grep through them
 - have a stats page with all types of content in the db listed
 - have a page with more detailed status tests than ezinfo/isalive
 Some pages that can be of help to developers too:
 - all available modules
-- all available module views with their parameteres
+- all available module views with their parameters
 - all available fetch functions
 - all available policy functions
 - all available policy module operations

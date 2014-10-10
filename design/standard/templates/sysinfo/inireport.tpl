@@ -10,7 +10,7 @@
 
 <h2>{'Siteaccess'|i18n('SysInfo')}: {$current_siteaccess|wash()}</h2>
 
-{* DESIGN: Mainline *}<div class="header-mainline"></div>
+{* DESIGN: Mainline *}<div class="header-mainline">{$description|wash}</div>
 
 {* DESIGN: Header END *}</div></div></div></div></div></div>
 

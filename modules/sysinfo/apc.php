@@ -2,15 +2,17 @@
 /**
  *
  * @author G. Giunta
- * @copyright (C) G. Giunta 2008-2012
+ * @copyright (C) G. Giunta 2008-2014
  * @license Licensed under GNU General Public License v2.0. See file license.txt
  */
 
 $extdir =  eZExtension::baseDirectory();
+
 // patch variable used by apc.php to build urls
 $self = $_SERVER['PHP_SELF'];
 $url = 'sysinfo/apc';
 eZURI::transformURI( $url );
+
 $_SERVER['PHP_SELF'] = $url;
 ob_start();
 include( $extdir . '/ggsysinfo/modules/sysinfo/lib/apc.php' );

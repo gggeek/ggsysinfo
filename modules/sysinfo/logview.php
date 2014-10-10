@@ -3,7 +3,7 @@
  * Dsiplay a table of messages by parsing a log file
  *
  * @author G. Giunta
- * @copyright (C) G. Giunta 2010-2012
+ * @copyright (C) G. Giunta 2010-2014
  * @license Licensed under GNU General Public License v2.0. See file license.txt
  *
  * @todo add support for user-selected start and end date (offset/limit?)
@@ -48,7 +48,7 @@ foreach( $logfiles as $level => $file )
 
                 readfile( $logfile );
                 $mdate = gmdate( 'D, d M Y H:i:s', filemtime( $logfile ) ) . ' GMT';
-                
+
                 eZExecution::cleanExit();
             }
 

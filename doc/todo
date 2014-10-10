@@ -14,6 +14,10 @@
 
 + check for content classes with 0 objects
 
++ check for stale ezmutex locks
+
++ add info panel for async publication
+
 generic tasks:
 - retest policy rules on 4.0.7
 - rebase info retrieval on ezsnmpd (?)

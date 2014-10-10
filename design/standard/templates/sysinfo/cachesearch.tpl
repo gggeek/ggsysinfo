@@ -11,7 +11,7 @@
 
 <h1 class="context-title">{"Cache search"|i18n('SysInfo')}{if or(ne($searchtext, ""), gt($list_count, 0))} [{$list_count} files found]{/if}</h1>
 
-{* DESIGN: Mainline *}<div class="header-mainline"></div>
+{* DESIGN: Mainline *}<div class="header-mainline">{$description|wash}</div>
 
 {* DESIGN: Header END *}</div></div></div></div></div></div>
 

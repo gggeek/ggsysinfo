@@ -2,13 +2,13 @@
 /**
  *
  * @author G. Giunta
- * @copyright (C) G. Giunta 2008-2012
+ * @copyright (C) G. Giunta 2008-2014
  * @license Licensed under GNU General Public License v2.0. See file license.txt
  *
  * @todo add more details, such as dates of first/last files
  * @todo add possibility to zoom in to file list going to cachesearch view
  * @todo add support for db-clustered configs - hard currently, since there is no recursive search in api...
- * @todo in edfs mode allow user to only show local / clustered data
+ * @todo in ezdfs mode allow user to only show local / clustered data
  */
 
 $cacheFilesList = array();

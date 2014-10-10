@@ -6,6 +6,10 @@
     "homepage": "http://projects.ez.no/ggsysinfo",
     "minimum-stability": "dev",
     "require": {
-        "ezsystems/ezpublish-legacy-installer": "*"
+        "ezsystems/ezpublish-legacy-installer": "*",
+        "zetacomponents/graph": "dev-master"
+    },
+    "require-dev": {
+        "gggeek/ezextensionbuilder": "*"
     }
 }

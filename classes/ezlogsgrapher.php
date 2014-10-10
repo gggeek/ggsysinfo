@@ -1,7 +1,7 @@
 <?php
 /**
  * @author G. Giunta
- * @copyright (C) G. Giunta 2008-2012
+ * @copyright (C) G. Giunta 2008-2014
  * @license Licensed under GNU General Public License v2.0. See file license.txt
  */
 
@@ -18,6 +18,8 @@ function calcChurnLabel( $pos, $step )
 class ezLogsGrapher
 {
 
+    static $lastError = '';
+
     /**
      * Parses an eZ log file, returns a (nested) array with one value per log message
      * @return array
@@ -29,6 +31,8 @@ class ezLogsGrapher
         $content = '';
         $time = 0;
         $ip = '';
+        $date = '';
+        $label = '';
         foreach ( $file as $line )
         {
             if ( preg_match( '/^\[ ([A-Za-z0-9: ]+) \] \[([0-9.]*)\] (.*)/', $line, $matches ) )
@@ -103,14 +107,24 @@ class ezLogsGrapher
      * create graph via ezc/gd2
      * @todo verify availability of gd2?
      * @todo improve layout: col. width, x axis labels, etc...
+     * @todo if zetacomponent graph is not there, create an error image using gd
      */
     static function graph( $data, $dataname, $scale = 60 )
     {
         $content = false;
+        self::$lastError = '';
 
         $times = array_keys( $data );
         $min = $times[0];
         $max = end( $times );
+
+        if ( !class_exists( 'ezcGraphBarChart' ) )
+        {
+            $errormsg = "Error while rendering graph: missing Zetacomponents Graph library";
+            self::$lastError = $errormsg;
+            eZDebug::writeError( $errormsg );
+            return false;
+        }
 
         $graph = new ezcGraphBarChart();
         $locale = eZLocale::instance();
@@ -143,6 +157,7 @@ class ezLogsGrapher
         } catch( exception $e )
         {
             $errormsg = "Error while rendering graph: " . $e->getMessage();
+            self::$lastError = $errormsg;
             eZDebug::writeError( $errormsg );
         }
         return $content;
@@ -162,6 +177,11 @@ class ezLogsGrapher
             }
         }
         return $a1;
+    }
+
+    static function lastError()
+    {
+        return self::$lastError;
     }
 }
 ?>

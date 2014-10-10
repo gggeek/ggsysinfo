@@ -3,7 +3,7 @@
  * Class used to help managing in a single place all module/view info
  *
  * @author G. Giunta
- * @copyright (C) G. Giunta 2010-2012
+ * @copyright (C) G. Giunta 2010-2014
  * @license Licensed under GNU General Public License v2.0. See file license.txt
  */
 
@@ -100,7 +100,7 @@ class sysinfoModule{
                 'default_navigation_part' => 'ezsysinfonavigationpart',
                 //'params' => array( 'output_format' ),
                 'name' => 'System check',
-                'description' => 'Executes tests to verify that the envitonment can properly support eZ Publish (i.e. the tests normally run by the setup wizard)' ),
+                'description' => 'Executes tests to verify that the environment can properly support eZ Publish (i.e. the tests normally run by the setup wizard)' ),
 
             'cachestats' => array(
                 //'functions' => array( 'system_info' ), - we check in the module itself
@@ -426,7 +426,7 @@ class sysinfoModule{
         return $viewlist;
     }
 
-    /// @todo use name if title is missing
+    // we use name if title is missing
     static function viewTitle( $viewname )
     {
         foreach( self::$view_groups as $views )
@@ -449,6 +449,18 @@ class sysinfoModule{
             }
         }
         return 'title-for-path';
+    }
+
+    static function viewDescription( $viewname )
+    {
+        foreach( self::$view_groups as $views )
+        {
+            if ( array_key_exists( $viewname, $views ) )
+            {
+                return isset( $views[$viewname]['description'] ) ? $views[$viewname]['description'] : $views[$viewname];
+            }
+        }
+        return '';
     }
 
     /// true if view is neither hidden nor disabled

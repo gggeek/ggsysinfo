@@ -1,7 +1,7 @@
 <?php
 /**
  * @author G. Giunta
- * @copyright (C) G. Giunta 2012
+ * @copyright (C) G. Giunta 2012-2014
  * @license Licensed under GNU General Public License v2.0. See file license.txt
  */
 
@@ -36,7 +36,7 @@ class dbChecker
                 return $warnings;
 
             //case 'oracle':
-                /// @todo check for stored procs which are not compiled; tables with max id bigger than their associtaed sequence; double triggers on tables
+                /// @todo check for stored procs which are not compiled; tables with max id bigger than their associated sequence; double triggers on tables
 
             default:
                 return array( 'Database type ' . $db->databaseName() . ' can currently not be checked for problems' );
