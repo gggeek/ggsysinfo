@@ -45,7 +45,7 @@ if( $options['reports'] == '' )
 }
 else
 {
-    $toGenerate = explode( ',', $options['reports'] );
+    $toGenerate = explode( ',', str_replace( ';', ',', $options['reports'] ) );
 }
 
 if( count( $options['arguments'] ) == 0 || !in_array( $options['arguments'][0], array( 'list', 'generate' ) ) )
@@ -72,7 +72,7 @@ switch( $action )
             $description = $report->getDescription();
             $cli->output( '  ' . $description['tag'] . ': ' . $description['title'] );
         }
-        $cli->output( 'Run: php extension/ggsysinfo/bin/php/report.php generate --reports=<name> to generate reports' );
+        $cli->output( "Run: php extension/ggsysinfo/bin/php/report.php generate --reports=<name,name,...> to generate reports" );
         break;
 
     case 'generate':
