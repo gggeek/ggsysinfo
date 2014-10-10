@@ -42,8 +42,8 @@ class contentStatsGatherer implements ezSysinfoReport
             'Media files (content)' => array( 'table' => 'ezmedia' ),
             'Maximum children per node' => array( 'sql' => 'SELECT MAX(tot) AS NUM FROM ( SELECT count(*) AS tot FROM ezcontentobject_tree GROUP BY parent_node_id ) nodes' ),
             'Maximum nodes per object' => array( 'sql' => 'SELECT MAX(tot) AS NUM FROM ( SELECT count(*) AS tot FROM ezcontentobject_tree GROUP BY contentobject_id ) nodes' ),
-            'Maximum incoming relations to an object' => array( 'sql' => 'SELECT MAX(tot) AS NUM FROM ( SELECT count(*) AS tot FROM ezcontentobject_link GROUP BY to_contentobject_id ) links' ),
-            'Maximum outgoing relations from an object' => array( 'sql' => 'SELECT MAX(tot) AS NUM FROM ( SELECT count(*) AS tot FROM ezcontentobject_link GROUP BY from_contentobject_id ) links' ),
+            'Maximum incoming relations to an object' => array( 'sql' => 'SELECT MAX(tot) AS NUM FROM ( SELECT count(*) AS tot FROM ezcontentobject_link GROUP BY to_contentobject_id ) links', 'nvl' => 0 ),
+            'Maximum outgoing relations from an object' => array( 'sql' => 'SELECT MAX(tot) AS NUM FROM ( SELECT count(*) AS tot FROM ezcontentobject_link GROUP BY from_contentobject_id ) links', 'nvl' => 0 ),
         );
 
         $db = eZDB::instance();
@@ -62,12 +62,8 @@ class contentStatsGatherer implements ezSysinfoReport
             {
                 $sql = $desc['sql'];
             }
-            /*if ( isset($desc['groupby']) )
-               {
-               $sql. = '';
-               }*/
             $count = $db->arrayQuery( $sql );
-            $contentList[$key] = $count[0]['NUM'];
+            $contentList[$key] = ( $count[0]['NUM'] === null ) ? $desc['nvl'] : $count[0]['NUM'];
         }
 
         if ( in_array( 'ezfind', eZExtension::activeExtensions() ) )
