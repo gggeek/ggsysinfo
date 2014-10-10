@@ -1,10 +1,11 @@
 *.PHPEditProject
+.idea/
 *.bak
 var
 build
 dist
 pakefile.php
-.idea/
+pake/options-user.yaml
 composer.phar
 composer.lock
 vendor
