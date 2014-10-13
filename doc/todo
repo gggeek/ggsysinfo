@@ -121,6 +121,7 @@ log views:
 - log search view
 
 qa views:
+- review checks which are meaningless with modern eZs, such as .ini vs .ini.append.php
 - use ajax calls to test php and tpl validity to avoid very long page load time
 - allow to specify location of php executable via ini
 - add a cache for parsed ini files

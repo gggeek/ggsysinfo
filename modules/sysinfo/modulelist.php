@@ -2,7 +2,7 @@
 /**
  * List all existing modules (optionally, in a given extension)
  * @author G. Giunta
- * @copyright (C) G. Giunta 2010-2012
+ * @copyright (C) G. Giunta 2010-2014
  * @license Licensed under GNU General Public License v2.0. See file license.txt
  *
  */

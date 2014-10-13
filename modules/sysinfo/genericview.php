@@ -31,6 +31,7 @@ if ( !in_array( "sysinfo/$view", $ini->variable( 'RoleSettings', 'PolicyOmitList
 $isClusterSlaveRequest = ezSysinfoClusterManager::isClusterSlaveRequest( $Params );
 
 $tpl = sysInfoTools::eZTemplateFactory();
+
 if ( $isClusterSlaveRequest )
 {
     // for requests which 'come from cluster', remove titles
