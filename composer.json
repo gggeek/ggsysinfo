@@ -6,6 +6,7 @@
     "homepage": "http://projects.ez.no/ggsysinfo",
     "minimum-stability": "dev",
     "require": {
+	    "php": ">=5.3",
         "ezsystems/ezpublish-legacy-installer": "*",
         "zetacomponents/graph": "dev-master"
     },
