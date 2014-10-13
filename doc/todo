@@ -28,8 +28,6 @@
 
 + check: disabled functions in php.ini, grep for their usage in php code
 
-+ list size of sf cache files as well when ezp >= 5.0
-
 cluster support:
 - make more views cluster-aware: the storage churn, log churn
 - add a view comparing ini settings from across all cluster nodes (or 2 at a time)
@@ -41,7 +39,6 @@ cluster support:
 
 generic tasks:
 - retest policy rules on 4.0.7
-- rebase info retrieval on ezsnmpd (?)
 - move to a saner security configuration
   . use own policies instead of system ones ?
 - add some js to left-hand menu to be able to expand/collapse groups of views

@@ -70,6 +70,8 @@
 {/foreach}
 </table>
 
+<p><b>NB:</b> {'Symfony cache stats are reliable only when using a standard configuration'|i18n( 'SysInfo' )}</p>
+
 {if eq( ezini( 'ClusteringSettings', 'FileHandler', 'file.ini' ), 'eZDFSFileHandler')}
     <p><b>NB:</b> {'"DFS://" stats refer to files found on the shared storage, not to what is recorded in the cluster database'|i18n( 'SysInfo' )}</p>
 {/if}

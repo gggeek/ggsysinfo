@@ -42,6 +42,26 @@ foreach ( $cacheList as $cacheItem )
     }
 }
 
+// q: are we 100% sure that the eZ5 cache is always at that location?
+if ( class_exists( 'Symfony\Component\HttpKernel\Kernel' ) && is_dir( $ezp5CacheDir = eZSys::siteDir() . '/../ezpublish/cache' ) )
+{
+    foreach( glob( $ezp5CacheDir . '/*' , GLOB_ONLYDIR ) as $envDir )
+    {
+        $env = basename( $envDir );
+        foreach( glob( $envDir . '/*' , GLOB_ONLYDIR ) as $cacheDir )
+        {
+            $cache = basename( $cacheDir );
+            $cacheName = "Symfony/$env/$cache";
+            $count = sysInfoTools::countFilesInDir( $cacheDir );
+            $cacheFilesList[$cacheName] = array(
+                'path' => "ezpublish/cache/$env/$cache",
+                'size' => ( $count ? number_format( sysInfoTools::countFilesSizeInDir( $cacheDir ) ) : "" ),
+                'count' => $count
+            );
+        }
+    }
+}
+
 if ( $Params['viewmode'] == 'json' )
 {
     $response_type = $Params['viewmode'];

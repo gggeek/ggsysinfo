@@ -234,7 +234,7 @@ class sysInfoTools implements ezSysinfoReport
     }
 
     /**
-    * Return arry of all php classes registered for autoload.
+    * Return array of all php classes registered for autoload.
     * Class ezpAutoloader does not help us here...
     */
     static function autoloadClasses()
@@ -274,7 +274,7 @@ class sysInfoTools implements ezSysinfoReport
 
     /**
     * Given a (known) tpl operator name, returns its subfolder in the online docs
-    * @param string $version
+    * @param string $operator
     * @return array or false
     *
     * @todo move list to ini ?

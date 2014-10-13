@@ -16,14 +16,23 @@ $desiredLog = str_replace( ':', '/', $Params['logfile'] );
 $logName = '';
 $isDebugLog = false;
 
-
-$desiredLogPath = dirname( $desiredLog   );
-if( $desiredLogPath != 'var/log'  && $desiredLogPath != eZSys::varDirectory() . '/' . $ini->variable( 'FileSettings', 'LogDir' ) )
+$desiredLogPath = dirname( $desiredLog );
+if( $desiredLogPath != 'var/log'
+    && $desiredLogPath != eZSys::varDirectory() . '/' . $ini->variable( 'FileSettings', 'LogDir' )
+    && $desiredLogPath != 'symfony' )
 {
     return $module->handleError( eZError::KERNEL_ACCESS_DENIED, 'kernel' );
 }
 
-$logfile = eZSys::siteDir() . '/' . $desiredLog;
+if ( $desiredLogPath == 'symfony' )
+{
+    $logfile = eZSys::siteDir() . '/../ezpublish/logs/' . basename( $desiredLog );
+}
+else
+{
+    $logfile = eZSys::siteDir() . '/' . $desiredLog;
+}
+
 if ( !file_exists( $logfile ) )
 {
     return $module->handleError( eZError::KERNEL_NOT_FOUND, 'kernel' );

@@ -78,6 +78,8 @@
 {/foreach}
 </table>
 
+<p><b>NB:</b> {'Symfony log stats are reliable only when using a standard configuration'|i18n( 'SysInfo' )}</p>
+
 {*
 <div class="context-toolbar">
 {include name=navigator

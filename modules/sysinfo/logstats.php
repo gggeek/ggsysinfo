@@ -66,6 +66,21 @@ foreach( scandir( $logDir ) as $log )
     }
 }
 
+// q: are we 100% sure that the eZ5 logs are always at that location?
+if ( class_exists( 'Symfony\Component\HttpKernel\Kernel' ) && is_dir( $ezp5CacheDir = eZSys::siteDir() . '/../ezpublish/cache' ) )
+{
+    $logDir = eZSys::siteDir() . '/../ezpublish/logs';
+    foreach( scandir( $logDir ) as $log )
+    {
+        $logfile = "$logDir/$log";
+        if ( is_file( $logfile ) && substr( $log, -4 ) == '.log' )
+        {
+            $logFilesList[$log] = array( 'path' => "Symfony/$log", 'count' => '[1]', 'size' => filesize( $logfile ),
+                'modified' => filemtime( $logfile ), 'link' => 'sysinfo/customlogview/' . 'symfony:'. $log );
+        }
+    }
+}
+
 // windows friendly
 foreach( $logFilesList as &$desc )
 {
