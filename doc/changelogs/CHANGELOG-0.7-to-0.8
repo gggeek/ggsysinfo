@@ -1,29 +1,8 @@
-Changes from 0.7 to 0.8 - released 2014/10/13
+Changes from 0.8 to 0.8.1 - released 2016/xx/yy
 
 New:
-- a view showing efficiency of realpath cache configuration in php.ini; useful especially when using the eZ5 stack:
-  sysinfo/realpath
-- vastly improved support for cluster mode:
-  the views "system status", "log file stats", "cache stats", "storage stats", "phpinfo" and opcode caches are clustered:
-  when appropriately configured, they will display data from all nodes in the cluster, in an iframe for each.
-  This extends to viewing contents of log files from all cluster nodes from a single console!
-  Configuration is done in sysinfo.ini
-- a view listing all available workflow event types and the workflows using them
-- the report.php cli script now can generate a report with all ini settings
-- the "log view" view can now display any custom logs, not just ezpublish ones. Including Smfony ones :-)
-- the "cache stats" view does display size of Smfony on-disk caches as well as eZ4 caches
-- bumped up php requirements to version 5.3
 
 Improved:
-- the systemstatus view can be extended with custom tests from other extensions
-- the list of views available in the System Information tab can be extended by other extensions
-- the list of reports available on the command line can be extended by other extensions
-- the views showing cache and storage stats have been separated into a "local" and "clustered" view when in ezdfs
-  mode. This allows to f.e. query the local data often without hitting the NFS mount at all
-- lots of internal refactoring. If you had extended/patched the extensions, I am sorry. This is better for the long term
-- the "content stats" view now reports the number of documents in solr, if ezfind is enabled, plus more data
-  about database contents, such as maximum number of nodes and links per object (important for cache clearing)
-- the report.php cli script now defaults to listing available reports, not executing all of them (as there are many verbose ones)
 
 Fixed:
-- systemstatus tests all report results as '1', '0' or 'X' strings (not integers)
+- Fix links to online docs for math template operators

@@ -2,8 +2,8 @@
 <software>
     <metadata>
         <name>ggsysinfo</name>
-        <version>0.8-dev</version>
-        <copyright>Copyright (C) 2008-2014 Gaetano Giunta</copyright>
+        <version>0.8.1</version>
+        <copyright>Copyright (C) 2008-2016 Gaetano Giunta</copyright>
         <license>GNU General Public License v2.0</license>
     </metadata>
 
