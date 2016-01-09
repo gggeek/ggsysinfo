@@ -288,7 +288,7 @@ class sysInfoTools implements ezSysinfoReport
             'Formatting-and-internationalization' => array( 'd18n', 'datetime', 'i18n', 'l10n', 'si' ),
             'Images' => array( 'image', 'imagefile', 'texttoimage' ),
             'Logical-operations' => array( 'and', 'choose', 'cond', 'eq', 'false', 'first_set', 'ge', 'gt', 'le', 'lt', 'ne', 'not', 'null', 'or', 'true' ),
-            'Matemathics' => array( 'abs', 'ceil', 'dec', 'div', 'floor', 'inc', 'max', 'min', 'mod', 'mul', 'rand', 'round', 'sub', 'sum' ),
+            'Mathematics' => array( 'abs', 'ceil', 'dec', 'div', 'floor', 'inc', 'max', 'min', 'mod', 'mul', 'rand', 'round', 'sub', 'sum' ),
             'Miscellaneous' => array( 'action_icon', 'attribute', 'classgroup_icon', 'class_icon', 'content_structure_tree', 'ezpackage', 'flag_icon', 'gettime', 'icon_info', 'makedate', 'maketime', 'mimetype_icon', 'month_overview', 'pdf', 'roman', 'topmenu', 'treemenu' ),
             'Strings' => array( 'append', 'autolink', 'begins_with', 'break', 'chr', 'compare', 'concat', 'contains', 'count_chars', 'count_words', 'crc32', 'downcase', 'ends_with', 'explode', 'extract', 'extract_left', 'extract_right', 'indent', 'insert', 'md5', 'nl2br', 'ord', 'pad', 'prepend', 'remove', 'repeat', 'replace', 'reverse', 'rot13', 'shorten', 'simpletags', 'simplify', 'trim', 'upcase', 'upfirst', 'upword', 'wash', 'wordtoimage', 'wrap' ),
             'URLs' => array( 'exturl', 'ezdesign', 'ezimage', 'ezroot', 'ezurl' ),
