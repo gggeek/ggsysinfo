@@ -39,6 +39,17 @@
 {/foreach}
 </table>
 
+<table class="list" cellspacing="0">
+  <tr>
+    <th>GIT Tag</th>
+  </tr>
+{foreach $tag_info as $result sequence array( 'bglight', 'bgdark') as $style}
+  <tr class="{$style}">
+    <td>{$result|wash()}</td>
+  </tr>
+{/foreach}
+</table>
+
 </pre>
 
 </div>
