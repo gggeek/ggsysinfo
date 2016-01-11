@@ -8,7 +8,7 @@
     "require": {
 	    "php": ">=5.3",
         "ezsystems/ezpublish-legacy-installer": "*",
-        "zetacomponents/graph": "dev-master"
+        "zetacomponents/graph": ">=1.5.2"
     },
     "require-dev": {
         "gggeek/ezextensionbuilder": "*"
