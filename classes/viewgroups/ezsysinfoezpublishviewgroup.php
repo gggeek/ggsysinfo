@@ -179,6 +179,15 @@ class ezSysinfoeZPublishViewGroup extends ezSysinfoBaseViewGroup implements ezSy
             self::$view_groups['clustercachestats']['hidden'] = true;
             self::$view_groups['clusterstoragestats']['hidden'] = true;
         }
+        if ( eZSysinfoSCMChecker::hasScmInfo()) {
+            self::$view_groups['sourcerevision'] = array(
+                'script' => 'genericview.php',
+                'default_navigation_part' => 'ezsysinfonavigationpart',
+                //'unordered_params' => array( 'view' => 'viewmode' ),
+                'name' => 'SCM Info',
+                'description' => 'Information about the Source Control System current Revision'
+            );
+        }
 
         // a bit hackish...
         if ( count( ezSysinfoClusterManager::clusterNodes() ) && ! ezSysinfoClusterManager::isClusterSlaveRequest() )

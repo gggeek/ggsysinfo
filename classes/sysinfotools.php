@@ -345,4 +345,3 @@ class sysInfoTools implements ezSysinfoReport
 
     static $ezpClasses = false;
 }
-?>

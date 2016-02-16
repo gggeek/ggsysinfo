@@ -76,5 +76,3 @@ class systemChecker implements ezSysinfoReport
     }
 
 }
-
-?>

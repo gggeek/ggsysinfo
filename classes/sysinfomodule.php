@@ -7,7 +7,11 @@
  * @license Licensed under GNU General Public License v2.0. See file license.txt
  */
 
-class sysinfoModule{
+/**
+ * @deprecated
+ */
+class sysinfoModule
+{
 
     static $initialized = false;
 
@@ -476,4 +480,3 @@ class sysinfoModule{
         return false;
     }
 }
-?>

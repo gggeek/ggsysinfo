@@ -21,7 +21,7 @@
   <tr>
     <th>GIT Revision</th>
   </tr>
-{foreach $revision_info as $result sequence array( 'bglight', 'bgdark') as $style}
+{foreach $info.revision_info as $result sequence array( 'bglight', 'bgdark') as $style}
   <tr class="{$style}">
     <td>{$result|wash()}</td>
   </tr>
@@ -32,7 +32,7 @@
   <tr>
     <th>GIT Status</th>
   </tr>
-{foreach $status_info as $result sequence array( 'bglight', 'bgdark') as $style}
+{foreach $info.status_info as $result sequence array( 'bglight', 'bgdark') as $style}
   <tr class="{$style}">
     <td>{$result|wash()}</td>
   </tr>
@@ -43,7 +43,7 @@
   <tr>
     <th>GIT Tag</th>
   </tr>
-{foreach $tag_info as $result sequence array( 'bglight', 'bgdark') as $style}
+{foreach $info.tag_info as $result sequence array( 'bglight', 'bgdark') as $style}
   <tr class="{$style}">
     <td>{$result|wash()}</td>
   </tr>
@@ -54,8 +54,9 @@
 
 </div>
 
-
-<p>Full history of source code is available at: <a href="https://bitbucket.org/itmebusiness/ovumkc">ITMEBusiness Bitbucket</a></p>
+{if ne('', ezini('SCMSettings', 'RepoLink', 'sysinfo.ini'))}
+<p>Full history of source code is available at: <a href="{ezini('SCMSettings', 'RepoLink', 'sysinfo.ini')|wash()}">{ezini('SCMSettings', 'RepoName', 'sysinfo.ini')|wash()}</a></p>
+{/endif}
 
 {* DESIGN: Content END *}</div></div></div></div></div></div>
 
