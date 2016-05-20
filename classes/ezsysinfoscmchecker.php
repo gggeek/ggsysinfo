@@ -57,6 +57,13 @@ class eZSysinfoSCMChecker implements ezSysinfoReport
 
     protected static function getScmDir()
     {
-        return is_dir('./.git') ? './.git' : (is_dir('../.git') && is_file('../ezpublish/EzPublishKernel.php') ? '../.git' : false);
+        $ini = eZINI::instance( 'sysinfo.ini' );
+        $dir = $ini->variable('SCMSettings', 'RepoDir');
+        if ($dir !== '')
+        {
+            return $dir;
+        }
+
+        return is_dir( './.git' ) ? './.git' : ( is_dir( '../.git' ) && is_file( '../ezpublish/EzPublishKernel.php' ) ? '../.git' : false );
     }
 }
