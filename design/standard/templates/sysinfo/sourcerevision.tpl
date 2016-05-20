@@ -56,7 +56,7 @@
 
 {if ne('', ezini('SCMSettings', 'RepoLink', 'sysinfo.ini'))}
 <p>Full history of source code is available at: <a href="{ezini('SCMSettings', 'RepoLink', 'sysinfo.ini')|wash()}">{ezini('SCMSettings', 'RepoName', 'sysinfo.ini')|wash()}</a></p>
-{/endif}
+{/if}
 
 {* DESIGN: Content END *}</div></div></div></div></div></div>
 
