@@ -29,36 +29,56 @@ class eZSysinfoSCMChecker implements ezSysinfoReport
     }
 
     /**
-     * @return array
+     * @todo add support for SVN
+     * @return array each element is an array with information
      */
     public static function getScmInfo()
     {
-        $dir = self::getScmDir();
-        if (!$dir) {
+        $dirs = self::getScmDir();
+        if (!$dirs) {
             return array();
         }
 
-        $revisionInfo = array();
-        exec( "cd $dir && git log -1", $revisionInfo, $retcode );
+        if ( is_string( $dirs ) )
+        {
+            $dirs = array( $dirs );
+        }
 
+        $out = array();
+        foreach( $dirs as $name => $dir )
+        {
+            if ( !is_dir( $dir) )
+            {
+                eZDebug::writeWarning( "'$dir' is not a directory, can not get SCM info", __METHOD__ );
+                continue;
+            }
 
-        $statusInfo = array();
-        exec( "cd $dir && git status", $statusInfo, $retcode );
+            $revisionInfo = array();
+            exec( "cd $dir && git log -1", $revisionInfo, $retcode );
 
-        $tagInfo = array();
-        exec( "cd $dir && git describe", $tagInfo, $retcode );
+            $statusInfo = array();
+            exec( "cd $dir && git status", $statusInfo, $retcode );
 
-        return array(
-            'revision_info' => $revisionInfo,
-            'status_info' => $statusInfo,
-            'tag_info' => $tagInfo
-        );
+            $tagInfo = array();
+            exec( "cd $dir && git describe", $tagInfo, $retcode );
+
+            $out[$name] = array(
+                'revision_info' => $revisionInfo,
+                'status_info' => $statusInfo,
+                'tag_info' => $tagInfo
+            );
+        }
+
+        return $out;
     }
 
+    /**
+     * @return false|array|string
+     */
     protected static function getScmDir()
     {
         $ini = eZINI::instance( 'sysinfo.ini' );
-        $dir = $ini->variable( 'SCMSettings', 'RepoDir' );
+        $dir = $ini->variable('SCMSettings', 'RepoDir');
         if ($dir !== '')
         {
             return $dir;

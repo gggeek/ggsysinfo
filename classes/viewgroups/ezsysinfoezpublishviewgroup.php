@@ -93,12 +93,13 @@ class ezSysinfoeZPublishViewGroup extends ezSysinfoBaseViewGroup implements ezSy
             'name' => 'Content stats',
             'description' => 'Number of content objects, information collections, pending notification events, pending indexation events etc...  present in the database' ),
 
-        'contentchurn' => array(
+        /// @todo to be implemented
+        /*'contentchurn' => array(
             //'functions' => array( 'system_info' ), - we check in the module itself
             'script' => 'genericview.php',
             'default_navigation_part' => 'ezsysinfonavigationpart',
             'name' => 'Content churn',
-            'description' => 'Graph of number of objects created per day' ),
+            'description' => 'Graph of number of objects created per day' ),*/
 
         'logstats' => array(
             //'functions' => array( 'system_info' ), - we check in the module itself

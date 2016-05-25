@@ -15,48 +15,47 @@
 <link rel="stylesheet" type="text/css" href={concat('stylesheets/',$css)|ezdesign()} />
 {/if}
 
-<pre>
-
-<table class="list" cellspacing="0">
-  <tr>
-    <th>GIT Revision</th>
-  </tr>
-{foreach $info.revision_info as $result sequence array( 'bglight', 'bgdark') as $style}
-  <tr class="{$style}">
-    <td>{$result|wash()}</td>
-  </tr>
-{/foreach}
-</table>
-
-<table class="list" cellspacing="0">
-  <tr>
-    <th>GIT Status</th>
-  </tr>
-{foreach $info.status_info as $result sequence array( 'bglight', 'bgdark') as $style}
-  <tr class="{$style}">
-    <td>{$result|wash()}</td>
-  </tr>
-{/foreach}
-</table>
-
-<table class="list" cellspacing="0">
-  <tr>
-    <th>GIT Tag</th>
-  </tr>
-{foreach $info.tag_info as $result sequence array( 'bglight', 'bgdark') as $style}
-  <tr class="{$style}">
-    <td>{$result|wash()}</td>
-  </tr>
-{/foreach}
-</table>
-
-</pre>
-
-</div>
-
 {if ne('', ezini('SCMSettings', 'RepoLink', 'sysinfo.ini'))}
-<p>Full history of source code is available at: <a href="{ezini('SCMSettings', 'RepoLink', 'sysinfo.ini')|wash()}">{ezini('SCMSettings', 'RepoName', 'sysinfo.ini')|wash()}</a></p>
+  <p>Full history of source code is available at: <a href="{ezini('SCMSettings', 'RepoLink', 'sysinfo.ini')|wash()}">{ezini('SCMSettings', 'RepoName', 'sysinfo.ini')|wash()}</a></p>
 {/if}
+
+{foreach $info as $name => $data}
+    <pre>
+    {if ne($name, '')}<h2>{$name|wash}</h2>{/if}
+    <table class="list" cellspacing="0">
+      <tr>
+        <th>GIT Revision</th>
+      </tr>
+    {foreach $data.revision_info as $result sequence array( 'bglight', 'bgdark') as $style}
+      <tr class="{$style}">
+        <td>{$result|wash()}</td>
+      </tr>
+    {/foreach}
+    </table>
+    <table class="list" cellspacing="0">
+      <tr>
+        <th>GIT Status</th>
+      </tr>
+    {foreach $data.status_info as $result sequence array( 'bglight', 'bgdark') as $style}
+      <tr class="{$style}">
+        <td>{$result|wash()}</td>
+      </tr>
+    {/foreach}
+    </table>
+    <table class="list" cellspacing="0">
+      <tr>
+        <th>GIT Tag</th>
+      </tr>
+    {foreach $data.tag_info as $result sequence array( 'bglight', 'bgdark') as $style}
+      <tr class="{$style}">
+        <td>{$result|wash()}</td>
+      </tr>
+    {/foreach}
+    </table>
+    </pre>
+
+    </div>
+{/foreach}
 
 {* DESIGN: Content END *}</div></div></div></div></div></div>
 
