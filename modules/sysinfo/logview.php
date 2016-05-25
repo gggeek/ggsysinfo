@@ -37,6 +37,8 @@ foreach( $logfiles as $level => $file )
                 header( 'Content-Type: text/plain' );
                 header( "Last-Modified: $mdate" );
 
+                /// @todo this can be a DOS. Do not attempt it if filesize is too big for the browser too handle, or use 'tail -1000'...
+
                 for( $i = eZdebug::maxLogrotateFiles(); $i > 0; $i-- )
                 {
                     $archivelog = $logfile.".$i";

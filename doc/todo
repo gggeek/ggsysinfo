@@ -10,13 +10,13 @@
   - tpls not found
   - rules with non-existing nodes, non-existing classes
 
-+ check for content classes with missing datatypes
++ check for content classes with missing datatypes (do it in ezdbintegrity?)
 
-+ check for workflows with missing event types
++ check for workflows with missing event types (do it in ezdbintegrity?)
 
-+ check for multiplexer events which point to non-existing workflows
++ check for multiplexer events which point to non-existing workflows (do it in ezdbintegrity?)
 
-+ check for rss feeds with no data defined
++ check for rss feeds with no data defined (do it in ezdbintegrity?)
 
 + check for preview-designs which do not exist
 
@@ -24,7 +24,7 @@
 
 + check for active siteaccess with no settings defined
 
-+ check for content classes with 0 objects
++ check for content classes with 0 objects (do it in ezdbintegrity?)
 
 + check: disabled functions in php.ini, grep for their usage in php code
 
@@ -38,11 +38,14 @@ cluster support:
   . do this via ezjscore? current master/slave view implementation is really a hack (but it works...)
 
 generic tasks:
-- retest policy rules on 4.0.7
+- retest policy rules on 4.0.7 (really ???)
 - move to a saner security configuration
   . use own policies instead of system ones ?
 - add some js to left-hand menu to be able to expand/collapse groups of views
 - add cronjob to mail report on a fixed basis
+
+scm view:
+- add support for svn besides git
 
 security view:
 - tweak warnings about post_max_size (esp. if rest is enabled, it has to be bigger)
@@ -116,6 +119,7 @@ system status views:
 log views:
 - allow zooming in graph / listing of messages in a timespan
 - log search view
+- do not allow raw view of a file if the file size is over X MB; only display its latest chunk
 
 qa views:
 - review checks which are meaningless with modern eZs, such as .ini vs .ini.append.php
