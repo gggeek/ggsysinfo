@@ -58,7 +58,7 @@ class eZSysinfoSCMChecker implements ezSysinfoReport
     protected static function getScmDir()
     {
         $ini = eZINI::instance( 'sysinfo.ini' );
-        $dir = $ini->variable('SCMSettings', 'RepoDir');
+        $dir = $ini->variable( 'SCMSettings', 'RepoDir' );
         if ($dir !== '')
         {
             return $dir;
