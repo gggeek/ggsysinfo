@@ -104,7 +104,8 @@ switch( $action )
         }
         $cli->output();
 
-        $cli->output( reportGenerator::getCSV( $report ) );
+        $reportFormatter = new reportGenerator();
+        $cli->output( $reportFormatter->getCSV( $report ) );
 }
 
 $script->shutdown();
