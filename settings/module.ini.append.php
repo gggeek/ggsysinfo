@@ -4,5 +4,3 @@
 ExtensionRepositories[]=ggsysinfo
 
 ModuleList[]=sysinfo
-
-*/?>

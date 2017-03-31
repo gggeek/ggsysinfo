@@ -5,7 +5,7 @@
  * NB: some tests are enabled/disabled depending upon config in sysinfo.ini
  *
  * @author G. Giunta
- * @copyright (C) G. Giunta 2008-2016
+ * @copyright (C) G. Giunta 2008-2017
  * @license Licensed under GNU General Public License v2.0. See file license.txt
  */
 
@@ -34,4 +34,3 @@ if ( $Params['viewmode'] == 'plaintext' || $Params['viewmode'] == 'json' )
 
 $tpl->setVariable( 'testslist', $testsList );
 $tpl->setVariable( 'ezsnmpd_available', $ezsnmpd_available );
-

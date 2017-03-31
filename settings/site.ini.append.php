@@ -28,5 +28,3 @@ CacheItems[]=sysinfo
 [Cache_sysinfo]
 name=ggSysInfo extension graph cache
 path=sysinfo
-
-*/ ?>

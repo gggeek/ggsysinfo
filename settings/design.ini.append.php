@@ -2,5 +2,3 @@
 
 [ExtensionSettings]
 DesignExtensions[]=ggsysinfo
-
-*/?>

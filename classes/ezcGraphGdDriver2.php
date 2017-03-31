@@ -13,5 +13,3 @@ class ezcGraphGdDriver2 extends ezcGraphGdDriver
         parent::render( $file );
     }
 }
-
-?>

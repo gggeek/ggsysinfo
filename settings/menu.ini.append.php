@@ -27,5 +27,3 @@ Shown[navigation]=true
 # current user has access to the setup/system_info policy
 # You can disable it if you use PolicyOmitList to allow access to the sysinfo module
 PolicyList[]=setup/system_info
-
-*/ ?>

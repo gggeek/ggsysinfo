@@ -6,7 +6,7 @@
  * Mode of operation: iframe contents are served from this same view, which acts as a proxy, requesting the data from other nodes
  *
  * @author G. Giunta
- * @copyright (C) G. Giunta 2014-2016
+ * @copyright (C) G. Giunta 2014-2017
  * @license Licensed under GNU General Public License v2.0. See file license.txt
  *
  * @todo use a 3-level path, with the name of the group as 2nd element ?

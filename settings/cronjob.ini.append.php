@@ -4,5 +4,3 @@
 
 #[CronjobSettings]
 #ExtensionDirectories[]=ggsysinfo
-
-*/ ?>

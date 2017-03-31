@@ -2,7 +2,7 @@
 /**
  * List all existing operations (optionally, in a given module)
  * @author G. Giunta
- * @copyright (C) G. Giunta 2010-2016
+ * @copyright (C) G. Giunta 2010-2017
  * @license Licensed under GNU General Public License v2.0. See file license.txt
  *
  */
@@ -80,5 +80,3 @@ $tpl->setVariable( 'operationlist', $operationList );
 $tpl->setVariable( 'sdkversion', eZPublishSDK::version() );
 $tpl->setVariable( 'ezgeshi_available', $ezgeshi_available );
 $tpl->setVariable( 'source_available', sysInfoTools::sourceCodeAvailable( eZPublishSDK::version() ) );
-
-?>
