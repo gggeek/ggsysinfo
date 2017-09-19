@@ -105,13 +105,13 @@ class eZSysinfoSCMChecker implements ezSysinfoReport
         $statusInfo = array();
         if ( is_file( "$dir/status.txt" ) )
         {
-            $revisionInfo = file( "$dir/status.txt", FILE_IGNORE_NEW_LINES );
+            $statusInfo = file( "$dir/status.txt", FILE_IGNORE_NEW_LINES );
         }
 
         $tagInfo = array();
         if ( is_file( "$dir/tag.txt" ) )
         {
-            $revisionInfo = file( "$dir/tag.txt", FILE_IGNORE_NEW_LINES );
+            $tagInfo = file( "$dir/tag.txt", FILE_IGNORE_NEW_LINES );
         }
 
         return array(
