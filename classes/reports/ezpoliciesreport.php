@@ -37,10 +37,11 @@ class ezPoliciesReport implements ezSysinfoReport
      */
     public static function getRoles()
     {
-        $roles = eZRole::fetchByOffset( 0, false, true, true );
+        $eZroles = eZRole::fetchByOffset( 0, false, true, true );
+        $roles = array();
 
         // scrap original array, create a new one where policies are sorted. Can you follow the logic?
-        foreach( $roles as $role )
+        foreach( $eZroles as $role )
         {
             $policies = array();
             $users = array();
