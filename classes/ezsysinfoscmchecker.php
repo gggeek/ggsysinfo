@@ -24,7 +24,10 @@ class eZSysinfoSCMChecker implements ezSysinfoReport
      */
     public static function hasScmInfo()
     {
-        return self::getScmDir() != false ? true : false;
+        $ini = eZINI::instance( 'sysinfo.ini' );
+        $type = $ini->variable('SCMSettings', 'RepoType');
+
+        return self::getScmDir($type) != false ? true : false;
     }
 
     /**
