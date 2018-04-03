@@ -4,7 +4,7 @@
  * It supports "cluster-slave-node" mode, where page navigation elements are not displayed
  *
  * @author G. Giunta
- * @copyright (C) G. Giunta 2010-2017
+ * @copyright (C) G. Giunta 2010-2018
  * @license Licensed under GNU General Public License v2.0. See file license.txt
  *
  * @todo use a 3-level path, with the name of the group as 2nd element ?
