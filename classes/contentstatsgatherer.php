@@ -2,7 +2,7 @@
 /**
  *
  * @author G. Giunta
- * @copyright (C) G. Giunta 2012-2018
+ * @copyright (C) G. Giunta 2012-2019
  * @license Licensed under GNU General Public License v2.0. See file license.txt
  *
  * @todo add more classes of content that have no stats in main admin interface
@@ -33,6 +33,7 @@ class contentStatsGatherer implements ezSysinfoReport
             'Objects (including users)' => array( 'table' => 'ezcontentobject' ),
             'Users' => array( 'table' => 'ezuser' ),
             'Nodes' => array( 'table' => 'ezcontentobject_tree' ),
+            'Object versions (including users)' => array( 'table' => 'ezcontentobject_versions' ),
             'Content Classes' => array( 'table' => 'ezcontentclass' ),
             'Information Collections' => array( 'table' => 'ezinfocollection' ),
             'Pending notification events' => array( 'table' => 'eznotificationevent', 'wherecondition' => 'status = 0' ),
@@ -40,6 +41,7 @@ class contentStatsGatherer implements ezSysinfoReport
             'Binary files (content)' => array( 'table' => 'ezbinaryfile' ),
             'Image files (content)' => array( 'table' => 'ezimagefile' ),
             'Media files (content)' => array( 'table' => 'ezmedia' ),
+            'Maximum versions per object' => array( 'sql' => 'SELECT MAX(tot) AS NUM FROM ( SELECT count(*) AS tot FROM ezcontentobject_version GROUP BY contentobject_id ) versions' ),
             'Maximum children per node' => array( 'sql' => 'SELECT MAX(tot) AS NUM FROM ( SELECT count(*) AS tot FROM ezcontentobject_tree GROUP BY parent_node_id ) nodes' ),
             'Maximum nodes per object' => array( 'sql' => 'SELECT MAX(tot) AS NUM FROM ( SELECT count(*) AS tot FROM ezcontentobject_tree GROUP BY contentobject_id ) nodes' ),
             'Maximum incoming relations to an object' => array( 'sql' => 'SELECT MAX(tot) AS NUM FROM ( SELECT count(*) AS tot FROM ezcontentobject_link GROUP BY to_contentobject_id ) links', 'nvl' => 0 ),
