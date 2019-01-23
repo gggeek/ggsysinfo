@@ -29,11 +29,11 @@ class contentStatsGatherer implements ezSysinfoReport
 
     static function gather()
     {
-        $contentTypes = array(ezcontentobject_version
+        $contentTypes = array(
             'Objects (including users)' => array( 'table' => 'ezcontentobject' ),
             'Users' => array( 'table' => 'ezuser' ),
             'Nodes' => array( 'table' => 'ezcontentobject_tree' ),
-            'Object versions (including users)' => array( 'table' => 'ezcontentobject_version' ),
+            'Object versions (including users)' => array( 'table' => 'ezcontentobject_versions' ),
             'Content Classes' => array( 'table' => 'ezcontentclass' ),
             'Information Collections' => array( 'table' => 'ezinfocollection' ),
             'Pending notification events' => array( 'table' => 'eznotificationevent', 'wherecondition' => 'status = 0' ),
