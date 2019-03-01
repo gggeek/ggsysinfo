@@ -3,3 +3,5 @@ Changes from 0.9.10 to 0.9.11 - released 2019/3/1
 Fix: do not take into accounts views when checking tables for storage engine and character set, in the DB QA checks
 
 Fix: one php warning when checking for ini files problems and there are extensions without settings at all
+
+Fix: fix for good the name of table ezcontentobject_version, used in the content Stats page

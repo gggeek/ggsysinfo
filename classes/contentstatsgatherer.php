@@ -33,7 +33,7 @@ class contentStatsGatherer implements ezSysinfoReport
             'Objects (including users)' => array( 'table' => 'ezcontentobject' ),
             'Users' => array( 'table' => 'ezuser' ),
             'Nodes' => array( 'table' => 'ezcontentobject_tree' ),
-            'Object versions (including users)' => array( 'table' => 'ezcontentobject_versions' ),
+            'Object versions (including users)' => array( 'table' => 'ezcontentobject_version' ),
             'Content Classes' => array( 'table' => 'ezcontentclass' ),
             'Information Collections' => array( 'table' => 'ezinfocollection' ),
             'Pending notification events' => array( 'table' => 'eznotificationevent', 'wherecondition' => 'status = 0' ),
