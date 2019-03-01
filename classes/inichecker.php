@@ -180,7 +180,10 @@ class iniChecker
         }
         foreach( $activeextensions as $extname )
         {
-            self::$extensioninis = array_merge( self::$extensioninis, self::scanDirForInis( $extensionsdirs[$extname] ) );
+            if ( isset( $extensionsdirs[$extname] ) )
+            {
+                self::$extensioninis = array_merge( self::$extensioninis, self::scanDirForInis( $extensionsdirs[$extname] ) );
+            }
         }
         self::$userinis = array_merge( self::$overrideinis, self::$siteaccesinis, self::$extensioninis );
 		self::$initialized = true;

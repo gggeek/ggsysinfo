@@ -22,7 +22,7 @@ class dbChecker
                 $ini = eZINI::instance();
                 $dbname = $ini->variable( 'DatabaseSettings', 'Database' );
                 $warnings = array();
-                foreach( $db->arrayquery( "SELECT table_name, table_collation, engine FROM information_schema.tables WHERE table_schema = '" . $db->escapeString( $dbname ) . "'" ) as $row )
+                foreach( $db->arrayquery( "SELECT table_name, table_collation, engine FROM information_schema.tables WHERE table_schema = '" . $db->escapeString( $dbname ) . "' AND table_type != 'VIEW'" ) as $row )
                 {
                     if ( $row['engine'] != 'InnoDB' )
                     {
