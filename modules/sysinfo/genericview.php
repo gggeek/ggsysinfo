@@ -69,7 +69,7 @@ switch ( $response_type )
         eZExecution::cleanExit();
 
     case 'plaintext':
-        header( 'Content-Type: text_plain' );
+        header( 'Content-Type: text/plain' );
         echo var_export( $response_data );
         eZExecution::cleanExit();
 
