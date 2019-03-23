@@ -71,10 +71,15 @@ class contentStatsGatherer implements ezSysinfoReport
         if ( in_array( 'ezfind', eZExtension::activeExtensions() ) )
         {
             $ini = eZINI::instance( 'solr.ini' );
-            $ezfindpingurl = $ini->variable( 'SolrBase', 'SearchServerURI' )."/admin/stats.jsp";
-            $data = eZHTTPTool::getDataByURL( $ezfindpingurl, false );
-            //var_dump( $data );
-            if ( preg_match( '#<stat +name="numDocs" ?>([^<]+)</stat>#', $data, $matches ) )
+            // remove the last part of the url, corresponding to the core name
+            $ezfindSatsUrl = substr(
+                $ini->variable( 'SolrBase', 'SearchServerURI' ),
+                0,
+                strrpos( rtrim( $ini->variable( 'SolrBase', 'SearchServerURI' ), '/' ), '/' )
+            ) . "/admin/cores";
+            $data = eZHTTPTool::getDataByURL( $ezfindSatsUrl, false );
+            /// @todo add support for multi-core setups
+            if ( preg_match( '#<int +name="numDocs" ?>([^<]+)</int>#', $data, $matches ) )
             {
                 $contentList['Documents in SOLR'] = trim( $matches[1] );
             }

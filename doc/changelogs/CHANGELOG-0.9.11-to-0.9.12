@@ -1,0 +1,3 @@
+Changes from 0.9.11 to 0.9.12 - unreleased
+
+Fix: in content stats page, request Solr data using an url which corresponds to Solr 4.10 admin interface
