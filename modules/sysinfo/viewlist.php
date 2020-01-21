@@ -2,7 +2,7 @@
 /**
  * List all existing views (optionally, in a given module)
  * @author G. Giunta
- * @copyright (C) G. Giunta 2010-2019
+ * @copyright (C) G. Giunta 2010-2020
  * @license Licensed under GNU General Public License v2.0. See file license.txt
  *
  */

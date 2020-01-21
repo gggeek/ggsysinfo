@@ -2,7 +2,7 @@
 /**
  *
  * @author G. Giunta
- * @copyright (C) G. Giunta 2012-2019
+ * @copyright (C) G. Giunta 2012-2020
  * @license Licensed under GNU General Public License v2.0. See file license.txt
  *
  * @todo add more classes of content that have no stats in main admin interface
@@ -38,6 +38,7 @@ class contentStatsGatherer implements ezSysinfoReport
             'Information Collections' => array( 'table' => 'ezinfocollection' ),
             'Pending notification events' => array( 'table' => 'eznotificationevent', 'wherecondition' => 'status = 0' ),
             'Objects pending indexation' => array( 'table' => 'ezpending_actions', 'wherecondition' => "action = 'index_object'" ),
+            'Objects pending subtree indexation (ezfind)' => array( 'table' => 'ezpending_actions', 'wherecondition' => "action = 'index_subtree'" ),
             'Binary files (content)' => array( 'table' => 'ezbinaryfile' ),
             'Image files (content)' => array( 'table' => 'ezimagefile' ),
             'Media files (content)' => array( 'table' => 'ezmedia' ),
@@ -77,6 +78,7 @@ class contentStatsGatherer implements ezSysinfoReport
                 0,
                 strrpos( rtrim( $ini->variable( 'SolrBase', 'SearchServerURI' ), '/' ), '/' )
             ) . "/admin/cores";
+            /// @todo it would be nice to be able to use a specific timeout here, in case of firewalls that block the connection...
             $data = eZHTTPTool::getDataByURL( $ezfindSatsUrl, false );
             /// @todo add support for multi-core setups
             if ( preg_match( '#<int +name="numDocs" ?>([^<]+)</int>#', $data, $matches ) )
