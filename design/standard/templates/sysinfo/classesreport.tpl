@@ -32,6 +32,7 @@
     <div style="clear:both">
     <h2>{$class.name|wash()} [{$class.identifier}]</h2>
     {$class.descriptionList[$language_code]|wash}
+    <pre>
     <table class="list">
     <tr class="bglight"><td>{'Container'|i18n('SysInfo')}</td><td>{if $class.is_container}{'Yes'|i18n('SysInfo')}{else}{'No'|i18n('SysInfo')}{/if}</td></tr>
     <tr class="bgdark"><td>{'Always available'|i18n('SysInfo')}</td><td>{if $class.always_available}{'Yes'|i18n('SysInfo')}{else}{'No'|i18n('SysInfo')}{/if}</td></tr>
@@ -67,7 +68,9 @@
     </tr>
     {/foreach}
     </table>
+    </pre>
 {/foreach}
+
 {undef $attributes $classes $LanguageCode}
 
 {* DESIGN: Content END *}</div></div></div>

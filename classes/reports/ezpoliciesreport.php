@@ -54,26 +54,29 @@ class ezPoliciesReport implements ezSysinfoReport
                     // We only use the "name" in each limitation.
                     // This might cause fake-positives when comparing, f.e. different node-limitations on different folders all having the same name
                     // But comparing what is inside the limitation is hard (eg node-ids, which we do not want to compare)
-                    $valNames = array();
+                    $limValues = array();
                     foreach( $values as $item )
                     {
-                        $valNames[] = $item["Name"];
+                        $limValues[] = $item["Name"];
                     }
-                    $limName = $limitation->attribute( 'identifier' ) . '_' . md5( serialize( $valNames ) );
-                    $limitations[$limName] = array(
+                    sort($limValues);
+                    $limitations[] = array(
                         'identifier' => $limitation->attribute( 'identifier' ),
-                        'values_as_array_with_names' => $values
+                        'values_as_array_with_names' => $limValues
                     );
                 }
-                ksort( $limitations );
+                // sort based on limitation identifier, then elements of lim. values
+                usort( $limitations, array( 'ezPoliciesReport', 'compareLimitations' ) );
+
                 $policy = array(
                     'module_name' => $policy->attribute('module_name'),
                     'function_name' => $policy->attribute('function_name'),
-                    'limitations' => array_values( $limitations )
+                    'limitations' => $limitations
                 );
-                $policies[$policy['module_name'] . '_' . $policy['function_name'] . '_' . md5( serialize( array_keys( $limitations ) ) ) ] = $policy;
+                $policies[] = $policy;
             }
-            ksort( $policies );
+
+            usort( $policies, array( 'ezPoliciesReport', 'comparePolicies' ) );
             foreach( $role->fetchUserByRole() as $user )
             {
                 $users[$user['user_object']->attribute('name')] = $user;
@@ -87,5 +90,67 @@ class ezPoliciesReport implements ezSysinfoReport
 
         ksort( $roles );
         return array_values( $roles );
+    }
+
+    /**
+     * @param array $limA
+     * @param array $limB
+     * @return int
+     */
+    protected static function compareLimitations( $limA, $limB )
+    {
+        if ( $limA['identifier'] != $limB['identifier'] )
+        {
+            return strcmp( $limA['identifier'], $limB['identifier'] );
+        }
+        else
+        {
+            foreach( $limA['values_as_array_with_names'] as $key => $val )
+            {
+                if ( !isset( $limB['values_as_array_with_names'][$key]) )
+                {
+                    // B has less elements => goes first
+                    return 1;
+                }
+                $diff = strcmp( $val, $limB['values_as_array_with_names'][$key] );
+                if ( $diff != 0 )
+                {
+                    return $diff;
+                }
+            }
+            // A has less elements than B or equal
+            return -1;
+        }
+    }
+
+    protected static function comparePolicies( $polA, $polB )
+    {
+        if ( $polA['module_name'] != $polB['module_name'] )
+        {
+            return strcmp( $polA['module_name'], $polB['module_name'] );
+        }
+        elseif ( $polA['function_name'] != $polB['function_name'] )
+        {
+            return strcmp( $polA['function_name'], $polB['function_name'] );
+        }
+        else
+        {
+            foreach( $polA['limitations'] as $key => $limA )
+            {
+                if ( !isset( $polB['limitations'][$key]) )
+                {
+                    // B has less limitations => goes first
+                    return 1;
+                }
+
+                $diff = self::compareLimitations( $limA, $polB['limitations'][$key] );
+                if ( $diff != 0 )
+                {
+                    return $diff;
+                }
+            }
+            // A has less limitations than B or equal
+            return -1;
+        }
     }
 }

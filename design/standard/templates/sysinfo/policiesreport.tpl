@@ -33,12 +33,13 @@
     <div style="clear:both">
     <h2>{$role.name|wash()}</h2>
 
+    <pre>
     <table class="list">
     <tr>
         <th>{'Policies'|i18n('SysInfo')}</th>
         <th>{'Module'|i18n('SysInfo')}</th>
         <th>{'Function'|i18n('SysInfo')}</th>
-        <th>{'Limitation'|i18n('SysInfo')}</th>
+        <th>{'Limitations'|i18n('SysInfo')}</th>
     </tr>
     {set $i = 1}
     {foreach $role.policies as $policy sequence array( 'bglight', 'bgdark') as $style}
@@ -46,14 +47,7 @@
         <td>{$i}</td>
         <td>{$policy.module_name|wash}</td>
         <td>{$policy.function_name|wash}</td>
-        <td>{foreach $policy.limitations as $limitation}
-            {$limitation.identifier|wash}(
-            {foreach $limitation.values_as_array_with_names as $limitation_value}
-                {$limitation_value.Name|wash}
-                {delimiter}, {/delimiter}
-            {/foreach})
-            {delimiter}, {/delimiter}
-        {/foreach}</td>
+        <td>{foreach $policy.limitations as $limitation}{$limitation.identifier|wash}({foreach $limitation.values_as_array_with_names as $limitation_value}{$limitation_value|wash}{delimiter}, {/delimiter}{/foreach}){delimiter}, {/delimiter}{/foreach}</td>
         {set $i = $i|inc()}
     </tr>
     {/foreach}
@@ -87,6 +81,7 @@
     </tr>
     {/foreach}
     </table>
+    </pre>
 
 {/foreach}
 {undef $policies $i $limit_location_array $limit_node $limit_section}

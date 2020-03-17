@@ -60,6 +60,7 @@ security view:
   . too many roles with content/* policies
 
 reports views:
+- use monotype font for workflow report
 - add a cache to report pages + load via ajax
 - add obj states report?
 - allow to sort on class id, and show it ? nb: might make the report less useful for syncing different installs
