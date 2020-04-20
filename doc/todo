@@ -8,7 +8,7 @@
 
 + check override.ini for
   - tpls not found
-  - rules with non-existing nodes, non-existing classes
+  - rules with non-existing nodes, non-existing classes, non-existing sections
 
 + check for content classes with missing datatypes (do it in ezdbintegrity?)
 
