@@ -1,0 +1,5 @@
+Changes from 0.9.14 to 0.9.15 - released 2020/4/22
+
+Improved: in content stats page separate number of archived versions from number of draft versions
+
+Fixed: in content stats page, the number of outgoing links was overestimated

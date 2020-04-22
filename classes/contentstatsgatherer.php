@@ -42,11 +42,13 @@ class contentStatsGatherer implements ezSysinfoReport
             'Binary files (content)' => array( 'table' => 'ezbinaryfile' ),
             'Image files (content)' => array( 'table' => 'ezimagefile' ),
             'Media files (content)' => array( 'table' => 'ezmedia' ),
-            'Maximum versions per object' => array( 'sql' => 'SELECT MAX(tot) AS NUM FROM ( SELECT count(*) AS tot FROM ezcontentobject_version GROUP BY contentobject_id ) versions' ),
+            //'Maximum versions per object' => array( 'sql' => 'SELECT MAX(tot) AS NUM FROM ( SELECT count(*) AS tot FROM ezcontentobject_version GROUP BY contentobject_id ) versions' ),
+            'Maximum archived versions per object' => array( 'sql' => 'SELECT MAX(tot) AS NUM FROM ( SELECT count(*) AS tot FROM ezcontentobject_version WHERE status IN (0, 5) GROUP BY contentobject_id ) versions' ),
+            'Maximum draft versions per object' => array( 'sql' => 'SELECT MAX(tot) AS NUM FROM ( SELECT count(*) AS tot FROM ezcontentobject_version WHERE status = 3 GROUP BY contentobject_id ) versions' ),
             'Maximum children per node' => array( 'sql' => 'SELECT MAX(tot) AS NUM FROM ( SELECT count(*) AS tot FROM ezcontentobject_tree GROUP BY parent_node_id ) nodes' ),
             'Maximum nodes per object' => array( 'sql' => 'SELECT MAX(tot) AS NUM FROM ( SELECT count(*) AS tot FROM ezcontentobject_tree GROUP BY contentobject_id ) nodes' ),
             'Maximum incoming relations to an object' => array( 'sql' => 'SELECT MAX(tot) AS NUM FROM ( SELECT count(*) AS tot FROM ezcontentobject_link GROUP BY to_contentobject_id ) links', 'nvl' => 0 ),
-            'Maximum outgoing relations from an object' => array( 'sql' => 'SELECT MAX(tot) AS NUM FROM ( SELECT count(*) AS tot FROM ezcontentobject_link GROUP BY from_contentobject_id ) links', 'nvl' => 0 ),
+            'Maximum outgoing relations from an object' => array( 'sql' => 'SELECT MAX(tot) AS NUM FROM ( SELECT count(*) AS tot FROM ezcontentobject_link GROUP BY from_contentobject_id, from_contentobject_version ) links', 'nvl' => 0 ),
         );
 
         $db = eZDB::instance();
