@@ -58,7 +58,7 @@ class ezSysinfoClusterManager
         return null;
     }
 
-    static public function clusterDataRetrievalMode()
+    /*static public function clusterDataRetrievalMode()
     {
         $ini = eZINI::instance( 'sysinfo.ini' );
         switch( $ini->variable( 'ClusterSettings', 'DataRetrieval' ) )
@@ -68,7 +68,7 @@ class ezSysinfoClusterManager
             default:
                 return self::RETRIEVAL_MODE_BACKEND;
         }
-    }
+    }*/
 
     /**
      * The list of nodes in the cluster, as per configuration.

@@ -93,7 +93,7 @@ class ezSysinfoModule
         {
             if ( array_key_exists( $viewName, $views ) )
             {
-                return isset( $views[$viewName]['description'] ) ? $views[$viewName]['description'] : $views[$viewName];
+                return isset( $views[$viewName]['description'] ) ? $views[$viewName]['description'] : $views[$viewName]['name'];
             }
         }
         return '';

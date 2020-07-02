@@ -1,0 +1,7 @@
+Changes from 0.9.15 to 0.9.16 - released xxx-yyy
+
+Fixed: in storage churn page, avoid exception if there is no data available
+
+Improved: made the log-parsing algorithms for logs stats and graphs more resilient
+
+Improved: generate less warnings in ez logs

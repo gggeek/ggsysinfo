@@ -17,14 +17,19 @@ function calcChurnLabel( $pos, $step )
 
 class ezLogsGrapher
 {
-
     static $lastError = '';
+    // assume that ezlog format could have been slightly tweaked
+    static $ezLogRegexp = '/^\[ ?([A-Za-z0-9:\- ]+) ?\] \[([0-9.]*)\] (.*)/';
+    static $storageLogRegexp = '/^\[ ?([A-Za-z0-9:\- ]+) ?\] \[(.*)\]$/';
+    static $exclude_regexp = '#\] Timing Point: #';
 
     /**
      * Parses an eZ log file, returns a (nested) array with one value per log message
-     * @return array
+     * @param string $logfile
+     * @return array[]
+     * @todo add support for storage log format
      */
-    static function splitLog( $logfile, $exclude_regexp='#\] Timing Point: #' )
+    static function splitLog( $logfile )
     {
         $file =  file( $logfile );
         $data = array();
@@ -35,7 +40,7 @@ class ezLogsGrapher
         $label = '';
         foreach ( $file as $line )
         {
-            if ( preg_match( '/^\[ ([A-Za-z0-9: ]+) \] \[([0-9.]*)\] (.*)/', $line, $matches ) )
+            if ( preg_match( self::$ezLogRegexp, $line, $matches ) )
             {
                 if ( $time > 0 )
                 {
@@ -43,13 +48,13 @@ class ezLogsGrapher
                 }
                 $time = 0;
                 $content = '';
-                if ( !preg_match( $exclude_regexp, $line ) )
+                if ( !preg_match( self::$exclude_regexp, $line ) )
                 {
-                    $date = $matches[1];
+                    $date = trim( $matches[1] );
                     /// @todo test if $time > 0 else log error
                     $time = strtotime( $date );
                     $ip = $matches[2];
-                    $label = $matches[3];
+                    $label = ( trim( $matches[3] ) != ':' ? $matches[3] : '' );
                 }
             }
             else
@@ -65,11 +70,14 @@ class ezLogsGrapher
     }
 
     /**
-    * Returns an array where indexes are timestamps, and values are the number of log events found
-    * @param $scale the time interval used to average (default: 1 minute)
-    * @return array
-    */
-    static function parseLog( $logfile, $scale=60, $exclude_regexp='#\] Timing Point: #' )
+     * Returns an array where indexes are timestamps, and values are the number of log events found
+     * @param string $logfile
+     * @param int $scale the time interval used to average (default: 1 minute)
+     * @param bool $isStorageLog
+     * @return array
+     * @todo rename, this is an histogram generator
+     */
+    static function parseLog( $logfile, $scale = 60, $isStorageLog = false )
     {
         if ( !file_exists( $logfile ) )
         {
@@ -79,11 +87,12 @@ class ezLogsGrapher
         $data = array();
         foreach ( $file as $line )
         {
-            if ( strlen( $line ) > 22 && substr( $line, 0, 2 ) == '[ ' && substr( $line, 22, 2) == ' ]' )
+            /// @todo verify is this is correct - are date strings long 19 or 20 chars ? Also: move to a regexp...
+            if ( preg_match( ( $isStorageLog ? self::$storageLogRegexp : self::$ezLogRegexp ), $line, $matches ) )
             {
-                if ( !preg_match( $exclude_regexp, $line ) )
+                if ( !preg_match( self::$exclude_regexp, $line ) )
                 {
-                    $time = strtotime( substr( $line, 2, 20 ) );
+                    $time = strtotime( $matches[1] );
                     if ( $time > 0 )
                     {
 
@@ -142,7 +151,6 @@ class ezLogsGrapher
         $graph->xAxis->min = $min - ( $scale / 2 );
         $graph->xAxis->max = $max + ( $scale / 2 );
         $graph->xAxis->labelCallback = 'calcChurnLabel';
-        $graph->data[$dataname] = new ezcGraphArrayDataSet( $data );
         $graph->driver = new ezcGraphGdDriver2();
         $graph->driver->options->imageFormat = IMG_JPEG;
         // pick a font that is delivered along with ezp
@@ -150,6 +158,7 @@ class ezLogsGrapher
 
         try
         {
+            $graph->data[$dataname] = new ezcGraphArrayDataSet( $data );
             $ok = ob_start();
             $graph->render( 600, 400, 'php://stdout' );
             $content = ob_get_clean();

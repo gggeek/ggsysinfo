@@ -6,7 +6,7 @@
 
 <h1 class="context-title">{$title|wash()}</h1>
 
-{* DESIGN: Mainline *}<div class="header-mainline">{$description|wash}</div>
+{* DESIGN: Mainline *}{*<div class="header-mainline">{$description|wash}</div>*}
 
 <a href={concat('sysinfo/logview/', $logfile, '/(view)/raw')|ezurl()}>{'RAW version'|i18n( 'SysInfo')}</a>
 

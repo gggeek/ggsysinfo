@@ -70,9 +70,7 @@
                     $limit_node=fetch('content','node', hash('node_id', $limit_location_array[$limit_location_array|count()|sub(2)] ))
                 }{$user.limit_ident|wash}:&nbsp;"{$limit_node.name|wash}"&nbsp;({$user.limit_value|wash}){else
                 }{set $limit_section=fetch( 'section', 'object', hash( 'section_id', $user.limit_value ) )
-                }{$user.limit_ident|wash}:&nbsp;"{$limit_section.name|wash}"&nbsp;({$user.limit_value|wash}){/if
-            }{/if
-        }</td>
+                }{$user.limit_ident|wash}:&nbsp;"{$limit_section.name|wash}"&nbsp;({$user.limit_value|wash}){/if}{/if}</td>
         {set $i = $i|inc()}
     </tr>
     {/foreach}

@@ -24,7 +24,7 @@ if ( $Params['viewmode'] == 'json' )
         /// @todo return a 404 error?
     }
 
-    $data = ezLogsGrapher::asum( ezLogsGrapher::parseLog( $logfile, $scale ), ezLogsGrapher::parseLog( $logfile2, $scale ) );
+    $data = ezLogsGrapher::asum( ezLogsGrapher::parseLog( $logfile, $scale, true ), ezLogsGrapher::parseLog( $logfile2, $scale, true ) );
     ksort( $data );
 
     $mtime = @filemtime( $logfile );
@@ -69,7 +69,7 @@ if ( !$cachefound )
     $scalenames = array( 60 => 'minute', 60*60 => 'hour', 60*60*24 => 'day' );
 
     // *** Parse storage.log files ***
-    $data = ezLogsGrapher::asum( ezLogsGrapher::parseLog( $logfile, $scale ), ezLogsGrapher::parseLog( $logfile2, $scale ) );
+    $data = ezLogsGrapher::asum( ezLogsGrapher::parseLog( $logfile, $scale, true ), ezLogsGrapher::parseLog( $logfile2, $scale, true ) );
     ksort( $data );
 
     // *** build graph and store it ***

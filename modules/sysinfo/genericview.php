@@ -10,7 +10,8 @@
  * @todo use a 3-level path, with the name of the group as 2nd element ?
  */
 
-/// @var eZModule $module
+/** @var array $Params */
+/** @var eZModule $module */
 $module = $Params['Module'];
 $view = $module->currentView();
 

@@ -61,7 +61,6 @@ foreach( $logfiles as $level => $file )
                 if ( file_exists( $archivelog ) )
                 {
                     $data = array_merge( $data, ezLogsGrapher::splitLog( $archivelog ) );
-                    //var_dump( $archivelog );
                 }
             }
 
