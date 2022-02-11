@@ -20,7 +20,6 @@ Enabled[edit]=false
 Shown[]
 Shown[default]=true
 Shown[browse]=false
-Enabled[edit]=true
 Shown[navigation]=true
 
 # This line means the tab will not be visible on eZP 4.3 and later unless the

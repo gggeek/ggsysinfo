@@ -1,0 +1,5 @@
+Changes from 0.9.16 to 0.9.17 - released 2022-2-11
+
+Improved: remove all php short open tags
+
+Improved: make sysinfo tab in top-level nav disabled in edit mode
