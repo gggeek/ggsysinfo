@@ -1,5 +1,7 @@
 <?php
 
+/** @var eZTemplate $tpl */
+
 $workflows = eZWorkflow::fetchList( );
 $triggers = eZTrigger::fetchList();
 

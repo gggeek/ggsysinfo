@@ -11,6 +11,10 @@
  * @todo add support for not showing older (rotated) logs
  */
 
+/** @var array $Params */
+/** @var eZTemplate $tpl */
+/** @var eZINI $ini */
+
 $errormsg = 'File not found';
 $data = array();
 $logname = '';

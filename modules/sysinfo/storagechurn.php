@@ -11,6 +11,10 @@
  * @todo
  */
 
+/** @var array $Params */
+/** @var eZTemplate $tpl */
+/** @var eZINI $ini */
+
 $errormsg = "";
 // nb: this dir is calculated the same way as ezlog does
 $logfile = eZSys::varDirectory() . '/' . $ini->variable( 'FileSettings', 'LogDir' ) . '/storage.log';

@@ -10,6 +10,10 @@
  * @todo add information: originating extension for each type
  */
 
+/** @var array $Params */
+/** @var eZTemplate $tpl */
+/** @var eZINI $ini */
+
 $eventTypeList = eZWorkflowType::fetchRegisteredTypes();
 ksort( $eventTypeList );
 

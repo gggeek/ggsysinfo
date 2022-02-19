@@ -9,6 +9,10 @@
  * @todo add support for if-modified-since, etag headers
  */
 
+/** @var array $Params */
+/** @var eZTemplate $tpl */
+/** @var eZINI $ini */
+
 $module = $Params['Module'];
 
 $desiredLog = str_replace( ':', '/', $Params['logfile'] );
@@ -26,7 +30,8 @@ if( $desiredLogPath != 'var/log'
 
 if ( $desiredLogPath == 'symfony' )
 {
-    $logfile = eZSys::siteDir() . '/../ezpublish/logs/' . basename( $desiredLog );
+    $ezp5LogDir = is_dir( eZSys::siteDir() . '/../ezpublish/logs' ) ? eZSys::siteDir() . '/../ezpublish/logs/' : eZSys::siteDir() . '/../var/logs/';
+    $logfile = $ezp5LogDir . basename( $desiredLog );
 }
 else
 {

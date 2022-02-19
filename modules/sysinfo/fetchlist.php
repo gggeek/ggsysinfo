@@ -7,6 +7,10 @@
  *
  */
 
+/** @var array $Params */
+/** @var eZTemplate $tpl */
+/** @var eZINI $ini */
+
 // rely on system policy instead of creating our own, but allow also PolicyOmitList
 $ini = eZINI::instance();
 if ( !in_array( 'sysinfo/fetchlist', $ini->variable( 'RoleSettings', 'PolicyOmitList' ) ) )

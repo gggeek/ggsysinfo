@@ -1,6 +1,5 @@
 <?php
 /**
- *
  * @author G. Giunta
  * @copyright (C) G. Giunta 2008-2022
  * @license Licensed under GNU General Public License v2.0. See file license.txt
@@ -10,6 +9,10 @@
  * @todo add support for db-clustered configs - hard currently, since there is no recursive search in api...
  * @todo in ezdfs mode allow user to only show clustered data
  */
+
+/** @var array $Params */
+/** @var eZTemplate $tpl */
+/** @var eZINI $ini */
 
 $cacheFilesList = array();
 
@@ -43,7 +46,8 @@ foreach ( $cacheList as $cacheItem )
 }
 
 // q: are we 100% sure that the eZ5 cache is always at that location?
-if ( class_exists( 'Symfony\Component\HttpKernel\Kernel' ) && is_dir( $ezp5CacheDir = eZSys::siteDir() . '/../ezpublish/cache' ) )
+if ( class_exists( 'Symfony\Component\HttpKernel\Kernel' ) && (
+    is_dir( $ezp5CacheDir = eZSys::siteDir() . '/../ezpublish/cache' ) || is_dir( $ezp5CacheDir = eZSys::siteDir() . '/../var/cache' )) )
 {
     foreach( glob( $ezp5CacheDir . '/*' , GLOB_ONLYDIR ) as $envDir )
     {

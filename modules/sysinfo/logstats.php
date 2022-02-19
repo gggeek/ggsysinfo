@@ -1,6 +1,5 @@
 <?php
 /**
- *
  * @author G. Giunta
  * @copyright (C) G. Giunta 2010-2022
  * @license Licensed under GNU General Public License v2.0. See file license.txt
@@ -8,11 +7,14 @@
  * @todo sort logs by criticity
  */
 
+/** @var array $Params */
+/** @var eZTemplate $tpl */
+/** @var eZINI $ini */
+
 $errormsg = '';
 $cachedir = eZSys::cacheDirectory() . '/sysinfo';
 $logFilesList = array();
 $extraLogFilesList = array();
-
 
 // nb: this dir is calculated the same way as ezlog does
 $debug = eZDebug::instance();
@@ -67,12 +69,12 @@ foreach( scandir( $logDir ) as $log )
 }
 
 // q: are we 100% sure that the eZ5 logs are always at that location?
-if ( class_exists( 'Symfony\Component\HttpKernel\Kernel' ) && is_dir( $ezp5CacheDir = eZSys::siteDir() . '/../ezpublish/cache' ) )
+if ( class_exists( 'Symfony\Component\HttpKernel\Kernel' ) && (
+    is_dir( $ezp5LogDir = eZSys::siteDir() . '/../ezpublish/logs' ) || is_dir( $ezp5LogDir = eZSys::siteDir() . '/../var/logs' ) ) )
 {
-    $logDir = eZSys::siteDir() . '/../ezpublish/logs';
-    foreach( scandir( $logDir ) as $log )
+    foreach( scandir( $ezp5LogDir ) as $log )
     {
-        $logfile = "$logDir/$log";
+        $logfile = "$ezp5LogDir/$log";
         if ( is_file( $logfile ) && substr( $log, -4 ) == '.log' )
         {
             $logFilesList[$log] = array( 'path' => "Symfony/$log", 'count' => '[1]', 'size' => filesize( $logfile ),

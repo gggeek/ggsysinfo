@@ -1,5 +1,8 @@
 <?php
 
+/** @var array $Params */
+/** @var eZTemplate $tpl */
+
 $currentSiteAccess = $Params['siteaccess'];
 
 if ( $currentSiteAccess == '' )

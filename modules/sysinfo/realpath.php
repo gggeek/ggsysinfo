@@ -1,5 +1,7 @@
 <?php
 
+/** @var eZTemplate $tpl */
+
 $tpl->setVariable(
     'realpath_cache',
     array(

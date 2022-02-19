@@ -13,6 +13,10 @@
  * @todo use a line graph and coalesce logs together
  */
 
+/** @var array $Params */
+/** @var eZTemplate $tpl */
+/** @var eZINI $ini */
+
 $errormsg = '';
 $cachedir = eZSys::cacheDirectory() . '/sysinfo';
 $scale = 60;

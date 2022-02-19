@@ -4,6 +4,9 @@
  * @copyright (C) G. Giunta 2014-2022
  * @license Licensed under GNU General Public License v2.0. See file license.txt
  */
+
+/** @var eZTemplate $tpl */
+
 $mysqlnd_available = false;
 if ( function_exists( 'mysqli_get_client_stats' ) )
 {

@@ -7,6 +7,9 @@
  *
  */
 
+/** @var array $Params */
+/** @var eZTemplate $tpl */
+
 // generic info for all views: module name, extension name, ...
 $viewList = array();
 $modules = eZModuleLister::getModuleList();

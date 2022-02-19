@@ -7,6 +7,8 @@
  * A view which is used to do alternative permission checking, then execute one of the std views
  */
 
+/** @var array $Params */
+
 $module = $Params['Module'];
 $targetView = array_shift( $Params['Parameters'] );
 $token = $Params['authToken'];

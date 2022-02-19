@@ -161,7 +161,7 @@ class ezSysinfoClusterManager
      * Starts the http call to retrieve content from cluster nodes, setting appropriate configs
      *
      * @param string $url
-     * @return stream resource
+     * @return resource stream
      */
     static public function clusterDataFopen( $url )
     {

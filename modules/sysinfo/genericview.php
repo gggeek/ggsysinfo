@@ -29,7 +29,7 @@ if ( !in_array( "sysinfo/$view", $ini->variable( 'RoleSettings', 'PolicyOmitList
     }
 }
 
-$isClusterSlaveRequest = ezSysinfoClusterManager::isClusterSlaveRequest( $Params );
+$isClusterSlaveRequest = ezSysinfoClusterManager::isClusterSlaveRequest( /*$Params*/ );
 
 $tpl = sysInfoTools::eZTemplateFactory();
 
@@ -68,11 +68,13 @@ switch ( $response_type )
         header( 'Content-Type: application/json' );
         echo json_encode( $response_data );
         eZExecution::cleanExit();
+        break;
 
     case 'plaintext':
         header( 'Content-Type: text/plain' );
         echo var_export( $response_data );
         eZExecution::cleanExit();
+        break;
 
     case '':
         break;

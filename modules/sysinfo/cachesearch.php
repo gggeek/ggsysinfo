@@ -1,6 +1,5 @@
 <?php
 /**
- *
  * @author G. Giunta
  * @copyright (C) G. Giunta 2008-2022
  * @license Licensed under GNU General Public License v2.0. See file license.txt
@@ -9,6 +8,11 @@
  * @todo add confirmation message with nr. of deleted files
  * @todo add support for clustered configs - hard currently, since there is no recursive search in api...
  */
+
+/** @var array $Params */
+/** @var eZTemplate $tpl */
+/** @var eZINI $ini */
+/** @var eZUser $user */
 
 $module = $Params['Module'];
 $http = eZHTTPTool::instance();

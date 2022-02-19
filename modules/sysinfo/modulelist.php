@@ -7,6 +7,9 @@
  *
  */
 
+/** @var array $Params */
+/** @var eZTemplate $tpl */
+
 // generic info for all modules: number of views, fetch functions, policy functions, name of extension
 $moduleList = array();
 

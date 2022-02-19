@@ -9,6 +9,9 @@
  * @license Licensed under GNU General Public License v2.0. See file license.txt
  */
 
+/** @var array $Params */
+/** @var eZTemplate $tpl */
+
 // backwards compatibility
 if ( !isset( $Params['viewmode'] ) )
 {

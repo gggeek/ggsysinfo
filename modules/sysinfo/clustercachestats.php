@@ -1,6 +1,5 @@
 <?php
 /**
- *
  * @author G. Giunta
  * @copyright (C) G. Giunta 2008-2022
  * @license Licensed under GNU General Public License v2.0. See file license.txt
@@ -10,6 +9,10 @@
  * @todo add support for db-clustered configs - hard currently, since there is no recursive search in api...
  * @todo in ezdfs mode allow user to only show clustered data
  */
+
+/** @var array $Params */
+/** @var eZTemplate $tpl */
+/** @var eZINI $ini */
 
 $cacheFilesList = array();
 
