@@ -128,7 +128,11 @@
 {* DESIGN: Control bar END *}</div></div></div></div></div></div>
 </div>
 
+<hr>
+{def $timestamp=currentdate()}
+Host: {$hostname|wash}; date: {$timestamp|l10n( 'shortdatetime' )}
 </div>
+
 
 <!--</form>-->
 

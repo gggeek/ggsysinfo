@@ -68,7 +68,9 @@ if ( $http->hasPostVariable( 'SearchText' ) && $http->hasPostVariable( 'SearchCa
             // take care: this is hardcoded from knowledge of cache structure...
             if ( $cacheDirsList[$cache] == 'var/cache/ini' )
             {
-                $filelist = array_merge( $filelist, sysInfoTools::searchInFiles( $searchtext, eZSys::siteDir() . '/' . $cacheDirsList[$cache], $is_regexp ) );
+                // work around legacy kernel bug with ezplatform 2.5
+                $siteDir = preg_replace('#/app\.php$#', '', eZSys::siteDir());
+                $filelist = array_merge( $filelist, sysInfoTools::searchInFiles( $searchtext, $siteDir . '/' . $cacheDirsList[$cache], $is_regexp ) );
             }
             else
             {

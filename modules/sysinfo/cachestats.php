@@ -16,6 +16,9 @@
 
 $cacheFilesList = array();
 
+// work around legacy kernel bug with ezplatform 2.5
+$siteDir = preg_replace('#/app\.php$#', '', eZSys::siteDir());
+
 $cacheList = eZCache::fetchList();
 foreach ( $cacheList as $cacheItem )
 {
@@ -26,7 +29,8 @@ foreach ( $cacheList as $cacheItem )
         // take care: this is hardcoded from knowledge of cache structure...
         if ( $cacheItem['path'] == 'var/cache/ini' )
         {
-            $cachedir = eZSys::siteDir() . '/' . $cacheItem['path'];
+            // work around legacy kernel bug with ezplatform 2.5
+            $cachedir = $siteDir . '/' . $cacheItem['path'];
         }
         else
         {
@@ -47,7 +51,7 @@ foreach ( $cacheList as $cacheItem )
 
 // q: are we 100% sure that the eZ5 cache is always at that location?
 if ( class_exists( 'Symfony\Component\HttpKernel\Kernel' ) && (
-    is_dir( $ezp5CacheDir = eZSys::siteDir() . '/../ezpublish/cache' ) || is_dir( $ezp5CacheDir = eZSys::siteDir() . '/../var/cache' )) )
+    is_dir( $ezp5CacheDir = $siteDir . '/../ezpublish/cache' ) || is_dir( $ezp5CacheDir = $siteDir . '/../var/cache' )) )
 {
     foreach( glob( $ezp5CacheDir . '/*' , GLOB_ONLYDIR ) as $envDir )
     {

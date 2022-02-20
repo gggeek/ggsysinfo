@@ -7,25 +7,39 @@
  * @license Licensed under GNU General Public License v2.0. See file license.txt
  *
  * @todo add support for user-selected start and end date
+ * @todo add support for a fixed timespan, eg 'last N seconds'
  * @todo support coarser intervals than 60 secs
  * @todo add support for not showing older (rotated) logs
- * @todo sort logs by criticity
+ * @todo sort logs by severity
  * @todo use a line graph and coalesce logs together
  */
 
 /** @var array $Params */
 /** @var eZTemplate $tpl */
 /** @var eZINI $ini */
+/** @var string $hostName */
 
 $errormsg = '';
 $cachedir = eZSys::cacheDirectory() . '/sysinfo';
-$scale = 60;
 $scalenames = array( 60 => 'minute', 60*60 => 'hour', 60*60*24 => 'day' );
 $cachefiles = array();
+
+$ini = eZINI::instance( 'sysinfo.ini' );
+$graphRange =  $ini->variable( 'GraphSettings', 'MaxTimespan' );
+if ( $graphRange > 0 )
+{
+    $minDate = time() - $graphRange;
+}
+else
+{
+    $minDate = null;
+}
+$scale = 60;
 
 // nb: this dir is calculated the same way as ezlog does
 $debug = eZDebug::instance();
 $logfiles = $debug->logFiles();
+
 foreach( $logfiles as $level => $file )
 {
     $logfile = $file[0] . $file[1];
@@ -34,7 +48,8 @@ foreach( $logfiles as $level => $file )
 
     if ( file_exists( $logfile ) )
     {
-        $cachefile = $cachedir . '/' . $file[1] . '.jpg';
+        // We add the hostname, so that, if there are many eZ hosts, they don't overwrite each other's graphs
+        $cachefile = $cachedir . '/' . $file[1] . '_' . md5( $hostName ) . 'jpg';
 
         // *** Check if cached image file exists and is younger than storage log
         $cachefound = false;
@@ -56,7 +71,6 @@ foreach( $logfiles as $level => $file )
 
         if ( !$cachefound )
         {
-
             // *** parse rotated log files, if found ***
             $data = array();
             for( $i = eZdebug::maxLogrotateFiles(); $i > 0; $i-- )
@@ -64,12 +78,12 @@ foreach( $logfiles as $level => $file )
                 $archivelog = $logfile.".$i";
                 if ( file_exists( $archivelog ) )
                 {
-                    $data = ezLogsGrapher::asum( $data, ezLogsGrapher::parseLog( $archivelog, $scale ) );
+                    $data = ezLogsGrapher::asum( $data, ezLogsGrapher::parseLog( $archivelog, $scale, false, $minDate ) );
                 }
             }
 
             // *** Parse log file ***
-            $data = ezLogsGrapher::asum( $data, ezLogsGrapher::parseLog( $logfile, $scale ) );
+            $data = ezLogsGrapher::asum( $data, ezLogsGrapher::parseLog( $logfile, $scale, false, $minDate ) );
 
             if ( $Params['viewmode'] == 'json' )
             {
@@ -123,7 +137,7 @@ $tpl->setVariable( 'graphsources', $cachefiles );
 $tpl->setVariable( 'errormsg', $errormsg );
 
 $Result = array();
-$Result['content'] = $tpl->fetch( "design:sysinfo/logchurn.tpl" ); //var_dump($cacheFilesList);
+$Result['content'] = $tpl->fetch( "design:sysinfo/logchurn.tpl" );
 
 $Result['left_menu'] = 'design:parts/sysinfo/menu.tpl';
 $Result['path'] = array( array( 'url' => false,

@@ -32,7 +32,6 @@ if ( $clusterStorageDir != '' )
             // take care: this is hardcoded from knowledge of cache structure...
             if ( $cacheItem['path'] == 'var/cache/ini' )
             {
-                //$cachedir = $storageDir . '/' . eZSys::siteDir() . '/' . $cacheItem['path'];
                 // no var/cache/ini in dfs nfs storage
                 continue;
             }

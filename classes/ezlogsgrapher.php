@@ -5,16 +5,6 @@
  * @license Licensed under GNU General Public License v2.0. See file license.txt
  */
 
-/// @todo see if using a static method instead of plain func works
-function calcChurnLabel( $pos, $step )
-{
-    $locale = eZLocale::instance();
-    /// todo: look at time span, if too big use date, if small use time (both will not fit, unless we change axis type)
-    // $out = $locale->formatShortDate( $pos );
-    $out = $locale->formatShortTime( $pos );
-    return $out;
-}
-
 class ezLogsGrapher
 {
     static $lastError = '';
@@ -22,6 +12,7 @@ class ezLogsGrapher
     static $ezLogRegexp = '/^\[ ?([A-Za-z0-9:\- ]+) ?\] \[([0-9.]*)\] (.*)/';
     static $storageLogRegexp = '/^\[ ?([A-Za-z0-9:\- ]+) ?\] \[(.*)\]$/';
     static $exclude_regexp = '#\] Timing Point: #';
+    static $timeRange = null;
 
     /**
      * Parses an eZ log file, returns a (nested) array with one value per log message
@@ -74,10 +65,11 @@ class ezLogsGrapher
      * @param string $logfile
      * @param int $scale the time interval used to average (default: 1 minute)
      * @param bool $isStorageLog
+     * @param int $minDate
      * @return array
      * @todo rename, this is an histogram generator
      */
-    static function parseLog( $logfile, $scale = 60, $isStorageLog = false )
+    static function parseLog( $logfile, $scale = 60, $isStorageLog = false, $minDate = null)
     {
         if ( !file_exists( $logfile ) )
         {
@@ -93,9 +85,8 @@ class ezLogsGrapher
                 if ( !preg_match( self::$exclude_regexp, $line ) )
                 {
                     $time = strtotime( $matches[1] );
-                    if ( $time > 0 )
+                    if ( $time > 0 && ( $minDate === null || $time > $minDate ))
                     {
-
                         $time = $time - ( $time % $scale );
                         if( !isset( $data[$time] ) )
                         {
@@ -150,17 +141,23 @@ class ezLogsGrapher
         $graph->xAxis = new ezcGraphChartElementNumericAxis();
         $graph->xAxis->min = $min - ( $scale / 2 );
         $graph->xAxis->max = $max + ( $scale / 2 );
-        $graph->xAxis->labelCallback = 'calcChurnLabel';
+        $graph->xAxis->labelCallback = 'ezLogsGrapher::calcChurnLabel';
         $graph->driver = new ezcGraphGdDriver2();
         $graph->driver->options->imageFormat = IMG_JPEG;
         // pick a font that is delivered along with ezp
-        $graph->options->font = 'design/standard/fonts/arial.ttf';
+        $graph->options->font->path = 'design/standard/fonts/arial.ttf';
+
+        $dateRange = array_keys($data);
+        $begin = reset($dateRange);
+        $end = end($dateRange);
+        self::$timeRange = $end - $begin;
 
         try
         {
+            $ini = eZINI::instance( 'sysinfo.ini' );
             $graph->data[$dataname] = new ezcGraphArrayDataSet( $data );
-            $ok = ob_start();
-            $graph->render( 600, 400, 'php://stdout' );
+            ob_start();
+            $graph->render( $ini->variable( 'GraphSettings', 'Width' ), $ini->variable( 'GraphSettings', 'Height' ), 'php://stdout' );
             $content = ob_get_clean();
             //$clusterfile->fileStoreContents( $cachefile, $content );
         } catch( exception $e )
@@ -191,5 +188,21 @@ class ezLogsGrapher
     static function lastError()
     {
         return self::$lastError;
+    }
+
+    static function calcChurnLabel( $pos, $step )
+    {
+        $locale = eZLocale::instance();
+        // look at time span, if too big use date, if small use time
+        if ( self::$timeRange >= ( 86400 * 6 ) )
+        {
+            $out = $locale->formatShortDate($pos);
+        } else if ( self::$timeRange <= 86400 ) {
+            $out = $locale->formatShortTime( $pos );
+        } else {
+            $out = $locale->formatShortDateTime( $pos );
+        }
+
+        return $out;
     }
 }

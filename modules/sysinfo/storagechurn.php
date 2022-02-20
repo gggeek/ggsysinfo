@@ -8,18 +8,31 @@
  *
  * @todo add support for user-selected start and end date
  * @todo support coarser intervals than 60 secs
- * @todo
  */
 
 /** @var array $Params */
 /** @var eZTemplate $tpl */
 /** @var eZINI $ini */
+/** @var string $hostName */
 
 $errormsg = "";
 // nb: this dir is calculated the same way as ezlog does
 $logfile = eZSys::varDirectory() . '/' . $ini->variable( 'FileSettings', 'LogDir' ) . '/storage.log';
 // but storage log also is in var/log (created I think before siteaccess settings are loaded)
 $logfile2 = 'var/log/storage.log';
+
+$ini = eZINI::instance( 'sysinfo.ini' );
+$graphRange =  $ini->variable( 'GraphSettings', 'MaxTimespan' );
+if ( $graphRange > 0 )
+{
+    $minDate = time() - $graphRange;
+}
+else
+{
+    $minDate = null;
+}
+/// @todo allow this to be set from ini. Either that, or pick it based on the timespan
+$scale = 60;
 
 if ( $Params['viewmode'] == 'json' )
 {
@@ -28,7 +41,7 @@ if ( $Params['viewmode'] == 'json' )
         /// @todo return a 404 error?
     }
 
-    $data = ezLogsGrapher::asum( ezLogsGrapher::parseLog( $logfile, $scale, true ), ezLogsGrapher::parseLog( $logfile2, $scale, true ) );
+    $data = ezLogsGrapher::asum( ezLogsGrapher::parseLog( $logfile, $scale, true, $minDate ), ezLogsGrapher::parseLog( $logfile2, $scale, true, $minDate ) );
     ksort( $data );
 
     $mtime = @filemtime( $logfile );
@@ -42,7 +55,8 @@ if ( $Params['viewmode'] == 'json' )
 }
 
 $cachedir = eZSys::cacheDirectory() . '/sysinfo';
-$cachefile = $cachedir . '/storagechurn.jpg';
+// We add the hostname, so that, if there are many eZ hosts, they don't overwrite each other's graphs
+$cachefile = $cachedir . '/storagechurn_' . md5( $hostName ). '.jpg';
 
 // *** Check if cached image file exists and is younger than storage log
 $cachefound = false;
@@ -52,11 +66,11 @@ if ( $clusterfile->exists() )
     $logdate = $logdate2 = 0;
     if ( file_exists( $logfile ) )
     {
-    $logdate = filemtime( $logfile );
+        $logdate = filemtime( $logfile );
     }
     if ( file_exists( $logfile2 ) )
     {
-    $logdate2 = filemtime( $logfile2 );
+        $logdate2 = filemtime( $logfile2 );
     }
     $cachedate = $clusterfile->mtime();
     if ( $cachedate >= $logdate && $cachedate >= $logdate2 )
@@ -68,12 +82,10 @@ if ( $clusterfile->exists() )
 
 if ( !$cachefound )
 {
-
-    $scale = 60;
     $scalenames = array( 60 => 'minute', 60*60 => 'hour', 60*60*24 => 'day' );
 
     // *** Parse storage.log files ***
-    $data = ezLogsGrapher::asum( ezLogsGrapher::parseLog( $logfile, $scale, true ), ezLogsGrapher::parseLog( $logfile2, $scale, true ) );
+    $data = ezLogsGrapher::asum( ezLogsGrapher::parseLog( $logfile, $scale, true, $minDate ), ezLogsGrapher::parseLog( $logfile2, $scale, true, $minDate ) );
     ksort( $data );
 
     // *** build graph and store it ***

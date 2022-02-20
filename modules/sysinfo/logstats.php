@@ -31,13 +31,13 @@ foreach( $logFiles as $level => $file )
         $modified = filemtime( $logfile );
 
         // *** parse rotated log files, if found ***
-        $data = array();
+        //$data = array();
         for( $i = eZdebug::maxLogrotateFiles(); $i > 0; $i-- )
         {
             $archivelog = $logfile.".$i";
             if ( file_exists( $archivelog ) )
             {
-                $data = ezLogsGrapher::asum( $data, ezLogsGrapher::parseLog( $archivelog ) );
+                //$data = ezLogsGrapher::asum( $data, ezLogsGrapher::parseLog( $archivelog ) );
                 $size += filesize( $archivelog );
                 $count++;
             }
@@ -68,9 +68,12 @@ foreach( scandir( $logDir ) as $log )
     }
 }
 
+// work around legacy kernel bug with ezplatform 2.5
+$siteDir = preg_replace('#/app\.php$#', '', eZSys::siteDir());
+
 // q: are we 100% sure that the eZ5 logs are always at that location?
 if ( class_exists( 'Symfony\Component\HttpKernel\Kernel' ) && (
-    is_dir( $ezp5LogDir = eZSys::siteDir() . '/../ezpublish/logs' ) || is_dir( $ezp5LogDir = eZSys::siteDir() . '/../var/logs' ) ) )
+    is_dir( $ezp5LogDir = $siteDir . '/../ezpublish/logs' ) || is_dir( $ezp5LogDir = $siteDir . '/../var/logs' ) ) )
 {
     foreach( scandir( $ezp5LogDir ) as $log )
     {

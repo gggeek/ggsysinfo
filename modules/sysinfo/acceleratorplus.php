@@ -8,6 +8,7 @@
 /** @var array $Params */
 /** @var eZTemplate $tpl */
 /** @var eZINI $ini */
+/** @var string $hostName */
 
 $extdir =  eZExtension::baseDirectory();
 ob_start();

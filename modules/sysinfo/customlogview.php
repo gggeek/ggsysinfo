@@ -28,14 +28,16 @@ if( $desiredLogPath != 'var/log'
     return $module->handleError( eZError::KERNEL_ACCESS_DENIED, 'kernel' );
 }
 
+// work around legacy kernel bug with ezplatform 2.5
+$siteDir = preg_replace('#/app\.php$#', '', eZSys::siteDir());
 if ( $desiredLogPath == 'symfony' )
 {
-    $ezp5LogDir = is_dir( eZSys::siteDir() . '/../ezpublish/logs' ) ? eZSys::siteDir() . '/../ezpublish/logs/' : eZSys::siteDir() . '/../var/logs/';
+    $ezp5LogDir = is_dir( $siteDir . '/../ezpublish/logs' ) ? $siteDir . '/../ezpublish/logs/' : eZSys::siteDir() . '/../var/logs/';
     $logfile = $ezp5LogDir . basename( $desiredLog );
 }
 else
 {
-    $logfile = eZSys::siteDir() . '/' . $desiredLog;
+    $logfile = $siteDir . '/' . $desiredLog;
 }
 
 if ( !file_exists( $logfile ) )

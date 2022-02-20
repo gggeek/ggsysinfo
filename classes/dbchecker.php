@@ -28,7 +28,7 @@ class dbChecker
                     {
                         $warnings[] = "Table " .  $row['table_name'] . " does not use the InnoDB storage engine: " . $row['engine'];
                     }
-                    if ( substr( $row['table_collation'], 0, 5 ) != 'utf8_' )
+                    if ( substr( $row['table_collation'], 0, 5 ) != 'utf8_' && substr( $row['table_collation'], 0, 8 ) != 'utf8mb4_' )
                     {
                         $warnings[] = "Table " .  $row['table_name'] . " does not use an utf8 character set: ". $row['table_collation'];
                     }

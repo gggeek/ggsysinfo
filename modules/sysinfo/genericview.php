@@ -15,6 +15,9 @@
 $module = $Params['Module'];
 $view = $module->currentView();
 
+exec( 'hostname', $output );
+$hostName = $output[0];
+
 // rely on system policy instead of creating our own, but allow also PolicyOmitList for single views
 // (useful f.e. for system status checks from tools which can not authenticate because they are too simple).
 // Also allow the clusterhelper view to do its auth and then run this view.
@@ -43,6 +46,7 @@ if ( $isClusterSlaveRequest )
 else
 {
     $tpl->setVariable( 'title', ezSysinfoModule::viewTitle( $view ) );
+    $tpl->setVariable( 'hostname', $hostName );
     $tpl->setVariable( 'description', ezSysinfoModule::viewDescription( $view ) );
     $tpl->setVariable( 'cluster_request', false );
 }
@@ -102,7 +106,6 @@ if ( $isClusterSlaveRequest )
 }
 else
 {
-
     // build nav menu & left-hand menu
 
     $Result['left_menu'] = 'design:parts/sysinfo/menu.tpl';
@@ -133,5 +136,4 @@ else
         $url3rdlevel = array();
     }
     $Result['path'] = array_merge( $url1stlevel, $url2ndlevel, $url3rdlevel );
-
 }

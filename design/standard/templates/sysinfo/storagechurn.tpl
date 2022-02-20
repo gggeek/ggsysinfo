@@ -8,7 +8,7 @@
 
 {* DESIGN: Header END *}</div></div></div></div></div></div>
 
-{* DESIGN: Content START *}{*<div class="box-bc"><div class="box-ml"><div class="box-mr"><div class="box-bl"><div class="box-br"><div class="box-content">*}
+    {* DESIGN: Content START *}{*<div class="box-bc"><div class="box-ml"><div class="box-mr"><div class="box-bl"><div class="box-br"><div class="box-content">*}
 {* DESIGN: Content START *}<div class="box-ml"><div class="box-mr"><div class="box-content">
 
 {if ne($errormsg, '')}
@@ -20,3 +20,8 @@
 {/if}
 
 {* DESIGN: Content END *}</div></div></div>
+
+<hr>
+{def $timestamp=currentdate()}
+Host: {$hostname|wash}; date: {$timestamp|l10n( 'shortdatetime' )}
+</div>
