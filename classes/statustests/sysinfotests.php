@@ -32,6 +32,7 @@ class sysinfoTests implements ezSysinfoTest
         }
 
         $clusterDBHandler = ezSysinfoClusterManager::clusterDBHandler();
+
         if ( $clusterDBHandler instanceof eZDBFileHandler )
         {
             // warning - we dig into the private parts of the cluster file handler,

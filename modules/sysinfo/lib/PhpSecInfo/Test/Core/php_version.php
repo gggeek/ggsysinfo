@@ -28,7 +28,7 @@ class PhpSecInfo_Test_Core_Php_Version extends PhpSecInfo_Test_Core
 	function _retrieveCurrentValue() {
 		$this->current_value = PHP_VERSION;
 
-		$url = 'http://php.net/releases/?serialize=1&version=5';
+		$url = 'http://php.net/releases/?serialize=1&version=7';
 		try {
 		    $latestVersion = eZHTTPTool::getDataByURL( $url );
 			$versionInfo = unserialize( $latestVersion );

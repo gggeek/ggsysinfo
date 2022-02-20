@@ -1,0 +1,22 @@
+Changes from 0.9.17 to 0.10.0 - released 2022-2-20
+
+Improved: current hostname and date are displayed at the bottom of every page, helping especially in case of cluster setups
+
+New: its is now possible to specify the size for churn graphs (Height, Width) via ini settings
+
+Improved: the churn graphs do display dates in X axis for long time spans instead of just times
+
+Improved: the `Log churn` file list logs by decreasing severity
+
+Improved: the churn graphs are cached separately for each server when running in cluster mode and no having set up
+  the bundle for cluster configuration
+
+Improved: cluster db connection is now tested if the FileHandler in ClusteringSettings was changed, and its name contains the string `DFSFileHandler`
+
+Improved: in the security checks, recommend php version 7.4 instead of 5.6
+
+Improved: in the ini files checks, do not verify for one .ini and many .ini.append.php for eZP > 4.4
+
+Fixed: clearing the churn graphs when clearing eZ caches did not work
+
+Fixed: do not report mysql utf8mb4 tables as having a bad character set

@@ -15,13 +15,13 @@
     {$errormsg}
 {else}
 <div class="block">
-<img src="{concat(ezroot('no'),$graphsource)}" alt="{$title|i18n('SysInfo')}" />
+    <img src="{concat(ezroot('no'),$graphsource)}" alt="{$title|i18n('SysInfo')}" />
 </div>
 {/if}
 
 {* DESIGN: Content END *}</div></div></div>
 
-<hr>
+<hr/>
 {def $timestamp=currentdate()}
 Host: {$hostname|wash}; date: {$timestamp|l10n( 'shortdatetime' )}
 </div>

@@ -74,6 +74,7 @@
 {/foreach}
 </table>
 
+<hr/>
 {if $ezsnmpd_available}
     See also the <a href={'snmp/mib/html'|ezurl}>eZSNMPd extension</a> for more status tests
 {else}
@@ -107,7 +108,7 @@
 {* DESIGN: Control bar END *}</div></div></div></div></div></div>
 </div>
 
-<hr>
+<hr/>
 {def $timestamp=currentdate()}
 Host: {$hostname|wash}; date: {$timestamp|l10n( 'shortdatetime' )}
 </div>

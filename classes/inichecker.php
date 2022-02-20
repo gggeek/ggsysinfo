@@ -50,9 +50,8 @@ class iniChecker
 
         // starting with version 4.4, it is not necessary to have exactly one .ini
         // file (and optionally many .ini.append.php)
-        if ( version_compare( '4.4', eZPublishSDK::version() ) <= 0 )
+        if ( version_compare( '4.4', eZPublishSDK::version() ) >= 0 )
         {
-
             // .ini files in extensions that have same name as std files, no .ini (master) file for new ones
             $newinis = array();
             $changedinis = array();

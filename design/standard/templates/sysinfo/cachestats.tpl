@@ -72,6 +72,7 @@
 
 <p><b>NB:</b> {'Symfony cache stats are reliable only when using a standard configuration'|i18n( 'SysInfo' )}</p>
 
+{* @todo add support for customized dfs class names *}
 {if eq( ezini( 'ClusteringSettings', 'FileHandler', 'file.ini' ), 'eZDFSFileHandler')}
     <p><b>NB:</b> {'"DFS://" stats refer to files found on the shared storage, not to what is recorded in the cluster database'|i18n( 'SysInfo' )}</p>
 {/if}
@@ -103,7 +104,7 @@
 {* DESIGN: Control bar END *}</div></div></div></div></div></div>
 </div>
 
-<hr>
+<hr/>
 {def $timestamp=currentdate()}
 Host: {$hostname|wash}; date: {$timestamp|l10n( 'shortdatetime' )}
 </div>

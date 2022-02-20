@@ -82,22 +82,23 @@ if ( $clusterfile->exists() )
 
 if ( !$cachefound )
 {
-    $scalenames = array( 60 => 'minute', 60*60 => 'hour', 60*60*24 => 'day' );
-
     // *** Parse storage.log files ***
     $data = ezLogsGrapher::asum( ezLogsGrapher::parseLog( $logfile, $scale, true, $minDate ), ezLogsGrapher::parseLog( $logfile2, $scale, true, $minDate ) );
-    ksort( $data );
 
-    // *** build graph and store it ***
-    $graphname = sysInfoTools::ezpI18ntr( 'SysInfo', 'files per '.$scalenames[$scale] );
-    $graph = ezLogsGrapher::graph( $data, $graphname, $scale );
-    if ( $graph != false )
-    {
-        $clusterfile->fileStoreContents( $cachefile, $graph );
-    }
-    else
-    {
-        $errormsg = ezLogsGrapher::lastError();
+    if ( count( $data ) ) {
+        ksort($data);
+        $scalenames = array( 60 => 'minute', 60*60 => 'hour', 60*60*24 => 'day' );
+
+        // *** build graph and store it ***
+        $graphname = sysInfoTools::ezpI18ntr('SysInfo', 'files per ' . $scalenames[$scale]);
+        $graph = ezLogsGrapher::graph($data, $graphname, $scale);
+        if ($graph != false) {
+            $clusterfile->fileStoreContents($cachefile, $graph);
+        } else {
+            $errormsg = ezLogsGrapher::lastError();
+        }
+    } else {
+        $errormsg = "No data found" . ( $minDate > 0 ? ' in the specified time range' : '' );
     }
 }
 

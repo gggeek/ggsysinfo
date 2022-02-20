@@ -26,7 +26,7 @@ class ezSysinfoClusterManager
         {
             return eZClusterFileHandler::instance();
         }
-        else if ( $handler == 'eZDFSFileHandler' )
+        else if ( $handler == 'eZDFSFileHandler' || strpos( $handler, 'DFSFileHandler' ) !== false )
         {
             // This is even worse: we have no right to know if db connection is ok.
             // So we replicate some code here...
@@ -50,7 +50,7 @@ class ezSysinfoClusterManager
     {
         $ini = eZINI::instance( 'file.ini' );
         $handler = $ini->variable( 'ClusteringSettings', 'FileHandler' );
-        if ( $handler == 'eZDFSFileHandler' )
+        if ( $handler == 'eZDFSFileHandler' || strpos( $handler, 'DFSFileHandler' ) !== false )
         {
             return $ini->variable( 'eZDFSClusteringSettings', 'MountPointPath' );
         }

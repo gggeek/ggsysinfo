@@ -10,7 +10,6 @@
  * @todo add support for a fixed timespan, eg 'last N seconds'
  * @todo support coarser intervals than 60 secs
  * @todo add support for not showing older (rotated) logs
- * @todo sort logs by severity
  * @todo use a line graph and coalesce logs together
  */
 
@@ -38,10 +37,19 @@ $scale = 60;
 
 // nb: this dir is calculated the same way as ezlog does
 $debug = eZDebug::instance();
-$logfiles = $debug->logFiles();
+
+// sort logfiles according to severity
+$logfiles = array( 'error.log' => null, 'warning.log' => null, 'debug.log' => null, 'notice.log' => null, 'strict.log' => null);
+foreach( $debug->logFiles() as $item ) {
+    $logfiles[$item[1]] = $item;
+}
 
 foreach( $logfiles as $level => $file )
 {
+    if ($file == null) {
+        continue;
+    }
+
     $logfile = $file[0] . $file[1];
     $logname = str_replace( '.log', '', $file[1] );
     $cachefiles[$logname] = false;
