@@ -32,7 +32,7 @@ if( $desiredLogPath != 'var/log'
 $siteDir = preg_replace('#/app\.php/?$#', '', eZSys::siteDir());
 if ( $desiredLogPath == 'symfony' )
 {
-    $ezp5LogDir = is_dir( $siteDir . '/../ezpublish/logs' ) ? $siteDir . '/../ezpublish/logs/' : eZSys::siteDir() . '/../var/logs/';
+    $ezp5LogDir = is_dir( $siteDir . '/../ezpublish/logs' ) ? $siteDir . '/../ezpublish/logs/' : $siteDir . '/../var/logs/';
     $logfile = $ezp5LogDir . basename( $desiredLog );
 }
 else
