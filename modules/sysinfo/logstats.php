@@ -69,7 +69,7 @@ foreach( scandir( $logDir ) as $log )
 }
 
 // work around legacy kernel bug with ezplatform 2.5
-$siteDir = preg_replace('#/app\.php$#', '', eZSys::siteDir());
+$siteDir = preg_replace('#/app\.php/?$#', '', eZSys::siteDir());
 
 // q: are we 100% sure that the eZ5 logs are always at that location?
 if ( class_exists( 'Symfony\Component\HttpKernel\Kernel' ) && (

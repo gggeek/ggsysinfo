@@ -17,7 +17,7 @@
 $cacheFilesList = array();
 
 // work around legacy kernel bug with ezplatform 2.5
-$siteDir = preg_replace('#/app\.php$#', '', eZSys::siteDir());
+$siteDir = preg_replace('#/app\.php/?$#', '', eZSys::siteDir());
 
 $cacheList = eZCache::fetchList();
 foreach ( $cacheList as $cacheItem )

@@ -29,7 +29,7 @@ if( $desiredLogPath != 'var/log'
 }
 
 // work around legacy kernel bug with ezplatform 2.5
-$siteDir = preg_replace('#/app\.php$#', '', eZSys::siteDir());
+$siteDir = preg_replace('#/app\.php/?$#', '', eZSys::siteDir());
 if ( $desiredLogPath == 'symfony' )
 {
     $ezp5LogDir = is_dir( $siteDir . '/../ezpublish/logs' ) ? $siteDir . '/../ezpublish/logs/' : eZSys::siteDir() . '/../var/logs/';

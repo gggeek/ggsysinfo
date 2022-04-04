@@ -27,9 +27,8 @@ Some pages that can be of help to developers too:
 Requirements
 ------------
 - php 5.3 or later
-- eZ Publish 4.0 or later
+- eZ Publish 4.0 or later (tested all the way to eZ Platform 2.5)
 - eZ Publish cluster mode is only partially supported for the cache info part
-- Zend Accelerator, Turck MMCache and IonCube are not supported for the opcode cache part
 - the GD extension to php plus the Zeta Components library are needed to produce graphs (eg. in the storage churn page)
 - the ezgeshi extension ver. 1.3 or later is an optional add-on that will add some functionality
 
@@ -37,14 +36,13 @@ Installation
 ------------
 - As per standard eZ Publish extensions: drop in extension dir, activate in site.ini override file or via gui
 - fix the autoload config: if not activated via the admin interface, run the ezpgenerateautoloads.php script
-- if using eAccelerator, make sure that the  eZ Publish dir is within the eaccelerator.allowed_admin_path setting in php.ini
 - to have the connecting-to-the-web and connecting-to-email-server tests activated, go edit sysinfo.ini.append.php.
-  By default these tests are deactivated since they involve active probing of external resources
+  By default, these tests are deactivated since they involve active probing of external resources
 - Access to all views of this module is regulated by granting access to the "setup/system_info" policy.
   NB: this is the same policy that governs access to the "System information" page in the admin interface,
   not a new policy defined by this extension.
   To allow anonymous access to a single view, the ini setting PolicyOmitList can be also used.
-- Make sure that users can access image files stored in var/sitename/cache/sysinfo for the storage churn graph to work
+- Make sure that users can access image files stored in var/$sitename/cache/sysinfo for the storage churn graph to work
   (this means properly configuring .htaccess file or vhost configuration usually)
 
 - For setting up the extension properly in cluster mode, read the details in settings/sysinfo.ini, [ClusterSettings] section
@@ -55,7 +53,7 @@ Installation
 
 New modules/views
 -----------------
-All of the functionality is available in a new top-level tab in the administration interface, named "System Information".
+All the functionality is available in a new top-level tab in the administration interface, named "System Information".
 A somewhat-detailed description of all available information pages is given there.
 If some of the items in the menu are greyed out, it is because the corresponding item does not work / apply to your eZ Publish setup.
 
